@@ -1,0 +1,588 @@
+{
+ "metrics": {
+  "label": "tatyova-arena",
+  "strategy": "midrange",
+  "tribal": null,
+  "size": 99,
+  "lands": 34,
+  "nonland": 65,
+  "roleCounts": {
+   "ramp": 21,
+   "win_condition": 1,
+   "protection": 4,
+   "removal": 9,
+   "utility": 6,
+   "synergy": 1,
+   "draw": 13,
+   "tutor": 2,
+   "board_wipe": 4,
+   "land": 4
+  },
+  "walkers": 0,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 85,
+  "ms": 2025
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Dungeon Map",
+   "pickedScore": 46,
+   "bench": "Summon: Fenrir",
+   "benchScore": 131,
+   "margin": 85
+  },
+  "win_condition": {
+   "picked": "Rampaging Baloths",
+   "pickedScore": 196,
+   "bench": "Craterhoof Behemoth",
+   "benchScore": 110,
+   "margin": -86
+  },
+  "protection": {
+   "picked": "Heroic Intervention",
+   "pickedScore": 118,
+   "bench": "Sapling Nursery",
+   "benchScore": 123,
+   "margin": 5
+  },
+  "removal": {
+   "picked": "Bushwhack",
+   "pickedScore": 90,
+   "bench": "Resculpt",
+   "benchScore": 99,
+   "margin": 9
+  },
+  "utility": {
+   "picked": "Dispel",
+   "pickedScore": 61,
+   "bench": "Mutagen Man, Living Ooze",
+   "benchScore": 115,
+   "margin": 55
+  },
+  "synergy": {
+   "picked": "Mossborn Hydra",
+   "pickedScore": 166,
+   "bench": "Primeval Bounty",
+   "benchScore": 129,
+   "margin": -38
+  },
+  "draw": {
+   "picked": "Sleight of Hand",
+   "pickedScore": 56,
+   "bench": "Tribute to the World Tree",
+   "benchScore": 139,
+   "margin": 84
+  },
+  "tutor": {
+   "picked": "Worldly Tutor",
+   "pickedScore": 116,
+   "bench": "Tezzeret, Cruel Captain",
+   "benchScore": 115,
+   "margin": -1
+  },
+  "board_wipe": {
+   "picked": "River's Rebuke",
+   "pickedScore": 55,
+   "bench": "Sunderflock",
+   "benchScore": 48,
+   "margin": -7
+  },
+  "land": {
+   "picked": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "pickedScore": 78,
+   "bench": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "benchScore": 79,
+   "margin": 0
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Aetherize",
+   "role": "board_wipe",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "role": "ramp",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "role": "removal",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "role": "draw",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "role": "land",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Broken Bond",
+   "role": "removal",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Brokers Hideout",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Burgeoning",
+   "role": "ramp",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "role": "removal",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "role": "removal",
+   "score": 99
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "role": "draw",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Consider",
+   "role": "draw",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "role": "protection",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "role": "ramp",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "role": "ramp",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "role": "land",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Dispel",
+   "role": "utility",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Dungeon Map",
+   "role": "ramp",
+   "score": 46
+  },
+  {
+   "q": 1,
+   "name": "Earthshaker Dreadmaw",
+   "role": "draw",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Elvish Archdruid",
+   "role": "ramp",
+   "score": 66
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "role": "utility",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "role": "ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "role": "ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 13,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "role": "draw",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Glacier Godmaw",
+   "role": "ramp",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Harmonize",
+   "role": "draw",
+   "score": 83
+  },
+  {
+   "q": 1,
+   "name": "Hashep Oasis",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "role": "protection",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "role": "land",
+   "score": 78
+  },
+  {
+   "q": 7,
+   "name": "Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "role": "ramp",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Loot, Exuberant Explorer",
+   "role": "ramp",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mossborn Hydra",
+   "role": "synergy",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Negate",
+   "role": "protection",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "role": "board_wipe",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Opt",
+   "role": "draw",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "role": "ramp",
+   "score": 63
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "role": "board_wipe",
+   "score": 58
+  },
+  {
+   "q": 1,
+   "name": "Planar Engineering",
+   "role": "utility",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Ponder",
+   "role": "draw",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "role": "removal",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Preordain",
+   "role": "draw",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Rampaging Baloths",
+   "role": "win_condition",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "role": "ramp",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "role": "removal",
+   "score": 113
+  },
+  {
+   "q": 1,
+   "name": "Reclamation Sage",
+   "role": "removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "role": "removal",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "River's Rebuke",
+   "role": "board_wipe",
+   "score": 55
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shark Typhoon",
+   "role": "draw",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "role": "land",
+   "score": 91
+  },
+  {
+   "q": 1,
+   "name": "Sleight of Hand",
+   "role": "draw",
+   "score": 56
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Spell Pierce",
+   "role": "utility",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Springbloom Druid",
+   "role": "ramp",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Starting Column",
+   "role": "ramp",
+   "score": 80
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "role": "protection",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "role": "ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "The Unagi of Kyoshi Island",
+   "role": "draw",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "role": "ramp",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Willowrush Verge",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Wood Elves",
+   "role": "utility",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "World Shaper",
+   "role": "utility",
+   "score": 64
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "role": "tutor",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "role": "removal",
+   "score": 100
+  }
+ ]
+}

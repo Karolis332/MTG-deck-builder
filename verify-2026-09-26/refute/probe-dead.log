@@ -1,0 +1,6 @@
+before [main,lands] [ 99, 38 ] after [ 99, 38 ] deterministic true
+swaps [{"out":"Kozilek's Command","in":"Chaos Warp","reason":"{C} cost, only 5 colourless sources"},{"out":"Chromatic Lantern","in":"Arcane Signet","reason":"mono-colour dead fixer"},{"out":"Courier of Comestibles","in":"Godo, Bandit Warlord","reason":"narrow tutor: only 1 Food in deck"}]
+offense category of swaps-in: Chaos Warp:null, Arcane Signet:null, Godo, Bandit Warlord:null
+reported bracket {"t":3,"res":3} recomputed final 3 injected deck 3 after pass 4
+canPick owned-only: swaps-in all owned: true ["Chaos Warp","Fellwar Stone","Godo, Bandit Warlord"]
+EXIT=0

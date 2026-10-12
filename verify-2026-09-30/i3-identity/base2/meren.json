@@ -1,0 +1,360 @@
+{
+ "file": "meren.txt",
+ "format": "commander",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 19,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 97.5,
+    "weight": 20.61855670103093,
+    "reason": "36.4 effective lands vs 37.4; B has 29/41 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 95.6,
+    "weight": 10.309278350515465,
+    "reason": "3-drops 18/15; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 95,
+    "weight": 16.494845360824744,
+    "reason": "12.3/12.0 effective answers, 7/7.0 cheap; weakest coverage: stack."
+   },
+   {
+    "key": "advantage",
+    "score": 81.8,
+    "weight": 14.43298969072165,
+    "reason": "26.4/10.0 draw units by turn 6; 4 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 68.7,
+    "weight": 20.61855670103093,
+    "reason": "Control inevitability (16 finishers): closes T8, access 94% (u=0.76); shared bottleneck, protection access 37%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 92.8,
+    "weight": 17.52577319587629,
+    "reason": "73% supports aristocrats; weakest dependency fodder 15/16; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 0,
+    "weight": 0,
+    "reason": "4/5 rule checks verified; size; cap 19."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "fail",
+    "cap": null,
+    "reason": "4/5 rule checks verified; size; cap 19."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "Commander decks require exactly 100 cards (currently 101)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in commander"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BG"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 75,
+    "reason": "quality cap 20+0.8*min(M,W,S)=75.0 from mana=97.5, win=68.7, synergy=92.8."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "89% of nonland copies are typed in the effect catalogue; unknown prerequisite \"creature death or mill\" — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Meren of Clan Nel Toth",
+  "archetype": "aristocrats",
+  "tribalType": "Human",
+  "iss": 45,
+  "topSynergyPairs": [
+   {
+    "a": "Cauldron of Essence",
+    "b": "Saw in Half",
+    "weight": 8,
+    "reasons": [
+     "Cauldron of Essence consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder",
+     "Cauldron of Essence consumes creature_death ← Saw in Half produces creature_death"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Woe Strider",
+    "weight": 8,
+    "reasons": [
+     "Cauldron of Essence consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder",
+     "Cauldron of Essence consumes creature_death ← Woe Strider produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Cauldron of Essence",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Carrion Feeder produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Liliana, Dreadhorde General",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Liliana, Dreadhorde General produces sacrifice_fodder",
+     "Liliana, Dreadhorde General consumes creature_death ← Carrion Feeder produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Saw in Half",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Woe Strider",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Chthonian Nightmare",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Chthonian Nightmare produces creature_death"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Infernal Grasp",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Infernal Grasp produces creature_death"
+    ]
+   }
+  ],
+  "curveScore": {
+   "score": 83,
+   "perBucket": {
+    "0": 0,
+    "1": -1,
+    "2": 1,
+    "3": 3,
+    "4": -2,
+    "5": -1,
+    "6": 0,
+    "7+": 0
+   },
+   "notes": [
+    "Too many 3-drops (18 vs target 15)",
+    "Missing 4-drops (8 vs target 10)"
+   ]
+  },
+  "winPlan": {
+   "route": "drain",
+   "description": "Aristocrats value engine — creatures die, opponents lose life or you gain resources.",
+   "keyCards": {
+    "enablers": [
+     "Braids, Arisen Nightmare",
+     "Carrion Feeder",
+     "Cauldron of Essence",
+     "Chthonian Nightmare",
+     "Infernal Grasp",
+     "Jarad, Golgari Lich Lord",
+     "Priest of Forgotten Gods",
+     "Ravenous Chupacabra",
+     "Saw in Half",
+     "The Gitrog, Ravenous Ride",
+     "Victimize",
+     "Village Rites",
+     "Viscera Seer",
+     "Wight of the Reliquary",
+     "Woe Strider",
+     "Yahenni, Undying Partisan"
+    ],
+    "payoffs": [
+     "Blood Artist",
+     "Butcher of Malakir",
+     "Cauldron of Essence",
+     "Grim Haruspex",
+     "Liliana, Dreadhorde General",
+     "Midnight Reaper",
+     "Moldervine Reclamation",
+     "Morbid Opportunist",
+     "Syr Konrad, the Grim",
+     "Zulaport Cutthroat"
+    ],
+    "protection": [
+     "Lightning Greaves",
+     "Veil of Summer",
+     "Yahenni, Undying Partisan"
+    ],
+    "tutors": [
+     "Buried Alive",
+     "Emeritus of Woe // Demonic Tutor",
+     "Grim Servant",
+     "Rune-Scarred Demon"
+    ]
+   },
+   "missingPieces": [
+    "Triskelion"
+   ],
+   "cardRoles": {
+    "Accursed Marauder": "off_plan",
+    "Arcane Signet": "off_plan",
+    "Assassin's Trophy": "off_plan",
+    "Basking Broodscale": "off_plan",
+    "Blood Artist": "payoff",
+    "Bloodghast": "off_plan",
+    "Braids, Arisen Nightmare": "enabler",
+    "Braids, Cabal Minion": "off_plan",
+    "Buried Alive": "tutor_for_plan",
+    "Butcher of Malakir": "payoff",
+    "Carrion Feeder": "enabler",
+    "Cauldron of Essence": "enabler",
+    "Chthonian Nightmare": "enabler",
+    "Creakwood Liege": "off_plan",
+    "Culling Ritual": "off_plan",
+    "Deadly Dispute": "off_plan",
+    "Elvish Mystic": "off_plan",
+    "Emeritus of Woe // Demonic Tutor": "tutor_for_plan",
+    "Eternal Witness": "off_plan",
+    "Golgari Charm": "off_plan",
+    "Grave Researcher // Reanimate": "off_plan",
+    "Gray Merchant of Asphodel": "off_plan",
+    "Grim Haruspex": "payoff",
+    "Grim Servant": "tutor_for_plan",
+    "Haywire Mite": "off_plan",
+    "Infernal Grasp": "enabler",
+    "Jadar, Ghoulcaller of Nephalia": "off_plan",
+    "Jarad, Golgari Lich Lord": "enabler",
+    "Junji, the Midnight Sky": "off_plan",
+    "Lightning Greaves": "protection",
+    "Liliana, Dreadhorde General": "payoff",
+    "Llanowar Elves": "off_plan",
+    "Long Feng, Grand Secretariat": "off_plan",
+    "Massacre Wurm": "off_plan",
+    "Mazirek, Kraul Death Priest": "off_plan",
+    "Midnight Reaper": "payoff",
+    "Mikaeus, the Unhallowed": "off_plan",
+    "Moldervine Reclamation": "payoff",
+    "Morbid Opportunist": "payoff",
+    "Ophiomancer": "off_plan",
+    "Plaguecrafter": "off_plan",
+    "Priest of Forgotten Gods": "enabler",
+    "Ramunap Excavator": "off_plan",
+    "Ravenous Chupacabra": "enabler",
+    "Reanimate": "off_plan",
+    "Rune-Scarred Demon": "tutor_for_plan",
+    "Sakura-Tribe Elder": "off_plan",
+    "Saw in Half": "enabler",
+    "Sol Ring": "off_plan",
+    "Solemn Simulacrum": "off_plan",
+    "Springbloom Druid": "off_plan",
+    "Sylvan Library": "off_plan",
+    "Syr Konrad, the Grim": "payoff",
+    "Talisman of Resilience": "off_plan",
+    "The Gitrog, Ravenous Ride": "enabler",
+    "Toxic Deluge": "off_plan",
+    "Veil of Summer": "protection",
+    "Victimize": "enabler",
+    "Village Rites": "enabler",
+    "Viscera Seer": "enabler",
+    "Wight of the Reliquary": "enabler",
+    "Woe Strider": "enabler",
+    "Yahenni, Undying Partisan": "enabler",
+    "Zulaport Cutthroat": "payoff"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "a play on turn 2 or 3, or ramp if not",
+   "a drain plan piece (e.g. Braids, Arisen Nightmare or Carrion Feeder or Blood Artist)"
+  ],
+  "gameChangers": {
+   "count": 1,
+   "names": [
+    "Braids, Cabal Minion"
+   ]
+  },
+  "categories": {
+   "utility": 17,
+   "ramp": 13,
+   "removal": 8,
+   "land": 36,
+   "draw": 9,
+   "tutor": 4,
+   "win_condition": 8,
+   "board_wipe": 3,
+   "protection": 2
+  },
+  "stats": {
+   "totalCards": 100,
+   "landCount": 36,
+   "avgCmc": 3.02
+  }
+ }
+}

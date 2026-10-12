@@ -1,0 +1,1087 @@
+{
+ "metrics": {
+  "label": "aeve-arena",
+  "strategy": "tribal",
+  "themes": [
+   "tribal"
+  ],
+  "tribal": "ooze",
+  "size": 99,
+  "lands": 35,
+  "basics": 28,
+  "honestRamp": 21,
+  "draw": 20,
+  "removal": 7,
+  "wipes": 0,
+  "protection": 2,
+  "wincons": 4,
+  "tutors": 1,
+  "walkers": 0,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "utility": 7,
+   "removal": 7,
+   "ramp": 20,
+   "synergy": 10,
+   "draw": 12,
+   "protection": 1,
+   "win_condition": 3,
+   "tutor": 1,
+   "land": 3
+  },
+  "ms": 1775,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 0
+  },
+  "sources": {
+   "W": 5,
+   "U": 6,
+   "B": 5,
+   "R": 5,
+   "G": 40
+  },
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "ramp",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 115,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Celestial Reunion",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "tutor",
+   "score": 140,
+   "price": "1.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Charge Through",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 147,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 143,
+   "price": "3.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "cmc": 1,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 193,
+   "price": "5.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Experiment One",
+   "cmc": 1,
+   "type": "Creature — Human Ooze",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 205,
+   "price": "0.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Glimpse of Nature",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_synergy",
+   "score": 152,
+   "price": "9.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hardened Scales",
+   "cmc": 1,
+   "type": "Enchantment",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 164,
+   "price": "3.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 193,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Universal Automaton",
+   "cmc": 1,
+   "type": "Artifact Creature — Shapeshifter",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "",
+   "score": 128,
+   "price": "0.70",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Utopia Sprawl",
+   "cmc": 1,
+   "type": "Enchantment — Aura",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 107,
+   "price": "1.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 144,
+   "price": "32.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 175,
+   "price": "0.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Basking Broodscale",
+   "cmc": 2,
+   "type": "Creature — Eldrazi Lizard",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 146,
+   "price": "0.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Corrosive Ooze",
+   "cmc": 2,
+   "type": "Creature — Ooze",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 145,
+   "price": "0.16",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Emerald Medallion",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 180,
+   "price": "5.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 189,
+   "price": "0.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 156,
+   "price": "0.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fuel Tank Feaster",
+   "cmc": 2,
+   "type": "Creature — Ooze Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 93,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "arsenal:community_top",
+   "score": 156,
+   "price": "17.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Kenrith's Transformation",
+   "cmc": 2,
+   "type": "Enchantment — Aura",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 167,
+   "price": "1.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Metallic Mimic",
+   "cmc": 2,
+   "type": "Artifact Creature — Shapeshifter",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 167,
+   "price": "1.37",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 143,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mutagen Man, Living Ooze",
+   "cmc": 2,
+   "type": "Legendary Creature — Ooze Mutant",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 146,
+   "price": "2.05",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ozolith, the Shattered Spire",
+   "cmc": 2,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 180,
+   "price": "7.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "cmc": 2,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp",
+    "protection"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 123,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 194,
+   "price": "0.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 97,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scavenging Ooze",
+   "cmc": 2,
+   "type": "Creature — Ooze",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 222,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sylvan Library",
+   "cmc": 2,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 142,
+   "price": "29.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tangled Florahedron // Tangled Vale",
+   "cmc": 2,
+   "type": "Creature — Elemental // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 120,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Three Tree Mascot",
+   "cmc": 2,
+   "type": "Artifact Creature — Shapeshifter",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 132,
+   "price": "0.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Up the Beanstalk",
+   "cmc": 2,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 159,
+   "price": "2.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Barkform Harvester",
+   "cmc": 3,
+   "type": "Artifact Creature — Shapeshifter",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "",
+   "score": 110,
+   "price": "0.17",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 149,
+   "price": "0.62",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 116,
+   "price": "1.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Changeling Wayfinder",
+   "cmc": 3,
+   "type": "Creature — Shapeshifter",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 139,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chomping Changeling",
+   "cmc": 3,
+   "type": "Creature — Shapeshifter",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 118,
+   "price": "1.73",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 164,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "type": "Creature — Human Shaman",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 109,
+   "price": "2.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 208,
+   "price": "0.52",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 209,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Miming Slime",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 107,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mutable Explorer",
+   "cmc": 3,
+   "type": "Creature — Shapeshifter",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 156,
+   "price": "1.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Orcrist, Goblin-cleaver",
+   "cmc": 3,
+   "type": "Legendary Artifact — Equipment",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "synergy",
+   "score": 146,
+   "price": "9.50",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Outcaster Trailblazer",
+   "cmc": 3,
+   "type": "Creature — Human Druid",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 142,
+   "price": "1.69",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "type": "Legendary Creature — Elf Scout",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 156,
+   "price": "4.41",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Slime Against Humanity",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 187,
+   "price": "1.95",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 198,
+   "price": "15.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Harmonize",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 111,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 112,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "board_wipe",
+   "score": 108,
+   "price": "0.84",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ooze Patrol",
+   "cmc": 4,
+   "type": "Creature — Ooze",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 86,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "board_wipe",
+   "score": 43,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 141,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Temperamental Oozewagg",
+   "cmc": 4,
+   "type": "Creature — Ooze Brushwagg",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 156,
+   "price": "0.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 141,
+   "price": "115.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Acidic Slime",
+   "cmc": 5,
+   "type": "Creature — Ooze",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 162,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Doubling Season",
+   "cmc": 5,
+   "type": "Enchantment",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 117,
+   "price": "33.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rooftop Percher",
+   "cmc": 5,
+   "type": "Creature — Shapeshifter",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "",
+   "score": 52,
+   "price": "0.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Shamanic Revelation",
+   "cmc": 5,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 118,
+   "price": "1.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 145,
+   "price": "22.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "type": "Creature — Elf Druid // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 97,
+   "price": "3.78",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "type": "Legendary Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 161,
+   "price": "64.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cavern of Souls",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "52.07",
+   "edhrec": false
+  },
+  {
+   "q": 28,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Northampton Farm",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.68",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Secret Tunnel",
+   "cmc": 0,
+   "type": "Land — Cave",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.08",
+   "edhrec": false
+  }
+ ]
+}

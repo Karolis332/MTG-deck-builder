@@ -1,0 +1,1109 @@
+{
+ "metrics": {
+  "label": "karn-brawl",
+  "strategy": "midrange",
+  "themes": [
+   "artifacts",
+   "tokens",
+   "draw",
+   "counters",
+   "ramp",
+   "flying",
+   "spellslinger",
+   "equipment",
+   "aggro",
+   "lifegain",
+   "sacrifice"
+  ],
+  "tribal": null,
+  "size": 71,
+  "lands": 10,
+  "basics": 0,
+  "honestRamp": 12,
+  "draw": 25,
+  "removal": 11,
+  "wipes": 1,
+  "protection": 3,
+  "wincons": 6,
+  "tutors": 1,
+  "walkers": 6,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "win_condition": 5,
+   "synergy": 17,
+   "draw": 13,
+   "ramp": 10,
+   "removal": 11,
+   "tutor": 1,
+   "board_wipe": 1,
+   "protection": 3
+  },
+  "ms": 1068,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 54
+  },
+  "sources": {
+   "W": 2,
+   "U": 2,
+   "B": 2,
+   "R": 2,
+   "G": 2
+  },
+  "price": {
+   "total": 467.03,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 160,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Manifold Key",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 162,
+   "price": "1.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Null Elemental Blast",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 129,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 166,
+   "price": "0.70",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Diary of Dreams",
+   "cmc": 2,
+   "type": "Artifact — Book",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 146,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Kozilek's Command",
+   "cmc": 2,
+   "type": "Kindred Instant — Eldrazi",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 138,
+   "price": "7.63",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 146,
+   "price": "3.87",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 210,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Spell Satchel",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "draw",
+   "score": 150,
+   "price": "0.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Steel Overseer",
+   "cmc": 2,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 183,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 136,
+   "price": "2.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Technodrome",
+   "cmc": 2,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 147,
+   "price": "1.73",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Echoverse Fulcrum",
+   "cmc": 2,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "board_wipe",
+   "score": -12,
+   "price": "4.99",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tome of Legends",
+   "cmc": 2,
+   "type": "Artifact — Book",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Warping Wail",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "ramp",
+   "score": 163,
+   "price": "1.16",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cloud Key",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 188,
+   "price": "1.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragon's Hoard",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 153,
+   "price": "0.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Foundry Inspector",
+   "cmc": 3,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 195,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Liberator, Urza's Battlethopter",
+   "cmc": 3,
+   "type": "Legendary Artifact Creature — Thopter",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 232,
+   "price": "7.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Magnifying Glass",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "draw",
+   "score": 148,
+   "price": "0.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Nettlecyst",
+   "cmc": 3,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 175,
+   "price": "4.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Palladium Myr",
+   "cmc": 3,
+   "type": "Artifact Creature — Myr",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 168,
+   "price": "1.13",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scrap Trawler",
+   "cmc": 3,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 168,
+   "price": "3.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sculpting Steel",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 188,
+   "price": "3.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Staff of Compleation",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 125,
+   "price": "4.06",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Staff of Domination",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 188,
+   "price": "11.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "cmc": 3,
+   "type": "Legendary Planeswalker — Tezzeret",
+   "cats": [
+    "tutor",
+    "synergy"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 142,
+   "price": "22.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Worn Powerstone",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 169,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Aetherflux Reservoir",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 137,
+   "price": "21.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 202,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Jhoira's Familiar",
+   "cmc": 4,
+   "type": "Artifact Creature — Bird",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "payoff",
+   "score": 202,
+   "price": "2.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Karn, Living Legacy",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Karn",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "ramp",
+   "score": 189,
+   "price": "1.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Karn, Scion of Urza",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Karn",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "payoff",
+   "score": 192,
+   "price": "4.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Karn, the Great Creator",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Karn",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 165,
+   "price": "5.16",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mystic Forge",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 189,
+   "price": "3.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "board_wipe",
+   "score": 70,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 163,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "payoff",
+   "score": 177,
+   "price": "115.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Traxos, Scourge of Kroog",
+   "cmc": 4,
+   "type": "Legendary Artifact Creature — Dragon Con",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 150,
+   "price": "0.41",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Unwinding Clock",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 189,
+   "price": "20.83",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Forsaken Monument",
+   "cmc": 5,
+   "type": "Legendary Artifact",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "utility",
+   "score": 163,
+   "price": "5.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind's Eye",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 170,
+   "price": "5.64",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo's Journal",
+   "cmc": 5,
+   "type": "Legendary Artifact — Book",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "tutor",
+   "score": 145,
+   "price": "3.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Mightstone and Weakstone",
+   "cmc": 5,
+   "type": "Legendary Artifact — Powerstone",
+   "cats": [
+    "ramp",
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "ramp",
+   "score": 150,
+   "price": "4.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "5.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "cmc": 5,
+   "type": "Instant — Lesson",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 130,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chimil, the Inner Sun",
+   "cmc": 6,
+   "type": "Legendary Artifact",
+   "cats": [
+    "protection",
+    "synergy"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 128,
+   "price": "7.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dreamstone Hedron",
+   "cmc": 6,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 153,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Nexus of Becoming",
+   "cmc": 6,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 152,
+   "price": "1.78",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ugin, the Ineffable",
+   "cmc": 6,
+   "type": "Legendary Planeswalker — Ugin",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 165,
+   "price": "2.16",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wurmcoil Engine",
+   "cmc": 6,
+   "type": "Artifact Creature — Phyrexian Wurm",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 195,
+   "price": "10.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Meteor Golem",
+   "cmc": 7,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 131,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Myr Battlesphere",
+   "cmc": 7,
+   "type": "Artifact Creature — Myr Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "win_condition",
+   "score": 156,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Threefold Thunderhulk",
+   "cmc": 7,
+   "type": "Artifact Creature — Gnome",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "win_condition",
+   "score": 151,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "cmc": 7,
+   "type": "Legendary Planeswalker — Ugin",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 202,
+   "price": "41.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cityscape Leveler",
+   "cmc": 8,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 158,
+   "price": "13.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Extinguisher Battleship",
+   "cmc": 8,
+   "type": "Artifact — Spacecraft",
+   "cats": [
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 131,
+   "price": "0.87",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Krang, Utrom Warlord",
+   "cmc": 9,
+   "type": "Legendary Artifact Creature — Utrom Robo",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 161,
+   "price": "22.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Portal to Phyrexia",
+   "cmc": 9,
+   "type": "Artifact",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 147,
+   "price": "50.83",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Triplicate Titan",
+   "cmc": 9,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 183,
+   "price": "1.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Metalwork Colossus",
+   "cmc": 11,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "win_condition",
+   "score": 161,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blinkmoth Nexus",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.02",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cavernous Maw",
+   "cmc": 0,
+   "type": "Land — Cave",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Faceless Haven",
+   "cmc": 0,
+   "type": "Snow Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Inkmoth Nexus",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "13.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Foundry",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mobilized District",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mutavault",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "4.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.68",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.08",
+   "edhrec": false
+  }
+ ]
+}

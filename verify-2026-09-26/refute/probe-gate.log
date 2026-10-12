@@ -1,0 +1,11 @@
+Talrand, Sky Summoner: tribal=null req=instant_sorcery thr=null | new ratio 0.79 en 0.18 -> fail | old ratio 0.79 en 0.18 -> fail
+Ezuri, Claw of Progress: tribal=null req=null thr=null | new ratio 0.56 en 0.00 -> pass | old ratio 0.56 en 0.00 -> fail
+Korvold, Fae-Cursed King: tribal=null req=null thr=null | new ratio 0.16 en 0.00 -> fail | old ratio 0.16 en 0.00 -> fail
+Meren of Clan Nel Toth: tribal=null req=null thr=null | new ratio 0.16 en 0.00 -> fail | old ratio 0.16 en 0.00 -> fail
+Teysa Karlov: tribal=null req=null thr=null | new ratio 0.56 en 0.00 -> pass | old ratio 0.56 en 0.00 -> fail
+Edgar Markov: tribal=null req=null thr=null | new ratio 0.41 en 0.00 -> warn | old ratio 0.41 en 0.00 -> fail
+Aeve, Progenitor Ooze: tribal=Ooze req=null thr=null | new ratio 0.62 en 0.46 -> pass | old ratio 0.44 en 0.00 -> fail
+Sram, Senior Edificer: tribal=null req=null thr=null | new ratio 0.00 en 0.00 -> fail | old ratio 0.00 en 0.00 -> fail
+Goreclaw, Terror of Qal Sisma: tribal=null req=creature thr=null | new ratio 0.41 en 0.41 -> warn | old ratio 0.41 en 0.41 -> warn
+tribalType values: Bear=2(The Bear Force Pilot/The Bear Force Pilot Runner), Goblin=1(Muxus, Goblin Grandee), Rat=1(Vren, the Relentless), Bird=2(Bartz and Boko/The Bird Champion), Forest=1(Rofellos, Llanowar Emissary), Ooze=1(Aeve, Progenitor Ooze), Human=1(Éomer, King of Rohan), Assassin=1(Desmond Miles), Equipment=2(Adelbert Steiner/Nahiri, Forged in Fury), Spider=1(Ishkanah, Grafwidow), Spirit=1(Millicent, Restless Revenant), Elf=1(Rhys the Exiled), Artificer=1(Cid, Timeless Artificer), Ally=1(Sokka, Swordmaster), Aura=1(Pearl-Ear, Imperial Advisor), Raccoon=1(Muerra, Trash Tactician), Mountain=1(Molten Man, Inferno Incarnate), Illusion=1(Minn, Wily Illusionist), Wolf=1(Voja, Jaws of the Conclave), Wizard=1(Euroakus), Treasure=1(Evin, Waterdeep Opportunist), Plain=1(Grizzlegom, Hurloon Hero), Food=1(The Cookout Creator), Nephilim=1(Nephilim Epochal), Halfling=1(The Notary Hobbits)
+EXIT=0

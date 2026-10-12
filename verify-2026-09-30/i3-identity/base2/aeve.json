@@ -1,0 +1,335 @@
+{
+ "file": "aeve.txt",
+ "format": "brawl",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 19,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 99.4,
+    "weight": 20.61855670103093,
+    "reason": "37.1 effective lands vs 37.0; B has 7/19 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 85.6,
+    "weight": 15.463917525773196,
+    "reason": "3-drops 22/15; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 95,
+    "weight": 20.61855670103093,
+    "reason": "11.1/10.2 effective answers, 8/6.0 cheap; weakest coverage: stack."
+   },
+   {
+    "key": "advantage",
+    "score": 73.5,
+    "weight": 12.371134020618557,
+    "reason": "19.2/6.8 draw units by turn 5; 2 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 77.5,
+    "weight": 16.494845360824744,
+    "reason": "Creature pressure (4 threats): closes T7, access 58% (u=0.84); shared bottleneck, protection access 48%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 8.7,
+    "weight": 14.43298969072165,
+    "reason": "38% supports midrange; weakest dependency threats 3/7; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 0,
+    "weight": 0,
+    "reason": "3/5 rule checks verified; legality; cap 19."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "fail",
+    "cap": null,
+    "reason": "3/5 rule checks verified; legality; cap 19."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (brawl wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "Not legal in brawl: The One Ring, Pick Your Poison"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "1 card(s) outside G"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 27,
+    "reason": "quality cap 20+0.8*min(M,W,S)=27.0 from mana=99.4, win=77.5, synergy=8.7."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "52% of nonland copies are typed in the effect catalogue; unknown prerequisite \"artifact token\" — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Aeve, Progenitor Ooze",
+  "archetype": "tribal",
+  "tribalType": "Elf",
+  "iss": 30,
+  "topSynergyPairs": [
+   {
+    "a": "Slime Against Humanity",
+    "b": "Ozolith, the Shattered Spire",
+    "weight": 4,
+    "reasons": [
+     "Ozolith, the Shattered Spire consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Slime Against Humanity",
+    "b": "Kami of Whispered Hopes",
+    "weight": 4,
+    "reasons": [
+     "Kami of Whispered Hopes consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Slime Against Humanity",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Slime Against Humanity produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Ozolith, the Shattered Spire",
+    "weight": 4,
+    "reasons": [
+     "Ozolith, the Shattered Spire consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Kami of Whispered Hopes",
+    "weight": 4,
+    "reasons": [
+     "Kami of Whispered Hopes consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Scavenging Ooze produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Fuel Tank Feaster",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Fuel Tank Feaster produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Three Tree Mascot",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Three Tree Mascot produces creatures_etb"
+    ]
+   }
+  ],
+  "curveScore": {
+   "score": 50,
+   "perBucket": {
+    "0": 1,
+    "1": 2,
+    "2": -2,
+    "3": 5,
+    "4": -8,
+    "5": 3,
+    "6": -2,
+    "7+": 1
+   },
+   "notes": [
+    "Too many 1-drops (10 vs target 8)",
+    "Missing 2-drops (16 vs target 18)",
+    "Too many 3-drops (22 vs target 17)",
+    "Missing 4-drops (3 vs target 11)",
+    "Too many 5-drops (9 vs target 6)",
+    "Missing 6-drops (0 vs target 2)",
+    "Average CMC 2.89 is high (target ~2.55)"
+   ]
+  },
+  "winPlan": {
+   "route": "spell_burn",
+   "description": "Chain cheap spells into damage/value payoffs (spellslinger/storm).",
+   "keyCards": {
+    "enablers": [
+     "Rampant Growth",
+     "Worldly Tutor",
+     "Celestial Reunion",
+     "Heroic Intervention",
+     "Silkguard",
+     "Seedship Impact",
+     "Bite Down",
+     "Bushwhack"
+    ],
+    "payoffs": [],
+    "protection": [
+     "Paradise Druid",
+     "The One Ring",
+     "Inspiring Call",
+     "Heroic Intervention",
+     "Silkguard"
+    ],
+    "tutors": [
+     "Worldly Tutor",
+     "Celestial Reunion",
+     "Formidable Speaker"
+    ]
+   },
+   "missingPieces": [],
+   "cardRoles": {
+    "Slime Against Humanity": "off_plan",
+    "Scavenging Ooze": "off_plan",
+    "Acidic Slime": "off_plan",
+    "Experiment One": "off_plan",
+    "Temperamental Oozewagg": "off_plan",
+    "Fuel Tank Feaster": "off_plan",
+    "Mutagen Man, Living Ooze": "off_plan",
+    "Universal Automaton": "off_plan",
+    "Three Tree Mascot": "off_plan",
+    "Mutable Explorer": "off_plan",
+    "Chomping Changeling": "off_plan",
+    "Firdoch Core": "off_plan",
+    "Miming Slime": "off_plan",
+    "Hardened Scales": "off_plan",
+    "Ozolith, the Shattered Spire": "off_plan",
+    "Michelangelo, Weirdness to 11": "off_plan",
+    "Kami of Whispered Hopes": "off_plan",
+    "Renata, Called to the Hunt": "off_plan",
+    "Doubling Season": "off_plan",
+    "Germination Practicum": "off_plan",
+    "Terrasymbiosis": "off_plan",
+    "Llanowar Elves": "off_plan",
+    "Elvish Mystic": "off_plan",
+    "Paradise Druid": "protection",
+    "Ilysian Caryatid": "off_plan",
+    "Selvala, Heart of the Wilds": "off_plan",
+    "Enduring Vitality": "off_plan",
+    "Nissa, Who Shakes the World": "off_plan",
+    "Overlord of the Hauntwoods": "off_plan",
+    "Mox Amber": "off_plan",
+    "Metallic Mimic": "off_plan",
+    "Emerald Medallion": "off_plan",
+    "Utopia Sprawl": "off_plan",
+    "Rampant Growth": "enabler",
+    "Wood Elves": "off_plan",
+    "Sylvan Library": "off_plan",
+    "The One Ring": "protection",
+    "Garruk's Uprising": "off_plan",
+    "Tribute to the World Tree": "off_plan",
+    "Inspiring Call": "protection",
+    "Shamanic Revelation": "off_plan",
+    "The Great Henge": "off_plan",
+    "Craterhoof Behemoth": "off_plan",
+    "Overrun": "off_plan",
+    "Return of the Wildspeaker": "off_plan",
+    "Worldly Tutor": "enabler",
+    "Celestial Reunion": "enabler",
+    "Formidable Speaker": "tutor_for_plan",
+    "Heroic Intervention": "enabler",
+    "Silkguard": "enabler",
+    "Beast Within": "off_plan",
+    "Pick Your Poison": "off_plan",
+    "Seedship Impact": "enabler",
+    "Kenrith's Transformation": "off_plan",
+    "Bite Down": "enabler",
+    "Bushwhack": "enabler"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+   "a spell burn plan piece (e.g. Rampant Growth or Worldly Tutor)"
+  ],
+  "gameChangers": {
+   "count": 2,
+   "names": [
+    "The One Ring",
+    "Worldly Tutor"
+   ]
+  },
+  "categories": {
+   "utility": 21,
+   "removal": 7,
+   "win_condition": 4,
+   "ramp": 16,
+   "draw": 9,
+   "tutor": 3,
+   "protection": 2,
+   "board_wipe": 1,
+   "land": 36
+  },
+  "stats": {
+   "totalCards": 99,
+   "landCount": 36,
+   "avgCmc": 2.89
+  }
+ }
+}

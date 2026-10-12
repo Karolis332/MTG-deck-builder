@@ -1,0 +1,1085 @@
+{
+ "metrics": {
+  "label": "krenko",
+  "strategy": "tribal",
+  "themes": [
+   "tribal"
+  ],
+  "tribal": "goblin",
+  "size": 99,
+  "lands": 35,
+  "basics": 28,
+  "honestRamp": 10,
+  "draw": 17,
+  "removal": 6,
+  "wipes": 2,
+  "protection": 3,
+  "wincons": 5,
+  "tutors": 1,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "ramp": 10,
+   "draw": 13,
+   "synergy": 20,
+   "tutor": 1,
+   "removal": 6,
+   "board_wipe": 2,
+   "utility": 3,
+   "protection": 3,
+   "win_condition": 3,
+   "land": 3
+  },
+  "ms": 878,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 61
+  },
+  "sources": {
+   "W": 5,
+   "U": 5,
+   "B": 5,
+   "R": 44,
+   "G": 5
+  },
+  "price": {
+   "total": 375.65,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Legion Loyalist",
+   "cmc": 1,
+   "type": "Creature — Goblin Soldier",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 104,
+   "price": "4.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Reckless Lackey",
+   "cmc": 1,
+   "type": "Creature — Goblin Pirate",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 103,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Skirk Prospector",
+   "cmc": 1,
+   "type": "Creature — Goblin",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 112,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Stadium Headliner",
+   "cmc": 1,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 106,
+   "price": "0.71",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 143,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Battle Cry Goblin",
+   "cmc": 2,
+   "type": "Creature — Goblin",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 110,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 102,
+   "price": "0.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragon Fodder",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 103,
+   "price": "0.13",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Enterprising Scallywag",
+   "cmc": 2,
+   "type": "Creature — Goblin Pirate",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "synergy",
+   "score": 110,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Cratermaker",
+   "cmc": 2,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 106,
+   "price": "0.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Instigator",
+   "cmc": 2,
+   "type": "Creature — Goblin Rogue",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 115,
+   "price": "0.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goro-Goro, Disciple of Ryusei",
+   "cmc": 2,
+   "type": "Legendary Creature — Goblin Samurai",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 115,
+   "price": "1.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hexing Squelcher",
+   "cmc": 2,
+   "type": "Creature — Goblin Sorcerer",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 118,
+   "price": "21.44",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Humble Defector",
+   "cmc": 2,
+   "type": "Creature — Human Rogue",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 102,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Krenko's Command",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 103,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 111,
+   "price": "4.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Roiling Vortex",
+   "cmc": 2,
+   "type": "Enchantment",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 69,
+   "price": "1.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scuzzback Scrounger",
+   "cmc": 2,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 110,
+   "price": "1.03",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Searslicer Goblin",
+   "cmc": 2,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 114,
+   "price": "1.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "cmc": 2,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 72,
+   "price": "8.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Shock Brigade",
+   "cmc": 2,
+   "type": "Creature — Goblin Soldier",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 103,
+   "price": "0.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Smash to Dust",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "board_wipe",
+   "score": 64,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 98,
+   "price": "2.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wily Goblin",
+   "cmc": 2,
+   "type": "Creature — Goblin Pirate",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "ramp",
+   "score": 101,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Breeches, Eager Pillager",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin Pirate",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 115,
+   "price": "0.91",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chaos Warp",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 115,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Crime Novelist",
+   "cmc": 3,
+   "type": "Creature — Goblin Bard",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 117,
+   "price": "2.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragon's Hoard",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 103,
+   "price": "0.49",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+   "cmc": 3,
+   "type": "Enchantment — Saga // Enchantment Creatu",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 147,
+   "price": "6.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gempalm Incinerator",
+   "cmc": 3,
+   "type": "Creature — Goblin",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 108,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "General Kreat, the Boltbringer",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin Soldier",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 117,
+   "price": "7.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Chainwhirler",
+   "cmc": 3,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 108,
+   "price": "0.68",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Matron",
+   "cmc": 3,
+   "type": "Creature — Goblin",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 116,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Rabblemaster",
+   "cmc": 3,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 112,
+   "price": "0.65",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Sharpshooter",
+   "cmc": 3,
+   "type": "Creature — Goblin",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 110,
+   "price": "24.41",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gut, True Soul Zealot",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin Shaman",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 106,
+   "price": "0.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Herald's Horn",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 102,
+   "price": "5.68",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hordeling Outburst",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 102,
+   "price": "0.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Howlsquad Heavy",
+   "cmc": 3,
+   "type": "Creature — Goblin Mercenary",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 115,
+   "price": "4.70",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Krenko, Baron of Tin Street",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 103,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Krenko, Tin Street Kingpin",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 121,
+   "price": "3.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Legion Warboss",
+   "cmc": 3,
+   "type": "Creature — Goblin Soldier",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 119,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Palantír of Orthanc",
+   "cmc": 3,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 103,
+   "price": "19.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pashalik Mons",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin Warrior",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 116,
+   "price": "4.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Squee, Dubious Monarch",
+   "cmc": 3,
+   "type": "Legendary Creature — Goblin Noble",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 110,
+   "price": "0.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Staff of Domination",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 103,
+   "price": "11.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 76,
+   "price": "1.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ashling, Flame Dancer",
+   "cmc": 4,
+   "type": "Legendary Creature — Elemental Shaman",
+   "cats": [
+    "ramp",
+    "draw",
+    "win_condition"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 102,
+   "price": "5.73",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Beetleback Chief",
+   "cmc": 4,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 114,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Empty the Warrens",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 102,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Ringleader",
+   "cmc": 4,
+   "type": "Creature — Goblin",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 109,
+   "price": "0.96",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goblin Trashmaster",
+   "cmc": 4,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 115,
+   "price": "7.65",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Jaxis, the Troublemaker",
+   "cmc": 4,
+   "type": "Legendary Creature — Human Warrior",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 102,
+   "price": "2.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Redcap Gutter-Dweller",
+   "cmc": 4,
+   "type": "Creature — Goblin Warrior",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 102,
+   "price": "0.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 118,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Well of Lost Dreams",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 103,
+   "price": "6.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Brash Taunter",
+   "cmc": 5,
+   "type": "Creature — Goblin",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "win_condition",
+   "score": 113,
+   "price": "4.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pinnacle Monk // Mystic Peak",
+   "cmc": 5,
+   "type": "Creature — Djinn Monk // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 69,
+   "price": "1.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Siege-Gang Commander",
+   "cmc": 5,
+   "type": "Creature — Goblin",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 114,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 115,
+   "price": "5.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 112,
+   "price": "22.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Muxus, Goblin Grandee",
+   "cmc": 6,
+   "type": "Legendary Creature — Goblin Noble",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "win_condition",
+   "score": 105,
+   "price": "13.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "cmc": 7,
+   "type": "Legendary Planeswalker — Ugin",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "tutor",
+   "score": 97,
+   "price": "39.83",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 110,
+   "price": "0.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arena of Glory",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arid Mesa",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "28.05",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "19.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Great Furnace",
+   "cmc": 0,
+   "type": "Artifact Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.34",
+   "edhrec": false
+  },
+  {
+   "q": 28,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "38.67",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sokenzan, Crucible of Defiance",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wooded Foothills",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "18.21",
+   "edhrec": false
+  }
+ ]
+}

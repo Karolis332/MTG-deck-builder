@@ -1,0 +1,588 @@
+{
+ "metrics": {
+  "label": "meren-paper",
+  "strategy": "aristocrats",
+  "tribal": null,
+  "size": 99,
+  "lands": 35,
+  "nonland": 64,
+  "roleCounts": {
+   "ramp": 16,
+   "utility": 5,
+   "synergy": 4,
+   "removal": 9,
+   "tutor": 2,
+   "win_condition": 6,
+   "draw": 14,
+   "board_wipe": 3,
+   "protection": 2,
+   "land": 3
+  },
+  "walkers": 0,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 61,
+  "ms": 2221
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Culling Ritual",
+   "pickedScore": 90,
+   "bench": "Gilded Goose",
+   "benchScore": 144,
+   "margin": 54
+  },
+  "utility": {
+   "picked": "Blood Artist",
+   "pickedScore": 158,
+   "bench": "Goldvein Hydra",
+   "benchScore": 142,
+   "margin": -15
+  },
+  "synergy": {
+   "picked": "Reanimate",
+   "pickedScore": 132,
+   "bench": "Syr Ginger, the Meal Ender",
+   "benchScore": 140,
+   "margin": 8
+  },
+  "removal": {
+   "picked": "Force of Vigor",
+   "pickedScore": 98,
+   "bench": "Grist, Voracious Larva // Grist, the Plague Swarm",
+   "benchScore": 134,
+   "margin": 36
+  },
+  "tutor": {
+   "picked": "Transmutation Font",
+   "pickedScore": 107,
+   "bench": "Dimir House Guard",
+   "benchScore": 104,
+   "margin": -3
+  },
+  "win_condition": {
+   "picked": "Cauldron of Essence",
+   "pickedScore": 79,
+   "bench": "Marionette Apprentice",
+   "benchScore": 141,
+   "margin": 61
+  },
+  "draw": {
+   "picked": "Moldervine Reclamation",
+   "pickedScore": 144,
+   "bench": "Elegy Acolyte",
+   "benchScore": 151,
+   "margin": 7
+  },
+  "board_wipe": {
+   "picked": "Toxic Deluge",
+   "pickedScore": 97,
+   "bench": "Phyrexian Scriptures",
+   "benchScore": 124,
+   "margin": 27
+  },
+  "protection": {
+   "picked": "Lightning Greaves",
+   "pickedScore": 132,
+   "bench": "Gyome, Master Chef",
+   "benchScore": 124,
+   "margin": -8
+  },
+  "land": {
+   "picked": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "pickedScore": 93,
+   "bench": "Revitalizing Repast // Old-Growth Grove",
+   "benchScore": 101,
+   "margin": 8
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Accursed Marauder",
+   "role": "utility",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Ashnod's Altar",
+   "role": "ramp",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "role": "removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "role": "utility",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Blooming Marsh",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "role": "land",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "role": "draw",
+   "score": 237
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "role": "land",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Buried Alive",
+   "role": "tutor",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Butcher of Malakir",
+   "role": "removal",
+   "score": 130
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "role": "removal",
+   "score": 187
+  },
+  {
+   "q": 1,
+   "name": "Carrion Feeder",
+   "role": "utility",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Cauldron of Essence",
+   "role": "win_condition",
+   "score": 79
+  },
+  {
+   "q": 1,
+   "name": "Chronomancer",
+   "role": "draw",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Culling Ritual",
+   "role": "ramp",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "role": "ramp",
+   "score": 98
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "role": "ramp",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "role": "ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Dina, Essence Brewer",
+   "role": "draw",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "role": "land",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Dread Presence",
+   "role": "removal",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "role": "ramp",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "role": "synergy",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "role": "ramp",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Force of Vigor",
+   "role": "removal",
+   "score": 98
+  },
+  {
+   "q": 6,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "role": "draw",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Gray Merchant of Asphodel",
+   "role": "win_condition",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Grim Haruspex",
+   "role": "draw",
+   "score": 215
+  },
+  {
+   "q": 1,
+   "name": "Haywire Mite",
+   "role": "removal",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "High-Society Hunter",
+   "role": "draw",
+   "score": 178
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "role": "draw",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Ifnir Deadlands",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+   "role": "draw",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "role": "protection",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "role": "ramp",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Wastes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Massacre Wurm",
+   "role": "board_wipe",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Midnight Reaper",
+   "role": "draw",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Mikaeus, the Unhallowed",
+   "role": "win_condition",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Mirkwood Bats",
+   "role": "win_condition",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Moldervine Reclamation",
+   "role": "draw",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Morbid Opportunist",
+   "role": "draw",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Necroblossom Snarl",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "role": "board_wipe",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Plaguecrafter",
+   "role": "removal",
+   "score": 192
+  },
+  {
+   "q": 1,
+   "name": "Priest of Forgotten Gods",
+   "role": "ramp",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Putrefy",
+   "role": "removal",
+   "score": 101
+  },
+  {
+   "q": 1,
+   "name": "Ravenous Chupacabra",
+   "role": "removal",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Reanimate",
+   "role": "synergy",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Riveteers Overlook",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sakura-Tribe Elder",
+   "role": "ramp",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "role": "ramp",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Smothering Abomination",
+   "role": "draw",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "role": "ramp",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Spore Frog",
+   "role": "utility",
+   "score": 188
+  },
+  {
+   "q": 14,
+   "name": "Swamp",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Syr Konrad, the Grim",
+   "role": "win_condition",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "role": "ramp",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Toski, Bearer of Secrets",
+   "role": "draw",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Toxic Deluge",
+   "role": "board_wipe",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Transmutation Font",
+   "role": "tutor",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Twilight Mire",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Victimize",
+   "role": "synergy",
+   "score": 217
+  },
+  {
+   "q": 1,
+   "name": "Village Rites",
+   "role": "draw",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Viridescent Bog",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Viscera Seer",
+   "role": "utility",
+   "score": 221
+  },
+  {
+   "q": 1,
+   "name": "Wight of the Reliquary",
+   "role": "ramp",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Woe Strider",
+   "role": "synergy",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Wooded Foothills",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Woodland Cemetery",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Yahenni, Undying Partisan",
+   "role": "protection",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Zulaport Cutthroat",
+   "role": "win_condition",
+   "score": 156
+  }
+ ]
+}

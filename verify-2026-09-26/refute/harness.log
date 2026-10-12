@@ -1,0 +1,25 @@
+Building aeve-collection (Aeve, Progenitor Ooze, brawl, collection=true)...
+  -> ok
+Building aeve-no-collection (Aeve, Progenitor Ooze, brawl, collection=false)...
+  -> ok
+Building krenko (Krenko, Mob Boss, commander, collection=false)...
+  -> ok
+Building talrand (Talrand, Sky Summoner, commander, collection=false)...
+  -> ok
+Building vivi (Vivi Ornitier, commander, collection=false)...
+  -> ok
+Building ezuri (Ezuri, Claw of Progress, commander, collection=false)...
+  -> ok
+Building edgar-markov (Edgar Markov, commander, collection=false)...
+  -> ok
+Wrote verify-2026-09-26/refute/refute.json and verify-2026-09-26/refute/refute.md
+
+=== Compare (baseline -> current) ===
+aeve-collection: strategy spellslinger -> tribal [CHANGED], dead-cards 0 -> 0, unowned ? -> 0, gate fail -> fail
+aeve-no-collection: strategy spellslinger -> tribal [CHANGED], dead-cards 3 -> 0, gate warn -> warn
+krenko: strategy tribal -> tribal, dead-cards 0 -> 0, gate warn -> warn
+talrand: strategy spellslinger -> spellslinger, dead-cards 0 -> 0, gate warn -> warn
+vivi: strategy spellslinger -> spellslinger, dead-cards 0 -> 0, gate warn -> warn
+ezuri: strategy aggro -> aggro, dead-cards 0 -> 0, gate warn -> warn
+edgar-markov: strategy aggro -> tribal [CHANGED], dead-cards 0 -> 0, gate warn -> warn
+EXIT=0

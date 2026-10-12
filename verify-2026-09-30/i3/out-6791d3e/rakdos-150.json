@@ -1,0 +1,1125 @@
+{
+ "metrics": {
+  "label": "rakdos-150",
+  "strategy": "control",
+  "themes": [
+   "draw",
+   "artifacts",
+   "ramp",
+   "control",
+   "tokens",
+   "sacrifice",
+   "equipment",
+   "tribal"
+  ],
+  "tribal": null,
+  "size": 100,
+  "lands": 36,
+  "basics": 28,
+  "honestRamp": 13,
+  "draw": 43,
+  "removal": 18,
+  "wipes": 4,
+  "protection": 3,
+  "wincons": 7,
+  "tutors": 0,
+  "walkers": 3,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "draw": 26,
+   "ramp": 11,
+   "win_condition": 1,
+   "removal": 18,
+   "board_wipe": 4,
+   "utility": 1,
+   "protection": 1,
+   "land": 2
+  },
+  "ms": 1736,
+  "edhrec": {
+   "skipped": "no commander",
+   "fetchMs": 0
+  },
+  "sources": {
+   "W": 6,
+   "U": 6,
+   "B": 38,
+   "R": 21,
+   "G": 6
+  },
+  "price": {
+   "total": 143.18,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 145,
+   "price": "6.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Soul-Guide Lantern",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 127,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vandalblast",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 150,
+   "price": "1.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Abrade",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 135,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 150,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 159,
+   "price": "0.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 190,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 135,
+   "price": "0.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Go for the Throat",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 121,
+   "price": "0.62",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Guild Globe",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 72,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 173,
+   "price": "3.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 180,
+   "price": "0.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Oblivion's Hunger",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "protection"
+   ],
+   "primary": "draw",
+   "role": "",
+   "score": 74,
+   "price": "0.06",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "board_wipe",
+   "score": 121,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rush of Vitality",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "",
+   "score": 50,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Untimely Malfunction",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "protection"
+   ],
+   "primary": "removal",
+   "role": "protection",
+   "score": 121,
+   "price": "8.89",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Waste Not",
+   "cmc": 2,
+   "type": "Enchantment",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 145,
+   "price": "8.67",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 188,
+   "price": "9.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "cmc": 3,
+   "type": "Creature — Goblin // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 120,
+   "price": "1.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "type": "Legendary Creature — Nightmare",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 159,
+   "price": "4.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Commander's Sphere",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 165,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dark Dabbling",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "",
+   "score": 68,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Flick a Coin",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 126,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Glass-Cast Heart",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 136,
+   "price": "0.63",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gluttonous Guest",
+   "cmc": 3,
+   "type": "Creature — Vampire",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 138,
+   "price": "0.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Magnifying Glass",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 140,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mari, the Killing Quill",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Assassin",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 142,
+   "price": "5.37",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mastermind Plum",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Wizard",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 147,
+   "price": "5.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Morbid Opportunist",
+   "cmc": 3,
+   "type": "Creature — Human Rogue",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 142,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Arena",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 158,
+   "price": "4.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Plundering Barbarian",
+   "cmc": 3,
+   "type": "Creature — Dwarf Barbarian",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 128,
+   "price": "0.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Skittering Surveyor",
+   "cmc": 3,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 24,
+   "price": "0.06",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Staff of Compleation",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 127,
+   "price": "4.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Succumb to Temptation",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "",
+   "score": 62,
+   "price": "0.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Teval's Judgment",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 144,
+   "price": "8.91",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Toxic Deluge",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 110,
+   "price": "4.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Unshakable Tail",
+   "cmc": 3,
+   "type": "Creature — Zombie Detective",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 144,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Anje, Maid of Dishonor",
+   "cmc": 4,
+   "type": "Legendary Creature — Vampire",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 144,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Azula, On the Hunt",
+   "cmc": 4,
+   "type": "Legendary Creature — Human Noble",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 141,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Big Score",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 160,
+   "price": "0.43",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chandra, Spark Hunter",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Chandra",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 147,
+   "price": "2.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Elegy Acolyte",
+   "cmc": 4,
+   "type": "Creature — Human Cleric",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "",
+   "score": 135,
+   "price": "0.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Erebos, Bleak-Hearted",
+   "cmc": 4,
+   "type": "Legendary Enchantment Creature — God",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 123,
+   "price": "2.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "cmc": 4,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 135,
+   "price": "5.17",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fiery Confluence",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe",
+    "win_condition"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 106,
+   "price": "0.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lethal Scheme",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 127,
+   "price": "0.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 150,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "cmc": 4,
+   "type": "Creature — Dwarf Shaman",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 139,
+   "price": "1.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Unexpected Windfall",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 159,
+   "price": "3.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "High-Society Hunter",
+   "cmc": 5,
+   "type": "Creature — Vampire Noble",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 137,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Moonstone Eulogist",
+   "cmc": 5,
+   "type": "Creature — Bat Warlock",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 143,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ob Nixilis Reignited",
+   "cmc": 5,
+   "type": "Legendary Planeswalker — Nixilis",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 132,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo's Journal",
+   "cmc": 5,
+   "type": "Legendary Artifact — Book",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "tutor",
+   "score": 142,
+   "price": "3.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Mightstone and Weakstone",
+   "cmc": 5,
+   "type": "Legendary Artifact — Powerstone",
+   "cats": [
+    "ramp",
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 127,
+   "price": "5.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 159,
+   "price": "5.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "cmc": 5,
+   "type": "Instant — Lesson",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 134,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Genesis of the Daleks",
+   "cmc": 6,
+   "type": "Enchantment — Saga",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 110,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Harvester of Souls",
+   "cmc": 6,
+   "type": "Creature — Demon",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 138,
+   "price": "2.69",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Liliana, Dreadhorde General",
+   "cmc": 6,
+   "type": "Legendary Planeswalker — Liliana",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 131,
+   "price": "8.79",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Megaton's Fate",
+   "cmc": 6,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "board_wipe",
+   "score": 117,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Summon: Primal Odin",
+   "cmc": 6,
+   "type": "Enchantment Creature — Saga Knight",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 124,
+   "price": "1.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Voracious Fell Beast",
+   "cmc": 6,
+   "type": "Creature — Drake Beast",
+   "cats": [
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 83,
+   "price": "0.09",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Marut",
+   "cmc": 8,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "",
+   "score": 82,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 150,
+   "price": "0.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Badlands",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragonskull Summit",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.43",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Foreboding Ruins",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.67",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Haunted Ridge",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Luxury Suite",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.85",
+   "edhrec": false
+  },
+  {
+   "q": 6,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sulfurous Springs",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 22,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tainted Peak",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.72",
+   "edhrec": false
+  }
+ ]
+}

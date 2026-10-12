@@ -1,0 +1,1316 @@
+{
+ "metrics": {
+  "label": "edgar",
+  "strategy": "tribal",
+  "themes": [
+   "tribal"
+  ],
+  "tribal": "vampire",
+  "size": 99,
+  "lands": 35,
+  "basics": 14,
+  "honestRamp": 10,
+  "draw": 16,
+  "removal": 9,
+  "wipes": 3,
+  "protection": 3,
+  "wincons": 10,
+  "tutors": 2,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "ramp": 10,
+   "draw": 10,
+   "removal": 9,
+   "protection": 3,
+   "utility": 7,
+   "synergy": 12,
+   "tutor": 2,
+   "board_wipe": 3,
+   "win_condition": 5,
+   "land": 3
+  },
+  "ms": 1101,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 0
+  },
+  "sources": {
+   "W": 22,
+   "U": 8,
+   "B": 33,
+   "R": 18,
+   "G": 8
+  },
+  "price": {
+   "total": 1405.64,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Walking Ballista",
+   "cmc": 0,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "payoff",
+   "score": 99,
+   "price": "10.71",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Indulgent Aristocrat",
+   "cmc": 1,
+   "type": "Creature — Vampire Noble",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 222,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Master of Dark Rites",
+   "cmc": 1,
+   "type": "Creature — Vampire Cleric",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 196,
+   "price": "4.44",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Path to Exile",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 114,
+   "price": "0.75",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Skullclamp",
+   "cmc": 1,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "payoff",
+   "score": 212,
+   "price": "4.85",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 157,
+   "price": "1.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 143,
+   "price": "1.02",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Viscera Seer",
+   "cmc": 1,
+   "type": "Creature — Vampire Wizard",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "",
+   "score": 180,
+   "price": "0.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Amalia Benavides Aguirre",
+   "cmc": 2,
+   "type": "Legendary Creature — Vampire Scout",
+   "cats": [
+    "draw",
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 118,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 157,
+   "price": "0.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bitterblossom",
+   "cmc": 2,
+   "type": "Kindred Enchantment — Faerie",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 101,
+   "price": "32.55",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "cmc": 2,
+   "type": "Creature — Vampire",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 237,
+   "price": "3.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Charismatic Conqueror",
+   "cmc": 2,
+   "type": "Creature — Vampire Soldier",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 202,
+   "price": "25.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cordial Vampire",
+   "cmc": 2,
+   "type": "Creature — Vampire",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 231,
+   "price": "2.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cruel Celebrant",
+   "cmc": 2,
+   "type": "Creature — Vampire",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 206,
+   "price": "2.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Legion Lieutenant",
+   "cmc": 2,
+   "type": "Creature — Vampire Knight",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 205,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 102,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Orzhov Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 84,
+   "price": "0.37",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 88,
+   "price": "0.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Indulgence",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 78,
+   "price": "1.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Thought Vessel",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 140,
+   "price": "2.04",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vampire Socialite",
+   "cmc": 2,
+   "type": "Creature — Vampire Noble",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 161,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Adeline, Resplendent Cathar",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Knight",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 102,
+   "price": "2.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 70,
+   "price": "28.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "9.88",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "cmc": 3,
+   "type": "Creature — Goblin // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 83,
+   "price": "1.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Captivating Vampire",
+   "cmc": 3,
+   "type": "Creature — Vampire",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 211,
+   "price": "3.52",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Clavileño, First of the Blessed",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Cleric",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 224,
+   "price": "0.71",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Drana, Liberator of Malakir",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Ally",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 198,
+   "price": "0.97",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Forerunner of the Legion",
+   "cmc": 3,
+   "type": "Creature — Vampire Knight",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 103,
+   "price": "1.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Loran of the Third Path",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 115,
+   "price": "7.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mari, the Killing Quill",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Assassin",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 145,
+   "price": "6.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mavren Fein, Dusk Apostle",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Cleric",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 185,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pawn of Ulamog",
+   "cmc": 3,
+   "type": "Creature — Vampire Shaman",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "ramp",
+   "score": 131,
+   "price": "0.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Professional Face-Breaker",
+   "cmc": 3,
+   "type": "Creature — Human Warrior",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "",
+   "score": 137,
+   "price": "7.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sorin, Imperious Bloodlord",
+   "cmc": 3,
+   "type": "Legendary Planeswalker — Sorin",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 173,
+   "price": "6.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Stromkirk Captain",
+   "cmc": 3,
+   "type": "Creature — Vampire Soldier",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 207,
+   "price": "1.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Teferi's Protection",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 107,
+   "price": "48.68",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+   "cmc": 3,
+   "type": "Legendary Creature — Elder Wizard // Leg",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "protection",
+   "score": 104,
+   "price": "1.79",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vito, Thorn of the Dusk Rose",
+   "cmc": 3,
+   "type": "Legendary Creature — Vampire Cleric",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 215,
+   "price": "10.78",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Welcoming Vampire",
+   "cmc": 3,
+   "type": "Creature — Vampire",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 249,
+   "price": "3.75",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Whispersilk Cloak",
+   "cmc": 3,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "payoff",
+   "score": 104,
+   "price": "2.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Yahenni, Undying Partisan",
+   "cmc": 3,
+   "type": "Legendary Creature — Aetherborn Vampire",
+   "cats": [
+    "protection",
+    "synergy"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 210,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Anger",
+   "cmc": 4,
+   "type": "Creature — Incarnation",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "payoff",
+   "score": 104,
+   "price": "0.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Anointed Procession",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 101,
+   "price": "62.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Baron Bertram Graywater",
+   "cmc": 4,
+   "type": "Legendary Creature — Vampire Noble",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 157,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bloodletter of Aclazotz",
+   "cmc": 4,
+   "type": "Creature — Vampire Demon",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "",
+   "score": 170,
+   "price": "37.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bloodline Keeper // Lord of Lineage",
+   "cmc": 4,
+   "type": "Creature — Vampire // Creature — Vampire",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 212,
+   "price": "9.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Damnation",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 87,
+   "price": "21.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Deadly Rollick",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 120,
+   "price": "28.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Edgar, Charmed Groom // Edgar Markov's Coffin",
+   "cmc": 4,
+   "type": "Legendary Creature — Vampire Noble // Le",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "",
+   "score": 189,
+   "price": "3.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Elenda, the Dusk Rose",
+   "cmc": 4,
+   "type": "Legendary Creature — Vampire Knight",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 224,
+   "price": "5.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Emeritus of Woe // Demonic Tutor",
+   "cmc": 4,
+   "type": "Creature — Vampire Warlock // Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 120,
+   "price": "11.55",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "cmc": 4,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 83,
+   "price": "4.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sanctum Seeker",
+   "cmc": 4,
+   "type": "Creature — Vampire Knight",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 204,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 143,
+   "price": "0.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Twilight Prophet",
+   "cmc": 4,
+   "type": "Creature — Vampire Cleric",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 174,
+   "price": "3.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Champion of Dusk",
+   "cmc": 5,
+   "type": "Creature — Vampire Knight",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 165,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "High-Society Hunter",
+   "cmc": 5,
+   "type": "Creature — Vampire Noble",
+   "cats": [
+    "draw",
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 173,
+   "price": "0.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Malakir Bloodwitch",
+   "cmc": 5,
+   "type": "Creature — Vampire Shaman",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 173,
+   "price": "4.55",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Crossway Troublemakers",
+   "cmc": 6,
+   "type": "Creature — Vampire",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 154,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "cmc": 6,
+   "type": "Battle — Siege // Legendary Creature — H",
+   "cats": [
+    "draw",
+    "board_wipe",
+    "win_condition"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 89,
+   "price": "0.46",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Patron of the Vein",
+   "cmc": 6,
+   "type": "Creature — Vampire Shaman",
+   "cats": [
+    "removal",
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 168,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Butcher of Malakir",
+   "cmc": 7,
+   "type": "Creature — Vampire Warrior",
+   "cats": [
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "payoff",
+   "score": 112,
+   "price": "0.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arid Mesa",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "30.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Badlands",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "235.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.88",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "18.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Caves of Koilos",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "12.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragonskull Summit",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "cmc": 0,
+   "type": "Land — Plains Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Luxury Suite",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.44",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "32.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.09",
+   "edhrec": false
+  },
+  {
+   "q": 3,
+   "name": "Plains",
+   "cmc": 0,
+   "type": "Basic Land — Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Plateau",
+   "cmc": 0,
+   "type": "Land — Mountain Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "225.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sacred Foundry",
+   "cmc": 0,
+   "type": "Land — Mountain Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "10.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "cmc": 0,
+   "type": "Land — Plains Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "278.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "cmc": 0,
+   "type": "Land — Town",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "11.61",
+   "edhrec": false
+  },
+  {
+   "q": 10,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "29.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vault of Champions",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "16.87",
+   "edhrec": false
+  }
+ ]
+}

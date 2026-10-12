@@ -1,0 +1,696 @@
+{
+ "metrics": {
+  "label": "edgar",
+  "strategy": "tribal",
+  "tribal": "vampire",
+  "size": 99,
+  "lands": 35,
+  "nonland": 64,
+  "roleCounts": {
+   "ramp": 10,
+   "draw": 10,
+   "removal": 9,
+   "protection": 3,
+   "utility": 7,
+   "synergy": 12,
+   "tutor": 2,
+   "board_wipe": 3,
+   "win_condition": 5,
+   "land": 3
+  },
+  "walkers": 2,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 65,
+  "planMargin": 65,
+  "sources": {
+   "W": 22,
+   "U": 8,
+   "B": 32,
+   "R": 18,
+   "G": 8
+  },
+  "ms": 1092
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Talisman of Indulgence",
+   "pickedScore": 78,
+   "bench": "Jeska's Will",
+   "benchScore": 120,
+   "margin": 41
+  },
+  "draw": {
+   "picked": "Mari, the Killing Quill",
+   "pickedScore": 145,
+   "bench": "Dusk Legion Duelist",
+   "benchScore": 139,
+   "margin": -5
+  },
+  "removal": {
+   "picked": "Walking Ballista",
+   "pickedScore": 99,
+   "bench": "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+   "benchScore": 104,
+   "margin": 5
+  },
+  "protection": {
+   "picked": "Whispersilk Cloak",
+   "pickedScore": 104,
+   "bench": "Shadowspear",
+   "benchScore": 99,
+   "margin": -5
+  },
+  "utility": {
+   "picked": "Anger",
+   "pickedScore": 104,
+   "bench": "Markov Baron",
+   "benchScore": 169,
+   "margin": 65
+  },
+  "synergy": {
+   "picked": "Bitterblossom",
+   "pickedScore": 101,
+   "bench": "Elenda's Hierophant",
+   "benchScore": 139,
+   "margin": 38
+  },
+  "tutor": {
+   "picked": "Forerunner of the Legion",
+   "pickedScore": 103,
+   "bench": "Demonic Tutor",
+   "benchScore": 100,
+   "margin": -3
+  },
+  "board_wipe": {
+   "picked": "Damnation",
+   "pickedScore": 87,
+   "bench": "Sunfall",
+   "benchScore": 83,
+   "margin": -4
+  },
+  "win_condition": {
+   "picked": "Bloodletter of Aclazotz",
+   "pickedScore": 170,
+   "bench": "Bloodthirsty Conqueror",
+   "benchScore": 170,
+   "margin": 0
+  },
+  "land": {
+   "picked": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "pickedScore": 70,
+   "bench": "Legion's Landing // Adanto, the First Fort",
+   "benchScore": 121,
+   "margin": 52
+  }
+ },
+ "planMargins": {
+  "ramp": {
+   "picked": "Talisman of Indulgence",
+   "pickedScore": 78,
+   "bench": "Jeska's Will",
+   "benchScore": 120,
+   "margin": 41
+  },
+  "draw": {
+   "picked": "Black Market Connections",
+   "pickedScore": 150,
+   "bench": "Dusk Legion Duelist",
+   "benchScore": 139,
+   "margin": -10
+  },
+  "protection": {
+   "picked": "Whispersilk Cloak",
+   "pickedScore": 104,
+   "bench": "Shadowspear",
+   "benchScore": 99,
+   "margin": -5
+  },
+  "utility": {
+   "picked": "Anger",
+   "pickedScore": 104,
+   "bench": "Markov Baron",
+   "benchScore": 169,
+   "margin": 65
+  },
+  "synergy": {
+   "picked": "Bitterblossom",
+   "pickedScore": 101,
+   "bench": "Elenda's Hierophant",
+   "benchScore": 139,
+   "margin": 38
+  },
+  "removal": {
+   "picked": "Walking Ballista",
+   "pickedScore": 99,
+   "bench": "Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal",
+   "benchScore": 104,
+   "margin": 5
+  },
+  "board_wipe": {
+   "picked": "Damnation",
+   "pickedScore": 87,
+   "bench": "Sunfall",
+   "benchScore": 83,
+   "margin": -4
+  },
+  "land": {
+   "picked": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "pickedScore": 70,
+   "bench": "Legion's Landing // Adanto, the First Fort",
+   "benchScore": 121,
+   "margin": 52
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Adeline, Resplendent Cathar",
+   "role": "synergy",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Agadeem's Awakening // Agadeem, the Undercrypt",
+   "role": "land",
+   "score": 70
+  },
+  {
+   "q": 1,
+   "name": "Amalia Benavides Aguirre",
+   "role": "board_wipe",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Anger",
+   "role": "utility",
+   "score": 104
+  },
+  {
+   "q": 1,
+   "name": "Anointed Procession",
+   "role": "synergy",
+   "score": 101
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Arid Mesa",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Badlands",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Baron Bertram Graywater",
+   "role": "draw",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Bitterblossom",
+   "role": "synergy",
+   "score": 101
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "role": "draw",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "role": "utility",
+   "score": 237
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bloodletter of Aclazotz",
+   "role": "win_condition",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Bloodline Keeper // Lord of Lineage",
+   "role": "win_condition",
+   "score": 212
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "role": "land",
+   "score": 83
+  },
+  {
+   "q": 1,
+   "name": "Butcher of Malakir",
+   "role": "removal",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Captivating Vampire",
+   "role": "utility",
+   "score": 211
+  },
+  {
+   "q": 1,
+   "name": "Cavern of Souls",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Caves of Koilos",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Champion of Dusk",
+   "role": "draw",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Charismatic Conqueror",
+   "role": "synergy",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Clavileño, First of the Blessed",
+   "role": "draw",
+   "score": 224
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Cordial Vampire",
+   "role": "synergy",
+   "score": 231
+  },
+  {
+   "q": 1,
+   "name": "Crossway Troublemakers",
+   "role": "draw",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Cruel Celebrant",
+   "role": "win_condition",
+   "score": 206
+  },
+  {
+   "q": 1,
+   "name": "Damnation",
+   "role": "board_wipe",
+   "score": 87
+  },
+  {
+   "q": 1,
+   "name": "Deadly Rollick",
+   "role": "removal",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Dragonskull Summit",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Drana, Liberator of Malakir",
+   "role": "synergy",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Edgar, Charmed Groom // Edgar Markov's Coffin",
+   "role": "synergy",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Elenda, the Dusk Rose",
+   "role": "synergy",
+   "score": 224
+  },
+  {
+   "q": 1,
+   "name": "Emeritus of Woe // Demonic Tutor",
+   "role": "tutor",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "role": "land",
+   "score": 83
+  },
+  {
+   "q": 1,
+   "name": "Forerunner of the Legion",
+   "role": "tutor",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Grand Coliseum",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "High-Society Hunter",
+   "role": "draw",
+   "score": 173
+  },
+  {
+   "q": 1,
+   "name": "Indulgent Aristocrat",
+   "role": "synergy",
+   "score": 222
+  },
+  {
+   "q": 1,
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "role": "board_wipe",
+   "score": 89
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Legion Lieutenant",
+   "role": "utility",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Liliana, Dreadhorde General",
+   "role": "removal",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Loran of the Third Path",
+   "role": "removal",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Malakir Bloodwitch",
+   "role": "win_condition",
+   "score": 173
+  },
+  {
+   "q": 1,
+   "name": "Mari, the Killing Quill",
+   "role": "draw",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Master of Dark Rites",
+   "role": "ramp",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Mavren Fein, Dusk Apostle",
+   "role": "synergy",
+   "score": 185
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Orzhov Signet",
+   "role": "ramp",
+   "score": 84
+  },
+  {
+   "q": 1,
+   "name": "Path to Exile",
+   "role": "removal",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Patron of the Vein",
+   "role": "removal",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Pawn of Ulamog",
+   "role": "ramp",
+   "score": 131
+  },
+  {
+   "q": 3,
+   "name": "Plains",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Plateau",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Professional Face-Breaker",
+   "role": "synergy",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Sacred Foundry",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sanctum Seeker",
+   "role": "win_condition",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shattered Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Skullclamp",
+   "role": "draw",
+   "score": 212
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "role": "ramp",
+   "score": 157
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Sorin, Imperious Bloodlord",
+   "role": "removal",
+   "score": 173
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stromkirk Captain",
+   "role": "utility",
+   "score": 207
+  },
+  {
+   "q": 10,
+   "name": "Swamp",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "role": "removal",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "role": "ramp",
+   "score": 88
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Indulgence",
+   "role": "ramp",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Teferi's Protection",
+   "role": "protection",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Thought Vessel",
+   "role": "ramp",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Twilight Prophet",
+   "role": "draw",
+   "score": 174
+  },
+  {
+   "q": 1,
+   "name": "Vampire Socialite",
+   "role": "synergy",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Viscera Seer",
+   "role": "utility",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Vito, Thorn of the Dusk Rose",
+   "role": "utility",
+   "score": 215
+  },
+  {
+   "q": 1,
+   "name": "Walking Ballista",
+   "role": "removal",
+   "score": 99
+  },
+  {
+   "q": 1,
+   "name": "Welcoming Vampire",
+   "role": "draw",
+   "score": 249
+  },
+  {
+   "q": 1,
+   "name": "Whispersilk Cloak",
+   "role": "protection",
+   "score": 104
+  },
+  {
+   "q": 1,
+   "name": "Yahenni, Undying Partisan",
+   "role": "protection",
+   "score": 210
+  }
+ ]
+}

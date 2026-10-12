@@ -1,0 +1,1504 @@
+{
+ "metrics": {
+  "label": "jhoira-arena",
+  "strategy": "midrange",
+  "themes": [
+   "artifacts",
+   "spellslinger",
+   "draw",
+   "tokens",
+   "ramp"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 29,
+  "basics": 2,
+  "honestRamp": 16,
+  "draw": 24,
+  "removal": 9,
+  "wipes": 3,
+  "protection": 3,
+  "wincons": 4,
+  "tutors": 2,
+  "walkers": 3,
+  "ways": 0,
+  "fromEdhrec": 14,
+  "primaryCounts": {
+   "ramp": 14,
+   "draw": 13,
+   "protection": 3,
+   "synergy": 16,
+   "removal": 9,
+   "board_wipe": 3,
+   "win_condition": 2,
+   "tutor": 1,
+   "land": 9
+  },
+  "ms": 2574,
+  "edhrec": {
+   "topCards": 60,
+   "themes": [
+    "Artifacts",
+    "Storm"
+   ],
+   "themeCards": [
+    40,
+    40
+   ],
+   "unique": 64,
+   "fetchMs": 1298
+  },
+  "sources": {
+   "W": 10,
+   "U": 29,
+   "B": 10,
+   "R": 31,
+   "G": 10
+  },
+  "price": {
+   "total": 782.34,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Hangarback Walker",
+   "cmc": 0,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 119,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Bauble",
+   "cmc": 0,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 159,
+   "price": "2.89",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Mox Opal",
+   "cmc": 0,
+   "type": "Legendary Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 153,
+   "price": "175.53",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Aether Spellbomb",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "upgrade",
+   "score": 128,
+   "price": "0.39",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 198,
+   "price": "3.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chromatic Sphere",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 110,
+   "price": "0.37",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "upgrade",
+   "score": 174,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Manifold Key",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 102,
+   "price": "1.46",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "arsenal:staple_removal",
+   "score": 128,
+   "price": "9.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "upgrade",
+   "score": 182,
+   "price": "0.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "arsenal:staple_removal",
+   "score": 155,
+   "price": "3.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "arsenal:staple_removal",
+   "score": 115,
+   "price": "39.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gleaming Barrier",
+   "cmc": 2,
+   "type": "Artifact Creature — Wall",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 126,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "upgrade",
+   "score": 131,
+   "price": "4.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 221,
+   "price": null,
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Steel Overseer",
+   "cmc": 2,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 108,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 165,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Thaumatic Compass // Spires of Orazca",
+   "cmc": 2,
+   "type": "Artifact // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 112,
+   "price": "1.99",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Treasure Map // Treasure Cove",
+   "cmc": 2,
+   "type": "Artifact // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 150,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Breya's Apprentice",
+   "cmc": 3,
+   "type": "Artifact Creature — Human Artificer",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 110,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Captain Lannery Storm",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Pirate",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 155,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chaos Warp",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 135,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cloud Key",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 124,
+   "price": "1.61",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Dragon's Hoard",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 153,
+   "price": "0.49",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Emry, Lurker of the Loch",
+   "cmc": 3,
+   "type": "Legendary Creature — Merfolk Wizard",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 110,
+   "price": "0.57",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Flick a Coin",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 149,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Forensic Gadgeteer",
+   "cmc": 3,
+   "type": "Creature — Vedalken Artificer Detective",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 183,
+   "price": "3.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Foundry Inspector",
+   "cmc": 3,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 147,
+   "price": "0.37",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Glóin, Dwarf Emissary",
+   "cmc": 3,
+   "type": "Legendary Creature — Dwarf Advisor",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 152,
+   "price": "6.54",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "cmc": 3,
+   "type": "Creature — Weird // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 115,
+   "price": "1.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Statuary",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 108,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Junk Diver",
+   "cmc": 3,
+   "type": "Artifact Creature — Bird",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 105,
+   "price": "0.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Magnifying Glass",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 163,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Matzalantli, the Great Door // The Core",
+   "cmc": 3,
+   "type": "Legendary Artifact // Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 124,
+   "price": "2.98",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Plundering Barbarian",
+   "cmc": 3,
+   "type": "Creature — Dwarf Barbarian",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 131,
+   "price": "0.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Prismari Command",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 140,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Professional Face-Breaker",
+   "cmc": 3,
+   "type": "Creature — Human Warrior",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "upgrade",
+   "score": 152,
+   "price": "8.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rhystic Study",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 181,
+   "price": "70.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sai, Master Thopterist",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 175,
+   "price": "0.71",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Scrap Trawler",
+   "cmc": 3,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 108,
+   "price": "3.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 115,
+   "price": "8.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "cmc": 3,
+   "type": "Legendary Planeswalker — Tezzeret",
+   "cats": [
+    "tutor",
+    "synergy"
+   ],
+   "primary": "tutor",
+   "role": "arsenal:archetype_payoff",
+   "score": 107,
+   "price": "21.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Aetherflux Reservoir",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 143,
+   "price": "22.33",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Conqueror's Galleon // Conqueror's Foothold",
+   "cmc": 4,
+   "type": "Artifact — Vehicle // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 121,
+   "price": "1.06",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Galazeth Prismari",
+   "cmc": 4,
+   "type": "Legendary Creature — Elder Dragon",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 144,
+   "price": "0.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 154,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Jhoira's Familiar",
+   "cmc": 4,
+   "type": "Artifact Creature — Bird",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:archetype_payoff",
+   "score": 112,
+   "price": "2.44",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Karn, Scion of Urza",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Karn",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 142,
+   "price": "4.16",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mystic Forge",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 131,
+   "price": "3.39",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Padeem, Consul of Innovation",
+   "cmc": 4,
+   "type": "Legendary Creature — Vedalken Artificer",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 154,
+   "price": "2.94",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 153,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Storm the Vault // Vault of Catlacan",
+   "cmc": 4,
+   "type": "Legendary Enchantment // Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 149,
+   "price": "5.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "cmc": 4,
+   "type": "Creature — Dwarf Shaman",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 173,
+   "price": "1.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Legend of Kuruk // Avatar Kuruk",
+   "cmc": 4,
+   "type": "Enchantment — Saga // Legendary Creature",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "upgrade",
+   "score": 170,
+   "price": "2.43",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Unwinding Clock",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 121,
+   "price": "20.64",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Urabrask // The Great Work",
+   "cmc": 4,
+   "type": "Legendary Creature — Phyrexian Praetor /",
+   "cats": [
+    "ramp",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 138,
+   "price": "16.95",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Urza, Lord High Artificer",
+   "cmc": 4,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 132,
+   "price": "16.49",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Vedalken Archmage",
+   "cmc": 4,
+   "type": "Creature — Vedalken Wizard",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 163,
+   "price": "12.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ashling's Command",
+   "cmc": 5,
+   "type": "Kindred Instant — Elemental",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "board_wipe",
+   "score": 108,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goldspan Dragon",
+   "cmc": 5,
+   "type": "Creature — Dragon",
+   "cats": [
+    "ramp",
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "ramp",
+   "role": "win_condition",
+   "score": 149,
+   "price": "10.52",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pinnacle Monk // Mystic Peak",
+   "cmc": 5,
+   "type": "Creature — Djinn Monk // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 111,
+   "price": "1.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Artifice Master",
+   "cmc": 5,
+   "type": "Legendary Planeswalker — Tezzeret",
+   "cats": [
+    "draw",
+    "tutor",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 155,
+   "price": "5.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Mightstone and Weakstone",
+   "cmc": 5,
+   "type": "Legendary Artifact — Powerstone",
+   "cats": [
+    "ramp",
+    "draw",
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "upgrade",
+   "score": 130,
+   "price": "5.30",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "upgrade",
+   "score": 177,
+   "price": "5.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Niv-Mizzet, Parun",
+   "cmc": 6,
+   "type": "Legendary Creature — Dragon Wizard",
+   "cats": [
+    "draw",
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "upgrade",
+   "score": 129,
+   "price": "5.50",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wurmcoil Engine",
+   "cmc": 6,
+   "type": "Artifact Creature — Phyrexian Wurm",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 120,
+   "price": "10.94",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Myr Battlesphere",
+   "cmc": 7,
+   "type": "Artifact Creature — Myr Construct",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 121,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sea Gate Restoration // Sea Gate, Reborn",
+   "cmc": 7,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 113,
+   "price": "37.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Extinguisher Battleship",
+   "cmc": 8,
+   "type": "Artifact — Spacecraft",
+   "cats": [
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 98,
+   "price": "0.50",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 150,
+   "price": "0.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Archway of Innovation",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arena of Glory",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Castle Embereth",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Castle Vantress",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cori Mountain Monastery",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fiery Islet",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "5.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Frostboil Snarl",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Great Furnace",
+   "cmc": 0,
+   "type": "Artifact Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.34",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "cmc": 0,
+   "type": "Basic Land — Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lindblum, Industrial Regency // Mage Siege",
+   "cmc": 0,
+   "type": "Land — Town // Instant — Adventure",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 114,
+   "price": "3.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "34.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Meteor Crater",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mistrise Village",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.97",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Otawara, Soaring City",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "26.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Prismatic Vista",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "32.50",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Reflecting Pool",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Riverglide Pathway // Lavaglide Pathway",
+   "cmc": 0,
+   "type": "Land // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 83,
+   "price": "5.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Riverpyre Verge",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "18.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "38.67",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Seat of the Synod",
+   "cmc": 0,
+   "type": "Artifact Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.82",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Shivan Reef",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sokenzan, Crucible of Defiance",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Spirebluff Canal",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "5.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "cmc": 0,
+   "type": "Land — Island Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Stormcarved Coast",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.52",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sulfur Falls",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  }
+ ]
+}

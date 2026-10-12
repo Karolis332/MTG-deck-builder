@@ -1,0 +1,124 @@
+{
+  "file": "tam.txt",
+  "unresolved": [],
+  "payload": {
+    "version": "1.2.0",
+    "score": 19,
+    "provisional": true,
+    "components": [
+      {
+        "key": "mana",
+        "score": 76.9,
+        "weight": 20.61855670103093,
+        "reason": "36.4 effective lands vs 40.0; R has 14/33 timely sources."
+      },
+      {
+        "key": "curve",
+        "score": 88.2,
+        "weight": 10.309278350515465,
+        "reason": "3-drops 21/15; 98% chance of a useful play by turn 2."
+      },
+      {
+        "key": "interaction",
+        "score": 81.6,
+        "weight": 16.494845360824744,
+        "reason": "10.4/12.0 effective answers, 6/7.0 cheap; weakest coverage: permanent."
+      },
+      {
+        "key": "advantage",
+        "score": 74.6,
+        "weight": 14.43298969072165,
+        "reason": "30.8/10.0 draw units by turn 6; 2 cheap velocity cards."
+      },
+      {
+        "key": "win",
+        "score": 0,
+        "weight": 20.61855670103093,
+        "reason": "no supported closing line: no catalogued win recipe present; t* never reached within 12 turns."
+      },
+      {
+        "key": "synergy",
+        "score": 0,
+        "weight": 17.52577319587629,
+        "reason": "16% supports midrange; weakest dependency threats 1/7; 0 unsupported payoffs."
+      },
+      {
+        "key": "meta",
+        "score": 50,
+        "weight": 0,
+        "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+      },
+      {
+        "key": "structure",
+        "score": 0,
+        "weight": 0,
+        "reason": "4/5 rule checks verified; legality; cap 19."
+      }
+    ],
+    "gates": [
+      {
+        "key": "structure",
+        "kind": "rules",
+        "status": "fail",
+        "cap": null,
+        "reason": "4/5 rule checks verified; legality; cap 19."
+      },
+      {
+        "key": "size",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "100 cards (commander wants 100)"
+      },
+      {
+        "key": "singleton",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "singleton respected (basics exempt)"
+      },
+      {
+        "key": "legality",
+        "kind": "rules",
+        "status": "fail",
+        "cap": 19,
+        "reason": "Not legal in commander: Way of the Mentor, Way of the Paradox, Way of the Healer, Way of the Cryomancer, Way of the Deathbringer and 18 more"
+      },
+      {
+        "key": "rules",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "no other format rule broken"
+      },
+      {
+        "key": "identity",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "all cards inside BGRUW"
+      },
+      {
+        "key": "quality_cap",
+        "kind": "quality",
+        "status": "warn",
+        "cap": 20,
+        "reason": "quality cap 20+0.8*min(M,W,S)=20.0 from mana=76.9, win=0, synergy=0."
+      },
+      {
+        "key": "coverage",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "21% of nonland copies are typed in the effect catalogue; unknown prerequisite \"legendary permanent\" — provisional: effect coverage, not calibrated."
+      },
+      {
+        "key": "meta_evidence",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+      }
+    ]
+  }
+}

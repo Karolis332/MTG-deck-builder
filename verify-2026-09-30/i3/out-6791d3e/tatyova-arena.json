@@ -1,0 +1,1219 @@
+{
+ "metrics": {
+  "label": "tatyova-arena",
+  "strategy": "midrange",
+  "themes": [
+   "sacrifice",
+   "artifacts",
+   "draw",
+   "tokens",
+   "counters",
+   "ramp",
+   "aggro",
+   "enchantments",
+   "graveyard",
+   "equipment"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 34,
+  "basics": 20,
+  "honestRamp": 21,
+  "draw": 21,
+  "removal": 9,
+  "wipes": 3,
+  "protection": 3,
+  "wincons": 6,
+  "tutors": 1,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "ramp": 20,
+   "draw": 15,
+   "synergy": 2,
+   "win_condition": 2,
+   "utility": 8,
+   "removal": 9,
+   "board_wipe": 3,
+   "protection": 2,
+   "land": 4
+  },
+  "ms": 1457,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 54
+  },
+  "sources": {
+   "W": 10,
+   "U": 28,
+   "B": 10,
+   "R": 10,
+   "G": 42
+  },
+  "price": {
+   "total": 527.28,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 3
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 113,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Burgeoning",
+   "cmc": 1,
+   "type": "Enchantment",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 68,
+   "price": "33.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Consider",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 114,
+   "price": "0.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Exploration",
+   "cmc": 1,
+   "type": "Enchantment",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 81,
+   "price": "31.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 125,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Nature's Claim",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 114,
+   "price": "1.73",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Opt",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 112,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Peek",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 77,
+   "price": "0.41",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ponder",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 113,
+   "price": "3.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 113,
+   "price": "2.64",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Preordain",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 112,
+   "price": "0.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 112,
+   "price": "0.88",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sleight of Hand",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 63,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 143,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Coldsteel Heart",
+   "cmc": 2,
+   "type": "Snow Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 85,
+   "price": "2.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 155,
+   "price": "3.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 115,
+   "price": "39.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 161,
+   "price": "4.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lotus Cobra",
+   "cmc": 2,
+   "type": "Creature — Snake",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 119,
+   "price": "6.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 157,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "cmc": 2,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp",
+    "protection"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 70,
+   "price": "0.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 106,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Simic Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 100,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Curiosity",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 116,
+   "price": "0.48",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Archdruid's Charm",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "ramp",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 150,
+   "price": "9.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Azusa, Lost but Seeking",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Monk",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 86,
+   "price": "12.90",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 173,
+   "price": "0.63",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 100,
+   "price": "1.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chromatic Lantern",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 115,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Coalition Relic",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 96,
+   "price": "0.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Courser of Kruphix",
+   "cmc": 3,
+   "type": "Enchantment Creature — Centaur",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 92,
+   "price": "2.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Crucible of Worlds",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 86,
+   "price": "32.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 191,
+   "price": "0.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Krosan Grip",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 118,
+   "price": "1.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ramunap Excavator",
+   "cmc": 3,
+   "type": "Creature — Snake Cleric",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 86,
+   "price": "4.90",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Reclamation Sage",
+   "cmc": 3,
+   "type": "Creature — Elf Shaman",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:staple_removal",
+   "score": 132,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scute Swarm",
+   "cmc": 3,
+   "type": "Creature — Insect",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 137,
+   "price": "9.51",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 115,
+   "price": "8.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "type": "Creature — Elf Scout",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 168,
+   "price": "3.87",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "cmc": 3,
+   "type": "Creature — Human Scout",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:archetype_payoff",
+   "score": 211,
+   "price": "0.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wood Elves",
+   "cmc": 3,
+   "type": "Creature — Elf Scout",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:staple_ramp",
+   "score": 105,
+   "price": "0.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Worn Powerstone",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 116,
+   "price": "0.37",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fade from History",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 111,
+   "price": "4.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 134,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Migration Path",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 90,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mu Yanling, Wind Rider",
+   "cmc": 4,
+   "type": "Legendary Creature — Human Wizard Pilot",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 133,
+   "price": "0.46",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "board_wipe",
+   "score": 133,
+   "price": "0.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Oracle of Mul Daya",
+   "cmc": 4,
+   "type": "Creature — Elf Shaman",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:archetype_payoff",
+   "score": 86,
+   "price": "2.04",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 173,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Splendid Reclamation",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 73,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "World Shaper",
+   "cmc": 4,
+   "type": "Creature — Merfolk Shaman",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 86,
+   "price": "9.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gilded Lotus",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 81,
+   "price": "0.46",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Glorious Sunrise",
+   "cmc": 5,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 137,
+   "price": "2.02",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo's Journal",
+   "cmc": 5,
+   "type": "Legendary Artifact — Book",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "tutor",
+   "score": 160,
+   "price": "3.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Artifice Master",
+   "cmc": 5,
+   "type": "Legendary Planeswalker — Tezzeret",
+   "cats": [
+    "draw",
+    "tutor"
+   ],
+   "primary": "draw",
+   "role": "tutor",
+   "score": 155,
+   "price": "5.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Titania, Protector of Argoth",
+   "cmc": 5,
+   "type": "Legendary Creature — Elemental",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:archetype_payoff",
+   "score": 85,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "type": "Creature — Elf Druid // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 114,
+   "price": "5.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Echo of Eons",
+   "cmc": 6,
+   "type": "Sorcery",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:staple_draw",
+   "score": 82,
+   "price": "13.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Rampaging Baloths",
+   "cmc": 6,
+   "type": "Creature — Beast",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:archetype_payoff",
+   "score": 134,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "cmc": 6,
+   "type": "Sorcery",
+   "cats": [
+    "draw",
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 144,
+   "price": "7.13",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Soul of the Harvest",
+   "cmc": 6,
+   "type": "Creature — Elemental",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 142,
+   "price": "1.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Titan of Industry",
+   "cmc": 7,
+   "type": "Creature — Elemental",
+   "cats": [
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 142,
+   "price": "0.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "cmc": 7,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 94,
+   "price": "5.50",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vaultborn Tyrant",
+   "cmc": 7,
+   "type": "Creature — Dinosaur",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 157,
+   "price": "38.46",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "type": "Legendary Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 185,
+   "price": "65.65",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Barkchannel Pathway // Tidechannel Pathway",
+   "cmc": 0,
+   "type": "Land // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 82,
+   "price": "4.95",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Botanical Sanctum",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "cmc": 0,
+   "type": "Land — Forest Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.01",
+   "edhrec": false
+  },
+  {
+   "q": 14,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 6,
+   "name": "Island",
+   "cmc": 0,
+   "type": "Basic Land — Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": null,
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "34.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "37.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "cmc": 0,
+   "type": "Land — Town",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "10.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "31.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Waterlogged Grove",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Willowrush Verge",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "5.69",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.38",
+   "edhrec": false
+  }
+ ]
+}

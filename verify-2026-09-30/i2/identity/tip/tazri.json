@@ -1,0 +1,2270 @@
+{
+ "file": "tazri.txt",
+ "format": "commander",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 32,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 89.4,
+    "weight": 20.61855670103093,
+    "reason": "36.8 effective lands vs 39.0; B has 11/24 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 94.4,
+    "weight": 10.309278350515465,
+    "reason": "2-drops 15/18; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 76.6,
+    "weight": 16.494845360824744,
+    "reason": "8.3/12.0 effective answers, 6/7.0 cheap; weakest coverage: creature."
+   },
+   {
+    "key": "advantage",
+    "score": 61.4,
+    "weight": 14.43298969072165,
+    "reason": "8.7/10.0 draw units by turn 6; 1 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 59.8,
+    "weight": 20.61855670103093,
+    "reason": "Token/Food conversion (7 bodies): closes T10, access 36% (u=0.66); shared bottleneck, protection access 38%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 14.7,
+    "weight": 17.52577319587629,
+    "reason": "38% supports typal; weakest dependency enabler 8/11; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 100,
+    "weight": 0,
+    "reason": "5/5 rule checks verified; none; cap none."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "5/5 rule checks verified; none; cap none."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (commander wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in commander"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BGRUW"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 31.8,
+    "reason": "quality cap 20+0.8*min(M,W,S)=31.8 from mana=89.4, win=59.8, synergy=14.7."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "52% of nonland copies are typed in the effect catalogue — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Tazri, Beacon of Unity",
+  "archetype": "midrange",
+  "tribalType": "Human",
+  "iss": 0,
+  "topSynergyPairs": [],
+  "curveScore": {
+   "score": 87,
+   "perBucket": {
+    "0": 0,
+    "1": 0,
+    "2": -1,
+    "3": 3,
+    "4": 0,
+    "5": -1,
+    "6": 0,
+    "7+": -1
+   },
+   "notes": [
+    "Too many 3-drops (19 vs target 16)"
+   ]
+  },
+  "winPlan": {
+   "route": "value_grind",
+   "description": "No sharp win condition detected — grind card/board advantage until a generic threat closes it out.",
+   "keyCards": {
+    "enablers": [
+     "Arcane Signet",
+     "Chromatic Lantern",
+     "Explore the Underdark",
+     "Fellwar Stone",
+     "Harper Recruiter",
+     "Imoen, Mystic Trickster",
+     "Kodama's Reach",
+     "Shadowheart, Dark Justiciar",
+     "Sol Ring",
+     "Spelunking",
+     "Spoils of Adventure",
+     "Stonework Packbeast",
+     "Undermountain Adventurer"
+    ],
+    "payoffs": [],
+    "protection": [
+     "Heroic Intervention",
+     "Seasoned Dungeoneer",
+     "Selfless Spirit",
+     "Squad Commander"
+    ],
+    "tutors": [
+     "Coveted Prize"
+    ]
+   },
+   "missingPieces": [],
+   "cardRoles": {
+    "Acererak the Archlich": "off_plan",
+    "Arcane Signet": "enabler",
+    "Archpriest of Iona": "off_plan",
+    "Bar the Gate": "off_plan",
+    "Blasphemous Act": "off_plan",
+    "Burakos, Party Leader": "off_plan",
+    "Changeling Outcast": "off_plan",
+    "Chromatic Lantern": "enabler",
+    "Concerted Defense": "off_plan",
+    "Coveted Prize": "tutor_for_plan",
+    "Durnan of the Yawning Portal": "off_plan",
+    "Explore the Underdark": "enabler",
+    "Farseek": "off_plan",
+    "Fellwar Stone": "enabler",
+    "Feywild Caretaker": "off_plan",
+    "Hama Pashar, Ruin Seeker": "off_plan",
+    "Harper Recruiter": "enabler",
+    "Heroic Intervention": "protection",
+    "Imoen, Mystic Trickster": "enabler",
+    "Karlach, Fury of Avernus": "off_plan",
+    "Kodama's Reach": "enabler",
+    "Linvala, Shield of Sea Gate": "off_plan",
+    "Lotho, Corrupt Shirriff": "off_plan",
+    "Mardu Siegebreaker": "off_plan",
+    "Masked Vandal": "off_plan",
+    "Midnight Pathlighter": "off_plan",
+    "Mirror Entity": "off_plan",
+    "Multiclass Baldric": "off_plan",
+    "Mutable Explorer": "off_plan",
+    "Nadaar, Selfless Paladin": "off_plan",
+    "Najeela, the Blade-Blossom": "off_plan",
+    "Nalia de'Arnise": "off_plan",
+    "Nature's Lore": "off_plan",
+    "Nimble Trapfinder": "off_plan",
+    "Outlaws' Merriment": "off_plan",
+    "Ravenloft Adventurer": "off_plan",
+    "Rilsa Rael, Kingpin": "off_plan",
+    "Safana, Calimport Cutthroat": "off_plan",
+    "Seasoned Dungeoneer": "protection",
+    "Sefris of the Hidden Ways": "off_plan",
+    "Selfless Spirit": "protection",
+    "Shadowheart, Dark Justiciar": "enabler",
+    "Sol Ring": "enabler",
+    "Solemn Doomguide": "off_plan",
+    "Spelunking": "enabler",
+    "Spoils of Adventure": "enabler",
+    "Squad Commander": "protection",
+    "Stick Together": "off_plan",
+    "Stonework Packbeast": "enabler",
+    "Swords to Plowshares": "off_plan",
+    "Tajuru Paragon": "off_plan",
+    "The Destined Warrior": "off_plan",
+    "The Destined White Mage": "off_plan",
+    "Thwart the Grave": "off_plan",
+    "Triumphant Adventurer": "off_plan",
+    "Undermountain Adventurer": "enabler",
+    "Unsettled Mariner": "off_plan",
+    "Varis, Silverymoon Ranger": "off_plan",
+    "Vizier of the Menagerie": "off_plan",
+    "White Plume Adventurer": "off_plan",
+    "You Find a Cursed Idol": "off_plan",
+    "Yuan-Ti Malison": "off_plan",
+    "Zagras, Thief of Heartbeats": "off_plan"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+   "a value grind plan piece (e.g. Arcane Signet or Chromatic Lantern)"
+  ],
+  "gameChangers": {
+   "count": 0,
+   "names": []
+  },
+  "categories": {
+   "utility": 28,
+   "ramp": 13,
+   "land": 36,
+   "board_wipe": 1,
+   "tutor": 1,
+   "win_condition": 7,
+   "draw": 7,
+   "protection": 3,
+   "removal": 3
+  },
+  "stats": {
+   "totalCards": 99,
+   "landCount": 36,
+   "avgCmc": 3.22
+  }
+ },
+ "optimize": {
+  "format": "commander",
+  "deckName": null,
+  "commander": "Tazri, Beacon of Unity",
+  "partner": null,
+  "stats": {
+   "totalCards": 100,
+   "landCount": 34,
+   "avgCmc": 3.2,
+   "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+   ]
+  },
+  "score": 37,
+  "health": [
+   {
+    "category": "land",
+    "label": "Lands",
+    "current": 34,
+    "target": {
+     "min": 36,
+     "max": 38,
+     "target": 37
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "ramp",
+    "label": "Ramp",
+    "current": 14,
+    "target": {
+     "min": 10,
+     "max": 13,
+     "target": 12
+    },
+    "status": "high",
+    "color": "text-yellow-400"
+   },
+   {
+    "category": "draw",
+    "label": "Card Draw",
+    "current": 7,
+    "target": {
+     "min": 8,
+     "max": 12,
+     "target": 10
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "removal",
+    "label": "Removal",
+    "current": 3,
+    "target": {
+     "min": 8,
+     "max": 15,
+     "target": 12
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "board_wipe",
+    "label": "Board Wipes",
+    "current": 1,
+    "target": {
+     "min": 3,
+     "max": 5,
+     "target": 4
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "protection",
+    "label": "Protection",
+    "current": 3,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 4
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "synergy",
+    "label": "Commander Synergy",
+    "current": 0,
+    "target": {
+     "min": 8,
+     "max": 12,
+     "target": 10
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "win_condition",
+    "label": "Win Conditions",
+    "current": 6,
+    "target": {
+     "min": 4,
+     "max": 8,
+     "target": 6
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   }
+  ],
+  "curve": {
+   "1": 6,
+   "2": 15,
+   "3": 19,
+   "4": 12,
+   "5": 7,
+   "6": 3,
+   "7": 1
+  },
+  "notes": [
+   "Add 2 more lands (currently 34, minimum 36)",
+   "Consider cutting 1 ramp (currently 14, maximum 13)",
+   "Add 1 more card draw (currently 7, minimum 8)",
+   "Add 5 more removal (currently 3, minimum 8)",
+   "Add 2 more board wipes (currently 1, minimum 3)",
+   "Add 8 more commander synergy (currently 0, minimum 8)"
+  ],
+  "mana": {
+   "demand": {
+    "W": 25,
+    "U": 15,
+    "B": 19,
+    "R": 6,
+    "G": 15
+   },
+   "sources": {
+    "B": 13,
+    "G": 14,
+    "R": 14,
+    "U": 12,
+    "W": 17
+   },
+   "warnings": [
+    "Only 13 Black sources for 19 B pips (wants ~19)",
+    "Only 14 Green sources for 15 G pips (wants ~19)",
+    "Only 12 Blue sources for 15 U pips (wants ~19)",
+    "Only 17 White sources for 25 W pips (wants ~19)"
+   ]
+  },
+  "landTarget": {
+   "current": 34,
+   "effective": 34.8,
+   "recommended": 38,
+   "mdfcLandBacks": 2,
+   "cheapSpells": 9,
+   "formula": "31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38"
+  },
+  "legality": [],
+  "cuts": [
+   {
+    "name": "Thwart the Grave",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 6,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Expensive card with no identified role"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Karlach, Fury of Avernus",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 5,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Expensive card with no identified role"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Stick Together",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 5,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Expensive card with no identified role"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Acererak the Archlich",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Bar the Gate",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Hama Pashar, Ruin Seeker",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Linvala, Shield of Sea Gate",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Mirror Entity",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "adds": [
+   {
+    "name": "Mountain",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Basic Land — Mountain",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/9/295b92bc-d66f-45d8-9bbe-5f5f13e39fd4.jpg?1767773878",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 89.05336
+   },
+   {
+    "name": "Deadly Alliance",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 5,
+    "mana_cost": "{4}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/0/007a5c8c-ed0b-4844-9393-a3d25d4ffa1d.jpg?1783929380",
+    "reason": "In 46% of Tazri, Beacon of Unity decks",
+    "score": 82.6924
+   },
+   {
+    "name": "Barrowin of Clan Undurr",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Dwarf Cleric",
+    "cmc": 4,
+    "mana_cost": "{2}{W}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/8/6896c311-5593-4437-b945-43ade9665e43.jpg?1783926450",
+    "reason": "In 35% of Tazri, Beacon of Unity decks",
+    "score": 77.37243
+   },
+   {
+    "name": "Maskwood Nexus",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Artifact",
+    "cmc": 4,
+    "mana_cost": "{4}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/2/1246c42d-57c0-4cba-959a-15ad89d8a50b.jpg?1783922389",
+    "reason": "In 35% of Tazri, Beacon of Unity decks",
+    "score": 76.75470999999999
+   },
+   {
+    "name": "Ellywick Tumblestrum",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Ellywick",
+    "cmc": 4,
+    "mana_cost": "{2}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/a/bab81bc0-0369-469e-9296-6d9681697b21.jpg?1783926464",
+    "reason": "In 30% of Tazri, Beacon of Unity decks",
+    "score": 74.92189
+   },
+   {
+    "name": "Baldur's Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/4/2436aa14-9200-4295-8041-b682cf3c4216.jpg?1783922662",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.54091000000001
+   },
+   {
+    "name": "Gond Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/4/746672d9-7c6b-415e-9f34-3cc3ac557008.jpg?1783922658",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.39627
+   },
+   {
+    "name": "Black Dragon Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/4/c4ceb589-c741-44ac-98c8-3d997953ee61.jpg?1783922660",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.36567000000001
+   },
+   {
+    "name": "Manor Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/9/793d4978-9e00-453d-8dc2-6d51ad6c26b7.jpg?1783922657",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.3149
+   },
+   {
+    "name": "Citadel Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/0/c0e6f002-9a10-49a1-8604-2b8ff57732dd.jpg?1783922660",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.20238
+   },
+   {
+    "name": "Sea Gate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/9/d97f31e1-bcaf-4316-a2de-49e2cf7566ec.jpg?1783922655",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 74.07593
+   },
+   {
+    "name": "Cliffgate",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Gate",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/5/557470dc-c594-4b26-81b9-356bedb0c215.jpg?1783922659",
+    "reason": "Deck runs 34 lands; the curve wants ~38 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck) = 39, clamped to the midrange land band 36-38)",
+    "score": 73.94159
+   }
+  ],
+  "swaps": [
+   {
+    "cut": "Thwart the Grave",
+    "add": "Barrowin of Clan Undurr",
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Karlach, Fury of Avernus",
+    "add": "Maskwood Nexus",
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Stick Together",
+    "add": "Deadly Alliance",
+    "reason": "No synergy edges with the commander or the rest of the deck; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Acererak the Archlich",
+    "add": "Ellywick Tumblestrum",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Bar the Gate",
+    "add": "Mountain",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Hama Pashar, Ruin Seeker",
+    "add": "Baldur's Gate",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Linvala, Shield of Sea Gate",
+    "add": "Gond Gate",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Mirror Entity",
+    "add": "Black Dragon Gate",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "lockedFromCuts": [],
+  "afterSize": 100,
+  "sizeChanged": false,
+  "gate": {
+   "verdict": "fail",
+   "format": "commander",
+   "commander": "Tazri, Beacon of Unity",
+   "totals": {
+    "cards": 100,
+    "lands": 38,
+    "effectiveLands": 38.8,
+    "nonland": 61,
+    "avgMv": 3.18
+   },
+   "curve": {
+    "1": 6,
+    "2": 16,
+    "3": 15,
+    "4": 15,
+    "5": 6,
+    "6": 2,
+    "7": 1
+   },
+   "plan": {
+    "condition": {
+     "threshold": null,
+     "requires": null,
+     "tribalType": null,
+     "nouns": [],
+     "description": "commander sets no measurable condition"
+    },
+    "nonland": 61,
+    "interacting": 0,
+    "ratio": 0,
+    "enablers": 0,
+    "enablerRatio": 0,
+    "nonInteracting": [
+     {
+      "name": "Archpriest of Iona",
+      "cmc": 1
+     },
+     {
+      "name": "Changeling Outcast",
+      "cmc": 1
+     },
+     {
+      "name": "Concerted Defense",
+      "cmc": 1
+     },
+     {
+      "name": "Multiclass Baldric",
+      "cmc": 1
+     },
+     {
+      "name": "Sol Ring",
+      "cmc": 1
+     },
+     {
+      "name": "Swords to Plowshares",
+      "cmc": 1
+     },
+     {
+      "name": "Arcane Signet",
+      "cmc": 2
+     },
+     {
+      "name": "Farseek",
+      "cmc": 2
+     },
+     {
+      "name": "Fellwar Stone",
+      "cmc": 2
+     },
+     {
+      "name": "Heroic Intervention",
+      "cmc": 2
+     },
+     {
+      "name": "Lotho, Corrupt Shirriff",
+      "cmc": 2
+     },
+     {
+      "name": "Masked Vandal",
+      "cmc": 2
+     },
+     {
+      "name": "Nature's Lore",
+      "cmc": 2
+     },
+     {
+      "name": "Nimble Trapfinder",
+      "cmc": 2
+     },
+     {
+      "name": "Selfless Spirit",
+      "cmc": 2
+     },
+     {
+      "name": "Stonework Packbeast",
+      "cmc": 2
+     },
+     {
+      "name": "Stump Stomp",
+      "cmc": 2
+     },
+     {
+      "name": "Tajuru Paragon",
+      "cmc": 2
+     },
+     {
+      "name": "Triumphant Adventurer",
+      "cmc": 2
+     },
+     {
+      "name": "Unsettled Mariner",
+      "cmc": 2
+     },
+     {
+      "name": "You Find a Cursed Idol",
+      "cmc": 2
+     },
+     {
+      "name": "Yuan-Ti Malison",
+      "cmc": 2
+     },
+     {
+      "name": "Chromatic Lantern",
+      "cmc": 3
+     },
+     {
+      "name": "Glasspool Mimic",
+      "cmc": 3
+     },
+     {
+      "name": "Harper Recruiter",
+      "cmc": 3
+     },
+     {
+      "name": "Imoen, Mystic Trickster",
+      "cmc": 3
+     },
+     {
+      "name": "Kodama's Reach",
+      "cmc": 3
+     },
+     {
+      "name": "Mutable Explorer",
+      "cmc": 3
+     },
+     {
+      "name": "Nadaar, Selfless Paladin",
+      "cmc": 3
+     },
+     {
+      "name": "Najeela, the Blade-Blossom",
+      "cmc": 3
+     },
+     {
+      "name": "Nalia de'Arnise",
+      "cmc": 3
+     },
+     {
+      "name": "Safana, Calimport Cutthroat",
+      "cmc": 3
+     },
+     {
+      "name": "Sefris of the Hidden Ways",
+      "cmc": 3
+     },
+     {
+      "name": "Spelunking",
+      "cmc": 3
+     },
+     {
+      "name": "The Destined White Mage",
+      "cmc": 3
+     },
+     {
+      "name": "Varis, Silverymoon Ranger",
+      "cmc": 3
+     },
+     {
+      "name": "White Plume Adventurer",
+      "cmc": 3
+     },
+     {
+      "name": "Barrowin of Clan Undurr",
+      "cmc": 4
+     },
+     {
+      "name": "Burakos, Party Leader",
+      "cmc": 4
+     },
+     {
+      "name": "Durnan of the Yawning Portal",
+      "cmc": 4
+     },
+     {
+      "name": "Ellywick Tumblestrum",
+      "cmc": 4
+     },
+     {
+      "name": "Mardu Siegebreaker",
+      "cmc": 4
+     },
+     {
+      "name": "Maskwood Nexus",
+      "cmc": 4
+     },
+     {
+      "name": "Midnight Pathlighter",
+      "cmc": 4
+     },
+     {
+      "name": "Outlaws' Merriment",
+      "cmc": 4
+     },
+     {
+      "name": "Ravenloft Adventurer",
+      "cmc": 4
+     },
+     {
+      "name": "Seasoned Dungeoneer",
+      "cmc": 4
+     },
+     {
+      "name": "Shadowheart, Dark Justiciar",
+      "cmc": 4
+     },
+     {
+      "name": "Squad Commander",
+      "cmc": 4
+     },
+     {
+      "name": "The Destined Warrior",
+      "cmc": 4
+     },
+     {
+      "name": "Undermountain Adventurer",
+      "cmc": 4
+     },
+     {
+      "name": "Vizier of the Menagerie",
+      "cmc": 4
+     },
+     {
+      "name": "Coveted Prize",
+      "cmc": 5
+     },
+     {
+      "name": "Deadly Alliance",
+      "cmc": 5
+     },
+     {
+      "name": "Explore the Underdark",
+      "cmc": 5
+     },
+     {
+      "name": "Feywild Caretaker",
+      "cmc": 5
+     },
+     {
+      "name": "Rilsa Rael, Kingpin",
+      "cmc": 5
+     },
+     {
+      "name": "Solemn Doomguide",
+      "cmc": 5
+     },
+     {
+      "name": "Spoils of Adventure",
+      "cmc": 6
+     },
+     {
+      "name": "Zagras, Thief of Heartbeats",
+      "cmc": 6
+     },
+     {
+      "name": "Blasphemous Act",
+      "cmc": 9
+     }
+    ]
+   },
+   "unresolved": [],
+   "checks": [
+    {
+     "id": "size",
+     "status": "pass",
+     "detail": "100 cards (commander wants 100)"
+    },
+    {
+     "id": "singleton",
+     "status": "pass",
+     "detail": "singleton respected (basics exempt)"
+    },
+    {
+     "id": "legality",
+     "status": "pass",
+     "detail": "every card legal in commander"
+    },
+    {
+     "id": "rules",
+     "status": "pass",
+     "detail": "no other format rule broken"
+    },
+    {
+     "id": "identity",
+     "status": "pass",
+     "detail": "all cards inside BGRUW"
+    },
+    {
+     "id": "ownership",
+     "status": "skip",
+     "detail": "no ownerId and no ownedCards — nothing to check the list against"
+    },
+    {
+     "id": "arenaNames",
+     "status": "warn",
+     "detail": "2 card(s) must be exported front-face only:",
+     "cards": [
+      "1 Glasspool Mimic",
+      "1 Stump Stomp"
+     ]
+    },
+    {
+     "id": "lands",
+     "status": "pass",
+     "detail": "38 lands (+2 MDFC land backs = 38.8 effective); Karsten wants 39 ±2"
+    },
+    {
+     "id": "plan",
+     "status": "fail",
+     "detail": "0/61 nonland cards interact (0%) — commander sets no measurable condition",
+     "cards": [
+      "Archpriest of Iona (MV 1)",
+      "Changeling Outcast (MV 1)",
+      "Concerted Defense (MV 1)",
+      "Multiclass Baldric (MV 1)",
+      "Sol Ring (MV 1)",
+      "Swords to Plowshares (MV 1)",
+      "Arcane Signet (MV 2)",
+      "Farseek (MV 2)",
+      "Fellwar Stone (MV 2)",
+      "Heroic Intervention (MV 2)",
+      "Lotho, Corrupt Shirriff (MV 2)",
+      "Masked Vandal (MV 2)",
+      "Nature's Lore (MV 2)",
+      "Nimble Trapfinder (MV 2)",
+      "Selfless Spirit (MV 2)",
+      "Stonework Packbeast (MV 2)",
+      "Stump Stomp (MV 2)",
+      "Tajuru Paragon (MV 2)",
+      "Triumphant Adventurer (MV 2)",
+      "Unsettled Mariner (MV 2)",
+      "You Find a Cursed Idol (MV 2)",
+      "Yuan-Ti Malison (MV 2)",
+      "Chromatic Lantern (MV 3)",
+      "Glasspool Mimic (MV 3)",
+      "Harper Recruiter (MV 3)",
+      "Imoen, Mystic Trickster (MV 3)",
+      "Kodama's Reach (MV 3)",
+      "Mutable Explorer (MV 3)",
+      "Nadaar, Selfless Paladin (MV 3)",
+      "Najeela, the Blade-Blossom (MV 3)",
+      "Nalia de'Arnise (MV 3)",
+      "Safana, Calimport Cutthroat (MV 3)",
+      "Sefris of the Hidden Ways (MV 3)",
+      "Spelunking (MV 3)",
+      "The Destined White Mage (MV 3)",
+      "Varis, Silverymoon Ranger (MV 3)",
+      "White Plume Adventurer (MV 3)",
+      "Barrowin of Clan Undurr (MV 4)",
+      "Burakos, Party Leader (MV 4)",
+      "Durnan of the Yawning Portal (MV 4)",
+      "Ellywick Tumblestrum (MV 4)",
+      "Mardu Siegebreaker (MV 4)",
+      "Maskwood Nexus (MV 4)",
+      "Midnight Pathlighter (MV 4)",
+      "Outlaws' Merriment (MV 4)",
+      "Ravenloft Adventurer (MV 4)",
+      "Seasoned Dungeoneer (MV 4)",
+      "Shadowheart, Dark Justiciar (MV 4)",
+      "Squad Commander (MV 4)",
+      "The Destined Warrior (MV 4)",
+      "Undermountain Adventurer (MV 4)",
+      "Vizier of the Menagerie (MV 4)",
+      "Coveted Prize (MV 5)",
+      "Deadly Alliance (MV 5)",
+      "Explore the Underdark (MV 5)",
+      "Feywild Caretaker (MV 5)",
+      "Rilsa Rael, Kingpin (MV 5)",
+      "Solemn Doomguide (MV 5)",
+      "Spoils of Adventure (MV 6)",
+      "Zagras, Thief of Heartbeats (MV 6)",
+      "Blasphemous Act (MV 9)"
+     ]
+    },
+    {
+     "id": "curve",
+     "status": "pass",
+     "detail": "avg MV 3.18; commander sets no cost threshold"
+    },
+    {
+     "id": "wincons",
+     "status": "pass",
+     "detail": "7 win condition(s)/closer(s)",
+     "cards": [
+      "Feywild Caretaker",
+      "Outlaws' Merriment",
+      "Rilsa Rael, Kingpin",
+      "Solemn Doomguide",
+      "The Destined Warrior",
+      "Zagras, Thief of Heartbeats",
+      "Ellywick Tumblestrum"
+     ]
+    },
+    {
+     "id": "locks",
+     "status": "pass",
+     "detail": "8 locked card(s) present and intact",
+     "cards": [
+      "Bloodstained Mire",
+      "Hallowed Fountain",
+      "Overgrown Tomb",
+      "Sacred Foundry",
+      "Steam Vents",
+      "Stomping Ground",
+      "Windswept Heath",
+      "Wooded Foothills"
+     ]
+    }
+   ]
+  },
+  "analysis": {
+   "commander": "Tazri, Beacon of Unity",
+   "archetype": "midrange",
+   "tribalType": "Human",
+   "iss": 0,
+   "topSynergyPairs": [],
+   "curveScore": {
+    "score": 87,
+    "perBucket": {
+     "0": 0,
+     "1": 0,
+     "2": -1,
+     "3": 3,
+     "4": 0,
+     "5": -1,
+     "6": 0,
+     "7+": -1
+    },
+    "notes": [
+     "Too many 3-drops (19 vs target 16)"
+    ]
+   },
+   "winPlan": {
+    "route": "value_grind",
+    "description": "No sharp win condition detected — grind card/board advantage until a generic threat closes it out.",
+    "keyCards": {
+     "enablers": [
+      "Arcane Signet",
+      "Chromatic Lantern",
+      "Explore the Underdark",
+      "Fellwar Stone",
+      "Harper Recruiter",
+      "Imoen, Mystic Trickster",
+      "Kodama's Reach",
+      "Shadowheart, Dark Justiciar",
+      "Sol Ring",
+      "Spelunking",
+      "Spoils of Adventure",
+      "Stonework Packbeast",
+      "Undermountain Adventurer"
+     ],
+     "payoffs": [],
+     "protection": [
+      "Heroic Intervention",
+      "Seasoned Dungeoneer",
+      "Selfless Spirit",
+      "Squad Commander"
+     ],
+     "tutors": [
+      "Coveted Prize"
+     ]
+    },
+    "missingPieces": [],
+    "cardRoles": {
+     "Acererak the Archlich": "off_plan",
+     "Arcane Signet": "enabler",
+     "Archpriest of Iona": "off_plan",
+     "Bar the Gate": "off_plan",
+     "Blasphemous Act": "off_plan",
+     "Burakos, Party Leader": "off_plan",
+     "Changeling Outcast": "off_plan",
+     "Chromatic Lantern": "enabler",
+     "Concerted Defense": "off_plan",
+     "Coveted Prize": "tutor_for_plan",
+     "Durnan of the Yawning Portal": "off_plan",
+     "Explore the Underdark": "enabler",
+     "Farseek": "off_plan",
+     "Fellwar Stone": "enabler",
+     "Feywild Caretaker": "off_plan",
+     "Hama Pashar, Ruin Seeker": "off_plan",
+     "Harper Recruiter": "enabler",
+     "Heroic Intervention": "protection",
+     "Imoen, Mystic Trickster": "enabler",
+     "Karlach, Fury of Avernus": "off_plan",
+     "Kodama's Reach": "enabler",
+     "Linvala, Shield of Sea Gate": "off_plan",
+     "Lotho, Corrupt Shirriff": "off_plan",
+     "Mardu Siegebreaker": "off_plan",
+     "Masked Vandal": "off_plan",
+     "Midnight Pathlighter": "off_plan",
+     "Mirror Entity": "off_plan",
+     "Multiclass Baldric": "off_plan",
+     "Mutable Explorer": "off_plan",
+     "Nadaar, Selfless Paladin": "off_plan",
+     "Najeela, the Blade-Blossom": "off_plan",
+     "Nalia de'Arnise": "off_plan",
+     "Nature's Lore": "off_plan",
+     "Nimble Trapfinder": "off_plan",
+     "Outlaws' Merriment": "off_plan",
+     "Ravenloft Adventurer": "off_plan",
+     "Rilsa Rael, Kingpin": "off_plan",
+     "Safana, Calimport Cutthroat": "off_plan",
+     "Seasoned Dungeoneer": "protection",
+     "Sefris of the Hidden Ways": "off_plan",
+     "Selfless Spirit": "protection",
+     "Shadowheart, Dark Justiciar": "enabler",
+     "Sol Ring": "enabler",
+     "Solemn Doomguide": "off_plan",
+     "Spelunking": "enabler",
+     "Spoils of Adventure": "enabler",
+     "Squad Commander": "protection",
+     "Stick Together": "off_plan",
+     "Stonework Packbeast": "enabler",
+     "Swords to Plowshares": "off_plan",
+     "Tajuru Paragon": "off_plan",
+     "The Destined Warrior": "off_plan",
+     "The Destined White Mage": "off_plan",
+     "Thwart the Grave": "off_plan",
+     "Triumphant Adventurer": "off_plan",
+     "Undermountain Adventurer": "enabler",
+     "Unsettled Mariner": "off_plan",
+     "Varis, Silverymoon Ranger": "off_plan",
+     "Vizier of the Menagerie": "off_plan",
+     "White Plume Adventurer": "off_plan",
+     "You Find a Cursed Idol": "off_plan",
+     "Yuan-Ti Malison": "off_plan",
+     "Zagras, Thief of Heartbeats": "off_plan"
+    }
+   },
+   "mulliganCriteria": [
+    "2-4 lands",
+    "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+    "a value grind plan piece (e.g. Arcane Signet or Chromatic Lantern)"
+   ],
+   "gameChangers": {
+    "count": 0,
+    "names": []
+   },
+   "categories": {
+    "utility": 28,
+    "ramp": 13,
+    "land": 36,
+    "board_wipe": 1,
+    "tutor": 1,
+    "win_condition": 7,
+    "draw": 7,
+    "protection": 3,
+    "removal": 3
+   },
+   "stats": {
+    "totalCards": 99,
+    "landCount": 36,
+    "avgCmc": 3.22
+   }
+  },
+  "deckScore": {
+   "version": "1.2.0",
+   "score": 32,
+   "provisional": true,
+   "components": [
+    {
+     "key": "mana",
+     "score": 89.4,
+     "weight": 20.61855670103093,
+     "reason": "36.8 effective lands vs 39.0; B has 11/24 timely sources."
+    },
+    {
+     "key": "curve",
+     "score": 94.4,
+     "weight": 10.309278350515465,
+     "reason": "2-drops 15/18; 100% chance of a useful play by turn 2."
+    },
+    {
+     "key": "interaction",
+     "score": 76.6,
+     "weight": 16.494845360824744,
+     "reason": "8.3/12.0 effective answers, 6/7.0 cheap; weakest coverage: creature."
+    },
+    {
+     "key": "advantage",
+     "score": 61.4,
+     "weight": 14.43298969072165,
+     "reason": "8.7/10.0 draw units by turn 6; 1 cheap velocity cards."
+    },
+    {
+     "key": "win",
+     "score": 59.8,
+     "weight": 20.61855670103093,
+     "reason": "Token/Food conversion (7 bodies): closes T10, access 36% (u=0.66); shared bottleneck, protection access 38%; none."
+    },
+    {
+     "key": "synergy",
+     "score": 14.7,
+     "weight": 17.52577319587629,
+     "reason": "38% supports typal; weakest dependency enabler 8/11; 0 unsupported payoffs."
+    },
+    {
+     "key": "meta",
+     "score": 50,
+     "weight": 0,
+     "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+    },
+    {
+     "key": "structure",
+     "score": 100,
+     "weight": 0,
+     "reason": "5/5 rule checks verified; none; cap none."
+    }
+   ],
+   "gates": [
+    {
+     "key": "structure",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "5/5 rule checks verified; none; cap none."
+    },
+    {
+     "key": "size",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "100 cards (commander wants 100)"
+    },
+    {
+     "key": "singleton",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "singleton respected (basics exempt)"
+    },
+    {
+     "key": "legality",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "every card legal in commander"
+    },
+    {
+     "key": "rules",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "no other format rule broken"
+    },
+    {
+     "key": "identity",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "all cards inside BGRUW"
+    },
+    {
+     "key": "quality_cap",
+     "kind": "quality",
+     "status": "warn",
+     "cap": 31.8,
+     "reason": "quality cap 20+0.8*min(M,W,S)=31.8 from mana=89.4, win=59.8, synergy=14.7."
+    },
+    {
+     "key": "coverage",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "52% of nonland copies are typed in the effect catalogue — provisional: effect coverage, not calibrated."
+    },
+    {
+     "key": "meta_evidence",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+    }
+   ]
+  },
+  "bracket": {
+   "bracket": 2,
+   "gameChangers": [],
+   "twoCardCombos": [],
+   "massLandDenial": [],
+   "extraTurnCards": [],
+   "chainedExtraTurns": false,
+   "tutors": 1,
+   "fastMana": [
+    "Sol Ring"
+   ],
+   "reasons": []
+  },
+  "main": [
+   {
+    "name": "Acererak the Archlich",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Zombie Wizard",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/d/dd52d0bd-3abd-401c-9f56-ee911613da3b.jpg?1783926501"
+   },
+   {
+    "name": "Arcane Signet",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/a/aa9e7f3c-e752-4cee-9e9d-fae38ba27dc9.jpg?1767730206"
+   },
+   {
+    "name": "Archpriest of Iona",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Cleric",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/b/0b0b1acd-68e5-4922-8b51-06fa7eda984c.jpg?1783922493"
+   },
+   {
+    "name": "Ash Barrens",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/5/f5314520-b8af-4416-b57c-74388542ecb6.jpg?1743207428"
+   },
+   {
+    "name": "Bar the Gate",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Instant",
+    "cmc": 3,
+    "mana_cost": "{2}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/9/b9b1e53f-1384-4860-9944-e68922afc65c.jpg?1783926518"
+   },
+   {
+    "name": "Base Camp",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/c/dc85412e-333d-4e7d-8c85-40618cf1b6c2.jpg?1783929310"
+   },
+   {
+    "name": "Blasphemous Act",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Sorcery",
+    "cmc": 9,
+    "mana_cost": "{8}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/3/f349a283-a3ee-468b-92c5-d74f53f4d621.jpg?1767731058"
+   },
+   {
+    "name": "Bloodstained Mire",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/7/579743fe-f71e-4cb2-8629-d6b02ed1591d.jpg?1783911241"
+   },
+   {
+    "name": "Bojuka Bog",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/0/b0c6fb5e-07e2-4d22-be19-60592f00584a.jpg?1752945235"
+   },
+   {
+    "name": "Brokers Hideout",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/8/989b299b-daa9-4bda-94e2-9a2f0e8f2bce.jpg?1783923058"
+   },
+   {
+    "name": "Burakos, Party Leader",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Orc",
+    "cmc": 4,
+    "mana_cost": "{3}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/899e278d-5d4e-461a-9878-2b85de16b38d.jpg?1783922517"
+   },
+   {
+    "name": "Cabaretti Courtyard",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/5/c54ddd4e-f668-4ec8-b123-59afa977eba4.jpg?1783906015"
+   },
+   {
+    "name": "Caves of Koilos",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/2/92bef577-f055-4d54-9a75-e9d4a125001c.jpg?1743207480"
+   },
+   {
+    "name": "Changeling Outcast",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/b/ab499df5-ed76-43ad-81b3-70afd0487ccd.jpg?1783911932"
+   },
+   {
+    "name": "Chromatic Lantern",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "mana_cost": "{3}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/f/bf810ace-f866-457c-8671-a84c73b6f733.jpg?1767731428"
+   },
+   {
+    "name": "Command Tower",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/a/da4d9f44-9079-4144-8dd9-076be04032d4.jpg?1767730254"
+   },
+   {
+    "name": "Concealed Courtyard",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/7/b75df1f0-0513-40e4-a449-454f75de6434.jpg?1783911773"
+   },
+   {
+    "name": "Concerted Defense",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/3/235c108d-3902-4c2e-919c-a5449cd2dc3c.jpg?1783929399"
+   },
+   {
+    "name": "Coveted Prize",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{4}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/a/5afbc5d3-318f-4545-88d6-fc81e5466238.jpg?1783929381"
+   },
+   {
+    "name": "Durnan of the Yawning Portal",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Warrior",
+    "cmc": 4,
+    "mana_cost": "{3}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/3/53f287c1-bd17-43fd-b0e3-b52472b0aa70.jpg?1783922514"
+   },
+   {
+    "name": "Exotic Orchard",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/c/dc0a1bc1-ba94-4494-a196-5363fde85194.jpg?1767731565"
+   },
+   {
+    "name": "Explore the Underdark",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{4}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/c/0cbf06f5-d1c7-474c-8f09-72f5ad0c8120.jpg?1783922714"
+   },
+   {
+    "name": "Farseek",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/5/95e0760a-d285-493b-88cd-7556d9b10007.jpg?1759995699"
+   },
+   {
+    "name": "Fellwar Stone",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/b/bbfb3591-1f81-4576-828b-fd00fea599dd.jpg?1767731501"
+   },
+   {
+    "name": "Feywild Caretaker",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Orc Wizard",
+    "cmc": 5,
+    "mana_cost": "{4}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/9/c959ab97-0727-4589-bfd9-d78dd8ebd86b.jpg?1783922789"
+   },
+   {
+    "name": "Forest",
+    "quantity": 2,
+    "category": "land",
+    "type_line": "Basic Land — Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b460f5f7-c7c9-400c-8419-23d614f45bf9.jpg?1767773926"
+   },
+   {
+    "name": "Glasspool Mimic // Glasspool Shore",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Creature — Shapeshifter Rogue // Land",
+    "cmc": 3,
+    "mana_cost": "{2}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/a/5adcb500-8c77-4925-8e2c-1243502827d1.jpg?1783929404"
+   },
+   {
+    "name": "Hallowed Fountain",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Plains Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/0/e056b55f-82ed-4fe0-ab0c-bb20fa4a218a.jpg?1759144845"
+   },
+   {
+    "name": "Hama Pashar, Ruin Seeker",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 3,
+    "mana_cost": "{1}{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/7/47b8eb2e-73ac-4ad6-9ab6-4f8da7b41020.jpg?1783926447"
+   },
+   {
+    "name": "Harper Recruiter",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Human Warrior",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/b/6bb131fd-d96f-43e0-a40d-fa6394a4b75c.jpg?1783922513"
+   },
+   {
+    "name": "Heroic Intervention",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/6969b172-8c86-4c2e-95a6-7b23e6f2092f.jpg?1764118046"
+   },
+   {
+    "name": "Imoen, Mystic Trickster",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Human Rogue Wizard",
+    "cmc": 3,
+    "mana_cost": "{2}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/0/1097264b-e383-4864-a587-dc7d5468f359.jpg?1783922786"
+   },
+   {
+    "name": "Inspiring Vantage",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/5/85df6b6a-2dcf-4828-a4a8-e07d52e1fddd.jpg?1783911772"
+   },
+   {
+    "name": "Island",
+    "quantity": 2,
+    "category": "land",
+    "type_line": "Basic Land — Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/0/b0da67fb-1cb2-4105-ab5c-b7c680b8116c.jpg?1767773855"
+   },
+   {
+    "name": "Jetmir's Garden",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Mountain Forest Plains",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/6/26d40e03-6de4-4373-9fbf-04c1dd79e995.jpg?1783923058"
+   },
+   {
+    "name": "Karlach, Fury of Avernus",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Tiefling Barbarian",
+    "cmc": 5,
+    "mana_cost": "{4}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/7/775480ed-f574-40cb-bd9b-21102eaaff63.jpg?1783922734"
+   },
+   {
+    "name": "Karplusan Forest",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/7/67198b97-bac2-480f-aea8-12841e8884de.jpg?1783906010"
+   },
+   {
+    "name": "Kodama's Reach",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery — Arcane",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/0/90c423cc-1264-4067-9c50-e7c88c68ef2d.jpg?1783904544"
+   },
+   {
+    "name": "Linvala, Shield of Sea Gate",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Angel Wizard",
+    "cmc": 3,
+    "mana_cost": "{1}{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/9/49b66956-82e1-402f-9088-2201bdc0d4b8.jpg?1783929323"
+   },
+   {
+    "name": "Lotho, Corrupt Shirriff",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Halfling Rogue",
+    "cmc": 2,
+    "mana_cost": "{W}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/e/ce01ff8f-a037-484f-9148-c847ffaabc5a.jpg?1783916251"
+   },
+   {
+    "name": "Mardu Siegebreaker",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Warrior",
+    "cmc": 4,
+    "mana_cost": "{1}{R}{W}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/0/3044b232-edf4-4000-9273-cc4653ad653a.jpg?1783907307"
+   },
+   {
+    "name": "Masked Vandal",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/0/f0a9c72a-e450-41e3-80e5-06f2f1171245.jpg?1783928209"
+   },
+   {
+    "name": "Midnight Pathlighter",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 4,
+    "mana_cost": "{2}{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/e/8eb6f699-1b5d-412b-a697-ee94b7be07a6.jpg?1783926238"
+   },
+   {
+    "name": "Mirror Entity",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/2/f2a3107d-bb96-45c6-97ac-b6c6b84cbad4.jpg?1783911947"
+   },
+   {
+    "name": "Multiclass Baldric",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Artifact — Equipment",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/b/dbb7927d-c3c4-4464-8ada-bcd8466b2012.jpg?1783922495"
+   },
+   {
+    "name": "Mutable Explorer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/f/8f35d95a-caea-4d5e-b98e-55da1ba7c92d.jpg?1783904425"
+   },
+   {
+    "name": "Nadaar, Selfless Paladin",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Dragon Knight",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/7/878a0d8c-11c1-4c65-9051-78e036ac496f.jpg?1783926528"
+   },
+   {
+    "name": "Najeela, the Blade-Blossom",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Warrior",
+    "cmc": 3,
+    "mana_cost": "{2}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/c/2cb1d1da-6077-46b5-8c63-39882b8016f2.jpg?1783934856"
+   },
+   {
+    "name": "Nalia de'Arnise",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Rogue",
+    "cmc": 3,
+    "mana_cost": "{1}{W}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/a/7a1294fd-9885-4dfd-8192-0ca074fc83f7.jpg?1783922518"
+   },
+   {
+    "name": "Nature's Lore",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/b/5b42a79a-1f08-4e15-b40e-c993307ae066.jpg?1752944838"
+   },
+   {
+    "name": "Nimble Trapfinder",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Human Rogue",
+    "cmc": 2,
+    "mana_cost": "{1}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/e/1ee1a550-b7e7-48e0-bd96-a41986dbd879.jpg?1783929391"
+   },
+   {
+    "name": "Outlaws' Merriment",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 4,
+    "mana_cost": "{1}{R}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/d/5d7585ab-a364-471c-8ef1-318e459b4020.jpg?1783932597"
+   },
+   {
+    "name": "Overgrown Tomb",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/5/45b92924-baa1-4c9b-9932-9a5eda8f3446.jpg?1759144847"
+   },
+   {
+    "name": "Path of Ancestry",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/b/3b792a6a-beac-4d4a-91b6-f5a5e3539ecd.jpg?1767731634"
+   },
+   {
+    "name": "Plains",
+    "quantity": 4,
+    "category": "land",
+    "type_line": "Basic Land — Plains",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/a/3a438199-54f8-4702-81cf-a9d42e7cd9f1.jpg?1767773831"
+   },
+   {
+    "name": "Ravenloft Adventurer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Rogue Assassin",
+    "cmc": 4,
+    "mana_cost": "{3}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/5/a5e27c36-d883-4681-8430-b4d0ad7f1df0.jpg?1783922756"
+   },
+   {
+    "name": "Rilsa Rael, Kingpin",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Human Rogue",
+    "cmc": 5,
+    "mana_cost": "{3}{U}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/4/54484439-6f8a-47f1-8d62-4689af7f00c2.jpg?1783922687"
+   },
+   {
+    "name": "Sacred Foundry",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Mountain Plains",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/b/8b4e2642-3c87-4708-b9b4-2e7f7359ac7d.jpg?1752947600"
+   },
+   {
+    "name": "Safana, Calimport Cutthroat",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Human Rogue",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/9/e9367f66-6556-459c-a43d-5ba7a84b568d.jpg?1783922756"
+   },
+   {
+    "name": "Seasoned Dungeoneer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Human Warrior",
+    "cmc": 4,
+    "mana_cost": "{3}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/f/7fee3f76-20a8-4621-84fb-ddf79c955532.jpg?1783922514"
+   },
+   {
+    "name": "Sefris of the Hidden Ways",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 3,
+    "mana_cost": "{W}{U}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/3/d30255f6-e058-476a-b377-2ee4c9178ed1.jpg?1783926260"
+   },
+   {
+    "name": "Selfless Spirit",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Creature — Spirit Cleric",
+    "cmc": 2,
+    "mana_cost": "{1}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/a/da85f3fb-e7d6-494a-ad3a-2ef35917f574.jpg?1743206187"
+   },
+   {
+    "name": "Shadowheart, Dark Justiciar",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Human Elf Cleric",
+    "cmc": 4,
+    "mana_cost": "{3}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/3/13a0913d-776b-4ef8-adef-8861349df2b5.jpg?1783922752"
+   },
+   {
+    "name": "Sol Ring",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/4/04002706-2236-4b79-bdea-4f263e43cb9c.jpg?1767730264"
+   },
+   {
+    "name": "Solemn Doomguide",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Tiefling Cleric",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b467929d-5fc3-4104-8a29-a8157835f274.jpg?1783922505"
+   },
+   {
+    "name": "Spara's Headquarters",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Forest Plains Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/3/7363f1fb-9af3-4212-921f-d59533faf0e5.jpg?1783923052"
+   },
+   {
+    "name": "Spelunking",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/3/d3be4257-2316-4a2e-b347-f71c0368a947.jpg?1783913740"
+   },
+   {
+    "name": "Spirebluff Canal",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/9/59a04e16-a767-4112-ab01-6ca1b09c286c.jpg?1783911772"
+   },
+   {
+    "name": "Spoils of Adventure",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 6,
+    "mana_cost": "{4}{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/b/9b3b1ef0-a653-4adb-8112-82d4822446b4.jpg?1783929318"
+   },
+   {
+    "name": "Squad Commander",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Creature — Kor Warrior",
+    "cmc": 4,
+    "mana_cost": "{3}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/3/5390bbf3-9906-46a9-81d3-60e23eb89ca1.jpg?1783922484"
+   },
+   {
+    "name": "Steam Vents",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Island Mountain",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/6/b66daa94-d367-4812-9f18-f35378c1febb.jpg?1759144847"
+   },
+   {
+    "name": "Stick Together",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{3}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/d/8d77a57a-e30b-46d7-acb8-1d164c7dff78.jpg?1783922510"
+   },
+   {
+    "name": "Stomping Ground",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Mountain Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/69be21b4-c613-47c6-ba57-f4785861af3e.jpg?1752947608"
+   },
+   {
+    "name": "Stonework Packbeast",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact Creature — Beast",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/2/a29e17ba-d584-4296-9f43-17467edaa25f.jpg?1783929309"
+   },
+   {
+    "name": "Stump Stomp // Burnwillow Clearing",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Sorcery // Land",
+    "cmc": 2,
+    "mana_cost": "{1}{R/G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/9/49974246-0a3b-4ec9-b5ea-2a89df9bb0b5.jpg?1783911225"
+   },
+   {
+    "name": "Swamp",
+    "quantity": 2,
+    "category": "land",
+    "type_line": "Basic Land — Swamp",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/d/1dd4d605-02a2-4183-b191-0bca8dfbf962.jpg?1767773902"
+   },
+   {
+    "name": "Swords to Plowshares",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/e/0e7ff4dc-af63-4342-9a44-d059e62bd14c.jpg?1752944384"
+   },
+   {
+    "name": "Tajuru Paragon",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Elf",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/0/a045dd0f-953a-4022-8f29-0758f2b6ccaa.jpg?1783929330"
+   },
+   {
+    "name": "The Destined Warrior",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Human Warrior",
+    "cmc": 4,
+    "mana_cost": "{1}{W}{U}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/4/743ee254-07f1-4d13-9ec7-6cb6358b9303.jpg?1783904658"
+   },
+   {
+    "name": "The Destined White Mage",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Cleric",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/b/8b52f14c-e6b9-4ad0-8515-6644b201e2ea.jpg?1783904657"
+   },
+   {
+    "name": "Thwart the Grave",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Sorcery",
+    "cmc": 6,
+    "mana_cost": "{4}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/c/cc339d3b-9c89-4679-bc83-8399d9a864c7.jpg?1783922439"
+   },
+   {
+    "name": "Triumphant Adventurer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Knight",
+    "cmc": 2,
+    "mana_cost": "{W}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/1/214d3167-4eea-42a1-a464-ddff59843142.jpg?1783926443"
+   },
+   {
+    "name": "Undermountain Adventurer",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Giant Warrior",
+    "cmc": 4,
+    "mana_cost": "{3}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/4/541f53a3-521f-4463-a0b6-758a45d8f661.jpg?1783922701"
+   },
+   {
+    "name": "Unsettled Mariner",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 2,
+    "mana_cost": "{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/a/eaea2e54-ee50-47b9-a2a5-e3353831248c.jpg?1783933078"
+   },
+   {
+    "name": "Varis, Silverymoon Ranger",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Elf Ranger",
+    "cmc": 3,
+    "mana_cost": "{1}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/3/e3bd3ea9-f06d-4df7-8b8d-ac6a0e591b09.jpg?1783926453"
+   },
+   {
+    "name": "Vizier of the Menagerie",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Snake Cleric",
+    "cmc": 4,
+    "mana_cost": "{3}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/0/3010ec33-c3f6-42ce-ad5a-e149e5c9a805.jpg?1730491058"
+   },
+   {
+    "name": "White Plume Adventurer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Orc Cleric",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/2/b256ddc8-8b12-434c-a610-1a872e948f2f.jpg?1783922800"
+   },
+   {
+    "name": "Windswept Heath",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/d/bd1d13f7-fd38-4f0b-a8e0-1eac78668117.jpg?1783911233"
+   },
+   {
+    "name": "Wooded Foothills",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/e/4e11ea8a-f895-438d-a3b7-f070238e4161.jpg?1783911232"
+   },
+   {
+    "name": "You Find a Cursed Idol",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/f/efb5671a-942a-4730-9756-32fe600e0528.jpg?1783926452"
+   },
+   {
+    "name": "Yuan-Ti Malison",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Snake Rogue",
+    "cmc": 2,
+    "mana_cost": "{1}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/f/0f51afd9-7093-4aa3-ad5b-7383684d6285.jpg?1783926503"
+   },
+   {
+    "name": "Zagras, Thief of Heartbeats",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Vampire Rogue",
+    "cmc": 6,
+    "mana_cost": "{4}{B}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/c/ac81448c-f87b-4ca1-b951-b359216ab1d0.jpg?1783929317"
+   },
+   {
+    "name": "Ziatora's Proving Ground",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Mountain Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/5/75fdce80-e338-4a50-bdc6-786511feaeef.jpg?1783923052"
+   }
+  ],
+  "sideboard": [],
+  "unresolved": [],
+  "truncated": false
+ }
+}

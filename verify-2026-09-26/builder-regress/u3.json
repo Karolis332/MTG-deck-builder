@@ -1,0 +1,630 @@
+[
+  {
+    "slug": "aeve-collection",
+    "commander": "Aeve, Progenitor Ooze",
+    "format": "brawl",
+    "useCollection": true,
+    "note": "WITH collection (userId 1)",
+    "ok": true,
+    "strategy": "tribal",
+    "themes": [
+      "tribal"
+    ],
+    "tribalType": "ooze",
+    "totalCards": 99,
+    "tribeCreatureCount": 8,
+    "changelingCount": 1,
+    "nonbasicLands": [
+      "Misty Rainforest",
+      "Windswept Heath",
+      "Wooded Foothills",
+      "Disciple of Freyalise // Garden of Freyalise",
+      "Bridgeworks Battle // Tanglespan Bridgeworks",
+      "Tangled Florahedron // Tangled Vale",
+      "Oakhollow Village",
+      "Rogue's Passage",
+      "Interplanar Beacon",
+      "Evendo, Waking Haven"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "fail",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "fail"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "pass"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "aeve-no-collection",
+    "commander": "Aeve, Progenitor Ooze",
+    "format": "brawl",
+    "useCollection": false,
+    "note": "WITHOUT collection",
+    "ok": true,
+    "strategy": "tribal",
+    "themes": [
+      "tribal"
+    ],
+    "tribalType": "ooze",
+    "totalCards": 99,
+    "tribeCreatureCount": 9,
+    "changelingCount": 1,
+    "nonbasicLands": [
+      "Misty Rainforest",
+      "Windswept Heath",
+      "Wooded Foothills",
+      "Verdant Catacombs",
+      "Bala Ged Recovery // Bala Ged Sanctuary",
+      "Disciple of Freyalise // Garden of Freyalise",
+      "Bridgeworks Battle // Tanglespan Bridgeworks",
+      "Khalni Ambush // Khalni Territory",
+      "Zanarkand, Ancient Metropolis // Lasting Fayth",
+      "Castle Garenbrig"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [
+      {
+        "name": "Glaring Fleshraker",
+        "detail": "1x {C}, deck has 3 colourless sources"
+      }
+    ],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "pass"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "krenko",
+    "commander": "Krenko, Mob Boss",
+    "format": "commander",
+    "useCollection": false,
+    "note": "mono-R tribal",
+    "ok": true,
+    "strategy": "tribal",
+    "themes": [
+      "tribal"
+    ],
+    "tribalType": "goblin",
+    "totalCards": 99,
+    "tribeCreatureCount": 31,
+    "changelingCount": 0,
+    "nonbasicLands": [
+      "Bloodstained Mire",
+      "Wooded Foothills",
+      "Scalding Tarn",
+      "Arid Mesa",
+      "Arena of Glory",
+      "Castle Embereth",
+      "Valakut Awakening // Valakut Stoneforge",
+      "Pinnacle Monk // Mystic Peak",
+      "Sundering Eruption // Volcanic Fissure",
+      "Shatterskull Smashing // Shatterskull, the Hammer Pass"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "warn"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "talrand",
+    "commander": "Talrand, Sky Summoner",
+    "format": "commander",
+    "useCollection": false,
+    "note": "mono-U spellslinger — must STAY spellslinger",
+    "ok": true,
+    "strategy": "spellslinger",
+    "themes": [
+      "tokens",
+      "artifacts",
+      "draw",
+      "control",
+      "flying",
+      "spellslinger",
+      "ramp",
+      "enchantments",
+      "equipment",
+      "counters"
+    ],
+    "tribalType": null,
+    "totalCards": 99,
+    "nonbasicLands": [
+      "Polluted Delta",
+      "Misty Rainforest",
+      "Flooded Strand",
+      "Scalding Tarn",
+      "Sink into Stupor // Soporific Springs",
+      "Hydroelectric Specimen // Hydroelectric Laboratory",
+      "Sea Gate Restoration // Sea Gate, Reborn",
+      "Glasspool Mimic // Glasspool Shore",
+      "Archway of Innovation",
+      "Castle Vantress"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "pass"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "vivi",
+    "commander": "Vivi Ornitier",
+    "format": "commander",
+    "useCollection": false,
+    "note": "SUBSTITUTED brawl->commander: Vivi is banned in Brawl",
+    "ok": true,
+    "strategy": "spellslinger",
+    "themes": [
+      "tokens",
+      "counters",
+      "aggro",
+      "flying",
+      "artifacts",
+      "spellslinger",
+      "ramp",
+      "draw",
+      "enchantments",
+      "graveyard",
+      "equipment"
+    ],
+    "tribalType": null,
+    "totalCards": 99,
+    "nonbasicLands": [
+      "Scalding Tarn",
+      "Steam Vents",
+      "Volcanic Island",
+      "Sulfur Falls",
+      "Shivan Reef",
+      "Frostboil Snarl",
+      "Fiery Islet",
+      "Command Tower",
+      "City of Brass",
+      "Three Tree City",
+      "Rush of Inspiration // Crackling Falls",
+      "Riverglide Pathway // Lavaglide Pathway",
+      "Spirebluff Canal",
+      "Multiversal Passage",
+      "Temple of the Dragon Queen",
+      "Grand Coliseum",
+      "Thran Portal",
+      "Caldera Lake"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "pass"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "ezuri",
+    "commander": "Ezuri, Claw of Progress",
+    "format": "commander",
+    "useCollection": false,
+    "note": "UG +1/+1 counters",
+    "ok": true,
+    "strategy": "aggro",
+    "themes": [
+      "counters",
+      "aggro",
+      "draw",
+      "equipment",
+      "tokens",
+      "artifacts",
+      "enchantments"
+    ],
+    "tribalType": null,
+    "totalCards": 99,
+    "nonbasicLands": [
+      "Breeding Pool",
+      "Misty Rainforest",
+      "Tropical Island",
+      "Hinterland Harbor",
+      "Yavimaya Coast",
+      "Vineglimmer Snarl",
+      "Command Tower",
+      "City of Brass",
+      "Three Tree City",
+      "Drowner of Truth // Drowned Jungle",
+      "Barkchannel Pathway // Tidechannel Pathway",
+      "Waterlogged Grove",
+      "Botanical Sanctum",
+      "Multiversal Passage",
+      "Temple of the Dragon Queen",
+      "Grand Coliseum",
+      "Thran Portal",
+      "Balamb Garden, SeeD Academy // Balamb Garden, Airborne"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "pass"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  },
+  {
+    "slug": "edgar-markov",
+    "commander": "Edgar Markov",
+    "format": "commander",
+    "useCollection": false,
+    "note": "tribal vampires, 3 colours",
+    "ok": true,
+    "strategy": "tribal",
+    "themes": [
+      "tribal"
+    ],
+    "tribalType": "vampire",
+    "totalCards": 99,
+    "tribeCreatureCount": 24,
+    "changelingCount": 0,
+    "nonbasicLands": [
+      "Bloodstained Mire",
+      "Marsh Flats",
+      "Godless Shrine",
+      "Blood Crypt",
+      "Sacred Foundry",
+      "Command Tower",
+      "Exotic Orchard",
+      "City of Brass",
+      "Three Tree City",
+      "Badlands",
+      "Scrubland",
+      "Multiversal Passage",
+      "Temple of the Dragon Queen",
+      "Dragonskull Summit",
+      "Isolated Chapel",
+      "Caves of Koilos",
+      "Arid Mesa",
+      "Grand Coliseum",
+      "Thran Portal",
+      "Plateau",
+      "Shattered Landscape",
+      "Bloodsoaked Insight // Sanguine Morass",
+      "Glasswing Grace // Age-Graced Chapel",
+      "Mana Confluence"
+    ],
+    "narrowDeadTutors": [],
+    "colorlessMismatch": [],
+    "monoColourDeadFixers": [],
+    "gateVerdict": "warn",
+    "gateChecks": [
+      {
+        "id": "size",
+        "status": "warn"
+      },
+      {
+        "id": "singleton",
+        "status": "pass"
+      },
+      {
+        "id": "legality",
+        "status": "pass"
+      },
+      {
+        "id": "rules",
+        "status": "warn"
+      },
+      {
+        "id": "identity",
+        "status": "pass"
+      },
+      {
+        "id": "ownership",
+        "status": "skip"
+      },
+      {
+        "id": "arenaNames",
+        "status": "warn"
+      },
+      {
+        "id": "lands",
+        "status": "warn"
+      },
+      {
+        "id": "plan",
+        "status": "pass"
+      },
+      {
+        "id": "curve",
+        "status": "pass"
+      },
+      {
+        "id": "wincons",
+        "status": "pass"
+      },
+      {
+        "id": "locks",
+        "status": "pass"
+      }
+    ]
+  }
+]

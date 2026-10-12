@@ -1,0 +1,2033 @@
+{
+ "file": "list-v3.txt",
+ "format": "brawl",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 19,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 99.4,
+    "weight": 20.61855670103093,
+    "reason": "37.1 effective lands vs 37.0; B has 7/19 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 85.6,
+    "weight": 15.463917525773196,
+    "reason": "3-drops 22/15; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 95,
+    "weight": 20.61855670103093,
+    "reason": "11.1/10.2 effective answers, 8/6.0 cheap; weakest coverage: stack."
+   },
+   {
+    "key": "advantage",
+    "score": 73.5,
+    "weight": 12.371134020618557,
+    "reason": "19.2/6.8 draw units by turn 5; 2 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 77.5,
+    "weight": 16.494845360824744,
+    "reason": "Creature pressure (4 threats): closes T7, access 58% (u=0.84); shared bottleneck, protection access 48%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 8.7,
+    "weight": 14.43298969072165,
+    "reason": "38% supports midrange; weakest dependency threats 3/7; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 0,
+    "weight": 0,
+    "reason": "3/5 rule checks verified; legality; cap 19."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "fail",
+    "cap": null,
+    "reason": "3/5 rule checks verified; legality; cap 19."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (brawl wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "Not legal in brawl: Pick Your Poison"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "1 card(s) outside G"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 27,
+    "reason": "quality cap 20+0.8*min(M,W,S)=27.0 from mana=99.4, win=77.5, synergy=8.7."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "52% of nonland copies are typed in the effect catalogue; unknown prerequisite \"artifact token\" — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Aeve, Progenitor Ooze",
+  "archetype": "tribal",
+  "tribalType": "Elf",
+  "iss": 30,
+  "topSynergyPairs": [
+   {
+    "a": "Slime Against Humanity",
+    "b": "Ozolith, the Shattered Spire",
+    "weight": 4,
+    "reasons": [
+     "Ozolith, the Shattered Spire consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Slime Against Humanity",
+    "b": "Kami of Whispered Hopes",
+    "weight": 4,
+    "reasons": [
+     "Kami of Whispered Hopes consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Slime Against Humanity",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Slime Against Humanity produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Ozolith, the Shattered Spire",
+    "weight": 4,
+    "reasons": [
+     "Ozolith, the Shattered Spire consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Kami of Whispered Hopes",
+    "weight": 4,
+    "reasons": [
+     "Kami of Whispered Hopes consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Scavenging Ooze",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Scavenging Ooze produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Fuel Tank Feaster",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Fuel Tank Feaster produces creatures_etb"
+    ]
+   },
+   {
+    "a": "Three Tree Mascot",
+    "b": "Selvala, Heart of the Wilds",
+    "weight": 4,
+    "reasons": [
+     "Selvala, Heart of the Wilds consumes creatures_etb ← Three Tree Mascot produces creatures_etb"
+    ]
+   }
+  ],
+  "curveScore": {
+   "score": 50,
+   "perBucket": {
+    "0": 1,
+    "1": 2,
+    "2": -2,
+    "3": 5,
+    "4": -8,
+    "5": 3,
+    "6": -2,
+    "7+": 1
+   },
+   "notes": [
+    "Too many 1-drops (10 vs target 8)",
+    "Missing 2-drops (16 vs target 18)",
+    "Too many 3-drops (22 vs target 17)",
+    "Missing 4-drops (3 vs target 11)",
+    "Too many 5-drops (9 vs target 6)",
+    "Missing 6-drops (0 vs target 2)",
+    "Average CMC 2.89 is high (target ~2.55)"
+   ]
+  },
+  "winPlan": {
+   "route": "spell_burn",
+   "description": "Chain cheap spells into damage/value payoffs (spellslinger/storm).",
+   "keyCards": {
+    "enablers": [
+     "Rampant Growth",
+     "Worldly Tutor",
+     "Celestial Reunion",
+     "Heroic Intervention",
+     "Silkguard",
+     "Seedship Impact",
+     "Bite Down",
+     "Bushwhack"
+    ],
+    "payoffs": [],
+    "protection": [
+     "Paradise Druid",
+     "The One Ring",
+     "Inspiring Call",
+     "Heroic Intervention",
+     "Silkguard"
+    ],
+    "tutors": [
+     "Worldly Tutor",
+     "Celestial Reunion",
+     "Formidable Speaker"
+    ]
+   },
+   "missingPieces": [],
+   "cardRoles": {
+    "Slime Against Humanity": "off_plan",
+    "Scavenging Ooze": "off_plan",
+    "Acidic Slime": "off_plan",
+    "Experiment One": "off_plan",
+    "Temperamental Oozewagg": "off_plan",
+    "Fuel Tank Feaster": "off_plan",
+    "Mutagen Man, Living Ooze": "off_plan",
+    "Universal Automaton": "off_plan",
+    "Three Tree Mascot": "off_plan",
+    "Mutable Explorer": "off_plan",
+    "Chomping Changeling": "off_plan",
+    "Firdoch Core": "off_plan",
+    "Miming Slime": "off_plan",
+    "Hardened Scales": "off_plan",
+    "Ozolith, the Shattered Spire": "off_plan",
+    "Michelangelo, Weirdness to 11": "off_plan",
+    "Kami of Whispered Hopes": "off_plan",
+    "Renata, Called to the Hunt": "off_plan",
+    "Doubling Season": "off_plan",
+    "Germination Practicum": "off_plan",
+    "Terrasymbiosis": "off_plan",
+    "Llanowar Elves": "off_plan",
+    "Elvish Mystic": "off_plan",
+    "Paradise Druid": "protection",
+    "Ilysian Caryatid": "off_plan",
+    "Selvala, Heart of the Wilds": "off_plan",
+    "Enduring Vitality": "off_plan",
+    "Nissa, Who Shakes the World": "off_plan",
+    "Overlord of the Hauntwoods": "off_plan",
+    "Mox Amber": "off_plan",
+    "Metallic Mimic": "off_plan",
+    "Emerald Medallion": "off_plan",
+    "Utopia Sprawl": "off_plan",
+    "Rampant Growth": "enabler",
+    "Wood Elves": "off_plan",
+    "Sylvan Library": "off_plan",
+    "The One Ring": "protection",
+    "Garruk's Uprising": "off_plan",
+    "Tribute to the World Tree": "off_plan",
+    "Inspiring Call": "protection",
+    "Shamanic Revelation": "off_plan",
+    "The Great Henge": "off_plan",
+    "Craterhoof Behemoth": "off_plan",
+    "Overrun": "off_plan",
+    "Return of the Wildspeaker": "off_plan",
+    "Worldly Tutor": "enabler",
+    "Celestial Reunion": "enabler",
+    "Formidable Speaker": "tutor_for_plan",
+    "Heroic Intervention": "enabler",
+    "Silkguard": "enabler",
+    "Beast Within": "off_plan",
+    "Pick Your Poison": "off_plan",
+    "Seedship Impact": "enabler",
+    "Kenrith's Transformation": "off_plan",
+    "Bite Down": "enabler",
+    "Bushwhack": "enabler"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+   "a spell burn plan piece (e.g. Rampant Growth or Worldly Tutor)"
+  ],
+  "gameChangers": {
+   "count": 2,
+   "names": [
+    "The One Ring",
+    "Worldly Tutor"
+   ]
+  },
+  "categories": {
+   "utility": 21,
+   "removal": 7,
+   "win_condition": 4,
+   "ramp": 16,
+   "draw": 9,
+   "tutor": 3,
+   "protection": 2,
+   "board_wipe": 1,
+   "land": 36
+  },
+  "stats": {
+   "totalCards": 99,
+   "landCount": 36,
+   "avgCmc": 2.89
+  }
+ },
+ "optimize": {
+  "format": "brawl",
+  "deckName": null,
+  "commander": "Aeve, Progenitor Ooze",
+  "partner": null,
+  "stats": {
+   "totalCards": 100,
+   "landCount": 33,
+   "avgCmc": 2.92,
+   "colors": [
+    "G"
+   ]
+  },
+  "score": 45,
+  "health": [
+   {
+    "category": "land",
+    "label": "Lands",
+    "current": 33,
+    "target": {
+     "min": 35,
+     "max": 37,
+     "target": 36
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "ramp",
+    "label": "Ramp",
+    "current": 16,
+    "target": {
+     "min": 10,
+     "max": 12,
+     "target": 11
+    },
+    "status": "high",
+    "color": "text-yellow-400"
+   },
+   {
+    "category": "draw",
+    "label": "Card Draw",
+    "current": 9,
+    "target": {
+     "min": 8,
+     "max": 12,
+     "target": 10
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "removal",
+    "label": "Removal",
+    "current": 7,
+    "target": {
+     "min": 6,
+     "max": 12,
+     "target": 9
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "board_wipe",
+    "label": "Board Wipes",
+    "current": 1,
+    "target": {
+     "min": 2,
+     "max": 4,
+     "target": 3
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "protection",
+    "label": "Protection",
+    "current": 2,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 4
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "synergy",
+    "label": "Commander Synergy",
+    "current": 17,
+    "target": {
+     "min": 5,
+     "max": 10,
+     "target": 8
+    },
+    "status": "high",
+    "color": "text-yellow-400"
+   },
+   {
+    "category": "win_condition",
+    "label": "Win Conditions",
+    "current": 4,
+    "target": {
+     "min": 2,
+     "max": 5,
+     "target": 4
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   }
+  ],
+  "curve": {
+   "0": 1,
+   "1": 10,
+   "2": 16,
+   "3": 22,
+   "4": 3,
+   "5": 9,
+   "7": 2
+  },
+  "notes": [
+   "Add 2 more lands (currently 33, minimum 35)",
+   "Consider cutting 4 ramp (currently 16, maximum 12)",
+   "Add 1 more board wipes (currently 1, minimum 2)",
+   "Add 1 more protection (currently 2, minimum 3)",
+   "Consider cutting 7 commander synergy (currently 17, maximum 10)"
+  ],
+  "mana": {
+   "demand": {
+    "W": 0,
+    "U": 0,
+    "B": 1,
+    "R": 0,
+    "G": 77
+   },
+   "sources": {
+    "G": 33
+   },
+   "warnings": []
+  },
+  "landTarget": {
+   "current": 33,
+   "effective": 34.1,
+   "recommended": 37,
+   "mdfcLandBacks": 3,
+   "cheapSpells": 14,
+   "formula": "31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck)"
+  },
+  "legality": [
+   {
+    "name": "Pick Your Poison",
+    "problem": "not_legal",
+    "detail": "not legal in brawl"
+   },
+   {
+    "name": "Pick Your Poison",
+    "problem": "off_color",
+    "detail": "outside the commander's colour identity (G)"
+   }
+  ],
+  "cuts": [
+   {
+    "name": "Pick Your Poison",
+    "quantity": 1,
+    "category": "board_wipe",
+    "cmc": 5,
+    "score": 11,
+    "hard": true,
+    "reasons": [
+     "not legal in brawl",
+     "outside the commander's colour identity (G)",
+     "Curve has 3 too many 5-drops"
+    ],
+    "reason": "not legal in brawl; outside the commander's colour identity (G); Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Doubling Season",
+    "quantity": 1,
+    "category": "synergy",
+    "cmc": 5,
+    "score": 7,
+    "hard": false,
+    "reasons": [
+     "Commander Synergy over quota (17/10) — weakest commander synergy slot",
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 5-drops"
+    ],
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Germination Practicum",
+    "quantity": 1,
+    "category": "synergy",
+    "cmc": 5,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Commander Synergy over quota (17/10) — weakest commander synergy slot",
+     "Curve has 3 too many 5-drops"
+    ],
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Nissa, Who Shakes the World",
+    "quantity": 1,
+    "category": "ramp",
+    "cmc": 5,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Ramp over quota (16/12) — weakest ramp slot",
+     "Curve has 3 too many 5-drops"
+    ],
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Enduring Vitality",
+    "quantity": 1,
+    "category": "ramp",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Ramp over quota (16/12) — weakest ramp slot",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Firdoch Core",
+    "quantity": 1,
+    "category": "ramp",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Ramp over quota (16/12) — weakest ramp slot",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops"
+   },
+   {
+    "name": "Kami of Whispered Hopes",
+    "quantity": 1,
+    "category": "ramp",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Ramp over quota (16/12) — weakest ramp slot",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Miming Slime",
+    "quantity": 1,
+    "category": "synergy",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "Commander Synergy over quota (17/10) — weakest commander synergy slot",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; Curve has 5 too many 3-drops"
+   }
+  ],
+  "adds": [
+   {
+    "name": "Biogenic Ooze",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Ooze",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/f/6f11029a-b24d-4248-834f-b852b56857f6.jpg?1584831093",
+    "reason": "In 64% of Aeve, Progenitor Ooze decks",
+    "score": 91.95037
+   },
+   {
+    "name": "Predator Ooze",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Ooze",
+    "cmc": 3,
+    "mana_cost": "{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/3/333b3cca-ebbf-4ceb-a6a5-3d49cb2e143a.jpg?1783908916",
+    "reason": "In 56% of Aeve, Progenitor Ooze decks",
+    "score": 87.93581
+   },
+   {
+    "name": "Oran-Rief Ooze",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Ooze",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/d/fd2ad967-dd77-4c3a-b53c-2929ecf7750f.jpg?1783929334",
+    "reason": "In 54% of Aeve, Progenitor Ooze decks",
+    "score": 86.92246
+   },
+   {
+    "name": "Ochre Jelly",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Ooze",
+    "cmc": 1,
+    "mana_cost": "{X}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/f/9f23cfb7-c6b6-4f04-abba-5b2a6117ea12.jpg?1783926458",
+    "reason": "In 49% of Aeve, Progenitor Ooze decks",
+    "score": 84.1405
+   },
+   {
+    "name": "Cultivate",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/d/4d36559d-3b91-46e4-bc39-c489842adcbf.jpg?1767731192",
+    "reason": "In 58% of Aeve, Progenitor Ooze decks",
+    "score": 83.97782
+   },
+   {
+    "name": "March of the World Ooze",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Enchantment",
+    "cmc": 6,
+    "mana_cost": "{3}{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/1/b1964ec5-0dd1-4b54-917c-cbeab05aba79.jpg?1783907868",
+    "reason": "In 43% of Aeve, Progenitor Ooze decks",
+    "score": 81.34773
+   },
+   {
+    "name": "The Earth Crystal",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Legendary Artifact",
+    "cmc": 4,
+    "mana_cost": "{2}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/5/d585e218-3dc8-4fbd-8ad2-795fbc9b2155.jpg?1783906588",
+    "reason": "In 39% of Aeve, Progenitor Ooze decks",
+    "score": 78.06456
+   },
+   {
+    "name": "Explore",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/9/3976affd-8c2b-499a-a946-b629c2ba59c7.jpg?1712354565",
+    "reason": "In 39% of Aeve, Progenitor Ooze decks",
+    "score": 77.70436000000001
+   },
+   {
+    "name": "Consuming Blob",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Ooze",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/5/4540fa4b-93e8-4749-a839-9a6e816c1145.jpg?1783925582",
+    "reason": "In 35% of Aeve, Progenitor Ooze decks",
+    "score": 77.48947
+   },
+   {
+    "name": "Circle of Dreams Druid",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 3,
+    "mana_cost": "{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/e/be6fdec0-a2c4-4da2-ae14-961185eaee66.jpg?1783926466",
+    "reason": "In 35% of Aeve, Progenitor Ooze decks",
+    "score": 76.20039
+   },
+   {
+    "name": "Nykthos, Shrine to Nyx",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/3/834b27a0-dfd7-4f96-8cde-cacac4b24acc.jpg?1783939713",
+    "reason": "Deck runs 33 lands; the curve wants ~37 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck))",
+    "score": 75.82007
+   },
+   {
+    "name": "Branching Evolution",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/0/c0f1a736-8b12-4f58-a031-bf1733f65c51.jpg?1783911212",
+    "reason": "In 33% of Aeve, Progenitor Ooze decks",
+    "score": 74.96910000000001
+   }
+  ],
+  "swaps": [
+   {
+    "cut": "Pick Your Poison",
+    "add": "Biogenic Ooze",
+    "reason": "not legal in brawl; outside the commander's colour identity (G); Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Doubling Season",
+    "add": "Predator Ooze",
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Germination Practicum",
+    "add": "Oran-Rief Ooze",
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Nissa, Who Shakes the World",
+    "add": "Cultivate",
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Enduring Vitality",
+    "add": "Explore",
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Firdoch Core",
+    "add": "Circle of Dreams Druid",
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops"
+   },
+   {
+    "cut": "Kami of Whispered Hopes",
+    "add": "Ochre Jelly",
+    "reason": "Ramp over quota (16/12) — weakest ramp slot; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Miming Slime",
+    "add": "March of the World Ooze",
+    "reason": "Commander Synergy over quota (17/10) — weakest commander synergy slot; Curve has 5 too many 3-drops"
+   }
+  ],
+  "lockedFromCuts": [],
+  "afterSize": 100,
+  "sizeChanged": false,
+  "gate": {
+   "verdict": "fail",
+   "format": "brawl",
+   "commander": "Aeve, Progenitor Ooze",
+   "totals": {
+    "cards": 100,
+    "lands": 33,
+    "effectiveLands": 34.1,
+    "nonland": 66,
+    "avgMv": 2.83
+   },
+   "curve": {
+    "0": 1,
+    "1": 11,
+    "2": 18,
+    "3": 23,
+    "4": 3,
+    "5": 6,
+    "6": 2,
+    "7": 2
+   },
+   "plan": {
+    "condition": {
+     "threshold": null,
+     "requires": null,
+     "tribalType": "Ooze",
+     "nouns": [
+      "whenever you cast",
+      "copy that spell",
+      "ooze"
+     ],
+     "description": "commander wants: Ooze creatures"
+    },
+    "nonland": 66,
+    "interacting": 23,
+    "ratio": 0.3484848484848485,
+    "enablers": 22,
+    "enablerRatio": 0.3333333333333333,
+    "nonInteracting": [
+     {
+      "name": "Mox Amber",
+      "cmc": 0
+     },
+     {
+      "name": "Bushwhack",
+      "cmc": 1
+     },
+     {
+      "name": "Celestial Reunion",
+      "cmc": 1
+     },
+     {
+      "name": "Elvish Mystic",
+      "cmc": 1
+     },
+     {
+      "name": "Hardened Scales",
+      "cmc": 1
+     },
+     {
+      "name": "Llanowar Elves",
+      "cmc": 1
+     },
+     {
+      "name": "Silkguard",
+      "cmc": 1
+     },
+     {
+      "name": "Utopia Sprawl",
+      "cmc": 1
+     },
+     {
+      "name": "Worldly Tutor",
+      "cmc": 1
+     },
+     {
+      "name": "Bite Down",
+      "cmc": 2
+     },
+     {
+      "name": "Emerald Medallion",
+      "cmc": 2
+     },
+     {
+      "name": "Explore",
+      "cmc": 2
+     },
+     {
+      "name": "Heroic Intervention",
+      "cmc": 2
+     },
+     {
+      "name": "Ilysian Caryatid",
+      "cmc": 2
+     },
+     {
+      "name": "Kenrith's Transformation",
+      "cmc": 2
+     },
+     {
+      "name": "Metallic Mimic",
+      "cmc": 2
+     },
+     {
+      "name": "Michelangelo, Weirdness to 11",
+      "cmc": 2
+     },
+     {
+      "name": "Ozolith, the Shattered Spire",
+      "cmc": 2
+     },
+     {
+      "name": "Paradise Druid",
+      "cmc": 2
+     },
+     {
+      "name": "Rampant Growth",
+      "cmc": 2
+     },
+     {
+      "name": "Seedship Impact",
+      "cmc": 2
+     },
+     {
+      "name": "Sylvan Library",
+      "cmc": 2
+     },
+     {
+      "name": "Tangled Florahedron",
+      "cmc": 2
+     },
+     {
+      "name": "Beast Within",
+      "cmc": 3
+     },
+     {
+      "name": "Bridgeworks Battle",
+      "cmc": 3
+     },
+     {
+      "name": "Circle of Dreams Druid",
+      "cmc": 3
+     },
+     {
+      "name": "Cultivate",
+      "cmc": 3
+     },
+     {
+      "name": "Formidable Speaker",
+      "cmc": 3
+     },
+     {
+      "name": "Garruk's Uprising",
+      "cmc": 3
+     },
+     {
+      "name": "Inspiring Call",
+      "cmc": 3
+     },
+     {
+      "name": "Selvala, Heart of the Wilds",
+      "cmc": 3
+     },
+     {
+      "name": "Terrasymbiosis",
+      "cmc": 3
+     },
+     {
+      "name": "Tribute to the World Tree",
+      "cmc": 3
+     },
+     {
+      "name": "Wood Elves",
+      "cmc": 3
+     },
+     {
+      "name": "Renata, Called to the Hunt",
+      "cmc": 4
+     },
+     {
+      "name": "The One Ring",
+      "cmc": 4
+     },
+     {
+      "name": "Overlord of the Hauntwoods",
+      "cmc": 5
+     },
+     {
+      "name": "Overrun",
+      "cmc": 5
+     },
+     {
+      "name": "Return of the Wildspeaker",
+      "cmc": 5
+     },
+     {
+      "name": "Shamanic Revelation",
+      "cmc": 5
+     },
+     {
+      "name": "Disciple of Freyalise",
+      "cmc": 6
+     },
+     {
+      "name": "Craterhoof Behemoth",
+      "cmc": 8
+     },
+     {
+      "name": "The Great Henge",
+      "cmc": 9
+     }
+    ]
+   },
+   "unresolved": [],
+   "checks": [
+    {
+     "id": "size",
+     "status": "pass",
+     "detail": "100 cards (brawl wants 100)"
+    },
+    {
+     "id": "singleton",
+     "status": "pass",
+     "detail": "singleton respected (basics exempt)"
+    },
+    {
+     "id": "legality",
+     "status": "pass",
+     "detail": "every card legal in brawl"
+    },
+    {
+     "id": "rules",
+     "status": "pass",
+     "detail": "no other format rule broken"
+    },
+    {
+     "id": "identity",
+     "status": "pass",
+     "detail": "all cards inside G"
+    },
+    {
+     "id": "ownership",
+     "status": "skip",
+     "detail": "no ownerId and no ownedCards — nothing to check the list against"
+    },
+    {
+     "id": "arenaNames",
+     "status": "warn",
+     "detail": "3 card(s) must be exported front-face only:",
+     "cards": [
+      "1 Disciple of Freyalise",
+      "1 Bridgeworks Battle",
+      "1 Tangled Florahedron"
+     ]
+    },
+    {
+     "id": "lands",
+     "status": "pass",
+     "detail": "33 lands (+3 MDFC land backs = 34.1 effective); Karsten wants 36 ±2"
+    },
+    {
+     "id": "plan",
+     "status": "fail",
+     "detail": "23/66 nonland cards interact (35%) — commander wants: Ooze creatures",
+     "cards": [
+      "Mox Amber (MV 0)",
+      "Bushwhack (MV 1)",
+      "Celestial Reunion (MV 1)",
+      "Elvish Mystic (MV 1)",
+      "Hardened Scales (MV 1)",
+      "Llanowar Elves (MV 1)",
+      "Silkguard (MV 1)",
+      "Utopia Sprawl (MV 1)",
+      "Worldly Tutor (MV 1)",
+      "Bite Down (MV 2)",
+      "Emerald Medallion (MV 2)",
+      "Explore (MV 2)",
+      "Heroic Intervention (MV 2)",
+      "Ilysian Caryatid (MV 2)",
+      "Kenrith's Transformation (MV 2)",
+      "Metallic Mimic (MV 2)",
+      "Michelangelo, Weirdness to 11 (MV 2)",
+      "Ozolith, the Shattered Spire (MV 2)",
+      "Paradise Druid (MV 2)",
+      "Rampant Growth (MV 2)",
+      "Seedship Impact (MV 2)",
+      "Sylvan Library (MV 2)",
+      "Tangled Florahedron (MV 2)",
+      "Beast Within (MV 3)",
+      "Bridgeworks Battle (MV 3)",
+      "Circle of Dreams Druid (MV 3)",
+      "Cultivate (MV 3)",
+      "Formidable Speaker (MV 3)",
+      "Garruk's Uprising (MV 3)",
+      "Inspiring Call (MV 3)",
+      "Selvala, Heart of the Wilds (MV 3)",
+      "Terrasymbiosis (MV 3)",
+      "Tribute to the World Tree (MV 3)",
+      "Wood Elves (MV 3)",
+      "Renata, Called to the Hunt (MV 4)",
+      "The One Ring (MV 4)",
+      "Overlord of the Hauntwoods (MV 5)",
+      "Overrun (MV 5)",
+      "Return of the Wildspeaker (MV 5)",
+      "Shamanic Revelation (MV 5)",
+      "Disciple of Freyalise (MV 6)",
+      "Craterhoof Behemoth (MV 8)",
+      "The Great Henge (MV 9)"
+     ]
+    },
+    {
+     "id": "curve",
+     "status": "pass",
+     "detail": "avg MV 2.83; commander sets no cost threshold"
+    },
+    {
+     "id": "wincons",
+     "status": "pass",
+     "detail": "6 win condition(s)/closer(s)",
+     "cards": [
+      "Acidic Slime",
+      "Temperamental Oozewagg",
+      "Overlord of the Hauntwoods",
+      "Craterhoof Behemoth",
+      "Overrun",
+      "Biogenic Ooze"
+     ]
+    },
+    {
+     "id": "locks",
+     "status": "pass",
+     "detail": "1 locked card(s) present and intact",
+     "cards": [
+      "Misty Rainforest"
+     ]
+    }
+   ]
+  },
+  "analysis": {
+   "commander": "Aeve, Progenitor Ooze",
+   "archetype": "tribal",
+   "tribalType": "Elf",
+   "iss": 30,
+   "topSynergyPairs": [
+    {
+     "a": "Slime Against Humanity",
+     "b": "Ozolith, the Shattered Spire",
+     "weight": 4,
+     "reasons": [
+      "Ozolith, the Shattered Spire consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Slime Against Humanity",
+     "b": "Kami of Whispered Hopes",
+     "weight": 4,
+     "reasons": [
+      "Kami of Whispered Hopes consumes plus1_counters ← Slime Against Humanity produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Slime Against Humanity",
+     "b": "Selvala, Heart of the Wilds",
+     "weight": 4,
+     "reasons": [
+      "Selvala, Heart of the Wilds consumes creatures_etb ← Slime Against Humanity produces creatures_etb"
+     ]
+    },
+    {
+     "a": "Scavenging Ooze",
+     "b": "Ozolith, the Shattered Spire",
+     "weight": 4,
+     "reasons": [
+      "Ozolith, the Shattered Spire consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Scavenging Ooze",
+     "b": "Kami of Whispered Hopes",
+     "weight": 4,
+     "reasons": [
+      "Kami of Whispered Hopes consumes plus1_counters ← Scavenging Ooze produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Scavenging Ooze",
+     "b": "Selvala, Heart of the Wilds",
+     "weight": 4,
+     "reasons": [
+      "Selvala, Heart of the Wilds consumes creatures_etb ← Scavenging Ooze produces creatures_etb"
+     ]
+    },
+    {
+     "a": "Fuel Tank Feaster",
+     "b": "Selvala, Heart of the Wilds",
+     "weight": 4,
+     "reasons": [
+      "Selvala, Heart of the Wilds consumes creatures_etb ← Fuel Tank Feaster produces creatures_etb"
+     ]
+    },
+    {
+     "a": "Three Tree Mascot",
+     "b": "Selvala, Heart of the Wilds",
+     "weight": 4,
+     "reasons": [
+      "Selvala, Heart of the Wilds consumes creatures_etb ← Three Tree Mascot produces creatures_etb"
+     ]
+    }
+   ],
+   "curveScore": {
+    "score": 50,
+    "perBucket": {
+     "0": 1,
+     "1": 2,
+     "2": -2,
+     "3": 5,
+     "4": -8,
+     "5": 3,
+     "6": -2,
+     "7+": 1
+    },
+    "notes": [
+     "Too many 1-drops (10 vs target 8)",
+     "Missing 2-drops (16 vs target 18)",
+     "Too many 3-drops (22 vs target 17)",
+     "Missing 4-drops (3 vs target 11)",
+     "Too many 5-drops (9 vs target 6)",
+     "Missing 6-drops (0 vs target 2)",
+     "Average CMC 2.89 is high (target ~2.55)"
+    ]
+   },
+   "winPlan": {
+    "route": "spell_burn",
+    "description": "Chain cheap spells into damage/value payoffs (spellslinger/storm).",
+    "keyCards": {
+     "enablers": [
+      "Rampant Growth",
+      "Worldly Tutor",
+      "Celestial Reunion",
+      "Heroic Intervention",
+      "Silkguard",
+      "Seedship Impact",
+      "Bite Down",
+      "Bushwhack"
+     ],
+     "payoffs": [],
+     "protection": [
+      "Paradise Druid",
+      "The One Ring",
+      "Inspiring Call",
+      "Heroic Intervention",
+      "Silkguard"
+     ],
+     "tutors": [
+      "Worldly Tutor",
+      "Celestial Reunion",
+      "Formidable Speaker"
+     ]
+    },
+    "missingPieces": [],
+    "cardRoles": {
+     "Slime Against Humanity": "off_plan",
+     "Scavenging Ooze": "off_plan",
+     "Acidic Slime": "off_plan",
+     "Experiment One": "off_plan",
+     "Temperamental Oozewagg": "off_plan",
+     "Fuel Tank Feaster": "off_plan",
+     "Mutagen Man, Living Ooze": "off_plan",
+     "Universal Automaton": "off_plan",
+     "Three Tree Mascot": "off_plan",
+     "Mutable Explorer": "off_plan",
+     "Chomping Changeling": "off_plan",
+     "Firdoch Core": "off_plan",
+     "Miming Slime": "off_plan",
+     "Hardened Scales": "off_plan",
+     "Ozolith, the Shattered Spire": "off_plan",
+     "Michelangelo, Weirdness to 11": "off_plan",
+     "Kami of Whispered Hopes": "off_plan",
+     "Renata, Called to the Hunt": "off_plan",
+     "Doubling Season": "off_plan",
+     "Germination Practicum": "off_plan",
+     "Terrasymbiosis": "off_plan",
+     "Llanowar Elves": "off_plan",
+     "Elvish Mystic": "off_plan",
+     "Paradise Druid": "protection",
+     "Ilysian Caryatid": "off_plan",
+     "Selvala, Heart of the Wilds": "off_plan",
+     "Enduring Vitality": "off_plan",
+     "Nissa, Who Shakes the World": "off_plan",
+     "Overlord of the Hauntwoods": "off_plan",
+     "Mox Amber": "off_plan",
+     "Metallic Mimic": "off_plan",
+     "Emerald Medallion": "off_plan",
+     "Utopia Sprawl": "off_plan",
+     "Rampant Growth": "enabler",
+     "Wood Elves": "off_plan",
+     "Sylvan Library": "off_plan",
+     "The One Ring": "protection",
+     "Garruk's Uprising": "off_plan",
+     "Tribute to the World Tree": "off_plan",
+     "Inspiring Call": "protection",
+     "Shamanic Revelation": "off_plan",
+     "The Great Henge": "off_plan",
+     "Craterhoof Behemoth": "off_plan",
+     "Overrun": "off_plan",
+     "Return of the Wildspeaker": "off_plan",
+     "Worldly Tutor": "enabler",
+     "Celestial Reunion": "enabler",
+     "Formidable Speaker": "tutor_for_plan",
+     "Heroic Intervention": "enabler",
+     "Silkguard": "enabler",
+     "Beast Within": "off_plan",
+     "Pick Your Poison": "off_plan",
+     "Seedship Impact": "enabler",
+     "Kenrith's Transformation": "off_plan",
+     "Bite Down": "enabler",
+     "Bushwhack": "enabler"
+    }
+   },
+   "mulliganCriteria": [
+    "2-4 lands",
+    "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+    "a spell burn plan piece (e.g. Rampant Growth or Worldly Tutor)"
+   ],
+   "gameChangers": {
+    "count": 2,
+    "names": [
+     "The One Ring",
+     "Worldly Tutor"
+    ]
+   },
+   "categories": {
+    "utility": 21,
+    "removal": 7,
+    "win_condition": 4,
+    "ramp": 16,
+    "draw": 9,
+    "tutor": 3,
+    "protection": 2,
+    "board_wipe": 1,
+    "land": 36
+   },
+   "stats": {
+    "totalCards": 99,
+    "landCount": 36,
+    "avgCmc": 2.89
+   }
+  },
+  "deckScore": {
+   "version": "1.2.0",
+   "score": 19,
+   "provisional": true,
+   "components": [
+    {
+     "key": "mana",
+     "score": 99.4,
+     "weight": 20.61855670103093,
+     "reason": "37.1 effective lands vs 37.0; B has 7/19 timely sources."
+    },
+    {
+     "key": "curve",
+     "score": 85.6,
+     "weight": 15.463917525773196,
+     "reason": "3-drops 22/15; 100% chance of a useful play by turn 2."
+    },
+    {
+     "key": "interaction",
+     "score": 95,
+     "weight": 20.61855670103093,
+     "reason": "11.1/10.2 effective answers, 8/6.0 cheap; weakest coverage: stack."
+    },
+    {
+     "key": "advantage",
+     "score": 73.5,
+     "weight": 12.371134020618557,
+     "reason": "19.2/6.8 draw units by turn 5; 2 cheap velocity cards."
+    },
+    {
+     "key": "win",
+     "score": 77.5,
+     "weight": 16.494845360824744,
+     "reason": "Creature pressure (4 threats): closes T7, access 58% (u=0.84); shared bottleneck, protection access 48%; none."
+    },
+    {
+     "key": "synergy",
+     "score": 8.7,
+     "weight": 14.43298969072165,
+     "reason": "38% supports midrange; weakest dependency threats 3/7; 0 unsupported payoffs."
+    },
+    {
+     "key": "meta",
+     "score": 50,
+     "weight": 0,
+     "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+    },
+    {
+     "key": "structure",
+     "score": 0,
+     "weight": 0,
+     "reason": "3/5 rule checks verified; legality; cap 19."
+    }
+   ],
+   "gates": [
+    {
+     "key": "structure",
+     "kind": "rules",
+     "status": "fail",
+     "cap": null,
+     "reason": "3/5 rule checks verified; legality; cap 19."
+    },
+    {
+     "key": "size",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "100 cards (brawl wants 100)"
+    },
+    {
+     "key": "singleton",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "singleton respected (basics exempt)"
+    },
+    {
+     "key": "legality",
+     "kind": "rules",
+     "status": "fail",
+     "cap": 19,
+     "reason": "Not legal in brawl: Pick Your Poison"
+    },
+    {
+     "key": "rules",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "no other format rule broken"
+    },
+    {
+     "key": "identity",
+     "kind": "rules",
+     "status": "fail",
+     "cap": 19,
+     "reason": "1 card(s) outside G"
+    },
+    {
+     "key": "quality_cap",
+     "kind": "quality",
+     "status": "warn",
+     "cap": 27,
+     "reason": "quality cap 20+0.8*min(M,W,S)=27.0 from mana=99.4, win=77.5, synergy=8.7."
+    },
+    {
+     "key": "coverage",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "52% of nonland copies are typed in the effect catalogue; unknown prerequisite \"artifact token\" — provisional: effect coverage, not calibrated."
+    },
+    {
+     "key": "meta_evidence",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+    }
+   ]
+  },
+  "bracket": {
+   "bracket": 3,
+   "gameChangers": [
+    "The One Ring",
+    "Worldly Tutor"
+   ],
+   "twoCardCombos": [],
+   "massLandDenial": [],
+   "extraTurnCards": [],
+   "chainedExtraTurns": false,
+   "tutors": 3,
+   "fastMana": [
+    "Mox Amber"
+   ],
+   "reasons": [
+    "2 game changer(s): The One Ring, Worldly Tutor"
+   ]
+  },
+  "main": [
+   {
+    "name": "Slime Against Humanity",
+    "quantity": 8,
+    "category": "synergy",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/e/1eb21318-d32e-4724-8908-c0d7613de2f4.jpg?1783912861"
+   },
+   {
+    "name": "Scavenging Ooze",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Ooze",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/c/8c504c23-1e9a-411b-9cfe-4180d0c744f6.jpg?1783909056"
+   },
+   {
+    "name": "Acidic Slime",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Ooze",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/3/932d48fb-42b5-4aaa-a91c-d35cdb5e41a3.jpg?1783915638"
+   },
+   {
+    "name": "Experiment One",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Human Ooze",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/b/3b551403-47dd-4c2b-95c8-0e2e674d6fcf.jpg?1783913305"
+   },
+   {
+    "name": "Temperamental Oozewagg",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Ooze Brushwagg",
+    "cmc": 4,
+    "mana_cost": "{3}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/6/6625df2e-7046-411a-ae86-c46ac0953a0b.jpg?1783911256"
+   },
+   {
+    "name": "Fuel Tank Feaster",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Ooze Druid",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/b/3bd66ee9-d818-4cd9-9d95-521b9f276def.jpg?1783907498"
+   },
+   {
+    "name": "Mutagen Man, Living Ooze",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Legendary Creature — Ooze Mutant",
+    "cmc": 2,
+    "mana_cost": "{X}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/f/9f9085f0-3702-462c-8c81-b4576236792d.jpg?1783904085"
+   },
+   {
+    "name": "Universal Automaton",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Artifact Creature — Shapeshifter",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/3/53c682e2-c90f-4f4b-9010-00b099e85518.jpg?1783933069"
+   },
+   {
+    "name": "Three Tree Mascot",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact Creature — Shapeshifter",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/0/40b8bf3a-1cb5-4ce2-ac25-9410f17130de.jpg?1783908902"
+   },
+   {
+    "name": "Mutable Explorer",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/f/8f35d95a-caea-4d5e-b98e-55da1ba7c92d.jpg?1783904425"
+   },
+   {
+    "name": "Chomping Changeling",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Shapeshifter",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/1/e187dcc6-19ad-4cf6-94b4-daf07f5144e5.jpg?1783904431"
+   },
+   {
+    "name": "Firdoch Core",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Kindred Artifact — Shapeshifter",
+    "cmc": 3,
+    "mana_cost": "{3}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/e/8e45cd37-bf97-4742-978d-96f96ed653cd.jpg?1783904397"
+   },
+   {
+    "name": "Miming Slime",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/0/80d816cd-9ca6-4118-893e-5c6b167d9d81.jpg?1783933788"
+   },
+   {
+    "name": "Hardened Scales",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Enchantment",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/c/fc69ad56-9ae2-4eb5-b7e2-558524f6cbcc.jpg?1698988369"
+   },
+   {
+    "name": "Ozolith, the Shattered Spire",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Artifact",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/9/c9eee658-29e8-4ab5-8a0e-31f2f28a9a92.jpg?1682204958"
+   },
+   {
+    "name": "Michelangelo, Weirdness to 11",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Legendary Creature — Mutant Ninja Turtle",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/8/18477047-218d-4b2a-a086-37431b6a3025.jpg?1783904086"
+   },
+   {
+    "name": "Kami of Whispered Hopes",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Spirit",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/c/5c644650-3861-4a78-9e39-a413b073ddac.jpg?1682204938"
+   },
+   {
+    "name": "Renata, Called to the Hunt",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Legendary Enchantment Creature — Demigod",
+    "cmc": 4,
+    "mana_cost": "{2}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/b/2b27e6b2-13ad-42b2-a121-70935913723d.jpg?1783931530"
+   },
+   {
+    "name": "Doubling Season",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{4}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/2/f2c4f80e-84a0-463b-82c3-5c6503809351.jpg?1783909062"
+   },
+   {
+    "name": "Germination Practicum",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Sorcery — Lesson",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/b/abe8332f-c76e-44e2-9427-d1228453abec.jpg?1783903658"
+   },
+   {
+    "name": "Terrasymbiosis",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/6/26008c7d-5dbe-4da2-b475-4dd307e7bc68.jpg?1783905928"
+   },
+   {
+    "name": "Llanowar Elves",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6a0b230b-d391-4998-a3f7-7b158a0ec2cd.jpg?1783909057"
+   },
+   {
+    "name": "Elvish Mystic",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/5/75918859-c93f-41b4-9ad0-a4a96c389f0d.jpg?1689998466"
+   },
+   {
+    "name": "Paradise Druid",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/8/187d5819-6a63-4e4f-98c4-18191c03f164.jpg?1783926189"
+   },
+   {
+    "name": "Ilysian Caryatid",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Plant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/d/3db65137-c9d6-4352-b7a0-f3968b167233.jpg?1783915629"
+   },
+   {
+    "name": "Selvala, Heart of the Wilds",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Elf Scout",
+    "cmc": 3,
+    "mana_cost": "{1}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/1/812856be-cf51-42de-96d2-4ac91e71d442.jpg?1783904541"
+   },
+   {
+    "name": "Enduring Vitality",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Enchantment Creature — Elk Glimmer",
+    "cmc": 3,
+    "mana_cost": "{1}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/d/9d76a30c-0431-4334-892a-9822dda9671a.jpg?1783909457"
+   },
+   {
+    "name": "Nissa, Who Shakes the World",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Planeswalker — Nissa",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/8/f857bbe4-5619-4733-a0c7-69700f2ef4f3.jpg?1783933410"
+   },
+   {
+    "name": "Overlord of the Hauntwoods",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Enchantment Creature — Avatar Horror",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/5/05d08ff1-edcc-4c76-96e0-683b3da36ebb.jpg?1783909450"
+   },
+   {
+    "name": "Mox Amber",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Artifact",
+    "cmc": 0,
+    "mana_cost": "{0}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1783934955"
+   },
+   {
+    "name": "Metallic Mimic",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Artifact Creature — Shapeshifter",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/a/9ad98263-9fe6-4766-a9fb-4776e570c250.jpg?1736468634"
+   },
+   {
+    "name": "Emerald Medallion",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/d/5ddf44fe-9e4e-42a6-a6f8-11ada3ce8a94.jpg?1783911210"
+   },
+   {
+    "name": "Utopia Sprawl",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Enchantment — Aura",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/e/5ea568df-04a1-4012-98ec-ba75e189e0ca.jpg?1783913297"
+   },
+   {
+    "name": "Rampant Growth",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/3/f3b48473-b53d-4c85-b970-7ee09a1eefd2.jpg?1773756967"
+   },
+   {
+    "name": "Wood Elves",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Elf Scout",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/2/527cf39d-29d1-4c19-9c49-ebf611ca15d5.jpg?1682209656"
+   },
+   {
+    "name": "Sylvan Library",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6ada256f-2e55-4c1f-b4d3-d7b10b498956.jpg?1783918436"
+   },
+   {
+    "name": "The One Ring",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Artifact",
+    "cmc": 4,
+    "mana_cost": "{4}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/5/d5806e68-1054-458e-866d-1f2470f682b2.jpg?1783916239"
+   },
+   {
+    "name": "Garruk's Uprising",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/8/4805c303-e73b-443b-a09f-49d2c2c88bb5.jpg?1730489415"
+   },
+   {
+    "name": "Tribute to the World Tree",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/0/c0cdeaba-fc21-44e6-bf99-aa1ff379401b.jpg?1783916960"
+   },
+   {
+    "name": "Inspiring Call",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/e/3e241642-5172-4437-b694-f6aa159d5cd9.jpg?1730489440"
+   },
+   {
+    "name": "Shamanic Revelation",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/3/b3784eff-ab7b-4fd4-9a07-fbc852d116bf.jpg?1783923241"
+   },
+   {
+    "name": "The Great Henge",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Artifact",
+    "cmc": 9,
+    "mana_cost": "{7}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/e/5e861bb6-0841-4a84-9d65-1d45ea87e90d.jpg?1764118034"
+   },
+   {
+    "name": "Craterhoof Behemoth",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Beast",
+    "cmc": 8,
+    "mana_cost": "{5}{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/7/276f5cee-a501-4658-bd4d-7a044bf1ccbc.jpg?1783907345"
+   },
+   {
+    "name": "Overrun",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{2}{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/d/1d8e9cbb-8bf4-4a48-a58e-79deb3abdf7f.jpg?1783909056"
+   },
+   {
+    "name": "Return of the Wildspeaker",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 5,
+    "mana_cost": "{4}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/9/c924fa52-a835-4259-8bfd-2cde60bdfcc5.jpg?1764118052"
+   },
+   {
+    "name": "Worldly Tutor",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/d/8d3569de-ff5e-44a2-94a2-86e994d2a0f1.jpg?1764119841"
+   },
+   {
+    "name": "Celestial Reunion",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "mana_cost": "{X}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/8/583b2863-aca1-4dab-9196-ea453b5d9454.jpg?1783904435"
+   },
+   {
+    "name": "Formidable Speaker",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/6/265522eb-4f6a-40e7-b374-3833fa63c80b.jpg?1783904430"
+   },
+   {
+    "name": "Heroic Intervention",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/6969b172-8c86-4c2e-95a6-7b23e6f2092f.jpg?1764118046"
+   },
+   {
+    "name": "Silkguard",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{X}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/4/d4373a89-b571-46e2-9021-02aa4cdbb3b0.jpg?1651655447"
+   },
+   {
+    "name": "Beast Within",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/c/ccac70d4-6e04-4802-8bb8-021368a40e14.jpg?1752944774"
+   },
+   {
+    "name": "Pick Your Poison",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/7/b7656890-7fb0-4392-9600-dc1da3a17353.jpg?1783925917"
+   },
+   {
+    "name": "Seedship Impact",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/0/d060d95f-f33a-4fc0-b002-c394d4cd82ce.jpg?1783905931"
+   },
+   {
+    "name": "Kenrith's Transformation",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Enchantment — Aura",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/4/44d60a41-3f5e-4559-b18c-22c0fe15235e.jpg?1783926190"
+   },
+   {
+    "name": "Bite Down",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/8/f8d70b3b-f6f9-4b3c-ad70-0ce369e812b5.jpg?1783909062"
+   },
+   {
+    "name": "Bushwhack",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/3/03ebdb36-55e0-49dd-a514-785fbeb4ae19.jpg?1783909061"
+   },
+   {
+    "name": "Disciple of Freyalise // Garden of Freyalise",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Creature — Elf Druid // Land",
+    "cmc": 6,
+    "mana_cost": "{3}{G}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/8/a8e9ea5a-5e10-4b77-baef-0352ff035483.jpg?1783911228"
+   },
+   {
+    "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Sorcery // Land",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/b/ebef3db0-2b58-4581-a79c-fbca9a059e63.jpg?1783911228"
+   },
+   {
+    "name": "Tangled Florahedron // Tangled Vale",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Creature — Elemental // Land",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/3/235d1ffc-72aa-40a2-95dc-3f6a8d495061.jpg?1783929335"
+   },
+   {
+    "name": "Misty Rainforest",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/894105c4-d3ce-4d38-855b-24aa47b112c1.jpg?1742337368"
+   },
+   {
+    "name": "Ba Sing Se",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/d/bdf3b2be-d0cd-4a3c-a10e-82d32c12d3bd.jpg?1783904912"
+   },
+   {
+    "name": "Forest",
+    "quantity": 31,
+    "category": "land",
+    "type_line": "Basic Land — Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b460f5f7-c7c9-400c-8419-23d614f45bf9.jpg?1767773926"
+   }
+  ],
+  "sideboard": [],
+  "unresolved": [],
+  "truncated": false
+ }
+}

@@ -1,0 +1,1247 @@
+{
+ "metrics": {
+  "label": "ygra",
+  "strategy": "aggro",
+  "themes": [
+   "ramp",
+   "draw",
+   "tokens",
+   "artifacts",
+   "control",
+   "aggro",
+   "sacrifice",
+   "tribal"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 35,
+  "basics": 20,
+  "honestRamp": 13,
+  "draw": 24,
+  "removal": 7,
+  "wipes": 2,
+  "protection": 3,
+  "wincons": 4,
+  "tutors": 1,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "draw": 20,
+   "ramp": 13,
+   "win_condition": 4,
+   "synergy": 10,
+   "removal": 7,
+   "board_wipe": 2,
+   "protection": 2,
+   "utility": 1,
+   "land": 5
+  },
+  "ms": 1223,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 29
+  },
+  "sources": {
+   "W": 13,
+   "U": 13,
+   "B": 36,
+   "R": 13,
+   "G": 35
+  },
+  "price": {
+   "total": 369.45,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Cauldron Familiar",
+   "cmc": 1,
+   "type": "Creature — Cat",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 191,
+   "price": "3.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 131,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 137,
+   "price": "7.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gilded Goose",
+   "cmc": 1,
+   "type": "Creature — Bird",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 217,
+   "price": "0.43",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Goldvein Hydra",
+   "cmc": 1,
+   "type": "Creature — Hydra",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 119,
+   "price": "3.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Greedy Freebooter",
+   "cmc": 1,
+   "type": "Creature — Human Pirate",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "ramp",
+   "score": 127,
+   "price": "1.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Many Partings",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "draw",
+   "score": 126,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Nature's Claim",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "",
+   "score": 113,
+   "price": "1.44",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Party Dude",
+   "cmc": 1,
+   "type": "Enchantment — Class",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 118,
+   "price": "0.40",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pest Infestation",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 116,
+   "price": "0.59",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ravenous Squirrel",
+   "cmc": 1,
+   "type": "Creature — Squirrel",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 162,
+   "price": "0.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "cmc": 1,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "utility",
+   "score": 121,
+   "price": "1.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scavenger's Talent",
+   "cmc": 1,
+   "type": "Enchantment — Class",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 138,
+   "price": "1.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Witch's Oven",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 154,
+   "price": "0.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 205,
+   "price": "0.74",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 116,
+   "price": "1.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "cmc": 2,
+   "type": "Creature — Vampire",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 122,
+   "price": "3.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collective Resistance",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal",
+    "protection",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "protection",
+   "score": 109,
+   "price": "2.41",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 132,
+   "price": "0.70",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 232,
+   "price": "0.28",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fanatic of Rhonas",
+   "cmc": 2,
+   "type": "Creature — Snake Druid",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "synergy",
+   "score": 114,
+   "price": "14.09",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fanatical Offering",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 114,
+   "price": "1.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Gorbag of Minas Morgul",
+   "cmc": 2,
+   "type": "Legendary Creature — Orc Soldier",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 122,
+   "price": "0.25",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 160,
+   "price": "3.87",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Marionette Apprentice",
+   "cmc": 2,
+   "type": "Creature — Human Artificer",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 161,
+   "price": "2.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "draw",
+   "score": 147,
+   "price": "0.24",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Priest of Forgotten Gods",
+   "cmc": 2,
+   "type": "Creature — Human Cleric",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "synergy",
+   "score": 115,
+   "price": "0.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Prosperous Innkeeper",
+   "cmc": 2,
+   "type": "Creature — Halfling Citizen",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 114,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 151,
+   "price": "2.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Syr Ginger, the Meal Ender",
+   "cmc": 2,
+   "type": "Legendary Artifact Creature — Food Knigh",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 128,
+   "price": "1.71",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Sackville-Bagginses",
+   "cmc": 2,
+   "type": "Legendary Creature — Halfling Citizen",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 132,
+   "price": "0.75",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Thornvault Forager",
+   "cmc": 2,
+   "type": "Creature — Squirrel Ranger",
+   "cats": [
+    "ramp",
+    "tutor",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 163,
+   "price": "2.57",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Trail of Crumbs",
+   "cmc": 2,
+   "type": "Enchantment",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 142,
+   "price": "0.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tribute to Horobi // Echo of Death's Wail",
+   "cmc": 2,
+   "type": "Enchantment — Saga // Enchantment Creatu",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 115,
+   "price": "0.23",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Voldaren Bloodcaster // Bloodbat Summoner",
+   "cmc": 2,
+   "type": "Creature — Vampire Wizard // Creature — ",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 133,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Academy Manufactor",
+   "cmc": 3,
+   "type": "Artifact Creature — Assembly-Worker",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 192,
+   "price": "9.52",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ashnod's Altar",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 153,
+   "price": "15.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 117,
+   "price": "0.62",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "type": "Legendary Creature — Nightmare",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 147,
+   "price": "4.86",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 80,
+   "price": "1.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Camellia, the Seedmiser",
+   "cmc": 3,
+   "type": "Legendary Creature — Squirrel Warlock",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 212,
+   "price": "2.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Chatterfang, Squirrel General",
+   "cmc": 3,
+   "type": "Legendary Creature — Squirrel Warrior",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 173,
+   "price": "11.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 126,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Experimental Confectioner",
+   "cmc": 3,
+   "type": "Creature — Human Peasant",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 212,
+   "price": "8.22",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Greta, Sweettooth Scourge",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Warrior",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 198,
+   "price": "0.34",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Manglehorn",
+   "cmc": 3,
+   "type": "Creature — Beast",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 158,
+   "price": "1.04",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Peregrin Took",
+   "cmc": 3,
+   "type": "Legendary Creature — Halfling Citizen",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 208,
+   "price": "0.96",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Ruthless Knave",
+   "cmc": 3,
+   "type": "Creature — Orc Pirate",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 115,
+   "price": "0.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Savvy Hunter",
+   "cmc": 3,
+   "type": "Creature — Human Warrior",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 208,
+   "price": "0.18",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Skullport Merchant",
+   "cmc": 3,
+   "type": "Creature — Dwarf Citizen",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 121,
+   "price": "0.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "The Cabbage Merchant",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Citizen",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 129,
+   "price": "27.95",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "type": "Creature — Elf Scout",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 190,
+   "price": "3.98",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "cmc": 3,
+   "type": "Creature — Human Scout",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 145,
+   "price": "0.31",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Warren Soultrader",
+   "cmc": 3,
+   "type": "Creature — Zombie Goblin Wizard",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "ramp",
+   "score": 176,
+   "price": "18.71",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fade from History",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 159,
+   "price": "4.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "cmc": 4,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 108,
+   "price": "4.92",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mirkwood Bats",
+   "cmc": 4,
+   "type": "Creature — Bat",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 144,
+   "price": "1.97",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "ramp",
+   "score": 198,
+   "price": "0.84",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Pitiless Plunderer",
+   "cmc": 4,
+   "type": "Creature — Human Pirate",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 160,
+   "price": "4.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tyvar Kell",
+   "cmc": 4,
+   "type": "Legendary Planeswalker — Tyvar",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 121,
+   "price": "5.32",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo's Journal",
+   "cmc": 5,
+   "type": "Legendary Artifact — Book",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "tutor",
+   "score": 96,
+   "price": "3.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "type": "Creature — Elf Druid // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 80,
+   "price": "3.78",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "cmc": 6,
+   "type": "Sorcery",
+   "cats": [
+    "draw",
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 124,
+   "price": "7.39",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Turntimber Symbiosis // Turntimber, Serpentine Wood",
+   "cmc": 7,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 54,
+   "price": "3.93",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blooming Marsh",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Darkbore Pathway // Slitherbore Pathway",
+   "cmc": 0,
+   "type": "Land // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 97,
+   "price": "7.06",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Deathcap Glade",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "2.90",
+   "edhrec": false
+  },
+  {
+   "q": 10,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Wastes",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Midgar, City of Mako // Reactor Raid",
+   "cmc": 0,
+   "type": "Land — Town // Sorcery — Adventure",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "utility",
+   "score": 122,
+   "price": "2.12",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Necroblossom Snarl",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Nurturing Peatland",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.01",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "cmc": 0,
+   "type": "Land — Swamp Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "cmc": 0,
+   "type": "Land — Town",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "11.61",
+   "edhrec": false
+  },
+  {
+   "q": 10,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "29.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "29.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wastewood Verge",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "10.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Woodland Cemetery",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.07",
+   "edhrec": false
+  }
+ ]
+}

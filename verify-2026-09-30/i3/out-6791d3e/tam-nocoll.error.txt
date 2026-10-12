@@ -1,0 +1,5 @@
+Error: Tam, the Possibility is not legal as a commander in commander (status: not_legal)
+    at buildScoredCandidatePool (C:\Users\QuLeR\mtg-audit-wt\src\lib\deck-builder-ai.ts:630:17)
+    at autoBuildDeck (C:\Users\QuLeR\mtg-audit-wt\src\lib\deck-builder-ai.ts:1795:28)
+    at main (C:\Users\QuLeR\mtg-score-tmp\verify-2026-09-30\i3\build-all.ts:71:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

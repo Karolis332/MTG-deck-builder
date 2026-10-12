@@ -1,0 +1,600 @@
+{
+ "metrics": {
+  "label": "karn-brawl",
+  "strategy": "midrange",
+  "tribal": null,
+  "size": 99,
+  "lands": 38,
+  "nonland": 61,
+  "roleCounts": {
+   "win_condition": 8,
+   "synergy": 10,
+   "draw": 11,
+   "ramp": 12,
+   "removal": 11,
+   "tutor": 1,
+   "board_wipe": 3,
+   "protection": 3,
+   "land": 1,
+   "utility": 1
+  },
+  "walkers": 6,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": -1,
+  "planMargin": -1,
+  "sources": {
+   "W": 2,
+   "U": 2,
+   "B": 2,
+   "R": 2,
+   "G": 2
+  },
+  "ms": 1069
+ },
+ "margins": {
+  "win_condition": {
+   "picked": "Traxos, Scourge of Kroog",
+   "pickedScore": 150,
+   "bench": "Steel Hellkite",
+   "benchScore": 145,
+   "margin": -5
+  },
+  "synergy": {
+   "picked": "Karn, the Great Creator",
+   "pickedScore": 165,
+   "bench": "Manifold Key",
+   "benchScore": 162,
+   "margin": -2
+  },
+  "draw": {
+   "picked": "Contested Game Ball",
+   "pickedScore": 145,
+   "bench": "Tamiyo's Journal",
+   "benchScore": 145,
+   "margin": -1
+  },
+  "ramp": {
+   "picked": "Magnifying Glass",
+   "pickedScore": 148,
+   "bench": "Glaring Fleshraker",
+   "benchScore": 140,
+   "margin": -8
+  },
+  "removal": {
+   "picked": "Staff of Compleation",
+   "pickedScore": 125,
+   "bench": "The Ooze",
+   "benchScore": 117,
+   "margin": -7
+  },
+  "tutor": {
+   "picked": "Tezzeret, Cruel Captain",
+   "pickedScore": 142,
+   "bench": "Moonsilver Key",
+   "benchScore": 126,
+   "margin": -16
+  },
+  "protection": {
+   "picked": "Chimil, the Inner Sun",
+   "pickedScore": 128,
+   "bench": "Shadowspear",
+   "benchScore": 115,
+   "margin": -13
+  },
+  "land": {
+   "picked": "Treasure Map // Treasure Cove",
+   "pickedScore": 165,
+   "bench": "Primal Amulet // Primal Wellspring",
+   "benchScore": 120,
+   "margin": -46
+  },
+  "utility": {
+   "picked": "Forsaken Monument",
+   "pickedScore": 163,
+   "bench": "Echoes of Eternity",
+   "benchScore": 156,
+   "margin": -6
+  }
+ },
+ "planMargins": {
+  "win_condition": {
+   "picked": "Traxos, Scourge of Kroog",
+   "pickedScore": 150,
+   "bench": "Steel Hellkite",
+   "benchScore": 145,
+   "margin": -5
+  },
+  "synergy": {
+   "picked": "Karn, the Great Creator",
+   "pickedScore": 165,
+   "bench": "Manifold Key",
+   "benchScore": 162,
+   "margin": -2
+  },
+  "draw": {
+   "picked": "Contested Game Ball",
+   "pickedScore": 145,
+   "bench": "Tamiyo's Journal",
+   "benchScore": 145,
+   "margin": -1
+  },
+  "ramp": {
+   "picked": "Magnifying Glass",
+   "pickedScore": 148,
+   "bench": "Glaring Fleshraker",
+   "benchScore": 140,
+   "margin": -8
+  },
+  "removal": {
+   "picked": "Staff of Compleation",
+   "pickedScore": 125,
+   "bench": "The Ooze",
+   "benchScore": 117,
+   "margin": -7
+  },
+  "tutor": {
+   "picked": "Tezzeret, Cruel Captain",
+   "pickedScore": 142,
+   "bench": "Moonsilver Key",
+   "benchScore": 126,
+   "margin": -16
+  },
+  "protection": {
+   "picked": "Chimil, the Inner Sun",
+   "pickedScore": 128,
+   "bench": "Shadowspear",
+   "benchScore": 115,
+   "margin": -13
+  },
+  "land": {
+   "picked": "Treasure Map // Treasure Cove",
+   "pickedScore": 165,
+   "bench": "Primal Amulet // Primal Wellspring",
+   "benchScore": 120,
+   "margin": -46
+  },
+  "utility": {
+   "picked": "Forsaken Monument",
+   "pickedScore": 163,
+   "bench": "Echoes of Eternity",
+   "benchScore": 156,
+   "margin": -6
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Aetherflux Reservoir",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Blinkmoth Nexus",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Cavernous Maw",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Chimil, the Inner Sun",
+   "role": "protection",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Cityscape Leveler",
+   "role": "removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Cloud Key",
+   "role": "synergy",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Collector's Vault",
+   "role": "ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Contested Game Ball",
+   "role": "draw",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "role": "draw",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Diary of Dreams",
+   "role": "draw",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Dragon's Hoard",
+   "role": "ramp",
+   "score": 153
+  },
+  {
+   "q": 1,
+   "name": "Dreamstone Hedron",
+   "role": "ramp",
+   "score": 153
+  },
+  {
+   "q": 1,
+   "name": "Extinguisher Battleship",
+   "role": "board_wipe",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Faceless Haven",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forsaken Monument",
+   "role": "utility",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Foundry Inspector",
+   "role": "synergy",
+   "score": 195
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "Inkmoth Nexus",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Jhoira's Familiar",
+   "role": "win_condition",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "Karn, Living Legacy",
+   "role": "ramp",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Karn, Scion of Urza",
+   "role": "draw",
+   "score": 192
+  },
+  {
+   "q": 1,
+   "name": "Karn, the Great Creator",
+   "role": "synergy",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Kozilek's Command",
+   "role": "removal",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Krang, Utrom Warlord",
+   "role": "win_condition",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Liberator, Urza's Battlethopter",
+   "role": "synergy",
+   "score": 232
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "role": "protection",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Magnifying Glass",
+   "role": "ramp",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Metalwork Colossus",
+   "role": "win_condition",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Meteor Golem",
+   "role": "removal",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 210
+  },
+  {
+   "q": 1,
+   "name": "Mind's Eye",
+   "role": "draw",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Foundry",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mobilized District",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mutavault",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Myr Battlesphere",
+   "role": "win_condition",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Mystic Forge",
+   "role": "synergy",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Nettlecyst",
+   "role": "synergy",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Nexus of Becoming",
+   "role": "draw",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Null Elemental Blast",
+   "role": "removal",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Palladium Myr",
+   "role": "ramp",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "role": "board_wipe",
+   "score": 70
+  },
+  {
+   "q": 1,
+   "name": "Portal to Phyrexia",
+   "role": "removal",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrap Trawler",
+   "role": "synergy",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Sculpting Steel",
+   "role": "synergy",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Spell Satchel",
+   "role": "ramp",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Staff of Compleation",
+   "role": "removal",
+   "score": 125
+  },
+  {
+   "q": 1,
+   "name": "Staff of Domination",
+   "role": "draw",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Steel Overseer",
+   "role": "synergy",
+   "score": 183
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "role": "protection",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Technodrome",
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "role": "tutor",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "The Echoverse Fulcrum",
+   "role": "board_wipe",
+   "score": -12
+  },
+  {
+   "q": 1,
+   "name": "The Mightstone and Weakstone",
+   "role": "removal",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Threefold Thunderhulk",
+   "role": "win_condition",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "Tome of Legends",
+   "role": "draw",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Traxos, Scourge of Kroog",
+   "role": "win_condition",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Treasure Map // Treasure Cove",
+   "role": "land",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Triplicate Titan",
+   "role": "win_condition",
+   "score": 183
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "role": "ramp",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "Ugin, the Ineffable",
+   "role": "removal",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Unwinding Clock",
+   "role": "synergy",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "role": "draw",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Warping Wail",
+   "role": "removal",
+   "score": 163
+  },
+  {
+   "q": 28,
+   "name": "Wastes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Worn Powerstone",
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Wurmcoil Engine",
+   "role": "win_condition",
+   "score": 195
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "role": "removal",
+   "score": 130
+  }
+ ]
+}

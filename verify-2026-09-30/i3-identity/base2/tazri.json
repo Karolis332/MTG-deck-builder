@@ -1,0 +1,270 @@
+{
+ "file": "tazri.txt",
+ "format": "commander",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 32,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 89.4,
+    "weight": 20.61855670103093,
+    "reason": "36.8 effective lands vs 39.0; B has 11/24 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 94.4,
+    "weight": 10.309278350515465,
+    "reason": "2-drops 15/18; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 76.6,
+    "weight": 16.494845360824744,
+    "reason": "8.3/12.0 effective answers, 6/7.0 cheap; weakest coverage: creature."
+   },
+   {
+    "key": "advantage",
+    "score": 61.4,
+    "weight": 14.43298969072165,
+    "reason": "8.7/10.0 draw units by turn 6; 1 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 59.8,
+    "weight": 20.61855670103093,
+    "reason": "Token/Food conversion (7 bodies): closes T10, access 36% (u=0.66); shared bottleneck, protection access 38%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 14.7,
+    "weight": 17.52577319587629,
+    "reason": "38% supports typal; weakest dependency enabler 8/11; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 100,
+    "weight": 0,
+    "reason": "5/5 rule checks verified; none; cap none."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "5/5 rule checks verified; none; cap none."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (commander wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in commander"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BGRUW"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 31.8,
+    "reason": "quality cap 20+0.8*min(M,W,S)=31.8 from mana=89.4, win=59.8, synergy=14.7."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "52% of nonland copies are typed in the effect catalogue — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Tazri, Beacon of Unity",
+  "archetype": "midrange",
+  "tribalType": "Human",
+  "iss": 0,
+  "topSynergyPairs": [],
+  "curveScore": {
+   "score": 87,
+   "perBucket": {
+    "0": 0,
+    "1": 0,
+    "2": -1,
+    "3": 3,
+    "4": 0,
+    "5": -1,
+    "6": 0,
+    "7+": -1
+   },
+   "notes": [
+    "Too many 3-drops (19 vs target 16)"
+   ]
+  },
+  "winPlan": {
+   "route": "value_grind",
+   "description": "No sharp win condition detected — grind card/board advantage until a generic threat closes it out.",
+   "keyCards": {
+    "enablers": [
+     "Arcane Signet",
+     "Chromatic Lantern",
+     "Explore the Underdark",
+     "Fellwar Stone",
+     "Harper Recruiter",
+     "Imoen, Mystic Trickster",
+     "Kodama's Reach",
+     "Shadowheart, Dark Justiciar",
+     "Sol Ring",
+     "Spelunking",
+     "Spoils of Adventure",
+     "Stonework Packbeast",
+     "Undermountain Adventurer"
+    ],
+    "payoffs": [],
+    "protection": [
+     "Heroic Intervention",
+     "Seasoned Dungeoneer",
+     "Selfless Spirit",
+     "Squad Commander"
+    ],
+    "tutors": [
+     "Coveted Prize"
+    ]
+   },
+   "missingPieces": [],
+   "cardRoles": {
+    "Acererak the Archlich": "off_plan",
+    "Arcane Signet": "enabler",
+    "Archpriest of Iona": "off_plan",
+    "Bar the Gate": "off_plan",
+    "Blasphemous Act": "off_plan",
+    "Burakos, Party Leader": "off_plan",
+    "Changeling Outcast": "off_plan",
+    "Chromatic Lantern": "enabler",
+    "Concerted Defense": "off_plan",
+    "Coveted Prize": "tutor_for_plan",
+    "Durnan of the Yawning Portal": "off_plan",
+    "Explore the Underdark": "enabler",
+    "Farseek": "off_plan",
+    "Fellwar Stone": "enabler",
+    "Feywild Caretaker": "off_plan",
+    "Hama Pashar, Ruin Seeker": "off_plan",
+    "Harper Recruiter": "enabler",
+    "Heroic Intervention": "protection",
+    "Imoen, Mystic Trickster": "enabler",
+    "Karlach, Fury of Avernus": "off_plan",
+    "Kodama's Reach": "enabler",
+    "Linvala, Shield of Sea Gate": "off_plan",
+    "Lotho, Corrupt Shirriff": "off_plan",
+    "Mardu Siegebreaker": "off_plan",
+    "Masked Vandal": "off_plan",
+    "Midnight Pathlighter": "off_plan",
+    "Mirror Entity": "off_plan",
+    "Multiclass Baldric": "off_plan",
+    "Mutable Explorer": "off_plan",
+    "Nadaar, Selfless Paladin": "off_plan",
+    "Najeela, the Blade-Blossom": "off_plan",
+    "Nalia de'Arnise": "off_plan",
+    "Nature's Lore": "off_plan",
+    "Nimble Trapfinder": "off_plan",
+    "Outlaws' Merriment": "off_plan",
+    "Ravenloft Adventurer": "off_plan",
+    "Rilsa Rael, Kingpin": "off_plan",
+    "Safana, Calimport Cutthroat": "off_plan",
+    "Seasoned Dungeoneer": "protection",
+    "Sefris of the Hidden Ways": "off_plan",
+    "Selfless Spirit": "protection",
+    "Shadowheart, Dark Justiciar": "enabler",
+    "Sol Ring": "enabler",
+    "Solemn Doomguide": "off_plan",
+    "Spelunking": "enabler",
+    "Spoils of Adventure": "enabler",
+    "Squad Commander": "protection",
+    "Stick Together": "off_plan",
+    "Stonework Packbeast": "enabler",
+    "Swords to Plowshares": "off_plan",
+    "Tajuru Paragon": "off_plan",
+    "The Destined Warrior": "off_plan",
+    "The Destined White Mage": "off_plan",
+    "Thwart the Grave": "off_plan",
+    "Triumphant Adventurer": "off_plan",
+    "Undermountain Adventurer": "enabler",
+    "Unsettled Mariner": "off_plan",
+    "Varis, Silverymoon Ranger": "off_plan",
+    "Vizier of the Menagerie": "off_plan",
+    "White Plume Adventurer": "off_plan",
+    "You Find a Cursed Idol": "off_plan",
+    "Yuan-Ti Malison": "off_plan",
+    "Zagras, Thief of Heartbeats": "off_plan"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "ramp that lands before turn 4 — the commander is expensive and needs the mana ready",
+   "a value grind plan piece (e.g. Arcane Signet or Chromatic Lantern)"
+  ],
+  "gameChangers": {
+   "count": 0,
+   "names": []
+  },
+  "categories": {
+   "utility": 28,
+   "ramp": 13,
+   "land": 36,
+   "board_wipe": 1,
+   "tutor": 1,
+   "win_condition": 7,
+   "draw": 7,
+   "protection": 3,
+   "removal": 3
+  },
+  "stats": {
+   "totalCards": 99,
+   "landCount": 36,
+   "avgCmc": 3.22
+  }
+ }
+}

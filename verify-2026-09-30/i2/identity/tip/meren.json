@@ -1,0 +1,2309 @@
+{
+ "file": "meren.txt",
+ "format": "commander",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 19,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 97.5,
+    "weight": 20.61855670103093,
+    "reason": "36.4 effective lands vs 37.4; B has 29/41 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 95.6,
+    "weight": 10.309278350515465,
+    "reason": "3-drops 18/15; 100% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 95,
+    "weight": 16.494845360824744,
+    "reason": "12.3/12.0 effective answers, 7/7.0 cheap; weakest coverage: stack."
+   },
+   {
+    "key": "advantage",
+    "score": 81.8,
+    "weight": 14.43298969072165,
+    "reason": "26.4/10.0 draw units by turn 6; 4 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 68.7,
+    "weight": 20.61855670103093,
+    "reason": "Control inevitability (16 finishers): closes T8, access 94% (u=0.76); shared bottleneck, protection access 37%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 92.8,
+    "weight": 17.52577319587629,
+    "reason": "73% supports aristocrats; weakest dependency fodder 15/16; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 0,
+    "weight": 0,
+    "reason": "4/5 rule checks verified; size; cap 19."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "fail",
+    "cap": null,
+    "reason": "4/5 rule checks verified; size; cap 19."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "fail",
+    "cap": 19,
+    "reason": "Commander decks require exactly 100 cards (currently 101)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in commander"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BG"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 75,
+    "reason": "quality cap 20+0.8*min(M,W,S)=75.0 from mana=97.5, win=68.7, synergy=92.8."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "89% of nonland copies are typed in the effect catalogue; unknown prerequisite \"creature death or mill\" — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Meren of Clan Nel Toth",
+  "archetype": "aristocrats",
+  "tribalType": "Human",
+  "iss": 45,
+  "topSynergyPairs": [
+   {
+    "a": "Cauldron of Essence",
+    "b": "Saw in Half",
+    "weight": 8,
+    "reasons": [
+     "Cauldron of Essence consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder",
+     "Cauldron of Essence consumes creature_death ← Saw in Half produces creature_death"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Woe Strider",
+    "weight": 8,
+    "reasons": [
+     "Cauldron of Essence consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder",
+     "Cauldron of Essence consumes creature_death ← Woe Strider produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Cauldron of Essence",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Carrion Feeder produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Liliana, Dreadhorde General",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Liliana, Dreadhorde General produces sacrifice_fodder",
+     "Liliana, Dreadhorde General consumes creature_death ← Carrion Feeder produces creature_death"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Saw in Half",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Carrion Feeder",
+    "b": "Woe Strider",
+    "weight": 4,
+    "reasons": [
+     "Carrion Feeder consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Chthonian Nightmare",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Chthonian Nightmare produces creature_death"
+    ]
+   },
+   {
+    "a": "Cauldron of Essence",
+    "b": "Infernal Grasp",
+    "weight": 4,
+    "reasons": [
+     "Cauldron of Essence consumes creature_death ← Infernal Grasp produces creature_death"
+    ]
+   }
+  ],
+  "curveScore": {
+   "score": 83,
+   "perBucket": {
+    "0": 0,
+    "1": -1,
+    "2": 1,
+    "3": 3,
+    "4": -2,
+    "5": -1,
+    "6": 0,
+    "7+": 0
+   },
+   "notes": [
+    "Too many 3-drops (18 vs target 15)",
+    "Missing 4-drops (8 vs target 10)"
+   ]
+  },
+  "winPlan": {
+   "route": "drain",
+   "description": "Aristocrats value engine — creatures die, opponents lose life or you gain resources.",
+   "keyCards": {
+    "enablers": [
+     "Braids, Arisen Nightmare",
+     "Carrion Feeder",
+     "Cauldron of Essence",
+     "Chthonian Nightmare",
+     "Infernal Grasp",
+     "Jarad, Golgari Lich Lord",
+     "Priest of Forgotten Gods",
+     "Ravenous Chupacabra",
+     "Saw in Half",
+     "The Gitrog, Ravenous Ride",
+     "Victimize",
+     "Village Rites",
+     "Viscera Seer",
+     "Wight of the Reliquary",
+     "Woe Strider",
+     "Yahenni, Undying Partisan"
+    ],
+    "payoffs": [
+     "Blood Artist",
+     "Butcher of Malakir",
+     "Cauldron of Essence",
+     "Grim Haruspex",
+     "Liliana, Dreadhorde General",
+     "Midnight Reaper",
+     "Moldervine Reclamation",
+     "Morbid Opportunist",
+     "Syr Konrad, the Grim",
+     "Zulaport Cutthroat"
+    ],
+    "protection": [
+     "Lightning Greaves",
+     "Veil of Summer",
+     "Yahenni, Undying Partisan"
+    ],
+    "tutors": [
+     "Buried Alive",
+     "Emeritus of Woe // Demonic Tutor",
+     "Grim Servant",
+     "Rune-Scarred Demon"
+    ]
+   },
+   "missingPieces": [
+    "Triskelion"
+   ],
+   "cardRoles": {
+    "Accursed Marauder": "off_plan",
+    "Arcane Signet": "off_plan",
+    "Assassin's Trophy": "off_plan",
+    "Basking Broodscale": "off_plan",
+    "Blood Artist": "payoff",
+    "Bloodghast": "off_plan",
+    "Braids, Arisen Nightmare": "enabler",
+    "Braids, Cabal Minion": "off_plan",
+    "Buried Alive": "tutor_for_plan",
+    "Butcher of Malakir": "payoff",
+    "Carrion Feeder": "enabler",
+    "Cauldron of Essence": "enabler",
+    "Chthonian Nightmare": "enabler",
+    "Creakwood Liege": "off_plan",
+    "Culling Ritual": "off_plan",
+    "Deadly Dispute": "off_plan",
+    "Elvish Mystic": "off_plan",
+    "Emeritus of Woe // Demonic Tutor": "tutor_for_plan",
+    "Eternal Witness": "off_plan",
+    "Golgari Charm": "off_plan",
+    "Grave Researcher // Reanimate": "off_plan",
+    "Gray Merchant of Asphodel": "off_plan",
+    "Grim Haruspex": "payoff",
+    "Grim Servant": "tutor_for_plan",
+    "Haywire Mite": "off_plan",
+    "Infernal Grasp": "enabler",
+    "Jadar, Ghoulcaller of Nephalia": "off_plan",
+    "Jarad, Golgari Lich Lord": "enabler",
+    "Junji, the Midnight Sky": "off_plan",
+    "Lightning Greaves": "protection",
+    "Liliana, Dreadhorde General": "payoff",
+    "Llanowar Elves": "off_plan",
+    "Long Feng, Grand Secretariat": "off_plan",
+    "Massacre Wurm": "off_plan",
+    "Mazirek, Kraul Death Priest": "off_plan",
+    "Midnight Reaper": "payoff",
+    "Mikaeus, the Unhallowed": "off_plan",
+    "Moldervine Reclamation": "payoff",
+    "Morbid Opportunist": "payoff",
+    "Ophiomancer": "off_plan",
+    "Plaguecrafter": "off_plan",
+    "Priest of Forgotten Gods": "enabler",
+    "Ramunap Excavator": "off_plan",
+    "Ravenous Chupacabra": "enabler",
+    "Reanimate": "off_plan",
+    "Rune-Scarred Demon": "tutor_for_plan",
+    "Sakura-Tribe Elder": "off_plan",
+    "Saw in Half": "enabler",
+    "Sol Ring": "off_plan",
+    "Solemn Simulacrum": "off_plan",
+    "Springbloom Druid": "off_plan",
+    "Sylvan Library": "off_plan",
+    "Syr Konrad, the Grim": "payoff",
+    "Talisman of Resilience": "off_plan",
+    "The Gitrog, Ravenous Ride": "enabler",
+    "Toxic Deluge": "off_plan",
+    "Veil of Summer": "protection",
+    "Victimize": "enabler",
+    "Village Rites": "enabler",
+    "Viscera Seer": "enabler",
+    "Wight of the Reliquary": "enabler",
+    "Woe Strider": "enabler",
+    "Yahenni, Undying Partisan": "enabler",
+    "Zulaport Cutthroat": "payoff"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "a play on turn 2 or 3, or ramp if not",
+   "a drain plan piece (e.g. Braids, Arisen Nightmare or Carrion Feeder or Blood Artist)"
+  ],
+  "gameChangers": {
+   "count": 1,
+   "names": [
+    "Braids, Cabal Minion"
+   ]
+  },
+  "categories": {
+   "utility": 17,
+   "ramp": 13,
+   "removal": 8,
+   "land": 36,
+   "draw": 9,
+   "tutor": 4,
+   "win_condition": 8,
+   "board_wipe": 3,
+   "protection": 2
+  },
+  "stats": {
+   "totalCards": 100,
+   "landCount": 36,
+   "avgCmc": 3.02
+  }
+ },
+ "optimize": {
+  "format": "commander",
+  "deckName": null,
+  "commander": "Meren of Clan Nel Toth",
+  "partner": null,
+  "stats": {
+   "totalCards": 101,
+   "landCount": 35,
+   "avgCmc": 2.98,
+   "colors": [
+    "B",
+    "G"
+   ]
+  },
+  "score": 89,
+  "health": [
+   {
+    "category": "land",
+    "label": "Lands",
+    "current": 35,
+    "target": {
+     "min": 35,
+     "max": 37,
+     "target": 36
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "ramp",
+    "label": "Ramp",
+    "current": 11,
+    "target": {
+     "min": 10,
+     "max": 13,
+     "target": 12
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "draw",
+    "label": "Card Draw",
+    "current": 10,
+    "target": {
+     "min": 8,
+     "max": 12,
+     "target": 10
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "removal",
+    "label": "Removal",
+    "current": 9,
+    "target": {
+     "min": 6,
+     "max": 12,
+     "target": 9
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "board_wipe",
+    "label": "Board Wipes",
+    "current": 2,
+    "target": {
+     "min": 2,
+     "max": 4,
+     "target": 3
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "protection",
+    "label": "Protection",
+    "current": 2,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 4
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "synergy",
+    "label": "Commander Synergy",
+    "current": 9,
+    "target": {
+     "min": 8,
+     "max": 12,
+     "target": 10
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "win_condition",
+    "label": "Win Conditions",
+    "current": 8,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 5
+    },
+    "status": "high",
+    "color": "text-yellow-400"
+   }
+  ],
+  "curve": {
+   "1": 9,
+   "2": 18,
+   "3": 18,
+   "4": 8,
+   "5": 6,
+   "6": 3,
+   "7": 2
+  },
+  "notes": [
+   "Add 1 more protection (currently 2, minimum 3)",
+   "Consider cutting 2 win conditions (currently 8, maximum 6)"
+  ],
+  "mana": {
+   "demand": {
+    "W": 0,
+    "U": 0,
+    "B": 64,
+    "R": 0,
+    "G": 20
+   },
+   "sources": {
+    "B": 27,
+    "G": 21
+   },
+   "warnings": []
+  },
+  "landTarget": {
+   "current": 35,
+   "effective": 35.4,
+   "recommended": 37,
+   "mdfcLandBacks": 1,
+   "cheapSpells": 12,
+   "formula": "31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck)"
+  },
+  "legality": [],
+  "cuts": [
+   {
+    "name": "Gray Merchant of Asphodel",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 5,
+    "score": 6,
+    "hard": false,
+    "reasons": [
+     "Win Conditions over quota (8/6) — weakest win conditions slot",
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Junji, the Midnight Sky",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 5,
+    "score": 6,
+    "hard": false,
+    "reasons": [
+     "Win Conditions over quota (8/6) — weakest win conditions slot",
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Mazirek, Kraul Death Priest",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 5,
+    "score": 6,
+    "hard": false,
+    "reasons": [
+     "Win Conditions over quota (8/6) — weakest win conditions slot",
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Buried Alive",
+    "quantity": 1,
+    "category": "tutor",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Grave Researcher // Reanimate",
+    "quantity": 1,
+    "category": "synergy",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Ramunap Excavator",
+    "quantity": 1,
+    "category": "synergy",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Rune-Scarred Demon",
+    "quantity": 1,
+    "category": "tutor",
+    "cmc": 7,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Mikaeus, the Unhallowed",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 6,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "Win Conditions over quota (8/6) — weakest win conditions slot"
+    ],
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "adds": [
+   {
+    "name": "Spore Frog",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Frog",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/d/6d42fd52-34ea-4d1b-80dc-58fb0593bb5b.jpg?1783933092",
+    "reason": "In 74% of Meren of Clan Nel Toth decks",
+    "score": 96.38188
+   },
+   {
+    "name": "Skullclamp",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Artifact — Equipment",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/5/b5bb89dd-9d31-49d9-ba54-4a04798e515e.jpg?1743206083",
+    "reason": "In 60% of Meren of Clan Nel Toth decks",
+    "score": 86.79327
+   },
+   {
+    "name": "Overgrown Tomb",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/5/45b92924-baa1-4c9b-9932-9a5eda8f3446.jpg?1759144847",
+    "reason": "Deck runs 35 lands; the curve wants ~37 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck))",
+    "score": 83.70967999999999
+   },
+   {
+    "name": "Protean Hulk",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Creature — Beast",
+    "cmc": 7,
+    "mana_cost": "{5}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/69bf0bb7-3076-4dbf-a72e-4d91560be2fe.jpg?1783913300",
+    "reason": "In 45% of Meren of Clan Nel Toth decks",
+    "score": 82.03112
+   },
+   {
+    "name": "Ashnod's Altar",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "mana_cost": "{3}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/f/0f2d0ee5-3173-4a03-be45-2fe9ea49cdc3.jpg?1674091784",
+    "reason": "In 47% of Meren of Clan Nel Toth decks",
+    "score": 81.76052
+   },
+   {
+    "name": "Tainted Wood",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/d/3da7ab6b-b10a-4786-b1eb-92de7e66690e.jpg?1783909564",
+    "reason": "Deck runs 35 lands; the curve wants ~37 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck))",
+    "score": 81.42145000000001
+   },
+   {
+    "name": "Cankerbloom",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Phyrexian Fungus",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/89b39293-6f57-4294-85fc-c718bdbb4d40.jpg?1783918019",
+    "reason": "In 43% of Meren of Clan Nel Toth decks",
+    "score": 79.546
+   },
+   {
+    "name": "Fleshbag Marauder",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Zombie Warrior",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/c/fce2baa4-2976-4bbd-b6c5-a5a3c6a901be.jpg?1783912547",
+    "reason": "In 42% of Meren of Clan Nel Toth decks",
+    "score": 79.36087
+   },
+   {
+    "name": "Entomb",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/c/3caa9c55-5e3b-436b-84a9-b7ccebf63799.jpg?1783918480",
+    "reason": "In 41% of Meren of Clan Nel Toth decks",
+    "score": 79.30274999999999
+   },
+   {
+    "name": "Phyrexian Tower",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/b/0b47f6d2-9f65-47a4-bfc4-15619befe53d.jpg?1783911207",
+    "reason": "Deck runs 35 lands; the curve wants ~37 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck))",
+    "score": 78.8609
+   },
+   {
+    "name": "Reclamation Sage",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Elf Shaman",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/9/1918ea65-ab7f-4d40-97fd-a656c892a2a1.jpg?1783909055",
+    "reason": "In 40% of Meren of Clan Nel Toth decks",
+    "score": 77.81154000000001
+   },
+   {
+    "name": "Undergrowth Stadium",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/e/ae16c7da-912c-4d66-b1e7-17480cd3af99.jpg?1690000048",
+    "reason": "Deck runs 35 lands; the curve wants ~37 (31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck))",
+    "score": 77.70817000000001
+   }
+  ],
+  "swaps": [
+   {
+    "cut": "Gray Merchant of Asphodel",
+    "add": "Spore Frog",
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Junji, the Midnight Sky",
+    "add": "Skullclamp",
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Mazirek, Kraul Death Priest",
+    "add": "Protean Hulk",
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Buried Alive",
+    "add": "Entomb",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Grave Researcher // Reanimate",
+    "add": "Ashnod's Altar",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Ramunap Excavator",
+    "add": "Cankerbloom",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Rune-Scarred Demon",
+    "add": "Fleshbag Marauder",
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Mikaeus, the Unhallowed",
+    "add": "Reclamation Sage",
+    "reason": "Win Conditions over quota (8/6) — weakest win conditions slot; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "lockedFromCuts": [],
+  "afterSize": 101,
+  "sizeChanged": false,
+  "gate": {
+   "verdict": "fail",
+   "format": "commander",
+   "commander": "Meren of Clan Nel Toth",
+   "totals": {
+    "cards": 101,
+    "lands": 35,
+    "effectiveLands": 35.4,
+    "nonland": 65,
+    "avgMv": 2.74
+   },
+   "curve": {
+    "1": 13,
+    "2": 19,
+    "3": 18,
+    "4": 8,
+    "5": 3,
+    "6": 2,
+    "7": 2
+   },
+   "plan": {
+    "condition": {
+     "threshold": null,
+     "requires": null,
+     "tribalType": null,
+     "nouns": [
+      "creature you control dies",
+      "sacrifice a creature"
+     ],
+     "description": "commander wants: general value"
+    },
+    "nonland": 65,
+    "interacting": 15,
+    "ratio": 0.23076923076923078,
+    "enablers": 0,
+    "enablerRatio": 0,
+    "nonInteracting": [
+     {
+      "name": "Elvish Mystic",
+      "cmc": 1
+     },
+     {
+      "name": "Entomb",
+      "cmc": 1
+     },
+     {
+      "name": "Haywire Mite",
+      "cmc": 1
+     },
+     {
+      "name": "Llanowar Elves",
+      "cmc": 1
+     },
+     {
+      "name": "Reanimate",
+      "cmc": 1
+     },
+     {
+      "name": "Revitalizing Repast",
+      "cmc": 1
+     },
+     {
+      "name": "Skullclamp",
+      "cmc": 1
+     },
+     {
+      "name": "Sol Ring",
+      "cmc": 1
+     },
+     {
+      "name": "Spore Frog",
+      "cmc": 1
+     },
+     {
+      "name": "Veil of Summer",
+      "cmc": 1
+     },
+     {
+      "name": "Accursed Marauder",
+      "cmc": 2
+     },
+     {
+      "name": "Arcane Signet",
+      "cmc": 2
+     },
+     {
+      "name": "Assassin's Trophy",
+      "cmc": 2
+     },
+     {
+      "name": "Basking Broodscale",
+      "cmc": 2
+     },
+     {
+      "name": "Blood Artist",
+      "cmc": 2
+     },
+     {
+      "name": "Bloodghast",
+      "cmc": 2
+     },
+     {
+      "name": "Cankerbloom",
+      "cmc": 2
+     },
+     {
+      "name": "Deadly Dispute",
+      "cmc": 2
+     },
+     {
+      "name": "Golgari Charm",
+      "cmc": 2
+     },
+     {
+      "name": "Infernal Grasp",
+      "cmc": 2
+     },
+     {
+      "name": "Jadar, Ghoulcaller of Nephalia",
+      "cmc": 2
+     },
+     {
+      "name": "Lightning Greaves",
+      "cmc": 2
+     },
+     {
+      "name": "Sakura-Tribe Elder",
+      "cmc": 2
+     },
+     {
+      "name": "Sylvan Library",
+      "cmc": 2
+     },
+     {
+      "name": "Talisman of Resilience",
+      "cmc": 2
+     },
+     {
+      "name": "Wight of the Reliquary",
+      "cmc": 2
+     },
+     {
+      "name": "Braids, Arisen Nightmare",
+      "cmc": 3
+     },
+     {
+      "name": "Eternal Witness",
+      "cmc": 3
+     },
+     {
+      "name": "Fleshbag Marauder",
+      "cmc": 3
+     },
+     {
+      "name": "Long Feng, Grand Secretariat",
+      "cmc": 3
+     },
+     {
+      "name": "Morbid Opportunist",
+      "cmc": 3
+     },
+     {
+      "name": "Ophiomancer",
+      "cmc": 3
+     },
+     {
+      "name": "Plaguecrafter",
+      "cmc": 3
+     },
+     {
+      "name": "Reclamation Sage",
+      "cmc": 3
+     },
+     {
+      "name": "Saw in Half",
+      "cmc": 3
+     },
+     {
+      "name": "Springbloom Druid",
+      "cmc": 3
+     },
+     {
+      "name": "Toxic Deluge",
+      "cmc": 3
+     },
+     {
+      "name": "Woe Strider",
+      "cmc": 3
+     },
+     {
+      "name": "Yahenni, Undying Partisan",
+      "cmc": 3
+     },
+     {
+      "name": "Braids, Cabal Minion",
+      "cmc": 4
+     },
+     {
+      "name": "Creakwood Liege",
+      "cmc": 4
+     },
+     {
+      "name": "Culling Ritual",
+      "cmc": 4
+     },
+     {
+      "name": "Emeritus of Woe",
+      "cmc": 4
+     },
+     {
+      "name": "Grim Servant",
+      "cmc": 4
+     },
+     {
+      "name": "Jarad, Golgari Lich Lord",
+      "cmc": 4
+     },
+     {
+      "name": "Ravenous Chupacabra",
+      "cmc": 4
+     },
+     {
+      "name": "Solemn Simulacrum",
+      "cmc": 4
+     },
+     {
+      "name": "Syr Konrad, the Grim",
+      "cmc": 5
+     },
+     {
+      "name": "Massacre Wurm",
+      "cmc": 6
+     },
+     {
+      "name": "Protean Hulk",
+      "cmc": 7
+     }
+    ]
+   },
+   "unresolved": [],
+   "checks": [
+    {
+     "id": "size",
+     "status": "fail",
+     "detail": "Commander decks require exactly 100 cards (currently 101)"
+    },
+    {
+     "id": "singleton",
+     "status": "pass",
+     "detail": "singleton respected (basics exempt)"
+    },
+    {
+     "id": "legality",
+     "status": "pass",
+     "detail": "every card legal in commander"
+    },
+    {
+     "id": "rules",
+     "status": "pass",
+     "detail": "no other format rule broken"
+    },
+    {
+     "id": "identity",
+     "status": "pass",
+     "detail": "all cards inside BG"
+    },
+    {
+     "id": "ownership",
+     "status": "skip",
+     "detail": "no ownerId and no ownedCards — nothing to check the list against"
+    },
+    {
+     "id": "arenaNames",
+     "status": "warn",
+     "detail": "2 card(s) must be exported front-face only:",
+     "cards": [
+      "1 Emeritus of Woe",
+      "1 Revitalizing Repast"
+     ]
+    },
+    {
+     "id": "lands",
+     "status": "pass",
+     "detail": "35 lands (+1 MDFC land backs = 35.4 effective); Karsten wants 36 ±2"
+    },
+    {
+     "id": "plan",
+     "status": "fail",
+     "detail": "15/65 nonland cards interact (23%) — commander wants: general value",
+     "cards": [
+      "Elvish Mystic (MV 1)",
+      "Entomb (MV 1)",
+      "Haywire Mite (MV 1)",
+      "Llanowar Elves (MV 1)",
+      "Reanimate (MV 1)",
+      "Revitalizing Repast (MV 1)",
+      "Skullclamp (MV 1)",
+      "Sol Ring (MV 1)",
+      "Spore Frog (MV 1)",
+      "Veil of Summer (MV 1)",
+      "Accursed Marauder (MV 2)",
+      "Arcane Signet (MV 2)",
+      "Assassin's Trophy (MV 2)",
+      "Basking Broodscale (MV 2)",
+      "Blood Artist (MV 2)",
+      "Bloodghast (MV 2)",
+      "Cankerbloom (MV 2)",
+      "Deadly Dispute (MV 2)",
+      "Golgari Charm (MV 2)",
+      "Infernal Grasp (MV 2)",
+      "Jadar, Ghoulcaller of Nephalia (MV 2)",
+      "Lightning Greaves (MV 2)",
+      "Sakura-Tribe Elder (MV 2)",
+      "Sylvan Library (MV 2)",
+      "Talisman of Resilience (MV 2)",
+      "Wight of the Reliquary (MV 2)",
+      "Braids, Arisen Nightmare (MV 3)",
+      "Eternal Witness (MV 3)",
+      "Fleshbag Marauder (MV 3)",
+      "Long Feng, Grand Secretariat (MV 3)",
+      "Morbid Opportunist (MV 3)",
+      "Ophiomancer (MV 3)",
+      "Plaguecrafter (MV 3)",
+      "Reclamation Sage (MV 3)",
+      "Saw in Half (MV 3)",
+      "Springbloom Druid (MV 3)",
+      "Toxic Deluge (MV 3)",
+      "Woe Strider (MV 3)",
+      "Yahenni, Undying Partisan (MV 3)",
+      "Braids, Cabal Minion (MV 4)",
+      "Creakwood Liege (MV 4)",
+      "Culling Ritual (MV 4)",
+      "Emeritus of Woe (MV 4)",
+      "Grim Servant (MV 4)",
+      "Jarad, Golgari Lich Lord (MV 4)",
+      "Ravenous Chupacabra (MV 4)",
+      "Solemn Simulacrum (MV 4)",
+      "Syr Konrad, the Grim (MV 5)",
+      "Massacre Wurm (MV 6)",
+      "Protean Hulk (MV 7)"
+     ]
+    },
+    {
+     "id": "curve",
+     "status": "pass",
+     "detail": "avg MV 2.74; commander sets no cost threshold"
+    },
+    {
+     "id": "wincons",
+     "status": "pass",
+     "detail": "10 win condition(s)/closer(s)",
+     "cards": [
+      "Butcher of Malakir",
+      "Cauldron of Essence",
+      "Grim Servant",
+      "Jarad, Golgari Lich Lord",
+      "Liliana, Dreadhorde General",
+      "Massacre Wurm",
+      "Syr Konrad, the Grim",
+      "The Gitrog, Ravenous Ride",
+      "Zulaport Cutthroat",
+      "Protean Hulk"
+     ]
+    },
+    {
+     "id": "locks",
+     "status": "pass",
+     "detail": "1 locked card(s) present and intact",
+     "cards": [
+      "Fabled Passage"
+     ]
+    }
+   ]
+  },
+  "analysis": {
+   "commander": "Meren of Clan Nel Toth",
+   "archetype": "aristocrats",
+   "tribalType": "Human",
+   "iss": 45,
+   "topSynergyPairs": [
+    {
+     "a": "Cauldron of Essence",
+     "b": "Saw in Half",
+     "weight": 8,
+     "reasons": [
+      "Cauldron of Essence consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder",
+      "Cauldron of Essence consumes creature_death ← Saw in Half produces creature_death"
+     ]
+    },
+    {
+     "a": "Cauldron of Essence",
+     "b": "Woe Strider",
+     "weight": 8,
+     "reasons": [
+      "Cauldron of Essence consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder",
+      "Cauldron of Essence consumes creature_death ← Woe Strider produces creature_death"
+     ]
+    },
+    {
+     "a": "Carrion Feeder",
+     "b": "Cauldron of Essence",
+     "weight": 4,
+     "reasons": [
+      "Cauldron of Essence consumes creature_death ← Carrion Feeder produces creature_death"
+     ]
+    },
+    {
+     "a": "Carrion Feeder",
+     "b": "Liliana, Dreadhorde General",
+     "weight": 4,
+     "reasons": [
+      "Carrion Feeder consumes sacrifice_fodder ← Liliana, Dreadhorde General produces sacrifice_fodder",
+      "Liliana, Dreadhorde General consumes creature_death ← Carrion Feeder produces creature_death"
+     ]
+    },
+    {
+     "a": "Carrion Feeder",
+     "b": "Saw in Half",
+     "weight": 4,
+     "reasons": [
+      "Carrion Feeder consumes sacrifice_fodder ← Saw in Half produces sacrifice_fodder"
+     ]
+    },
+    {
+     "a": "Carrion Feeder",
+     "b": "Woe Strider",
+     "weight": 4,
+     "reasons": [
+      "Carrion Feeder consumes sacrifice_fodder ← Woe Strider produces sacrifice_fodder"
+     ]
+    },
+    {
+     "a": "Cauldron of Essence",
+     "b": "Chthonian Nightmare",
+     "weight": 4,
+     "reasons": [
+      "Cauldron of Essence consumes creature_death ← Chthonian Nightmare produces creature_death"
+     ]
+    },
+    {
+     "a": "Cauldron of Essence",
+     "b": "Infernal Grasp",
+     "weight": 4,
+     "reasons": [
+      "Cauldron of Essence consumes creature_death ← Infernal Grasp produces creature_death"
+     ]
+    }
+   ],
+   "curveScore": {
+    "score": 83,
+    "perBucket": {
+     "0": 0,
+     "1": -1,
+     "2": 1,
+     "3": 3,
+     "4": -2,
+     "5": -1,
+     "6": 0,
+     "7+": 0
+    },
+    "notes": [
+     "Too many 3-drops (18 vs target 15)",
+     "Missing 4-drops (8 vs target 10)"
+    ]
+   },
+   "winPlan": {
+    "route": "drain",
+    "description": "Aristocrats value engine — creatures die, opponents lose life or you gain resources.",
+    "keyCards": {
+     "enablers": [
+      "Braids, Arisen Nightmare",
+      "Carrion Feeder",
+      "Cauldron of Essence",
+      "Chthonian Nightmare",
+      "Infernal Grasp",
+      "Jarad, Golgari Lich Lord",
+      "Priest of Forgotten Gods",
+      "Ravenous Chupacabra",
+      "Saw in Half",
+      "The Gitrog, Ravenous Ride",
+      "Victimize",
+      "Village Rites",
+      "Viscera Seer",
+      "Wight of the Reliquary",
+      "Woe Strider",
+      "Yahenni, Undying Partisan"
+     ],
+     "payoffs": [
+      "Blood Artist",
+      "Butcher of Malakir",
+      "Cauldron of Essence",
+      "Grim Haruspex",
+      "Liliana, Dreadhorde General",
+      "Midnight Reaper",
+      "Moldervine Reclamation",
+      "Morbid Opportunist",
+      "Syr Konrad, the Grim",
+      "Zulaport Cutthroat"
+     ],
+     "protection": [
+      "Lightning Greaves",
+      "Veil of Summer",
+      "Yahenni, Undying Partisan"
+     ],
+     "tutors": [
+      "Buried Alive",
+      "Emeritus of Woe // Demonic Tutor",
+      "Grim Servant",
+      "Rune-Scarred Demon"
+     ]
+    },
+    "missingPieces": [
+     "Triskelion"
+    ],
+    "cardRoles": {
+     "Accursed Marauder": "off_plan",
+     "Arcane Signet": "off_plan",
+     "Assassin's Trophy": "off_plan",
+     "Basking Broodscale": "off_plan",
+     "Blood Artist": "payoff",
+     "Bloodghast": "off_plan",
+     "Braids, Arisen Nightmare": "enabler",
+     "Braids, Cabal Minion": "off_plan",
+     "Buried Alive": "tutor_for_plan",
+     "Butcher of Malakir": "payoff",
+     "Carrion Feeder": "enabler",
+     "Cauldron of Essence": "enabler",
+     "Chthonian Nightmare": "enabler",
+     "Creakwood Liege": "off_plan",
+     "Culling Ritual": "off_plan",
+     "Deadly Dispute": "off_plan",
+     "Elvish Mystic": "off_plan",
+     "Emeritus of Woe // Demonic Tutor": "tutor_for_plan",
+     "Eternal Witness": "off_plan",
+     "Golgari Charm": "off_plan",
+     "Grave Researcher // Reanimate": "off_plan",
+     "Gray Merchant of Asphodel": "off_plan",
+     "Grim Haruspex": "payoff",
+     "Grim Servant": "tutor_for_plan",
+     "Haywire Mite": "off_plan",
+     "Infernal Grasp": "enabler",
+     "Jadar, Ghoulcaller of Nephalia": "off_plan",
+     "Jarad, Golgari Lich Lord": "enabler",
+     "Junji, the Midnight Sky": "off_plan",
+     "Lightning Greaves": "protection",
+     "Liliana, Dreadhorde General": "payoff",
+     "Llanowar Elves": "off_plan",
+     "Long Feng, Grand Secretariat": "off_plan",
+     "Massacre Wurm": "off_plan",
+     "Mazirek, Kraul Death Priest": "off_plan",
+     "Midnight Reaper": "payoff",
+     "Mikaeus, the Unhallowed": "off_plan",
+     "Moldervine Reclamation": "payoff",
+     "Morbid Opportunist": "payoff",
+     "Ophiomancer": "off_plan",
+     "Plaguecrafter": "off_plan",
+     "Priest of Forgotten Gods": "enabler",
+     "Ramunap Excavator": "off_plan",
+     "Ravenous Chupacabra": "enabler",
+     "Reanimate": "off_plan",
+     "Rune-Scarred Demon": "tutor_for_plan",
+     "Sakura-Tribe Elder": "off_plan",
+     "Saw in Half": "enabler",
+     "Sol Ring": "off_plan",
+     "Solemn Simulacrum": "off_plan",
+     "Springbloom Druid": "off_plan",
+     "Sylvan Library": "off_plan",
+     "Syr Konrad, the Grim": "payoff",
+     "Talisman of Resilience": "off_plan",
+     "The Gitrog, Ravenous Ride": "enabler",
+     "Toxic Deluge": "off_plan",
+     "Veil of Summer": "protection",
+     "Victimize": "enabler",
+     "Village Rites": "enabler",
+     "Viscera Seer": "enabler",
+     "Wight of the Reliquary": "enabler",
+     "Woe Strider": "enabler",
+     "Yahenni, Undying Partisan": "enabler",
+     "Zulaport Cutthroat": "payoff"
+    }
+   },
+   "mulliganCriteria": [
+    "2-4 lands",
+    "a play on turn 2 or 3, or ramp if not",
+    "a drain plan piece (e.g. Braids, Arisen Nightmare or Carrion Feeder or Blood Artist)"
+   ],
+   "gameChangers": {
+    "count": 1,
+    "names": [
+     "Braids, Cabal Minion"
+    ]
+   },
+   "categories": {
+    "utility": 17,
+    "ramp": 13,
+    "removal": 8,
+    "land": 36,
+    "draw": 9,
+    "tutor": 4,
+    "win_condition": 8,
+    "board_wipe": 3,
+    "protection": 2
+   },
+   "stats": {
+    "totalCards": 100,
+    "landCount": 36,
+    "avgCmc": 3.02
+   }
+  },
+  "deckScore": {
+   "version": "1.2.0",
+   "score": 19,
+   "provisional": true,
+   "components": [
+    {
+     "key": "mana",
+     "score": 97.5,
+     "weight": 20.61855670103093,
+     "reason": "36.4 effective lands vs 37.4; B has 29/41 timely sources."
+    },
+    {
+     "key": "curve",
+     "score": 95.6,
+     "weight": 10.309278350515465,
+     "reason": "3-drops 18/15; 100% chance of a useful play by turn 2."
+    },
+    {
+     "key": "interaction",
+     "score": 95,
+     "weight": 16.494845360824744,
+     "reason": "12.3/12.0 effective answers, 7/7.0 cheap; weakest coverage: stack."
+    },
+    {
+     "key": "advantage",
+     "score": 81.8,
+     "weight": 14.43298969072165,
+     "reason": "26.4/10.0 draw units by turn 6; 4 cheap velocity cards."
+    },
+    {
+     "key": "win",
+     "score": 68.7,
+     "weight": 20.61855670103093,
+     "reason": "Control inevitability (16 finishers): closes T8, access 94% (u=0.76); shared bottleneck, protection access 37%; none."
+    },
+    {
+     "key": "synergy",
+     "score": 92.8,
+     "weight": 17.52577319587629,
+     "reason": "73% supports aristocrats; weakest dependency fodder 15/16; 0 unsupported payoffs."
+    },
+    {
+     "key": "meta",
+     "score": 50,
+     "weight": 0,
+     "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+    },
+    {
+     "key": "structure",
+     "score": 0,
+     "weight": 0,
+     "reason": "4/5 rule checks verified; size; cap 19."
+    }
+   ],
+   "gates": [
+    {
+     "key": "structure",
+     "kind": "rules",
+     "status": "fail",
+     "cap": null,
+     "reason": "4/5 rule checks verified; size; cap 19."
+    },
+    {
+     "key": "size",
+     "kind": "rules",
+     "status": "fail",
+     "cap": 19,
+     "reason": "Commander decks require exactly 100 cards (currently 101)"
+    },
+    {
+     "key": "singleton",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "singleton respected (basics exempt)"
+    },
+    {
+     "key": "legality",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "every card legal in commander"
+    },
+    {
+     "key": "rules",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "no other format rule broken"
+    },
+    {
+     "key": "identity",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "all cards inside BG"
+    },
+    {
+     "key": "quality_cap",
+     "kind": "quality",
+     "status": "warn",
+     "cap": 75,
+     "reason": "quality cap 20+0.8*min(M,W,S)=75.0 from mana=97.5, win=68.7, synergy=92.8."
+    },
+    {
+     "key": "coverage",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "89% of nonland copies are typed in the effect catalogue; unknown prerequisite \"creature death or mill\" — provisional: effect coverage, not calibrated."
+    },
+    {
+     "key": "meta_evidence",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+    }
+   ]
+  },
+  "bracket": {
+   "bracket": 3,
+   "gameChangers": [
+    "Braids, Cabal Minion"
+   ],
+   "twoCardCombos": [],
+   "massLandDenial": [],
+   "extraTurnCards": [],
+   "chainedExtraTurns": false,
+   "tutors": 4,
+   "fastMana": [
+    "Sol Ring"
+   ],
+   "reasons": [
+    "1 game changer(s): Braids, Cabal Minion"
+   ]
+  },
+  "main": [
+   {
+    "name": "Accursed Marauder",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Zombie Warrior",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/d/5da14d86-0780-4821-a799-96f64b377df4.jpg?1783911284"
+   },
+   {
+    "name": "Arcane Signet",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/a/aa9e7f3c-e752-4cee-9e9d-fae38ba27dc9.jpg?1767730206"
+   },
+   {
+    "name": "Assassin's Trophy",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/e/5e530961-1cb5-4208-ac49-f0963bac0134.jpg?1767731260"
+   },
+   {
+    "name": "Basking Broodscale",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Eldrazi Lizard",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/f/5feba5d6-99a6-4e9b-8a7d-90d955868fc3.jpg?1783911263"
+   },
+   {
+    "name": "Blood Artist",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Vampire",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/3/036f387a-8dee-482e-b3e3-cf79b54c61e1.jpg?1736467880"
+   },
+   {
+    "name": "Bloodghast",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Vampire Spirit",
+    "cmc": 2,
+    "mana_cost": "{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/d/fdceefe6-f083-4955-b53a-8e6f8aeb2083.jpg?1738356290"
+   },
+   {
+    "name": "Blooming Marsh",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/6/861caabb-0573-4e94-8b03-342f90465064.jpg?1783911773"
+   },
+   {
+    "name": "Bojuka Bog",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/0/b0c6fb5e-07e2-4d22-be19-60592f00584a.jpg?1752945235"
+   },
+   {
+    "name": "Braids, Arisen Nightmare",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Nightmare",
+    "cmc": 3,
+    "mana_cost": "{1}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/9/f96223d0-04c4-40c2-87a9-0c6bc74adddb.jpg?1783906041"
+   },
+   {
+    "name": "Braids, Cabal Minion",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Minion",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/7/27691efa-052d-4afe-b9ef-159858ca660f.jpg?1783926786"
+   },
+   {
+    "name": "Buried Alive",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/6/76878b19-2916-4f3f-bee5-20846bc9e2db.jpg?1783911216"
+   },
+   {
+    "name": "Butcher of Malakir",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Vampire Warrior",
+    "cmc": 7,
+    "mana_cost": "{5}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/d/9d805499-0739-403e-8447-ed2707dc9eb2.jpg?1783913878"
+   },
+   {
+    "name": "Carrion Feeder",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Zombie",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/a/0a19da90-880e-4eca-8cf7-6d7baf090d53.jpg?1783933131"
+   },
+   {
+    "name": "Cauldron of Essence",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "mana_cost": "{1}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/7/b7091740-e70c-4cf2-8d3d-b8e1ac1fbbdd.jpg?1783903647"
+   },
+   {
+    "name": "Chthonian Nightmare",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/e/ce5dd2c1-b6e0-4914-b5c9-7dd451c29e22.jpg?1783911283"
+   },
+   {
+    "name": "Command Tower",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/a/da4d9f44-9079-4144-8dd9-076be04032d4.jpg?1767730254"
+   },
+   {
+    "name": "Creakwood Liege",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Horror",
+    "cmc": 4,
+    "mana_cost": "{1}{B/G}{B/G}{B/G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/b/4b4e9ea4-5b86-4eb1-965c-ae67be24f4ea.jpg?1673148484"
+   },
+   {
+    "name": "Culling Ritual",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Sorcery",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bccb063c-6bd5-411f-86ce-9a7c054e34d3.jpg?1743350802"
+   },
+   {
+    "name": "Deadly Dispute",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/2/b22ef77b-67a3-45d3-9d18-12b7b124cbf4.jpg?1743419051"
+   },
+   {
+    "name": "Elvish Mystic",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/5/75918859-c93f-41b4-9ad0-a4a96c389f0d.jpg?1689998466"
+   },
+   {
+    "name": "Emeritus of Woe // Demonic Tutor",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Creature — Vampire Warlock // Sorcery",
+    "cmc": 4,
+    "mana_cost": "{3}{B} // {1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/e/7eb9e83d-515d-4911-a06b-9982200277b2.jpg?1783903682"
+   },
+   {
+    "name": "Eternal Witness",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Human Shaman",
+    "cmc": 3,
+    "mana_cost": "{1}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/9/39704000-65d3-4d39-849e-a3b617376bbc.jpg?1783915632"
+   },
+   {
+    "name": "Exotic Orchard",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/c/dc0a1bc1-ba94-4494-a196-5363fde85194.jpg?1767731565"
+   },
+   {
+    "name": "Fabled Passage",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6a21ecc8-f6fd-4670-91d8-94b9ce94c2fe.jpg?1752944504"
+   },
+   {
+    "name": "Festering Thicket",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/89891685-d4cf-4aaf-8179-210ed135f171.jpg?1767730315"
+   },
+   {
+    "name": "Forest",
+    "quantity": 6,
+    "category": "land",
+    "type_line": "Basic Land — Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b460f5f7-c7c9-400c-8419-23d614f45bf9.jpg?1767773926"
+   },
+   {
+    "name": "Golgari Charm",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/d/9d467e61-bbec-4cea-bd5d-f10555910c9d.jpg?1783933777"
+   },
+   {
+    "name": "Grave Researcher // Reanimate",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Troll Warlock // Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{B} // {B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/b/8b1e10e8-ea14-4761-910b-4072e2a18456.jpg?1783903680"
+   },
+   {
+    "name": "Gray Merchant of Asphodel",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Zombie",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/0/00d001d0-fd29-4b7c-9d0e-9131b995f910.jpg?1783909617"
+   },
+   {
+    "name": "Grim Backwoods",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/6/e6ee7441-458d-4fb6-8cb7-a331d8bd8e84.jpg?1726285428"
+   },
+   {
+    "name": "Grim Haruspex",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/5/f5c19b87-e114-46d4-9f6c-c02e838a08dd.jpg?1783922449"
+   },
+   {
+    "name": "Grim Servant",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Creature — Zombie Warlock",
+    "cmc": 4,
+    "mana_cost": "{3}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/f/df9c275d-e8cc-40c2-8baf-7a0d154aa7cf.jpg?1783911279"
+   },
+   {
+    "name": "Haywire Mite",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Artifact Creature — Insect",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/8/286f4d3a-6b38-404f-aaea-a1d3694f4fe6.jpg?1726285305"
+   },
+   {
+    "name": "High Market",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/d/9d56844f-ee3b-4161-85d2-18b872a9b465.jpg?1631589833"
+   },
+   {
+    "name": "Infernal Grasp",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/4/2430acb7-b371-4a03-88e7-0660a51836dd.jpg?1767730597"
+   },
+   {
+    "name": "Jadar, Ghoulcaller of Nephalia",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Human Wizard",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/f/ff971ba7-68b8-482a-9cb1-741f6893550c.jpg?1634349933"
+   },
+   {
+    "name": "Jarad, Golgari Lich Lord",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Zombie Elf",
+    "cmc": 4,
+    "mana_cost": "{B}{B}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/8/6870b355-e53d-4fa2-887b-0f0445bcd9c5.jpg?1783907026"
+   },
+   {
+    "name": "Junji, the Midnight Sky",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Dragon Spirit",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/9/e9ff50c0-915e-4055-a595-3df6be8f1e1b.jpg?1783907091"
+   },
+   {
+    "name": "Lightning Greaves",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Artifact — Equipment",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/b/8b59b12c-fde5-4f19-a357-e09f06f490cc.jpg?1743206077"
+   },
+   {
+    "name": "Liliana, Dreadhorde General",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker — Liliana",
+    "cmc": 6,
+    "mana_cost": "{4}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/b/cb28d217-795e-4320-a032-cd713f7ecc8a.jpg?1783909073"
+   },
+   {
+    "name": "Llanowar Elves",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6a0b230b-d391-4998-a3f7-7b158a0ec2cd.jpg?1783909057"
+   },
+   {
+    "name": "Llanowar Wastes",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/9/d9f0d724-3b77-4cf6-a745-a04aca743312.jpg?1752945365"
+   },
+   {
+    "name": "Long Feng, Grand Secretariat",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Legendary Creature — Human Advisor",
+    "cmc": 3,
+    "mana_cost": "{1}{B/G}{B/G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/3/a3eb92fe-bc59-4472-9028-f368bd015609.jpg?1783904924"
+   },
+   {
+    "name": "Massacre Wurm",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Creature — Phyrexian Wurm",
+    "cmc": 6,
+    "mana_cost": "{3}{B}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/9/39be2675-986c-4812-9448-99737e797671.jpg?1730572715"
+   },
+   {
+    "name": "Mazirek, Kraul Death Priest",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Insect Shaman",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/5/1522122b-e4bf-4dba-b22c-efa18bc6c33b.jpg?1752945005"
+   },
+   {
+    "name": "Midnight Reaper",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Zombie Knight",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/2/f229b0e6-1ffd-410e-b04b-a0afc179c58c.jpg?1783908929"
+   },
+   {
+    "name": "Mikaeus, the Unhallowed",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Zombie Cleric",
+    "cmc": 6,
+    "mana_cost": "{3}{B}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bc1f42a2-fe11-45da-9552-069803b4068a.jpg?1783915670"
+   },
+   {
+    "name": "Moldervine Reclamation",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/4/34c282d0-fe83-4ced-b696-cf0e2c6b13d0.jpg?1625977926"
+   },
+   {
+    "name": "Morbid Opportunist",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Creature — Human Rogue",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/f/5f0440bc-807a-4425-8707-e74f468b2ca7.jpg?1743206540"
+   },
+   {
+    "name": "Myriad Landscape",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/0/a0e2098f-1d94-491a-a7e9-a45a9f69e3a8.jpg?1783906009"
+   },
+   {
+    "name": "Necroblossom Snarl",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/d/ddf6ece8-d7c8-43a7-a318-f6eac2932b15.jpg?1726285464"
+   },
+   {
+    "name": "Ophiomancer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Shaman",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/d/7da2511d-f5ae-4c51-a9b2-dffd581243b6.jpg?1743206570"
+   },
+   {
+    "name": "Path of Ancestry",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/b/3b792a6a-beac-4d4a-91b6-f5a5e3539ecd.jpg?1767731634"
+   },
+   {
+    "name": "Plaguecrafter",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Human Shaman",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/7/97505837-e0e2-4f7b-8581-01942e886bb8.jpg?1783913321"
+   },
+   {
+    "name": "Priest of Forgotten Gods",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Human Cleric",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/8/b8ccb220-0f7c-4275-b1bf-fe8e28410e42.jpg?1702429472"
+   },
+   {
+    "name": "Ramunap Excavator",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Snake Cleric",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/f/3f8a0a0e-81f7-40a2-b393-bdc1423549f6.jpg?1783911907"
+   },
+   {
+    "name": "Ravenous Chupacabra",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Beast Horror",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/4/a4dfbac0-1849-41c5-853a-1fee108d0b01.jpg?1783913009"
+   },
+   {
+    "name": "Reanimate",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Sorcery",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/6/368b6903-5fc4-43e7-bd44-46b8107c8bb4.jpg?1783909614"
+   },
+   {
+    "name": "Revitalizing Repast // Old-Growth Grove",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Instant // Land",
+    "cmc": 1,
+    "mana_cost": "{B/G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/3/03522b6b-31ec-4126-8885-5dbb2248688b.jpg?1783911227"
+   },
+   {
+    "name": "Rune-Scarred Demon",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Creature — Demon",
+    "cmc": 7,
+    "mana_cost": "{5}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/e/1eae3165-554d-4759-8f18-794e2a7d8464.jpg?1783909071"
+   },
+   {
+    "name": "Sakura-Tribe Elder",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Snake Shaman",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/6/d619aece-7eab-40f3-8f41-970065f0dc73.jpg?1743206988"
+   },
+   {
+    "name": "Saw in Half",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/5/05e6a7bc-a35a-4e68-99a0-be264553b5de.jpg?1783920577"
+   },
+   {
+    "name": "Sol Ring",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 1,
+    "mana_cost": "{1}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/4/04002706-2236-4b79-bdea-4f263e43cb9c.jpg?1767730264"
+   },
+   {
+    "name": "Solemn Simulacrum",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact Creature — Golem",
+    "cmc": 4,
+    "mana_cost": "{4}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/b/cb1563a1-c8dc-4fcb-b9c8-e7432235d31e.jpg?1743207347"
+   },
+   {
+    "name": "Springbloom Druid",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/5/6520f5dc-ead8-40c5-af1c-411fea2ba268.jpg?1752944431"
+   },
+   {
+    "name": "Swamp",
+    "quantity": 11,
+    "category": "land",
+    "type_line": "Basic Land — Swamp",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/d/1dd4d605-02a2-4183-b191-0bca8dfbf962.jpg?1767773902"
+   },
+   {
+    "name": "Sylvan Library",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6ada256f-2e55-4c1f-b4d3-d7b10b498956.jpg?1783918436"
+   },
+   {
+    "name": "Syr Konrad, the Grim",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Human Knight",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/b/5b40815d-0104-461e-b193-fcf5e1f35299.jpg?1759418864"
+   },
+   {
+    "name": "Talisman of Resilience",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/f/eff598b0-0b32-41d0-b980-584576e58626.jpg?1783909582"
+   },
+   {
+    "name": "Temple of Malady",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/6/e60eb891-c06b-4a98-be3c-73e244405b45.jpg?1743207781"
+   },
+   {
+    "name": "The Gitrog, Ravenous Ride",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Frog Horror Mount",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/2/82512813-8618-483b-a7f0-e6a611d9d487.jpg?1783911793"
+   },
+   {
+    "name": "Toxic Deluge",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/a/5aa02b7d-db31-4924-b75e-eb02f332ca3a.jpg?1717013647"
+   },
+   {
+    "name": "Turbulent Fen",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/7/9737159b-256c-4004-ba5f-0417c35e1b30.jpg?1783903846"
+   },
+   {
+    "name": "Twilight Mire",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/3/b38ba12b-63ab-46ac-8fde-d1c9307c85e2.jpg?1752945570"
+   },
+   {
+    "name": "Veil of Summer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/a/aa686c34-1c11-469f-93c2-f9891aea521f.jpg?1783932955"
+   },
+   {
+    "name": "Vernal Fen",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/2/82253d45-587b-48a9-b6dc-e372f9adb2a6.jpg?1767730304"
+   },
+   {
+    "name": "Victimize",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Sorcery",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/3/83379f7f-3766-43f5-bd5e-e11ef9070ddb.jpg?1717013655"
+   },
+   {
+    "name": "Village Rites",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/c/9c0f60a6-b5c8-4704-8b61-94e8fc463e5d.jpg?1594736427"
+   },
+   {
+    "name": "Viridescent Bog",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/6/96fccdf1-9c68-46cd-ba90-668f677bbc44.jpg?1752945577"
+   },
+   {
+    "name": "Viscera Seer",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Vampire Wizard",
+    "cmc": 1,
+    "mana_cost": "{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/0/d0f3a502-064e-4700-a730-2e86f985bbc3.jpg?1743206596"
+   },
+   {
+    "name": "Wight of the Reliquary",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Zombie Knight",
+    "cmc": 2,
+    "mana_cost": "{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/1/a15570c0-4210-4959-8584-987ec85f8283.jpg?1717012876"
+   },
+   {
+    "name": "Woe Strider",
+    "quantity": 1,
+    "category": "synergy",
+    "type_line": "Creature — Horror",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/3/73b60c73-bae4-4a5c-819a-b5f2ffab45ce.jpg?1743206603"
+   },
+   {
+    "name": "Woodland Cemetery",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/c/0c20aa48-58a0-4dee-970f-ba1292affa28.jpg?1767732023"
+   },
+   {
+    "name": "Yahenni, Undying Partisan",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Legendary Creature — Aetherborn Vampire",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/9/396c5d77-f530-42f8-80b5-7cbfd562d1e2.jpg?1743206605"
+   },
+   {
+    "name": "Zulaport Cutthroat",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Human Rogue Ally",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/2/52ef00c1-613a-4cbd-8972-77c41f649431.jpg?1674141830"
+   }
+  ],
+  "sideboard": [],
+  "unresolved": [],
+  "truncated": false
+ }
+}

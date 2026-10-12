@@ -1,0 +1,2387 @@
+{
+ "file": "final.txt",
+ "format": "brawl",
+ "unresolved": [],
+ "deckScore": {
+  "version": "1.2.0",
+  "score": 20,
+  "provisional": true,
+  "components": [
+   {
+    "key": "mana",
+    "score": 75.6,
+    "weight": 20.61855670103093,
+    "reason": "36.4 effective lands vs 40.0; R has 14/34 timely sources."
+   },
+   {
+    "key": "curve",
+    "score": 85.9,
+    "weight": 15.463917525773196,
+    "reason": "3-drops 21/15; 90% chance of a useful play by turn 2."
+   },
+   {
+    "key": "interaction",
+    "score": 93.5,
+    "weight": 20.61855670103093,
+    "reason": "10.4/10.2 effective answers, 6/6.0 cheap; weakest coverage: permanent."
+   },
+   {
+    "key": "advantage",
+    "score": 73.5,
+    "weight": 12.371134020618557,
+    "reason": "28.0/6.8 draw units by turn 5; 2 cheap velocity cards."
+   },
+   {
+    "key": "win",
+    "score": 77.5,
+    "weight": 16.494845360824744,
+    "reason": "Token/Food conversion (4 bodies): closes T7, access 46% (u=0.84); shared bottleneck, protection access 48%; none."
+   },
+   {
+    "key": "synergy",
+    "score": 0,
+    "weight": 14.43298969072165,
+    "reason": "14% supports midrange; weakest dependency threats 1/7; 0 unsupported payoffs."
+   },
+   {
+    "key": "meta",
+    "score": 50,
+    "weight": 0,
+    "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+   },
+   {
+    "key": "structure",
+    "score": 100,
+    "weight": 0,
+    "reason": "5/5 rule checks verified; none; cap none."
+   }
+  ],
+  "gates": [
+   {
+    "key": "structure",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "5/5 rule checks verified; none; cap none."
+   },
+   {
+    "key": "size",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "100 cards (brawl wants 100)"
+   },
+   {
+    "key": "singleton",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "singleton respected (basics exempt)"
+   },
+   {
+    "key": "legality",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "every card legal in brawl"
+   },
+   {
+    "key": "rules",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "no other format rule broken"
+   },
+   {
+    "key": "identity",
+    "kind": "rules",
+    "status": "pass",
+    "cap": null,
+    "reason": "all cards inside BGRUW"
+   },
+   {
+    "key": "quality_cap",
+    "kind": "quality",
+    "status": "warn",
+    "cap": 20,
+    "reason": "quality cap 20+0.8*min(M,W,S)=20.0 from mana=75.6, win=77.5, synergy=0."
+   },
+   {
+    "key": "coverage",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "19% of nonland copies are typed in the effect catalogue; unknown prerequisite \"legendary permanent\" — provisional: effect coverage, not calibrated."
+   },
+   {
+    "key": "meta_evidence",
+    "kind": "evidence",
+    "status": "warn",
+    "cap": null,
+    "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+   }
+  ]
+ },
+ "analyze": {
+  "commander": "Tam, the Possibility",
+  "archetype": "superfriends",
+  "tribalType": null,
+  "iss": 5,
+  "topSynergyPairs": [
+   {
+    "a": "The Theorist, Jace Beleren",
+    "b": "Minsc & Boo, Timeless Heroes",
+    "weight": 4,
+    "reasons": [
+     "Minsc & Boo, Timeless Heroes consumes sacrifice_fodder ← The Theorist, Jace Beleren produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Way of the Necromancer",
+    "b": "Minsc & Boo, Timeless Heroes",
+    "weight": 2,
+    "reasons": [
+     "Way of the Necromancer consumes creature_death ← Minsc & Boo, Timeless Heroes produces creature_death"
+    ]
+   },
+   {
+    "a": "Doubling Season",
+    "b": "Minsc & Boo, Timeless Heroes",
+    "weight": 2,
+    "reasons": [
+     "Minsc & Boo, Timeless Heroes consumes sacrifice_fodder ← Doubling Season produces sacrifice_fodder"
+    ]
+   },
+   {
+    "a": "Tekuthal, Inquiry Dominus",
+    "b": "Tezzeret, Cruel Captain",
+    "weight": 2,
+    "reasons": [
+     "Tekuthal, Inquiry Dominus consumes plus1_counters ← Tezzeret, Cruel Captain produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Tekuthal, Inquiry Dominus",
+    "b": "The Theorist, Jace Beleren",
+    "weight": 2,
+    "reasons": [
+     "Tekuthal, Inquiry Dominus consumes plus1_counters ← The Theorist, Jace Beleren produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Tekuthal, Inquiry Dominus",
+    "b": "Minsc & Boo, Timeless Heroes",
+    "weight": 2,
+    "reasons": [
+     "Tekuthal, Inquiry Dominus consumes plus1_counters ← Minsc & Boo, Timeless Heroes produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Evolution Sage",
+    "b": "Tezzeret, Cruel Captain",
+    "weight": 2,
+    "reasons": [
+     "Evolution Sage consumes plus1_counters ← Tezzeret, Cruel Captain produces plus1_counters"
+    ]
+   },
+   {
+    "a": "Evolution Sage",
+    "b": "The Theorist, Jace Beleren",
+    "weight": 2,
+    "reasons": [
+     "Evolution Sage consumes plus1_counters ← The Theorist, Jace Beleren produces plus1_counters"
+    ]
+   }
+  ],
+  "curveScore": {
+   "score": 64,
+   "perBucket": {
+    "0": 1,
+    "1": -1,
+    "2": -1,
+    "3": 5,
+    "4": -2,
+    "5": 3,
+    "6": -2,
+    "7+": -3
+   },
+   "notes": [
+    "Too many 3-drops (21 vs target 16)",
+    "Missing 4-drops (11 vs target 13)",
+    "Too many 5-drops (11 vs target 8)",
+    "Missing 6-drops (3 vs target 5)",
+    "Missing 7+-drops (0 vs target 3)"
+   ]
+  },
+  "winPlan": {
+   "route": "value_grind",
+   "description": "No sharp win condition detected — grind card/board advantage until a generic threat closes it out.",
+   "keyCards": {
+    "enablers": [
+     "Way of the Mind Sculptor",
+     "Sheoldred, the Apocalypse",
+     "Phyrexian Arena",
+     "Mox Amber",
+     "Arcane Signet",
+     "Chromatic Lantern",
+     "Bloom Tender",
+     "Esika, God of the Tree // The Prismatic Bridge",
+     "Timeless Lotus",
+     "Jegantha, the Wellspring",
+     "Narset, Parter of Veils",
+     "Kiora, Behemoth Beckoner",
+     "The Theorist, Jace Beleren",
+     "Chandra, Torch of Defiance",
+     "Professor Dellian Fel",
+     "Minsc & Boo, Timeless Heroes",
+     "Ral, Crackling Wit",
+     "Kaito, Bane of Nightmares",
+     "Jace, Multiverse Architect",
+     "Garruk, Curse Breaker",
+     "Ajani Unrelenting"
+    ],
+    "payoffs": [],
+    "protection": [
+     "Teferi's Protection",
+     "Heroic Intervention",
+     "Counterspell",
+     "Countersculpt",
+     "Teyo, the Shieldmage",
+     "Kaito, Bane of Nightmares"
+    ],
+    "tutors": [
+     "Enlightened Tutor",
+     "Pia, Aether Ascetic",
+     "Captain Sisay",
+     "Tezzeret, Cruel Captain"
+    ]
+   },
+   "missingPieces": [],
+   "cardRoles": {
+    "Way of the Mentor": "off_plan",
+    "Way of the Paradox": "off_plan",
+    "Way of the Healer": "off_plan",
+    "Way of the Cryomancer": "off_plan",
+    "Way of the Deathbringer": "off_plan",
+    "Way of the Warlord": "off_plan",
+    "Way of the Pyromancer": "off_plan",
+    "Way of the Wildspeaker": "off_plan",
+    "Way of the Mind Sculptor": "enabler",
+    "Way of the Necromancer": "off_plan",
+    "Doubling Season": "off_plan",
+    "Tekuthal, Inquiry Dominus": "off_plan",
+    "Oath of Teferi": "off_plan",
+    "All Will Be One": "off_plan",
+    "Evolution Sage": "off_plan",
+    "Flux Channeler": "off_plan",
+    "Sheoldred, the Apocalypse": "enabler",
+    "Bloodthirsty Conqueror": "off_plan",
+    "Marauding Blight-Priest": "off_plan",
+    "Dina, Soul Steeper": "off_plan",
+    "Authority of the Consuls": "off_plan",
+    "Teferi's Protection": "protection",
+    "Heroic Intervention": "protection",
+    "Swords to Plowshares": "off_plan",
+    "Path to Exile": "off_plan",
+    "Lightning Helix": "off_plan",
+    "Sunfall": "off_plan",
+    "Overwrite the Multiverse": "off_plan",
+    "Counterspell": "protection",
+    "Countersculpt": "protection",
+    "Phyrexian Arena": "enabler",
+    "Sylvan Library": "off_plan",
+    "Enlightened Tutor": "tutor_for_plan",
+    "Pia, Aether Ascetic": "tutor_for_plan",
+    "Captain Sisay": "tutor_for_plan",
+    "Geist of Saint Thalia": "off_plan",
+    "Vraska, Soul of Stone": "off_plan",
+    "Mox Amber": "enabler",
+    "Arcane Signet": "enabler",
+    "Chromatic Lantern": "enabler",
+    "Bloom Tender": "enabler",
+    "Esika, God of the Tree // The Prismatic Bridge": "enabler",
+    "Timeless Lotus": "enabler",
+    "Jegantha, the Wellspring": "enabler",
+    "Ajani Resolute": "off_plan",
+    "Narset, Parter of Veils": "enabler",
+    "Saheeli, Sublime Artificer": "off_plan",
+    "Tezzeret, Cruel Captain": "tutor_for_plan",
+    "Chandra, Acolyte of Flame": "off_plan",
+    "Kiora, Behemoth Beckoner": "enabler",
+    "Teyo, the Shieldmage": "protection",
+    "Dovin, Hand of Control": "off_plan",
+    "The Theorist, Jace Beleren": "enabler",
+    "Chandra, Torch of Defiance": "enabler",
+    "Professor Dellian Fel": "enabler",
+    "Minsc & Boo, Timeless Heroes": "enabler",
+    "Ral, Crackling Wit": "enabler",
+    "Kaito, Bane of Nightmares": "enabler",
+    "The Wanderer": "off_plan",
+    "Jace, Multiverse Architect": "enabler",
+    "Garruk, Curse Breaker": "enabler",
+    "The Eternal Wanderer": "off_plan",
+    "Ajani Unrelenting": "enabler"
+   }
+  },
+  "mulliganCriteria": [
+   "2-4 lands",
+   "a play on turn 2 or 3, or ramp if not",
+   "a value grind plan piece (e.g. Way of the Mind Sculptor or Sheoldred, the Apocalypse)"
+  ],
+  "gameChangers": {
+   "count": 3,
+   "names": [
+    "Teferi's Protection",
+    "Enlightened Tutor",
+    "Narset, Parter of Veils"
+   ]
+  },
+  "categories": {
+   "draw": 20,
+   "ramp": 10,
+   "utility": 11,
+   "win_condition": 5,
+   "protection": 4,
+   "removal": 6,
+   "board_wipe": 3,
+   "land": 36,
+   "tutor": 4
+  },
+  "stats": {
+   "totalCards": 99,
+   "landCount": 36,
+   "avgCmc": 3.3
+  }
+ },
+ "optimize": {
+  "format": "brawl",
+  "deckName": null,
+  "commander": "Tam, the Possibility",
+  "partner": null,
+  "stats": {
+   "totalCards": 100,
+   "landCount": 35,
+   "avgCmc": 3.28,
+   "colors": [
+    "B",
+    "G",
+    "R",
+    "U",
+    "W"
+   ]
+  },
+  "score": 46,
+  "health": [
+   {
+    "category": "land",
+    "label": "Lands",
+    "current": 35,
+    "target": {
+     "min": 37,
+     "max": 39,
+     "target": 38
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "ramp",
+    "label": "Ramp",
+    "current": 10,
+    "target": {
+     "min": 10,
+     "max": 14,
+     "target": 12
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "draw",
+    "label": "Card Draw",
+    "current": 12,
+    "target": {
+     "min": 6,
+     "max": 9,
+     "target": 8
+    },
+    "status": "high",
+    "color": "text-yellow-400"
+   },
+   {
+    "category": "removal",
+    "label": "Removal",
+    "current": 6,
+    "target": {
+     "min": 10,
+     "max": 16,
+     "target": 13
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "board_wipe",
+    "label": "Board Wipes",
+    "current": 3,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 5
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "protection",
+    "label": "Protection",
+    "current": 5,
+    "target": {
+     "min": 3,
+     "max": 6,
+     "target": 4
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   },
+   {
+    "category": "synergy",
+    "label": "Commander Synergy",
+    "current": 0,
+    "target": {
+     "min": 5,
+     "max": 10,
+     "target": 8
+    },
+    "status": "low",
+    "color": "text-red-400"
+   },
+   {
+    "category": "win_condition",
+    "label": "Win Conditions",
+    "current": 16,
+    "target": {
+     "min": 8,
+     "max": 16,
+     "target": 12
+    },
+    "status": "ok",
+    "color": "text-green-400"
+   }
+  ],
+  "curve": {
+   "0": 1,
+   "1": 4,
+   "2": 12,
+   "3": 21,
+   "4": 11,
+   "5": 11,
+   "6": 3
+  },
+  "notes": [
+   "Add 2 more lands (currently 35, minimum 37)",
+   "Consider cutting 3 card draw (currently 12, maximum 9)",
+   "Add 4 more removal (currently 6, minimum 10)",
+   "Add 5 more commander synergy (currently 0, minimum 5)"
+  ],
+  "mana": {
+   "demand": {
+    "W": 19,
+    "U": 19,
+    "B": 15,
+    "R": 17,
+    "G": 16
+   },
+   "sources": {
+    "B": 17,
+    "G": 18,
+    "R": 15,
+    "U": 18,
+    "W": 17
+   },
+   "warnings": [
+    "Only 17 Black sources for 15 B pips (wants ~19)",
+    "Only 18 Green sources for 16 G pips (wants ~19)",
+    "Only 15 Red sources for 17 R pips (wants ~19)",
+    "Only 18 Blue sources for 19 U pips (wants ~19)",
+    "Only 17 White sources for 19 W pips (wants ~19)"
+   ]
+  },
+  "landTarget": {
+   "current": 35,
+   "effective": 35.4,
+   "recommended": 40,
+   "mdfcLandBacks": 1,
+   "cheapSpells": 7,
+   "formula": "31.42 + 3.13 × average mana value − 0.28 × cheap draw/ramp spells (99-card deck)"
+  },
+  "legality": [],
+  "cuts": [
+   {
+    "name": "All Will Be One",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 5,
+    "score": 5,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 5-drops",
+     "Expensive card with no identified role"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Bloodthirsty Conqueror",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 5,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 3 too many 5-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Marauding Blight-Priest",
+    "quantity": 1,
+    "category": "win_condition",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Pia, Aether Ascetic",
+    "quantity": 1,
+    "category": "tutor",
+    "cmc": 3,
+    "score": 4,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck",
+     "Curve has 5 too many 3-drops"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Captain Sisay",
+    "quantity": 1,
+    "category": "tutor",
+    "cmc": 4,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Geist of Saint Thalia",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 2,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Sylvan Library",
+    "quantity": 1,
+    "category": "draw",
+    "cmc": 2,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "Card Draw over quota (12/9) — weakest card draw slot"
+    ],
+    "reason": "Card Draw over quota (12/9) — weakest card draw slot; Never satisfies the commander's trigger condition"
+   },
+   {
+    "name": "Authority of the Consuls",
+    "quantity": 1,
+    "category": "utility",
+    "cmc": 1,
+    "score": 3,
+    "hard": false,
+    "reasons": [
+     "No synergy edges with the commander or the rest of the deck"
+    ],
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "adds": [
+   {
+    "name": "Spark Double",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Illusion",
+    "cmc": 4,
+    "mana_cost": "{3}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/4/c41b9ba2-0006-4d8e-b600-efe81ff5e0cc.jpg?1783913330",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Mangara, the Diplomat",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Human Cleric",
+    "cmc": 4,
+    "mana_cost": "{3}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/5/452b735c-791f-4843-9390-8803154cde62.jpg?1743206167",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Sphere of Safety",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{4}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/c/5c4e3031-ffc2-4d4d-a9f9-e85820059315.jpg?1783909633",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Elspeth, Storm Slayer",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker — Elspeth",
+    "cmc": 5,
+    "mana_cost": "{3}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/3/73a065e3-b530-4e62-ab3c-4f6f908184ec.jpg?1783907414",
+    "reason": "Planeswalker — supports the commander's superfriends plan",
+    "score": 92
+   },
+   {
+    "name": "Liliana, Dreadhorde General",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker — Liliana",
+    "cmc": 6,
+    "mana_cost": "{4}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/b/cb28d217-795e-4320-a032-cd713f7ecc8a.jpg?1783909073",
+    "reason": "Planeswalker — supports the commander's superfriends plan",
+    "score": 92
+   },
+   {
+    "name": "Cankerbloom",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Creature — Phyrexian Fungus",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/89b39293-6f57-4294-85fc-c718bdbb4d40.jpg?1783918019",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Elspeth, Sun's Champion",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Legendary Planeswalker — Elspeth",
+    "cmc": 6,
+    "mana_cost": "{4}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/6/46dc2519-2729-4bbd-8892-fab6186bf116.jpg?1783913033",
+    "reason": "Planeswalker — supports the commander's superfriends plan",
+    "score": 92
+   },
+   {
+    "name": "Yawgmoth, Thran Physician",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Creature — Human Cleric",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/5/b5a79f5d-d0df-4799-ac3a-84305e3af0c9.jpg?1783918469",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Thrummingbird",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Phyrexian Bird Horror",
+    "cmc": 2,
+    "mana_cost": "{1}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/1/f10db847-6598-49a5-8f10-67afd5187d32.jpg?1783906041",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Tezzeret's Gambit",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Sorcery",
+    "cmc": 4,
+    "mana_cost": "{3}{U/P}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/9/29ad5bb3-927d-41d0-a000-3826ea117e52.jpg?1783906052",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Inexorable Tide",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{3}{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/0/40441345-23ca-47e4-b349-bd13d986e41e.jpg?1783938420",
+    "reason": "Supports the commander's planeswalker/proliferate plan",
+    "score": 92
+   },
+   {
+    "name": "Jace, Wielder of Mysteries",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Jace",
+    "cmc": 4,
+    "mana_cost": "{1}{U}{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6adb7d73-4482-4930-8497-cffd169b57e2.jpg?1783933463",
+    "reason": "Planeswalker — supports the commander's superfriends plan",
+    "score": 92
+   }
+  ],
+  "swaps": [
+   {
+    "cut": "All Will Be One",
+    "add": "Spark Double",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Expensive card with no identified role; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Bloodthirsty Conqueror",
+    "add": "Jace, Wielder of Mysteries",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 3 too many 5-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Marauding Blight-Priest",
+    "add": "Mangara, the Diplomat",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Pia, Aether Ascetic",
+    "add": "Sphere of Safety",
+    "reason": "No synergy edges with the commander or the rest of the deck; Curve has 5 too many 3-drops; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Captain Sisay",
+    "add": "Elspeth, Storm Slayer",
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Geist of Saint Thalia",
+    "add": "Thrummingbird",
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Sylvan Library",
+    "add": "Tezzeret's Gambit",
+    "reason": "Card Draw over quota (12/9) — weakest card draw slot; Never satisfies the commander's trigger condition"
+   },
+   {
+    "cut": "Authority of the Consuls",
+    "add": "Inexorable Tide",
+    "reason": "No synergy edges with the commander or the rest of the deck; Never satisfies the commander's trigger condition"
+   }
+  ],
+  "lockedFromCuts": [],
+  "afterSize": 100,
+  "sizeChanged": false,
+  "gate": {
+   "verdict": "fail",
+   "format": "brawl",
+   "commander": "Tam, the Possibility",
+   "totals": {
+    "cards": 100,
+    "lands": 35,
+    "effectiveLands": 35.4,
+    "nonland": 64,
+    "avgMv": 3.41
+   },
+   "curve": {
+    "0": 1,
+    "1": 3,
+    "2": 12,
+    "3": 19,
+    "4": 14,
+    "5": 12,
+    "6": 3
+   },
+   "plan": {
+    "condition": {
+     "threshold": null,
+     "requires": null,
+     "tribalType": null,
+     "nouns": [
+      "planeswalker spells",
+      "proliferate",
+      "loyalty abilit",
+      "planeswalker types",
+      "loyalty counter",
+      "mana of any color"
+     ],
+     "description": "commander wants: planeswalkers, proliferate"
+    },
+    "nonland": 64,
+    "interacting": 31,
+    "ratio": 0.484375,
+    "enablers": 0,
+    "enablerRatio": 0,
+    "nonInteracting": [
+     {
+      "name": "Enlightened Tutor",
+      "cmc": 1
+     },
+     {
+      "name": "Path to Exile",
+      "cmc": 1
+     },
+     {
+      "name": "Swords to Plowshares",
+      "cmc": 1
+     },
+     {
+      "name": "Bloom Tender",
+      "cmc": 2
+     },
+     {
+      "name": "Counterspell",
+      "cmc": 2
+     },
+     {
+      "name": "Dina, Soul Steeper",
+      "cmc": 2
+     },
+     {
+      "name": "Heroic Intervention",
+      "cmc": 2
+     },
+     {
+      "name": "Lightning Helix",
+      "cmc": 2
+     },
+     {
+      "name": "Shatterskull Smashing",
+      "cmc": 2
+     },
+     {
+      "name": "Dovin, Hand of Control",
+      "cmc": 3
+     },
+     {
+      "name": "Kiora, Behemoth Beckoner",
+      "cmc": 3
+     },
+     {
+      "name": "Narset, Parter of Veils",
+      "cmc": 3
+     },
+     {
+      "name": "Phyrexian Arena",
+      "cmc": 3
+     },
+     {
+      "name": "Saheeli, Sublime Artificer",
+      "cmc": 3
+     },
+     {
+      "name": "Teferi's Protection",
+      "cmc": 3
+     },
+     {
+      "name": "Teyo, the Shieldmage",
+      "cmc": 3
+     },
+     {
+      "name": "Chandra, Torch of Defiance",
+      "cmc": 4
+     },
+     {
+      "name": "Jace, Wielder of Mysteries",
+      "cmc": 4
+     },
+     {
+      "name": "Mangara, the Diplomat",
+      "cmc": 4
+     },
+     {
+      "name": "Minsc & Boo, Timeless Heroes",
+      "cmc": 4
+     },
+     {
+      "name": "Professor Dellian Fel",
+      "cmc": 4
+     },
+     {
+      "name": "Sheoldred, the Apocalypse",
+      "cmc": 4
+     },
+     {
+      "name": "The Theorist, Jace Beleren",
+      "cmc": 4
+     },
+     {
+      "name": "The Wanderer",
+      "cmc": 4
+     },
+     {
+      "name": "Doubling Season",
+      "cmc": 5
+     },
+     {
+      "name": "Elspeth, Storm Slayer",
+      "cmc": 5
+     },
+     {
+      "name": "Garruk, Curse Breaker",
+      "cmc": 5
+     },
+     {
+      "name": "Jace, Multiverse Architect",
+      "cmc": 5
+     },
+     {
+      "name": "Jegantha, the Wellspring",
+      "cmc": 5
+     },
+     {
+      "name": "Sphere of Safety",
+      "cmc": 5
+     },
+     {
+      "name": "Sunfall",
+      "cmc": 5
+     },
+     {
+      "name": "Timeless Lotus",
+      "cmc": 5
+     },
+     {
+      "name": "The Eternal Wanderer",
+      "cmc": 6
+     }
+    ]
+   },
+   "unresolved": [],
+   "checks": [
+    {
+     "id": "size",
+     "status": "pass",
+     "detail": "100 cards (brawl wants 100)"
+    },
+    {
+     "id": "singleton",
+     "status": "pass",
+     "detail": "singleton respected (basics exempt)"
+    },
+    {
+     "id": "legality",
+     "status": "pass",
+     "detail": "every card legal in brawl"
+    },
+    {
+     "id": "rules",
+     "status": "pass",
+     "detail": "no other format rule broken"
+    },
+    {
+     "id": "identity",
+     "status": "pass",
+     "detail": "all cards inside BGRUW"
+    },
+    {
+     "id": "ownership",
+     "status": "skip",
+     "detail": "no ownerId and no ownedCards — nothing to check the list against"
+    },
+    {
+     "id": "arenaNames",
+     "status": "warn",
+     "detail": "2 card(s) must be exported front-face only:",
+     "cards": [
+      "1 Shatterskull Smashing",
+      "1 Esika, God of the Tree"
+     ]
+    },
+    {
+     "id": "lands",
+     "status": "warn",
+     "detail": "35 lands (+1 MDFC land backs = 35.4 effective); Karsten wants 40 ±2"
+    },
+    {
+     "id": "plan",
+     "status": "fail",
+     "detail": "31/64 nonland cards interact (48%) — commander wants: planeswalkers, proliferate",
+     "cards": [
+      "Enlightened Tutor (MV 1)",
+      "Path to Exile (MV 1)",
+      "Swords to Plowshares (MV 1)",
+      "Bloom Tender (MV 2)",
+      "Counterspell (MV 2)",
+      "Dina, Soul Steeper (MV 2)",
+      "Heroic Intervention (MV 2)",
+      "Lightning Helix (MV 2)",
+      "Shatterskull Smashing (MV 2)",
+      "Dovin, Hand of Control (MV 3)",
+      "Kiora, Behemoth Beckoner (MV 3)",
+      "Narset, Parter of Veils (MV 3)",
+      "Phyrexian Arena (MV 3)",
+      "Saheeli, Sublime Artificer (MV 3)",
+      "Teferi's Protection (MV 3)",
+      "Teyo, the Shieldmage (MV 3)",
+      "Chandra, Torch of Defiance (MV 4)",
+      "Jace, Wielder of Mysteries (MV 4)",
+      "Mangara, the Diplomat (MV 4)",
+      "Minsc & Boo, Timeless Heroes (MV 4)",
+      "Professor Dellian Fel (MV 4)",
+      "Sheoldred, the Apocalypse (MV 4)",
+      "The Theorist, Jace Beleren (MV 4)",
+      "The Wanderer (MV 4)",
+      "Doubling Season (MV 5)",
+      "Elspeth, Storm Slayer (MV 5)",
+      "Garruk, Curse Breaker (MV 5)",
+      "Jace, Multiverse Architect (MV 5)",
+      "Jegantha, the Wellspring (MV 5)",
+      "Sphere of Safety (MV 5)",
+      "Sunfall (MV 5)",
+      "Timeless Lotus (MV 5)",
+      "The Eternal Wanderer (MV 6)"
+     ]
+    },
+    {
+     "id": "curve",
+     "status": "pass",
+     "detail": "avg MV 3.41; commander sets no cost threshold"
+    },
+    {
+     "id": "wincons",
+     "status": "pass",
+     "detail": "25 win condition(s)/closer(s)",
+     "cards": [
+      "Way of the Wildspeaker",
+      "Tekuthal, Inquiry Dominus",
+      "Dina, Soul Steeper",
+      "Jegantha, the Wellspring",
+      "Ajani Resolute",
+      "Narset, Parter of Veils",
+      "Saheeli, Sublime Artificer",
+      "Tezzeret, Cruel Captain",
+      "Chandra, Acolyte of Flame",
+      "Kiora, Behemoth Beckoner",
+      "Teyo, the Shieldmage",
+      "Dovin, Hand of Control",
+      "The Theorist, Jace Beleren",
+      "Chandra, Torch of Defiance",
+      "Professor Dellian Fel",
+      "Minsc & Boo, Timeless Heroes",
+      "Ral, Crackling Wit",
+      "Kaito, Bane of Nightmares",
+      "The Wanderer",
+      "Jace, Multiverse Architect",
+      "Garruk, Curse Breaker",
+      "The Eternal Wanderer",
+      "Ajani Unrelenting",
+      "Jace, Wielder of Mysteries",
+      "Elspeth, Storm Slayer"
+     ]
+    },
+    {
+     "id": "locks",
+     "status": "pass",
+     "detail": "12 locked card(s) present and intact",
+     "cards": [
+      "Breeding Pool",
+      "Godless Shrine",
+      "Hallowed Fountain",
+      "Steam Vents",
+      "Blood Crypt",
+      "Stomping Ground",
+      "Overgrown Tomb",
+      "Sacred Foundry",
+      "Temple Garden",
+      "Flooded Strand",
+      "Misty Rainforest",
+      "Scalding Tarn"
+     ]
+    }
+   ]
+  },
+  "analysis": {
+   "commander": "Tam, the Possibility",
+   "archetype": "superfriends",
+   "tribalType": null,
+   "iss": 5,
+   "topSynergyPairs": [
+    {
+     "a": "The Theorist, Jace Beleren",
+     "b": "Minsc & Boo, Timeless Heroes",
+     "weight": 4,
+     "reasons": [
+      "Minsc & Boo, Timeless Heroes consumes sacrifice_fodder ← The Theorist, Jace Beleren produces sacrifice_fodder"
+     ]
+    },
+    {
+     "a": "Way of the Necromancer",
+     "b": "Minsc & Boo, Timeless Heroes",
+     "weight": 2,
+     "reasons": [
+      "Way of the Necromancer consumes creature_death ← Minsc & Boo, Timeless Heroes produces creature_death"
+     ]
+    },
+    {
+     "a": "Doubling Season",
+     "b": "Minsc & Boo, Timeless Heroes",
+     "weight": 2,
+     "reasons": [
+      "Minsc & Boo, Timeless Heroes consumes sacrifice_fodder ← Doubling Season produces sacrifice_fodder"
+     ]
+    },
+    {
+     "a": "Tekuthal, Inquiry Dominus",
+     "b": "Tezzeret, Cruel Captain",
+     "weight": 2,
+     "reasons": [
+      "Tekuthal, Inquiry Dominus consumes plus1_counters ← Tezzeret, Cruel Captain produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Tekuthal, Inquiry Dominus",
+     "b": "The Theorist, Jace Beleren",
+     "weight": 2,
+     "reasons": [
+      "Tekuthal, Inquiry Dominus consumes plus1_counters ← The Theorist, Jace Beleren produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Tekuthal, Inquiry Dominus",
+     "b": "Minsc & Boo, Timeless Heroes",
+     "weight": 2,
+     "reasons": [
+      "Tekuthal, Inquiry Dominus consumes plus1_counters ← Minsc & Boo, Timeless Heroes produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Evolution Sage",
+     "b": "Tezzeret, Cruel Captain",
+     "weight": 2,
+     "reasons": [
+      "Evolution Sage consumes plus1_counters ← Tezzeret, Cruel Captain produces plus1_counters"
+     ]
+    },
+    {
+     "a": "Evolution Sage",
+     "b": "The Theorist, Jace Beleren",
+     "weight": 2,
+     "reasons": [
+      "Evolution Sage consumes plus1_counters ← The Theorist, Jace Beleren produces plus1_counters"
+     ]
+    }
+   ],
+   "curveScore": {
+    "score": 64,
+    "perBucket": {
+     "0": 1,
+     "1": -1,
+     "2": -1,
+     "3": 5,
+     "4": -2,
+     "5": 3,
+     "6": -2,
+     "7+": -3
+    },
+    "notes": [
+     "Too many 3-drops (21 vs target 16)",
+     "Missing 4-drops (11 vs target 13)",
+     "Too many 5-drops (11 vs target 8)",
+     "Missing 6-drops (3 vs target 5)",
+     "Missing 7+-drops (0 vs target 3)"
+    ]
+   },
+   "winPlan": {
+    "route": "value_grind",
+    "description": "No sharp win condition detected — grind card/board advantage until a generic threat closes it out.",
+    "keyCards": {
+     "enablers": [
+      "Way of the Mind Sculptor",
+      "Sheoldred, the Apocalypse",
+      "Phyrexian Arena",
+      "Mox Amber",
+      "Arcane Signet",
+      "Chromatic Lantern",
+      "Bloom Tender",
+      "Esika, God of the Tree // The Prismatic Bridge",
+      "Timeless Lotus",
+      "Jegantha, the Wellspring",
+      "Narset, Parter of Veils",
+      "Kiora, Behemoth Beckoner",
+      "The Theorist, Jace Beleren",
+      "Chandra, Torch of Defiance",
+      "Professor Dellian Fel",
+      "Minsc & Boo, Timeless Heroes",
+      "Ral, Crackling Wit",
+      "Kaito, Bane of Nightmares",
+      "Jace, Multiverse Architect",
+      "Garruk, Curse Breaker",
+      "Ajani Unrelenting"
+     ],
+     "payoffs": [],
+     "protection": [
+      "Teferi's Protection",
+      "Heroic Intervention",
+      "Counterspell",
+      "Countersculpt",
+      "Teyo, the Shieldmage",
+      "Kaito, Bane of Nightmares"
+     ],
+     "tutors": [
+      "Enlightened Tutor",
+      "Pia, Aether Ascetic",
+      "Captain Sisay",
+      "Tezzeret, Cruel Captain"
+     ]
+    },
+    "missingPieces": [],
+    "cardRoles": {
+     "Way of the Mentor": "off_plan",
+     "Way of the Paradox": "off_plan",
+     "Way of the Healer": "off_plan",
+     "Way of the Cryomancer": "off_plan",
+     "Way of the Deathbringer": "off_plan",
+     "Way of the Warlord": "off_plan",
+     "Way of the Pyromancer": "off_plan",
+     "Way of the Wildspeaker": "off_plan",
+     "Way of the Mind Sculptor": "enabler",
+     "Way of the Necromancer": "off_plan",
+     "Doubling Season": "off_plan",
+     "Tekuthal, Inquiry Dominus": "off_plan",
+     "Oath of Teferi": "off_plan",
+     "All Will Be One": "off_plan",
+     "Evolution Sage": "off_plan",
+     "Flux Channeler": "off_plan",
+     "Sheoldred, the Apocalypse": "enabler",
+     "Bloodthirsty Conqueror": "off_plan",
+     "Marauding Blight-Priest": "off_plan",
+     "Dina, Soul Steeper": "off_plan",
+     "Authority of the Consuls": "off_plan",
+     "Teferi's Protection": "protection",
+     "Heroic Intervention": "protection",
+     "Swords to Plowshares": "off_plan",
+     "Path to Exile": "off_plan",
+     "Lightning Helix": "off_plan",
+     "Sunfall": "off_plan",
+     "Overwrite the Multiverse": "off_plan",
+     "Counterspell": "protection",
+     "Countersculpt": "protection",
+     "Phyrexian Arena": "enabler",
+     "Sylvan Library": "off_plan",
+     "Enlightened Tutor": "tutor_for_plan",
+     "Pia, Aether Ascetic": "tutor_for_plan",
+     "Captain Sisay": "tutor_for_plan",
+     "Geist of Saint Thalia": "off_plan",
+     "Vraska, Soul of Stone": "off_plan",
+     "Mox Amber": "enabler",
+     "Arcane Signet": "enabler",
+     "Chromatic Lantern": "enabler",
+     "Bloom Tender": "enabler",
+     "Esika, God of the Tree // The Prismatic Bridge": "enabler",
+     "Timeless Lotus": "enabler",
+     "Jegantha, the Wellspring": "enabler",
+     "Ajani Resolute": "off_plan",
+     "Narset, Parter of Veils": "enabler",
+     "Saheeli, Sublime Artificer": "off_plan",
+     "Tezzeret, Cruel Captain": "tutor_for_plan",
+     "Chandra, Acolyte of Flame": "off_plan",
+     "Kiora, Behemoth Beckoner": "enabler",
+     "Teyo, the Shieldmage": "protection",
+     "Dovin, Hand of Control": "off_plan",
+     "The Theorist, Jace Beleren": "enabler",
+     "Chandra, Torch of Defiance": "enabler",
+     "Professor Dellian Fel": "enabler",
+     "Minsc & Boo, Timeless Heroes": "enabler",
+     "Ral, Crackling Wit": "enabler",
+     "Kaito, Bane of Nightmares": "enabler",
+     "The Wanderer": "off_plan",
+     "Jace, Multiverse Architect": "enabler",
+     "Garruk, Curse Breaker": "enabler",
+     "The Eternal Wanderer": "off_plan",
+     "Ajani Unrelenting": "enabler"
+    }
+   },
+   "mulliganCriteria": [
+    "2-4 lands",
+    "a play on turn 2 or 3, or ramp if not",
+    "a value grind plan piece (e.g. Way of the Mind Sculptor or Sheoldred, the Apocalypse)"
+   ],
+   "gameChangers": {
+    "count": 3,
+    "names": [
+     "Teferi's Protection",
+     "Enlightened Tutor",
+     "Narset, Parter of Veils"
+    ]
+   },
+   "categories": {
+    "draw": 20,
+    "ramp": 10,
+    "utility": 11,
+    "win_condition": 5,
+    "protection": 4,
+    "removal": 6,
+    "board_wipe": 3,
+    "land": 36,
+    "tutor": 4
+   },
+   "stats": {
+    "totalCards": 99,
+    "landCount": 36,
+    "avgCmc": 3.3
+   }
+  },
+  "deckScore": {
+   "version": "1.2.0",
+   "score": 20,
+   "provisional": true,
+   "components": [
+    {
+     "key": "mana",
+     "score": 75.6,
+     "weight": 20.61855670103093,
+     "reason": "36.4 effective lands vs 40.0; R has 14/34 timely sources."
+    },
+    {
+     "key": "curve",
+     "score": 85.9,
+     "weight": 15.463917525773196,
+     "reason": "3-drops 21/15; 90% chance of a useful play by turn 2."
+    },
+    {
+     "key": "interaction",
+     "score": 93.5,
+     "weight": 20.61855670103093,
+     "reason": "10.4/10.2 effective answers, 6/6.0 cheap; weakest coverage: permanent."
+    },
+    {
+     "key": "advantage",
+     "score": 73.5,
+     "weight": 12.371134020618557,
+     "reason": "28.0/6.8 draw units by turn 5; 2 cheap velocity cards."
+    },
+    {
+     "key": "win",
+     "score": 77.5,
+     "weight": 16.494845360824744,
+     "reason": "Token/Food conversion (4 bodies): closes T7, access 46% (u=0.84); shared bottleneck, protection access 48%; none."
+    },
+    {
+     "key": "synergy",
+     "score": 0,
+     "weight": 14.43298969072165,
+     "reason": "14% supports midrange; weakest dependency threats 1/7; 0 unsupported payoffs."
+    },
+    {
+     "key": "meta",
+     "score": 50,
+     "weight": 0,
+     "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+    },
+    {
+     "key": "structure",
+     "score": 100,
+     "weight": 0,
+     "reason": "5/5 rule checks verified; none; cap none."
+    }
+   ],
+   "gates": [
+    {
+     "key": "structure",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "5/5 rule checks verified; none; cap none."
+    },
+    {
+     "key": "size",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "100 cards (brawl wants 100)"
+    },
+    {
+     "key": "singleton",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "singleton respected (basics exempt)"
+    },
+    {
+     "key": "legality",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "every card legal in brawl"
+    },
+    {
+     "key": "rules",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "no other format rule broken"
+    },
+    {
+     "key": "identity",
+     "kind": "rules",
+     "status": "pass",
+     "cap": null,
+     "reason": "all cards inside BGRUW"
+    },
+    {
+     "key": "quality_cap",
+     "kind": "quality",
+     "status": "warn",
+     "cap": 20,
+     "reason": "quality cap 20+0.8*min(M,W,S)=20.0 from mana=75.6, win=77.5, synergy=0."
+    },
+    {
+     "key": "coverage",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "19% of nonland copies are typed in the effect catalogue; unknown prerequisite \"legendary permanent\" — provisional: effect coverage, not calibrated."
+    },
+    {
+     "key": "meta_evidence",
+     "kind": "evidence",
+     "status": "warn",
+     "cap": null,
+     "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+    }
+   ]
+  },
+  "bracket": {
+   "bracket": 3,
+   "gameChangers": [
+    "Teferi's Protection",
+    "Enlightened Tutor",
+    "Narset, Parter of Veils"
+   ],
+   "twoCardCombos": [],
+   "massLandDenial": [],
+   "extraTurnCards": [],
+   "chainedExtraTurns": false,
+   "tutors": 4,
+   "fastMana": [
+    "Mox Amber"
+   ],
+   "reasons": [
+    "3 game changer(s): Teferi's Protection, Enlightened Tutor, Narset, Parter of Veils"
+   ]
+  },
+  "main": [
+   {
+    "name": "Way of the Mentor",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/a/1a59d5b1-12d6-486b-bd29-ca371359addd.jpg?1789729554"
+   },
+   {
+    "name": "Way of the Paradox",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/8/98dc5470-507a-4364-8480-42607255e56c.jpg?1789729606"
+   },
+   {
+    "name": "Way of the Healer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 4,
+    "mana_cost": "{3}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/0/50326a2a-7e10-464b-a97e-e880bda0558c.jpg?1789729503"
+   },
+   {
+    "name": "Way of the Cryomancer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/3/838b0efb-7398-4df9-8fdf-b8af43b47938.jpg?1789014637"
+   },
+   {
+    "name": "Way of the Deathbringer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/2/12dd46b2-e892-4660-b120-55766fd4d878.jpg?1789729576"
+   },
+   {
+    "name": "Way of the Warlord",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{2}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/d/6d86e410-20c4-4248-96bf-5780ece6274a.jpg?1789729585"
+   },
+   {
+    "name": "Way of the Pyromancer",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/1/c1a00020-7c14-4503-a057-5763704bb83e.jpg?1788878311"
+   },
+   {
+    "name": "Way of the Wildspeaker",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 5,
+    "mana_cost": "{4}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/2/a252cb01-537b-4afe-9abc-81a98c4a1439.jpg?1789729602"
+   },
+   {
+    "name": "Way of the Mind Sculptor",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 5,
+    "mana_cost": "{4}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/8/5838af68-66c3-4fe8-ab89-0a1721b0cfeb.jpg?1789729565"
+   },
+   {
+    "name": "Way of the Necromancer",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/0/a0ff9689-ea49-4fff-b37c-4abbaeb0f73d.jpg?1789729526"
+   },
+   {
+    "name": "Doubling Season",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{4}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/2/f2c4f80e-84a0-463b-82c3-5c6503809351.jpg?1783909062"
+   },
+   {
+    "name": "Tekuthal, Inquiry Dominus",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Phyrexian Horror",
+    "cmc": 4,
+    "mana_cost": "{2}{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/d/2d389264-e2d2-4589-9636-faa11fe46710.jpg?1783906040"
+   },
+   {
+    "name": "Oath of Teferi",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Enchantment",
+    "cmc": 5,
+    "mana_cost": "{3}{W}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/7/f7474f9e-a994-4ed7-83df-22edd8219e24.jpg?1783915413"
+   },
+   {
+    "name": "All Will Be One",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 5,
+    "mana_cost": "{3}{R}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/d/6d75e1f4-bd63-428e-8e6e-131594b3ba44.jpg?1783918036"
+   },
+   {
+    "name": "Evolution Sage",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/4/b4042db8-6032-49a2-bc96-ad15f55db6c3.jpg?1557576899"
+   },
+   {
+    "name": "Flux Channeler",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Creature — Human Wizard",
+    "cmc": 3,
+    "mana_cost": "{2}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/c/3c520263-6bad-4521-ba9e-192ca8223b07.jpg?1783915442"
+   },
+   {
+    "name": "Sheoldred, the Apocalypse",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Legendary Creature — Phyrexian Praetor",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/6/d67be074-cdd4-41d9-ac89-0a0456c4e4b2.jpg?1783921327"
+   },
+   {
+    "name": "Bloodthirsty Conqueror",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Vampire Knight",
+    "cmc": 5,
+    "mana_cost": "{3}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/e/ce860ed4-a5bd-4347-9eab-dd716ea84db1.jpg?1783909112"
+   },
+   {
+    "name": "Marauding Blight-Priest",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Creature — Vampire Cleric",
+    "cmc": 3,
+    "mana_cost": "{2}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/f/5f70dafc-c638-4ec0-ab5b-62998f752720.jpg?1783909072"
+   },
+   {
+    "name": "Dina, Soul Steeper",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Creature — Dryad Druid",
+    "cmc": 2,
+    "mana_cost": "{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/c/9cd2b567-0cf7-4441-b3ce-e31141dd91c8.jpg?1627428607"
+   },
+   {
+    "name": "Authority of the Consuls",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Enchantment",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/2/42ce2d7f-5924-47c0-b5ed-dacf9f9617a0.jpg?1783909087"
+   },
+   {
+    "name": "Teferi's Protection",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/8/483fa1cb-1e35-44f2-a143-98c0f107f5ca.jpg?1783921926"
+   },
+   {
+    "name": "Heroic Intervention",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/6969b172-8c86-4c2e-95a6-7b23e6f2092f.jpg?1764118046"
+   },
+   {
+    "name": "Swords to Plowshares",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/e/0e7ff4dc-af63-4342-9a44-d059e62bd14c.jpg?1752944384"
+   },
+   {
+    "name": "Path to Exile",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/5/35649ef0-b2fd-429f-be5f-766d5cea5994.jpg?1767730335"
+   },
+   {
+    "name": "Lightning Helix",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{R}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/1/4101e3fe-b0e7-4f0f-b9ac-9b61a4d628b3.jpg?1783912843"
+   },
+   {
+    "name": "Sunfall",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Sorcery",
+    "cmc": 5,
+    "mana_cost": "{3}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/2/32e29c7d-ed4b-4eff-b3c2-d99e5b63ef8d.jpg?1783917046"
+   },
+   {
+    "name": "Overwrite the Multiverse",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Sorcery",
+    "cmc": 6,
+    "mana_cost": "{4}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/4/c4554f5b-791b-48f6-bf54-ad28699e1beb.jpg?1788952080"
+   },
+   {
+    "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Sorcery // Land",
+    "cmc": 2,
+    "mana_cost": "{X}{R}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bc7239ea-f8aa-4a6f-87bd-c35359635673.jpg?1783929355"
+   },
+   {
+    "name": "Counterspell",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/1/e1e48b21-1a4f-4708-a4b4-e2e296df924c.jpg?1748703796"
+   },
+   {
+    "name": "Countersculpt",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Instant",
+    "cmc": 2,
+    "mana_cost": "{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/4/145b928d-a7ff-4fe5-ae4d-bbae7b1d955b.jpg?1788878107"
+   },
+   {
+    "name": "Phyrexian Arena",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 3,
+    "mana_cost": "{1}{B}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/7/0784b6f0-9ebf-43d2-ba0f-a6bc93ba0c48.jpg?1783909072"
+   },
+   {
+    "name": "Sylvan Library",
+    "quantity": 1,
+    "category": "draw",
+    "type_line": "Enchantment",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/a/6ada256f-2e55-4c1f-b4d3-d7b10b498956.jpg?1783918436"
+   },
+   {
+    "name": "Enlightened Tutor",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Instant",
+    "cmc": 1,
+    "mana_cost": "{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/c/1c9675fb-1a89-420f-aea8-50e0642f549c.jpg?1783918516"
+   },
+   {
+    "name": "Pia, Aether Ascetic",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Legendary Creature — Human Druid",
+    "cmc": 3,
+    "mana_cost": "{2}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/f/ff0bc30f-9d20-458e-808f-bdc2825905a5.jpg?1789387120"
+   },
+   {
+    "name": "Captain Sisay",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Legendary Creature — Human Soldier",
+    "cmc": 4,
+    "mana_cost": "{2}{G}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/2/d24d441c-f37f-44fe-8a93-f5c89df807e4.jpg?1783945664"
+   },
+   {
+    "name": "Geist of Saint Thalia",
+    "quantity": 1,
+    "category": "utility",
+    "type_line": "Legendary Creature — Spirit Cleric",
+    "cmc": 2,
+    "mana_cost": "{1}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/c/9c334530-0880-46b5-a358-9603eee3cecf.jpg?1789128026"
+   },
+   {
+    "name": "Vraska, Soul of Stone",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Gorgon Wizard",
+    "cmc": 3,
+    "mana_cost": "{U}{R}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/3/f3869752-eade-4e7a-8dd1-68cafb9e10be.jpg?1789128008"
+   },
+   {
+    "name": "Mox Amber",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Artifact",
+    "cmc": 0,
+    "mana_cost": "{0}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/6/66024e69-ad60-4c9a-a0ca-da138d33ad80.jpg?1783934955"
+   },
+   {
+    "name": "Arcane Signet",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 2,
+    "mana_cost": "{2}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/a/aa9e7f3c-e752-4cee-9e9d-fae38ba27dc9.jpg?1767730206"
+   },
+   {
+    "name": "Chromatic Lantern",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Artifact",
+    "cmc": 3,
+    "mana_cost": "{3}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/f/bf810ace-f866-457c-8671-a84c73b6f733.jpg?1767731428"
+   },
+   {
+    "name": "Bloom Tender",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Creature — Elf Druid",
+    "cmc": 2,
+    "mana_cost": "{1}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/a/ba86688d-18f0-4b5c-a797-42bf125a6c9f.jpg?1783904436"
+   },
+   {
+    "name": "Esika, God of the Tree // The Prismatic Bridge",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — God // Legendary Enchantment",
+    "cmc": 3,
+    "mana_cost": "{1}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg?1783928221"
+   },
+   {
+    "name": "Timeless Lotus",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Artifact",
+    "cmc": 5,
+    "mana_cost": "{5}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/f/0fbbab5f-657a-4e6a-8bdd-69f11547fe25.jpg?1783904529"
+   },
+   {
+    "name": "Jegantha, the Wellspring",
+    "quantity": 1,
+    "category": "ramp",
+    "type_line": "Legendary Creature — Elemental Elk",
+    "cmc": 5,
+    "mana_cost": "{4}{R/G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/9/79ec30d9-daf7-4f1d-ac16-4d11e8160d97.jpg?1783904538"
+   },
+   {
+    "name": "Ajani Resolute",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Ajani",
+    "cmc": 2,
+    "mana_cost": "{1}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/5/a5e1a7dd-8c49-4435-935c-bcc78704082b.jpg?1788329189"
+   },
+   {
+    "name": "Narset, Parter of Veils",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Narset",
+    "cmc": 3,
+    "mana_cost": "{1}{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/c/8c39f9b4-02b9-4d44-b8d6-4fd02ebbb0c5.jpg?1574294103"
+   },
+   {
+    "name": "Saheeli, Sublime Artificer",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Saheeli",
+    "cmc": 3,
+    "mana_cost": "{1}{U/R}{U/R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/e/ce35a39a-6dcd-4bbc-b43b-bd1a5425cb05.jpg?1783915410"
+   },
+   {
+    "name": "Tezzeret, Cruel Captain",
+    "quantity": 1,
+    "category": "tutor",
+    "type_line": "Legendary Planeswalker — Tezzeret",
+    "cmc": 3,
+    "mana_cost": "{3}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/2/02e8e540-8aa3-4e6a-9a11-c3949cab5f0f.jpg?1783906001"
+   },
+   {
+    "name": "Chandra, Acolyte of Flame",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Chandra",
+    "cmc": 3,
+    "mana_cost": "{1}{R}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/c/2cabfcfe-012e-4cab-bba2-24052eac0946.jpg?1783932984"
+   },
+   {
+    "name": "Kiora, Behemoth Beckoner",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Kiora",
+    "cmc": 3,
+    "mana_cost": "{2}{G/U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/a/7a61b1a6-a75f-47b0-b215-de9708b6d773.jpg?1783933378"
+   },
+   {
+    "name": "Teyo, the Shieldmage",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Legendary Planeswalker — Teyo",
+    "cmc": 3,
+    "mana_cost": "{2}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/9/a974571c-d8d5-4860-9077-2023e5f32a24.jpg?1783933473"
+   },
+   {
+    "name": "Dovin, Hand of Control",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Dovin",
+    "cmc": 3,
+    "mana_cost": "{2}{W/U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/d/bd6ff745-919b-4688-9e9e-ab7835b3b891.jpg?1783933381"
+   },
+   {
+    "name": "The Theorist, Jace Beleren",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Jace",
+    "cmc": 4,
+    "mana_cost": "{2}{U}{U}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/0/20bb8c55-4b0b-425f-8201-b54fa2fdde86.jpg?1788329228"
+   },
+   {
+    "name": "Chandra, Torch of Defiance",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker — Chandra",
+    "cmc": 4,
+    "mana_cost": "{2}{R}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/e/2eac0eaa-55b2-444a-863d-c66769aab4ee.jpg?1690004652"
+   },
+   {
+    "name": "Professor Dellian Fel",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker — Dellian",
+    "cmc": 4,
+    "mana_cost": "{2}{B}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/f/6ff3b4d8-1271-4c5d-8834-7662244f173d.jpg?1783903636"
+   },
+   {
+    "name": "Minsc & Boo, Timeless Heroes",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Minsc",
+    "cmc": 4,
+    "mana_cost": "{2}{R}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/5/057c66a8-9424-4c88-9707-5d8ef9170119.jpg?1681000740"
+   },
+   {
+    "name": "Ral, Crackling Wit",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Ral",
+    "cmc": 4,
+    "mana_cost": "{2}{U}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/a/c/acfde780-899a-4c5b-a39b-f4a3ff129103.jpg?1783910791"
+   },
+   {
+    "name": "Kaito, Bane of Nightmares",
+    "quantity": 1,
+    "category": "protection",
+    "type_line": "Legendary Planeswalker — Kaito",
+    "cmc": 4,
+    "mana_cost": "{2}{U}{B}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/5/55a14f30-4ff9-4472-90a6-c3139f1c18e5.jpg?1784963190"
+   },
+   {
+    "name": "The Wanderer",
+    "quantity": 1,
+    "category": "removal",
+    "type_line": "Legendary Planeswalker",
+    "cmc": 4,
+    "mana_cost": "{3}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/6/c6ec3686-cecd-4dee-8a68-c3e4baec25ca.jpg?1783915443"
+   },
+   {
+    "name": "Jace, Multiverse Architect",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Jace",
+    "cmc": 5,
+    "mana_cost": "{1}{W}{U}{B}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/5/55cd03d9-2535-4cf3-a8b2-1418e1190f4a.jpg?1789644316"
+   },
+   {
+    "name": "Garruk, Curse Breaker",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker — Garruk",
+    "cmc": 5,
+    "mana_cost": "{3}{G}{G}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/0/90ca5812-ceb5-46bd-b049-aed7ff10e6af.jpg?1788329370"
+   },
+   {
+    "name": "The Eternal Wanderer",
+    "quantity": 1,
+    "category": "win_condition",
+    "type_line": "Legendary Planeswalker",
+    "cmc": 6,
+    "mana_cost": "{4}{W}{W}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/0/905f0dd4-0197-45f8-8e7f-396d6dcef600.jpg?1783918081"
+   },
+   {
+    "name": "Ajani Unrelenting",
+    "quantity": 1,
+    "category": "board_wipe",
+    "type_line": "Legendary Planeswalker — Ajani",
+    "cmc": 6,
+    "mana_cost": "{4}{R}{R}",
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bc3c096f-7f6c-474c-a2c8-75d3e6ddd6f5.jpg?1788329317"
+   },
+   {
+    "name": "Command Tower",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/a/da4d9f44-9079-4144-8dd9-076be04032d4.jpg?1767730254"
+   },
+   {
+    "name": "Interplanar Beacon",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/c/bc1bed72-2440-4364-a69f-a9d7c4fe3fea.jpg?1783915388"
+   },
+   {
+    "name": "Great Hall of the Citadel",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/1/219c7b57-b62b-42d1-85d9-4b57624a3f54.jpg?1783916233"
+   },
+   {
+    "name": "Karn's Bastion",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/2/22017ec2-3552-4865-af76-dba042b141f5.jpg?1783906011"
+   },
+   {
+    "name": "Urborg, Tomb of Yawgmoth",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/69c0ade8-3bdc-4cc6-868b-1a5cf9de70ee.jpg?1732559638"
+   },
+   {
+    "name": "Multiversal Passage",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/1/21502958-a8e3-494a-9be9-bebbbb1dd9dc.jpg?1757546942"
+   },
+   {
+    "name": "Breeding Pool",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Forest Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/c/3c750d5a-f743-41ff-b5ba-02025ca0bec2.jpg?1752947580"
+   },
+   {
+    "name": "Godless Shrine",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Plains Swamp",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/c/8c542ea4-98c3-4c2d-9066-205ab7aa697a.jpg?1752947593"
+   },
+   {
+    "name": "Hallowed Fountain",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Plains Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/e/0/e056b55f-82ed-4fe0-ab0c-bb20fa4a218a.jpg?1759144845"
+   },
+   {
+    "name": "Steam Vents",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Island Mountain",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/b/6/b66daa94-d367-4812-9f18-f35378c1febb.jpg?1759144847"
+   },
+   {
+    "name": "Blood Crypt",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Mountain",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/d/6da63cc5-4624-4491-abd9-9b600c3fefe2.jpg?1759144844"
+   },
+   {
+    "name": "Stomping Ground",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Mountain Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/9/69be21b4-c613-47c6-ba57-f4785861af3e.jpg?1752947608"
+   },
+   {
+    "name": "Overgrown Tomb",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Swamp Forest",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/5/45b92924-baa1-4c9b-9932-9a5eda8f3446.jpg?1759144847"
+   },
+   {
+    "name": "Sacred Foundry",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Mountain Plains",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/b/8b4e2642-3c87-4708-b9b4-2e7f7359ac7d.jpg?1752947600"
+   },
+   {
+    "name": "Temple Garden",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Forest Plains",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/c/6cdd2a74-63b3-4ff2-9c5a-a85dee63c3c9.jpg?1759144838"
+   },
+   {
+    "name": "Flooded Strand",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/f/8f85e12c-196b-4459-b81f-0c9c854e9f57.jpg?1783911240"
+   },
+   {
+    "name": "Misty Rainforest",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/8/9/894105c4-d3ce-4d38-855b-24aa47b112c1.jpg?1742337368"
+   },
+   {
+    "name": "Scalding Tarn",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/9/49515199-f53c-4595-94ba-3a3e46b86372.jpg?1747530237"
+   },
+   {
+    "name": "Otawara, Soaring City",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/8/486d7edc-d983-41f0-8b78-c99aecd72996.jpg?1783923816"
+   },
+   {
+    "name": "Takenuma, Abandoned Mire",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Legendary Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/4/9/499037cc-a577-41cb-8ca2-5e117945634f.jpg?1783923812"
+   },
+   {
+    "name": "Theorist's Sanctum",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land — Island",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/2/22db5bba-46c9-4a26-821d-303ddb386ea4.jpg?1788878256"
+   },
+   {
+    "name": "Rockfall Vale",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/d/c/dcdea659-ecaf-4abe-be0f-64e105abb104.jpg?1783906974"
+   },
+   {
+    "name": "Theorix Annex",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/7/97bbbd23-ecb1-4407-ac14-dede08532a1e.jpg?1789557008"
+   },
+   {
+    "name": "Riverpyre Verge",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/7/57a93a71-d77c-417f-85d0-cd420f573331.jpg?1783907841"
+   },
+   {
+    "name": "Willowrush Verge",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/7/5/758d93d5-3f66-4395-a928-000485396c87.jpg?1783907837"
+   },
+   {
+    "name": "Sunbillow Verge",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/4/94ed132f-b818-4dbf-9b4a-e5acb067e0a4.jpg?1783907839"
+   },
+   {
+    "name": "Bleachbone Verge",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/5/2/52dcdabd-a186-45fe-9fee-6c0f1afeaf16.jpg?1783907843"
+   },
+   {
+    "name": "Hinterland Harbor",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/3/e/3eb512f5-9782-4c49-9b6e-4e967e42408b.jpg?1743207610"
+   },
+   {
+    "name": "Woodland Cemetery",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/0/c/0c20aa48-58a0-4dee-970f-ba1292affa28.jpg?1767732023"
+   },
+   {
+    "name": "Yavimaya Coast",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/9/f/9f98bf0c-74cf-49da-8b60-b2d3ac294a82.jpg?1743207818"
+   },
+   {
+    "name": "Shattered Sanctum",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/c/2c531254-1b12-44d8-a942-e767d516364e.jpg?1743207725"
+   },
+   {
+    "name": "Sundown Pass",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/1/2/12ca1b4f-3e98-4ad4-93fe-c4c2de09aa58.jpg?1736468697"
+   },
+   {
+    "name": "Deserted Beach",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/c/8/c819de09-dac2-407a-98c8-775865e9bdf8.jpg?1783908057"
+   },
+   {
+    "name": "Overgrown Farmland",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/6/4/644fb0ed-f434-4cc4-b7e9-a60db5ece2b7.jpg?1783906975"
+   },
+   {
+    "name": "Deathcap Glade",
+    "quantity": 1,
+    "category": "land",
+    "type_line": "Land",
+    "cmc": 0,
+    "mana_cost": null,
+    "image_uri_small": "https://cards.scryfall.io/small/front/2/f/2f20e738-bab6-4000-afca-9fc9e4261c34.jpg?1736468663"
+   }
+  ],
+  "sideboard": [],
+  "unresolved": [],
+  "truncated": false
+ }
+}

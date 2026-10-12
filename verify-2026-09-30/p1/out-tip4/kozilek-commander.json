@@ -1,0 +1,599 @@
+{
+ "metrics": {
+  "label": "kozilek-commander",
+  "strategy": "aggro",
+  "tribal": null,
+  "size": 99,
+  "lands": 38,
+  "nonland": 61,
+  "roleCounts": {
+   "ramp": 21,
+   "removal": 9,
+   "draw": 6,
+   "tutor": 2,
+   "board_wipe": 2,
+   "protection": 2,
+   "utility": 11,
+   "synergy": 3,
+   "win_condition": 5
+  },
+  "walkers": 3,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": -2,
+  "planMargin": -2,
+  "sources": {
+   "W": 1,
+   "U": 1,
+   "B": 1,
+   "R": 1,
+   "G": 1
+  },
+  "ms": 770
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Prismatic Lens",
+   "pickedScore": 126,
+   "bench": "The Irencrag",
+   "benchScore": 118,
+   "margin": -8
+  },
+  "removal": {
+   "picked": "Titan's Presence",
+   "pickedScore": 121,
+   "bench": "The Mightstone and Weakstone",
+   "benchScore": 115,
+   "margin": -6
+  },
+  "draw": {
+   "picked": "Idol of Oblivion",
+   "pickedScore": 119,
+   "bench": "Currency Converter",
+   "benchScore": 116,
+   "margin": -3
+  },
+  "tutor": {
+   "picked": "Conduit of Ruin",
+   "pickedScore": 134,
+   "bench": "Planar Bridge",
+   "benchScore": 109,
+   "margin": -25
+  },
+  "board_wipe": {
+   "picked": "Coercive Portal",
+   "pickedScore": 75,
+   "bench": "Extinguisher Battleship",
+   "benchScore": 65,
+   "margin": -10
+  },
+  "protection": {
+   "picked": "Swiftfoot Boots",
+   "pickedScore": 180,
+   "bench": "Not of This World",
+   "benchScore": 114,
+   "margin": -66
+  },
+  "utility": {
+   "picked": "Sculpting Steel",
+   "pickedScore": 118,
+   "bench": "Mirage Mirror",
+   "benchScore": 117,
+   "margin": -2
+  },
+  "synergy": {
+   "picked": "Skittering Cicada",
+   "pickedScore": 130,
+   "bench": "Darksteel Monolith",
+   "benchScore": 114,
+   "margin": -16
+  },
+  "win_condition": {
+   "picked": "Geode Golem",
+   "pickedScore": 127,
+   "bench": "Flayer of Loyalties",
+   "benchScore": 117,
+   "margin": -10
+  }
+ },
+ "planMargins": {
+  "ramp": {
+   "picked": "Prismatic Lens",
+   "pickedScore": 126,
+   "bench": "The Irencrag",
+   "benchScore": 118,
+   "margin": -8
+  },
+  "removal": {
+   "picked": "Titan's Presence",
+   "pickedScore": 121,
+   "bench": "The Mightstone and Weakstone",
+   "benchScore": 115,
+   "margin": -6
+  },
+  "draw": {
+   "picked": "Idol of Oblivion",
+   "pickedScore": 119,
+   "bench": "Currency Converter",
+   "benchScore": 116,
+   "margin": -3
+  },
+  "tutor": {
+   "picked": "Conduit of Ruin",
+   "pickedScore": 134,
+   "bench": "Planar Bridge",
+   "benchScore": 109,
+   "margin": -25
+  },
+  "board_wipe": {
+   "picked": "Coercive Portal",
+   "pickedScore": 75,
+   "bench": "Extinguisher Battleship",
+   "benchScore": 65,
+   "margin": -10
+  },
+  "protection": {
+   "picked": "Swiftfoot Boots",
+   "pickedScore": 180,
+   "bench": "Not of This World",
+   "benchScore": 114,
+   "margin": -66
+  },
+  "utility": {
+   "picked": "Sculpting Steel",
+   "pickedScore": 118,
+   "bench": "Mirage Mirror",
+   "benchScore": 117,
+   "margin": -2
+  },
+  "synergy": {
+   "picked": "Skittering Cicada",
+   "pickedScore": 130,
+   "bench": "Darksteel Monolith",
+   "benchScore": 114,
+   "margin": -16
+  },
+  "win_condition": {
+   "picked": "Geode Golem",
+   "pickedScore": 127,
+   "bench": "Flayer of Loyalties",
+   "benchScore": 117,
+   "margin": -10
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "All Is Dust",
+   "role": "utility",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Ancient Tomb",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Artisan of Kozilek",
+   "role": "win_condition",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Basalt Monolith",
+   "role": "ramp",
+   "score": 179
+  },
+  {
+   "q": 1,
+   "name": "Blinkmoth Nexus",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Coercive Portal",
+   "role": "board_wipe",
+   "score": 75
+  },
+  {
+   "q": 1,
+   "name": "Commander's Plate",
+   "role": "utility",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Conduit of Ruin",
+   "role": "tutor",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Crashing Drawbridge",
+   "role": "utility",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Dreamstone Hedron",
+   "role": "ramp",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Emrakul, the Promised End",
+   "role": "win_condition",
+   "score": 130
+  },
+  {
+   "q": 1,
+   "name": "Endbringer",
+   "role": "removal",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Everflowing Chalice",
+   "role": "ramp",
+   "score": 195
+  },
+  {
+   "q": 1,
+   "name": "Expedition Map",
+   "role": "ramp",
+   "score": 174
+  },
+  {
+   "q": 1,
+   "name": "Faceless Haven",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Forsaken Monument",
+   "role": "utility",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Foundry Inspector",
+   "role": "utility",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Geode Golem",
+   "role": "win_condition",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Glaring Fleshraker",
+   "role": "ramp",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Grim Monolith",
+   "role": "ramp",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "role": "draw",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Inkmoth Nexus",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "It That Heralds the End",
+   "role": "synergy",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Kozilek, Butcher of Truth",
+   "role": "draw",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Kozilek's Command",
+   "role": "removal",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Liberator, Urza's Battlethopter",
+   "role": "synergy",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "role": "protection",
+   "score": 215
+  },
+  {
+   "q": 1,
+   "name": "Liquimetal Torque",
+   "role": "ramp",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Mana Vault",
+   "role": "ramp",
+   "score": 151
+  },
+  {
+   "q": 1,
+   "name": "Manifold Key",
+   "role": "utility",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Metalworker",
+   "role": "ramp",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 225
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Factory",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Foundry",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Moonsilver Key",
+   "role": "tutor",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Mutavault",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mystic Forge",
+   "role": "utility",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Nevinyrral's Disk",
+   "role": "board_wipe",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Null Elemental Blast",
+   "role": "removal",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Palladium Myr",
+   "role": "ramp",
+   "score": 171
+  },
+  {
+   "q": 1,
+   "name": "Prismatic Lens",
+   "role": "ramp",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sculpting Steel",
+   "role": "utility",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Sensei's Divining Top",
+   "role": "draw",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Skittering Cicada",
+   "role": "synergy",
+   "score": 130
+  },
+  {
+   "q": 1,
+   "name": "Skullclamp",
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "role": "ramp",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Staff of Domination",
+   "role": "draw",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Stonespeaker Crystal",
+   "role": "ramp",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "role": "protection",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Thought Vessel",
+   "role": "ramp",
+   "score": 185
+  },
+  {
+   "q": 1,
+   "name": "Thran Dynamo",
+   "role": "ramp",
+   "score": 171
+  },
+  {
+   "q": 1,
+   "name": "Titan's Presence",
+   "role": "removal",
+   "score": 121
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "role": "ramp",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Ugin, the Ineffable",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Ugin, the Spirit Dragon",
+   "role": "removal",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Ulamog, the Ceaseless Hunger",
+   "role": "win_condition",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Ulamog, the Infinite Gyre",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Unstable Obelisk",
+   "role": "removal",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Unwinding Clock",
+   "role": "utility",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Urza's Incubator",
+   "role": "utility",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Urza's Saga",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Void Winnower",
+   "role": "win_condition",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Voltaic Key",
+   "role": "utility",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Warping Wail",
+   "role": "removal",
+   "score": 150
+  },
+  {
+   "q": 28,
+   "name": "Wastes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Worn Powerstone",
+   "role": "ramp",
+   "score": 179
+  }
+ ]
+}

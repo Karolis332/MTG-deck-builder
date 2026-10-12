@@ -1,0 +1,527 @@
+{
+ "metrics": {
+  "label": "aeve-arena",
+  "strategy": "tribal",
+  "tribal": "ooze",
+  "size": 99,
+  "lands": 35,
+  "nonland": 64,
+  "roleCounts": {
+   "utility": 5,
+   "removal": 7,
+   "ramp": 21,
+   "synergy": 9,
+   "draw": 12,
+   "protection": 1,
+   "win_condition": 2,
+   "tutor": 2,
+   "board_wipe": 2,
+   "land": 3
+  },
+  "walkers": 0,
+  "ways": 0,
+  "slime": 1,
+  "arenaDupes": [],
+  "maxMargin": 58,
+  "ms": 1989
+ },
+ "margins": {
+  "utility": {
+   "picked": "Eternal Witness",
+   "pickedScore": 109,
+   "bench": "Mesmeric Orb",
+   "benchScore": 113,
+   "margin": 5
+  },
+  "removal": {
+   "picked": "Return to Nature",
+   "pickedScore": 97,
+   "bench": "Kozilek's Command",
+   "benchScore": 126,
+   "margin": 29
+  },
+  "ramp": {
+   "picked": "Fuel Tank Feaster",
+   "pickedScore": 93,
+   "bench": "Idol of False Gods",
+   "benchScore": 138,
+   "margin": 45
+  },
+  "synergy": {
+   "picked": "Ooze Patrol",
+   "pickedScore": 86,
+   "bench": "Gift of the Viper",
+   "benchScore": 144,
+   "margin": 58
+  },
+  "draw": {
+   "picked": "Harmonize",
+   "pickedScore": 111,
+   "bench": "Mishra's Bauble",
+   "benchScore": 161,
+   "margin": 50
+  },
+  "protection": {
+   "picked": "Heroic Intervention",
+   "pickedScore": 156,
+   "bench": "Biosynthic Burst",
+   "benchScore": 126,
+   "margin": -30
+  },
+  "win_condition": {
+   "picked": "Rooftop Percher",
+   "pickedScore": 52,
+   "bench": "Traxos, Scourge of Kroog",
+   "benchScore": 88,
+   "margin": 36
+  },
+  "tutor": {
+   "picked": "Celestial Reunion",
+   "pickedScore": 140,
+   "bench": "Tezzeret, Cruel Captain",
+   "benchScore": 123,
+   "margin": -17
+  },
+  "land": {
+   "picked": "Disciple of Freyalise // Garden of Freyalise",
+   "pickedScore": 97,
+   "bench": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "benchScore": 145,
+   "margin": 48
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Acidic Slime",
+   "role": "removal",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Barkform Harvester",
+   "role": "utility",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Basking Broodscale",
+   "role": "ramp",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "role": "removal",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "role": "land",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "role": "removal",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Cavern of Souls",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Celestial Reunion",
+   "role": "tutor",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Changeling Wayfinder",
+   "role": "ramp",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Charge Through",
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Chomping Changeling",
+   "role": "removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "role": "draw",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Corrosive Ooze",
+   "role": "utility",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "role": "ramp",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "role": "ramp",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "role": "land",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Doubling Season",
+   "role": "synergy",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "role": "ramp",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Emerald Medallion",
+   "role": "utility",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "role": "utility",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Experiment One",
+   "role": "synergy",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "role": "ramp",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 28,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Fuel Tank Feaster",
+   "role": "ramp",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "role": "draw",
+   "score": 208
+  },
+  {
+   "q": 1,
+   "name": "Glimpse of Nature",
+   "role": "draw",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hardened Scales",
+   "role": "synergy",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Harmonize",
+   "role": "draw",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "role": "protection",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "role": "draw",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "Kenrith's Transformation",
+   "role": "removal",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "role": "ramp",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Metallic Mimic",
+   "role": "synergy",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Miming Slime",
+   "role": "synergy",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mutable Explorer",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Mutagen Man, Living Ooze",
+   "role": "synergy",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "role": "board_wipe",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Northampton Farm",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Ooze Patrol",
+   "role": "synergy",
+   "score": 86
+  },
+  {
+   "q": 1,
+   "name": "Orcrist, Goblin-cleaver",
+   "role": "synergy",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Outcaster Trailblazer",
+   "role": "ramp",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Ozolith, the Shattered Spire",
+   "role": "draw",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Paradise Druid",
+   "role": "ramp",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "role": "board_wipe",
+   "score": 43
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "role": "ramp",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Return to Nature",
+   "role": "removal",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Rooftop Percher",
+   "role": "win_condition",
+   "score": 52
+  },
+  {
+   "q": 1,
+   "name": "Scavenging Ooze",
+   "role": "removal",
+   "score": 222
+  },
+  {
+   "q": 1,
+   "name": "Secret Tunnel",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Shamanic Revelation",
+   "role": "draw",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Slime Against Humanity",
+   "role": "synergy",
+   "score": 187
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sylvan Library",
+   "role": "draw",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Tangled Florahedron // Tangled Vale",
+   "role": "land",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Temperamental Oozewagg",
+   "role": "win_condition",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "role": "ramp",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Three Tree Mascot",
+   "role": "ramp",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "role": "draw",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Universal Automaton",
+   "role": "utility",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Up the Beanstalk",
+   "role": "draw",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Utopia Sprawl",
+   "role": "ramp",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "role": "tutor",
+   "score": 144
+  }
+ ]
+}

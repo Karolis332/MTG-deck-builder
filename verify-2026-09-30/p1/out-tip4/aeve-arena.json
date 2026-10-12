@@ -1,0 +1,582 @@
+{
+ "metrics": {
+  "label": "aeve-arena",
+  "strategy": "tribal",
+  "tribal": "ooze",
+  "size": 99,
+  "lands": 35,
+  "nonland": 64,
+  "roleCounts": {
+   "removal": 6,
+   "draw": 13,
+   "synergy": 12,
+   "ramp": 18,
+   "utility": 5,
+   "win_condition": 2,
+   "protection": 1,
+   "tutor": 2,
+   "board_wipe": 2,
+   "land": 3
+  },
+  "walkers": 1,
+  "ways": 0,
+  "slime": 4,
+  "arenaDupes": [],
+  "maxMargin": 53,
+  "planMargin": 35,
+  "sources": {
+   "W": 3,
+   "U": 4,
+   "B": 3,
+   "R": 3,
+   "G": 39
+  },
+  "ms": 1945
+ },
+ "margins": {
+  "removal": {
+   "picked": "Bushwhack",
+   "pickedScore": 90,
+   "bench": "Kozilek's Command",
+   "benchScore": 96,
+   "margin": 6
+  },
+  "draw": {
+   "picked": "Glimpse of Nature",
+   "pickedScore": 112,
+   "bench": "Season of Growth",
+   "benchScore": 123,
+   "margin": 12
+  },
+  "synergy": {
+   "picked": "Ooze Patrol",
+   "pickedScore": 86,
+   "bench": "Gift of the Viper",
+   "benchScore": 119,
+   "margin": 33
+  },
+  "ramp": {
+   "picked": "Fuel Tank Feaster",
+   "pickedScore": 63,
+   "bench": "Basking Broodscale",
+   "benchScore": 116,
+   "margin": 53
+  },
+  "utility": {
+   "picked": "Barkform Harvester",
+   "pickedScore": 102,
+   "bench": "Eternal Witness",
+   "benchScore": 101,
+   "margin": -1
+  },
+  "win_condition": {
+   "picked": "Rooftop Percher",
+   "pickedScore": 72,
+   "bench": "Myr Battlesphere",
+   "benchScore": 94,
+   "margin": 22
+  },
+  "protection": {
+   "picked": "Heroic Intervention",
+   "pickedScore": 138,
+   "bench": "Biosynthic Burst",
+   "benchScore": 108,
+   "margin": -30
+  },
+  "tutor": {
+   "picked": "Celestial Reunion",
+   "pickedScore": 115,
+   "bench": "Tezzeret, Cruel Captain",
+   "benchScore": 115,
+   "margin": 0
+  },
+  "land": {
+   "picked": "Tangled Florahedron // Tangled Vale",
+   "pickedScore": 90,
+   "bench": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "benchScore": 125,
+   "margin": 35
+  }
+ },
+ "planMargins": {
+  "draw": {
+   "picked": "Glimpse of Nature",
+   "pickedScore": 112,
+   "bench": "Season of Growth",
+   "benchScore": 123,
+   "margin": 12
+  },
+  "ramp": {
+   "picked": "Three Tree Mascot",
+   "pickedScore": 102,
+   "bench": "Basking Broodscale",
+   "benchScore": 116,
+   "margin": 13
+  },
+  "utility": {
+   "picked": "Barkform Harvester",
+   "pickedScore": 102,
+   "bench": "Eternal Witness",
+   "benchScore": 101,
+   "margin": -1
+  },
+  "removal": {
+   "picked": "Bushwhack",
+   "pickedScore": 90,
+   "bench": "Kozilek's Command",
+   "benchScore": 96,
+   "margin": 6
+  },
+  "synergy": {
+   "picked": "Orcrist, Goblin-cleaver",
+   "pickedScore": 128,
+   "bench": "Gift of the Viper",
+   "benchScore": 119,
+   "margin": -9
+  },
+  "protection": {
+   "picked": "Heroic Intervention",
+   "pickedScore": 138,
+   "bench": "Biosynthic Burst",
+   "benchScore": 108,
+   "margin": -30
+  },
+  "tutor": {
+   "picked": "Celestial Reunion",
+   "pickedScore": 115,
+   "bench": "Tezzeret, Cruel Captain",
+   "benchScore": 115,
+   "margin": 0
+  },
+  "win_condition": {
+   "picked": "Rooftop Percher",
+   "pickedScore": 72,
+   "bench": "Myr Battlesphere",
+   "benchScore": 94,
+   "margin": 22
+  },
+  "land": {
+   "picked": "Tangled Florahedron // Tangled Vale",
+   "pickedScore": 90,
+   "bench": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "benchScore": 125,
+   "margin": 35
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Acidic Slime",
+   "role": "removal",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Banner of Kinship",
+   "role": "utility",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Barkform Harvester",
+   "role": "utility",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "role": "removal",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "role": "land",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Bushwhack",
+   "role": "removal",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Cavern of Souls",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Celestial Reunion",
+   "role": "tutor",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Changeling Wayfinder",
+   "role": "ramp",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Chomping Changeling",
+   "role": "removal",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "role": "draw",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Colossal Majesty",
+   "role": "draw",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Corrosive Ooze",
+   "role": "utility",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Crop Rotation",
+   "role": "ramp",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "role": "land",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Doubling Season",
+   "role": "synergy",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Elvish Mystic",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Emerald Medallion",
+   "role": "utility",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Experiment One",
+   "role": "synergy",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Explore",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Farseek",
+   "role": "ramp",
+   "score": 138
+  },
+  {
+   "q": 28,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Fuel Tank Feaster",
+   "role": "ramp",
+   "score": 63
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "role": "draw",
+   "score": 200
+  },
+  {
+   "q": 1,
+   "name": "Glimpse of Nature",
+   "role": "draw",
+   "score": 112
+  },
+  {
+   "q": 1,
+   "name": "Hall of Echoes",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hardened Scales",
+   "role": "synergy",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "role": "protection",
+   "score": 138
+  },
+  {
+   "q": 1,
+   "name": "Inspiring Call",
+   "role": "draw",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Kenrith's Transformation",
+   "role": "removal",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Leaf-Crowned Visionary",
+   "role": "draw",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Meltstrider Eulogist",
+   "role": "draw",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Metallic Mimic",
+   "role": "synergy",
+   "score": 149
+  },
+  {
+   "q": 1,
+   "name": "Miming Slime",
+   "role": "synergy",
+   "score": 99
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mutable Explorer",
+   "role": "ramp",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Mutagen Man, Living Ooze",
+   "role": "synergy",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "role": "board_wipe",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Nissa, Who Shakes the World",
+   "role": "ramp",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Northampton Farm",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Ooze Patrol",
+   "role": "synergy",
+   "score": 86
+  },
+  {
+   "q": 1,
+   "name": "Orcrist, Goblin-cleaver",
+   "role": "synergy",
+   "score": 128
+  },
+  {
+   "q": 1,
+   "name": "Outcaster Trailblazer",
+   "role": "ramp",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Ozolith, the Shattered Spire",
+   "role": "draw",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Perilous Vault",
+   "role": "board_wipe",
+   "score": 43
+  },
+  {
+   "q": 1,
+   "name": "Rampant Growth",
+   "role": "ramp",
+   "score": 176
+  },
+  {
+   "q": 1,
+   "name": "Rogue's Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Rooftop Percher",
+   "role": "win_condition",
+   "score": 72
+  },
+  {
+   "q": 1,
+   "name": "Scavenging Ooze",
+   "role": "removal",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Secret Tunnel",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "role": "ramp",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Shamanic Revelation",
+   "role": "draw",
+   "score": 138
+  },
+  {
+   "q": 4,
+   "name": "Slime Against Humanity",
+   "role": "synergy",
+   "score": 179
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Soulstone Sanctuary",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Summon: Fenrir",
+   "role": "ramp",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Sylvan Library",
+   "role": "draw",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Tangled Florahedron // Tangled Vale",
+   "role": "land",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Temperamental Oozewagg",
+   "role": "win_condition",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Three Tree Mascot",
+   "role": "ramp",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Tribute to the World Tree",
+   "role": "draw",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Universal Automaton",
+   "role": "utility",
+   "score": 103
+  },
+  {
+   "q": 1,
+   "name": "Up the Beanstalk",
+   "role": "draw",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Worldly Tutor",
+   "role": "tutor",
+   "score": 119
+  }
+ ]
+}

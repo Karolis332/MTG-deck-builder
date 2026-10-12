@@ -1,0 +1,124 @@
+{
+  "file": "tazri.txt",
+  "unresolved": [],
+  "payload": {
+    "version": "1.2.0",
+    "score": 32,
+    "provisional": true,
+    "components": [
+      {
+        "key": "mana",
+        "score": 89.4,
+        "weight": 20.61855670103093,
+        "reason": "36.8 effective lands vs 39.0; B has 11/24 timely sources."
+      },
+      {
+        "key": "curve",
+        "score": 94.4,
+        "weight": 10.309278350515465,
+        "reason": "2-drops 15/18; 100% chance of a useful play by turn 2."
+      },
+      {
+        "key": "interaction",
+        "score": 76.6,
+        "weight": 16.494845360824744,
+        "reason": "8.3/12.0 effective answers, 6/7.0 cheap; weakest coverage: creature."
+      },
+      {
+        "key": "advantage",
+        "score": 61.4,
+        "weight": 14.43298969072165,
+        "reason": "8.7/10.0 draw units by turn 6; 1 cheap velocity cards."
+      },
+      {
+        "key": "win",
+        "score": 59.8,
+        "weight": 20.61855670103093,
+        "reason": "Token/Food conversion (7 bodies): closes T10, access 36% (u=0.66); shared bottleneck, protection access 38%; none."
+      },
+      {
+        "key": "synergy",
+        "score": 14.7,
+        "weight": 17.52577319587629,
+        "reason": "38% supports typal; weakest dependency enabler 8/11; 0 unsupported payoffs."
+      },
+      {
+        "key": "meta",
+        "score": 50,
+        "weight": 0,
+        "reason": "no context: 0 dated lists, 0% coverage; insufficient data; snapshot none."
+      },
+      {
+        "key": "structure",
+        "score": 100,
+        "weight": 0,
+        "reason": "5/5 rule checks verified; none; cap none."
+      }
+    ],
+    "gates": [
+      {
+        "key": "structure",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "5/5 rule checks verified; none; cap none."
+      },
+      {
+        "key": "size",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "100 cards (commander wants 100)"
+      },
+      {
+        "key": "singleton",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "singleton respected (basics exempt)"
+      },
+      {
+        "key": "legality",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "every card legal in commander"
+      },
+      {
+        "key": "rules",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "no other format rule broken"
+      },
+      {
+        "key": "identity",
+        "kind": "rules",
+        "status": "pass",
+        "cap": null,
+        "reason": "all cards inside BGRUW"
+      },
+      {
+        "key": "quality_cap",
+        "kind": "quality",
+        "status": "warn",
+        "cap": 31.8,
+        "reason": "quality cap 20+0.8*min(M,W,S)=31.8 from mana=89.4, win=59.8, synergy=14.7."
+      },
+      {
+        "key": "coverage",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "52% of nonland copies are typed in the effect catalogue — provisional: effect coverage, not calibrated."
+      },
+      {
+        "key": "meta_evidence",
+        "kind": "evidence",
+        "status": "warn",
+        "cap": null,
+        "reason": "no corpus snapshot supplied — meta fit defaulted to 50."
+      }
+    ]
+  }
+}

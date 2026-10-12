@@ -1,0 +1,648 @@
+{
+ "metrics": {
+  "label": "atraxa",
+  "strategy": "superfriends",
+  "tribal": null,
+  "size": 99,
+  "lands": 38,
+  "nonland": 61,
+  "roleCounts": {
+   "ramp": 15,
+   "win_condition": 8,
+   "utility": 11,
+   "draw": 10,
+   "removal": 11,
+   "tutor": 1,
+   "board_wipe": 5
+  },
+  "walkers": 12,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 68,
+  "ms": 1266
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Ugin, Eye of the Storms",
+   "pickedScore": 124,
+   "bench": "Collector's Vault",
+   "benchScore": 158,
+   "margin": 35
+  },
+  "win_condition": {
+   "picked": "Kaito, Dancing Shadow",
+   "pickedScore": 140,
+   "bench": "Marionette Apprentice",
+   "benchScore": 152,
+   "margin": 12
+  },
+  "utility": {
+   "picked": "Orzhov Advokist",
+   "pickedScore": 109,
+   "bench": "Felidar Retreat",
+   "benchScore": 152,
+   "margin": 43
+  },
+  "draw": {
+   "picked": "Piper Wright, Publick Reporter",
+   "pickedScore": 155,
+   "bench": "Chasm Skulker",
+   "benchScore": 179,
+   "margin": 24
+  },
+  "removal": {
+   "picked": "Elspeth Conquers Death",
+   "pickedScore": 107,
+   "bench": "Loran of the Third Path",
+   "benchScore": 175,
+   "margin": 68
+  },
+  "tutor": {
+   "picked": "Tezzeret, Cruel Captain",
+   "pickedScore": 141,
+   "bench": "Beseech the Mirror",
+   "benchScore": 128,
+   "margin": -13
+  },
+  "board_wipe": {
+   "picked": "Damnation",
+   "pickedScore": 102,
+   "bench": "Phyrexian Scriptures",
+   "benchScore": 101,
+   "margin": -1
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Ajani, Strength of the Pride",
+   "role": "win_condition",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Archdruid's Charm",
+   "role": "removal",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Austere Command",
+   "role": "board_wipe",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Avenger of Zendikar",
+   "role": "win_condition",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Bane of Progress",
+   "role": "board_wipe",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Bayou",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "role": "draw",
+   "score": 216
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Brokers Ascendancy",
+   "role": "utility",
+   "score": 134
+  },
+  {
+   "q": 1,
+   "name": "Brokers Hideout",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "role": "removal",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Contagion Clasp",
+   "role": "removal",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Damnation",
+   "role": "board_wipe",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "role": "ramp",
+   "score": 203
+  },
+  {
+   "q": 1,
+   "name": "Deceptive Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Elspeth Conquers Death",
+   "role": "removal",
+   "score": 107
+  },
+  {
+   "q": 1,
+   "name": "Elspeth, Storm Slayer",
+   "role": "removal",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Everflowing Chalice",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Evolution Sage",
+   "role": "utility",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Ezuri, Stalker of Spheres",
+   "role": "draw",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "role": "removal",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Flux Channeler",
+   "role": "utility",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Foreboding Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Freyalise, Llanowar's Fury",
+   "role": "removal",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "role": "draw",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Grand Coliseum",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Ichormoon Gauntlet",
+   "role": "utility",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "role": "draw",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Inexorable Tide",
+   "role": "utility",
+   "score": 161
+  },
+  {
+   "q": 2,
+   "name": "Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Cunning Infiltrator",
+   "role": "win_condition",
+   "score": 148
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Dancing Shadow",
+   "role": "win_condition",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Ledger Shredder",
+   "role": "draw",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Lethal Scheme",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Lolth, Spider Queen",
+   "role": "win_condition",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "role": "ramp",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Murmuring Bosk",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Night of the Sweets' Revenge",
+   "role": "board_wipe",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Obsessive Pursuit",
+   "role": "draw",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Origin of Metalbending",
+   "role": "removal",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Orzhov Advokist",
+   "role": "utility",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Piper Wright, Publick Reporter",
+   "role": "draw",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Pitiless Plunderer",
+   "role": "ramp",
+   "score": 167
+  },
+  {
+   "q": 2,
+   "name": "Plains",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Promise of Loyalty",
+   "role": "utility",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Savannah",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Season of Gathering",
+   "role": "board_wipe",
+   "score": 146
+  },
+  {
+   "q": 1,
+   "name": "Semester's End",
+   "role": "utility",
+   "score": 110
+  },
+  {
+   "q": 1,
+   "name": "Skullclamp",
+   "role": "draw",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Spark Double",
+   "role": "utility",
+   "score": 120
+  },
+  {
+   "q": 1,
+   "name": "Sphere of Safety",
+   "role": "utility",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stroke of Midnight",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "role": "ramp",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "role": "ramp",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Teferi, Temporal Pilgrim",
+   "role": "win_condition",
+   "score": 165
+  },
+  {
+   "q": 1,
+   "name": "Tekuthal, Inquiry Dominus",
+   "role": "win_condition",
+   "score": 222
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "role": "tutor",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret's Gambit",
+   "role": "draw",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "The Aetherspark",
+   "role": "win_condition",
+   "score": 142
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "role": "ramp",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Thought Vessel",
+   "role": "ramp",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Thrummingbird",
+   "role": "utility",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Tireless Provisioner",
+   "role": "ramp",
+   "score": 168
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "role": "draw",
+   "score": 194
+  },
+  {
+   "q": 1,
+   "name": "Tranquil Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tropical Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tundra",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tyvar Kell",
+   "role": "ramp",
+   "score": 160
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "role": "ramp",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vraska, Betrayal's Sting",
+   "role": "ramp",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Walking Ballista",
+   "role": "removal",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "role": "land",
+   "score": -9999
+  }
+ ]
+}

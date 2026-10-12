@@ -1,0 +1,588 @@
+{
+ "metrics": {
+  "label": "jhoira-arena",
+  "strategy": "spellslinger",
+  "tribal": null,
+  "size": 99,
+  "lands": 34,
+  "nonland": 65,
+  "roleCounts": {
+   "ramp": 16,
+   "synergy": 4,
+   "utility": 8,
+   "draw": 7,
+   "win_condition": 4,
+   "removal": 14,
+   "protection": 5,
+   "tutor": 1,
+   "board_wipe": 2,
+   "land": 4
+  },
+  "walkers": 2,
+  "ways": 0,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 66,
+  "ms": 1614
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Mox Opal",
+   "pickedScore": 116,
+   "bench": "Glaring Fleshraker",
+   "benchScore": 148,
+   "margin": 32
+  },
+  "synergy": {
+   "picked": "Scrap Trawler",
+   "pickedScore": 109,
+   "bench": "Blacksmith's Talent",
+   "benchScore": 132,
+   "margin": 23
+  },
+  "utility": {
+   "picked": "Thousand-Year Storm",
+   "pickedScore": 75,
+   "bench": "Professional Face-Breaker",
+   "benchScore": 140,
+   "margin": 66
+  },
+  "draw": {
+   "picked": "Brainstorm",
+   "pickedScore": 96,
+   "bench": "The Legend of Kuruk // Avatar Kuruk",
+   "benchScore": 128,
+   "margin": 33
+  },
+  "win_condition": {
+   "picked": "Guttersnipe",
+   "pickedScore": 74,
+   "bench": "Smaug the Magnificent",
+   "benchScore": 101,
+   "margin": 27
+  },
+  "removal": {
+   "picked": "Grapeshot",
+   "pickedScore": 75,
+   "bench": "Kozilek's Command",
+   "benchScore": 126,
+   "margin": 51
+  },
+  "protection": {
+   "picked": "Lightning Greaves",
+   "pickedScore": 89,
+   "bench": "Ooze Spill",
+   "benchScore": 96,
+   "margin": 7
+  },
+  "tutor": {
+   "picked": "Mystical Tutor",
+   "pickedScore": 111,
+   "bench": "Tezzeret, Cruel Captain",
+   "benchScore": 98,
+   "margin": -13
+  },
+  "board_wipe": {
+   "picked": "Ajani Unrelenting",
+   "pickedScore": 94,
+   "bench": "Ashling's Command",
+   "benchScore": 81,
+   "margin": -13
+  },
+  "land": {
+   "picked": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "pickedScore": 79,
+   "bench": "Dowsing Device // Geode Grotto",
+   "benchScore": 114,
+   "margin": 34
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Abrade",
+   "role": "removal",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Ajani Unrelenting",
+   "role": "board_wipe",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "role": "ramp",
+   "score": 191
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Archmage Emeritus",
+   "role": "draw",
+   "score": 153
+  },
+  {
+   "q": 1,
+   "name": "Arena of Glory",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Ashling, Flame Dancer",
+   "role": "ramp",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Big Score",
+   "role": "ramp",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "role": "board_wipe",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Brain Freeze",
+   "role": "utility",
+   "score": 86
+  },
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "role": "draw",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Cool but Rude",
+   "role": "draw",
+   "score": 117
+  },
+  {
+   "q": 1,
+   "name": "Cori Mountain Monastery",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "role": "protection",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Dramatic Reversal",
+   "role": "utility",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Dualcaster Mage",
+   "role": "utility",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Enthusiastic Mechanaut",
+   "role": "synergy",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Foundry Inspector",
+   "role": "synergy",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Goblin Electromancer",
+   "role": "utility",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Goblin Trashmaster",
+   "role": "removal",
+   "score": 93
+  },
+  {
+   "q": 1,
+   "name": "Grapeshot",
+   "role": "removal",
+   "score": 75
+  },
+  {
+   "q": 1,
+   "name": "Guttersnipe",
+   "role": "win_condition",
+   "score": 74
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Ichor Wellspring",
+   "role": "draw",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Into the Flood Maw",
+   "role": "removal",
+   "score": 91
+  },
+  {
+   "q": 10,
+   "name": "Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Izzet Charm",
+   "role": "removal",
+   "score": 97
+  },
+  {
+   "q": 1,
+   "name": "Izzet Signet",
+   "role": "ramp",
+   "score": 174
+  },
+  {
+   "q": 1,
+   "name": "Jhoira's Familiar",
+   "role": "win_condition",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Laboratory Maniac",
+   "role": "draw",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "role": "protection",
+   "score": 89
+  },
+  {
+   "q": 1,
+   "name": "Magic Pot",
+   "role": "removal",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "role": "ramp",
+   "score": 188
+  },
+  {
+   "q": 1,
+   "name": "Mishra's Bauble",
+   "role": "draw",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Mistrise Village",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mizzix's Mastery",
+   "role": "removal",
+   "score": 96
+  },
+  {
+   "q": 10,
+   "name": "Mountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "role": "ramp",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Mox Opal",
+   "role": "ramp",
+   "score": 116
+  },
+  {
+   "q": 1,
+   "name": "Multiversal Passage",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Murmuring Mystic",
+   "role": "win_condition",
+   "score": 96
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "role": "tutor",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Negate",
+   "role": "protection",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Ornithopter",
+   "role": "utility",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Ornithopter of Paradise",
+   "role": "ramp",
+   "score": 123
+  },
+  {
+   "q": 1,
+   "name": "Pinnacle Monk // Mystic Peak",
+   "role": "land",
+   "score": 104
+  },
+  {
+   "q": 1,
+   "name": "Planar Incision",
+   "role": "removal",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Pongify",
+   "role": "removal",
+   "score": 119
+  },
+  {
+   "q": 1,
+   "name": "Price of Freedom",
+   "role": "removal",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Rapid Hybridization",
+   "role": "removal",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Reckless Fireweaver",
+   "role": "win_condition",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Resculpt",
+   "role": "removal",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Riverpyre Verge",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Saheeli, Sublime Artificer",
+   "role": "synergy",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Scrap Trawler",
+   "role": "synergy",
+   "score": 109
+  },
+  {
+   "q": 1,
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "role": "land",
+   "score": 79
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "role": "land",
+   "score": 106
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "role": "ramp",
+   "score": 126
+  },
+  {
+   "q": 1,
+   "name": "Soul-Guide Lantern",
+   "role": "removal",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Spirebluff Canal",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Springleaf Drum",
+   "role": "ramp",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "role": "ramp",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Stormcarved Coast",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sundering Eruption // Volcanic Fissure",
+   "role": "land",
+   "score": 111
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "role": "protection",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Swiftfoot Boots",
+   "role": "protection",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "role": "ramp",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 154
+  },
+  {
+   "q": 1,
+   "name": "Thousand-Year Storm",
+   "role": "utility",
+   "score": 75
+  },
+  {
+   "q": 1,
+   "name": "Thran Portal",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Underworld Breach",
+   "role": "utility",
+   "score": 77
+  },
+  {
+   "q": 1,
+   "name": "Unexpected Windfall",
+   "role": "ramp",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Urza, Lord High Artificer",
+   "role": "ramp",
+   "score": 164
+  },
+  {
+   "q": 1,
+   "name": "Young Pyromancer",
+   "role": "utility",
+   "score": 79
+  },
+  {
+   "q": 1,
+   "name": "Zuko's Exile",
+   "role": "removal",
+   "score": 115
+  }
+ ]
+}

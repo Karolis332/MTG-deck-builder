@@ -1,0 +1,7 @@
+## krenko-coll-u1: main=99 lands=38 basics=32 strategy=tribal tribe=34 dead=[]
+  roles {"ramp":16,"draw":6,"utility":25,"removal":5,"board_wipe":2,"protection":2,"win_condition":5}
+  NOT owned by user1: 0 
+## ayula-nocoll: main=99 lands=38 basics=28 strategy=tribal tribe=33 dead=[{"out":"Spirit of the Aldergard","in":"Roaming Throne","reason":"narrow tutor: only 0 Snow Land in deck"}]
+  roles {"ramp":11,"draw":18,"removal":3,"board_wipe":1,"protection":5,"win_condition":6,"utility":17}
+  bears: Rampaging Yao Guai(2955); Surrak and Goreclaw(1598); Goreclaw, Terror of Qal Sisma(647); Lumra, Bellow of the Woods(1130); Ulvenwald Bear(11837); Bosco, Just a Bear(13395); Wilson, Refined Grizzly(3962); Ruxa, Patient Professor(6021); Owlbear Cub(6106); Werebear(6905); Beorn the Fierce(9328); Evercoat Ursine(5089); Mother Bear(8456); Drover Grizzly(10331); Striped Bears(11747); Druid's Familiar(11296); Grizzly Bears(8181); Friendly Teddy(9527); Alpine Grizzly(8448); Ursine Monstrosity(9078); Runeclaw Bear(9276); Ashcoat Bear(9305); Bear Cub(9448); Dragon-Scarred Bear(12914); Copper Host Crusher(10707); Owlbear(9186); Balduvian Bears(10166); Casal, Lurkwood Pathfinder // Casal, Pathbreaker Owlbear(10231); Vivien's Grizzly(13559); River Bear(13679); Little Bear(13048); Studious First-Year // Rampant Growth(3140); Pale Bears(13748)
+EXIT=0

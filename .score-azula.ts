@@ -1,0 +1,13 @@
+import fs from 'fs';
+import { parseDecklist } from './src/lib/deck-gate-parse';
+import { toInput } from './scripts/deck-score-fixtures';
+import { scoreDeck } from './src/lib/deck-score';
+const text = fs.readFileSync('C:/Users/QuLeR/MTG-deck-builder/verify-2026-09-20/azula/fire-lord-azula-spellslinger-web.txt', 'utf8');
+const parsed: any = parseDecklist(text);
+const lines = Array.isArray(parsed) ? parsed : parsed.lines;
+const loaded = toInput(lines, 'commander');
+const r = scoreDeck(loaded.input);
+console.log('unresolved', loaded.unresolvedNames);
+console.log('score', r.score, 'provisional', r.provisional);
+for (const c of r.components) console.log(' ', c.key, Math.round(c.score * 10) / 10, 'w', Math.round(c.weight), '-', c.reason.slice(0, 120));
+for (const g of r.gates) if (g.status !== 'pass') console.log('  gate', g.key, g.status, g.cap, '-', g.reason.slice(0, 120));

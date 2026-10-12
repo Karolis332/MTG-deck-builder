@@ -1,0 +1,666 @@
+{
+ "metrics": {
+  "label": "tam-arena",
+  "strategy": "superfriends",
+  "tribal": null,
+  "size": 99,
+  "lands": 34,
+  "nonland": 65,
+  "roleCounts": {
+   "utility": 1,
+   "ramp": 12,
+   "draw": 12,
+   "removal": 11,
+   "board_wipe": 5,
+   "protection": 2,
+   "win_condition": 17,
+   "tutor": 1,
+   "land": 4
+  },
+  "walkers": 18,
+  "ways": 3,
+  "slime": 0,
+  "arenaDupes": [
+   "Minsc & Boo, Timeless Heroes"
+  ],
+  "maxMargin": 184,
+  "ms": 2505
+ },
+ "margins": {
+  "utility": {
+   "picked": "Oath of Teferi",
+   "pickedScore": 108,
+   "bench": "Third Path Iconoclast",
+   "benchScore": 170,
+   "margin": 62
+  },
+  "ramp": {
+   "picked": "Way of the Pyromancer",
+   "pickedScore": 25,
+   "bench": "The Great Henge",
+   "benchScore": 208,
+   "margin": 184
+  },
+  "draw": {
+   "picked": "Academic Ascent",
+   "pickedScore": 23,
+   "bench": "Kutzil, Malamet Exemplar",
+   "benchScore": 205,
+   "margin": 182
+  },
+  "removal": {
+   "picked": "Cut Down",
+   "pickedScore": 44,
+   "bench": "Fracture",
+   "benchScore": 197,
+   "margin": 153
+  },
+  "board_wipe": {
+   "picked": "Ashling's Command",
+   "pickedScore": 115,
+   "bench": "Night of the Sweets' Revenge",
+   "benchScore": 113,
+   "margin": -2
+  },
+  "protection": {
+   "picked": "Kaito, Bane of Nightmares",
+   "pickedScore": 114,
+   "bench": "Swan Song",
+   "benchScore": 181,
+   "margin": 67
+  },
+  "win_condition": {
+   "picked": "Huatli, the Sun's Heart",
+   "pickedScore": 84,
+   "bench": "Mirkwood Bats",
+   "benchScore": 155,
+   "margin": 72
+  },
+  "tutor": {
+   "picked": "Tezzeret, Cruel Captain",
+   "pickedScore": 132,
+   "bench": "Enlightened Tutor",
+   "benchScore": 148,
+   "margin": 16
+  },
+  "land": {
+   "picked": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "pickedScore": 141,
+   "bench": "Sundering Eruption // Volcanic Fissure",
+   "benchScore": 174,
+   "margin": 33
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "A-Minsc & Boo, Timeless Heroes",
+   "role": "win_condition",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Academic Ascent",
+   "role": "draw",
+   "score": 23
+  },
+  {
+   "q": 1,
+   "name": "Aetherize",
+   "role": "board_wipe",
+   "score": 122
+  },
+  {
+   "q": 1,
+   "name": "Angrath, Captain of Chaos",
+   "role": "win_condition",
+   "score": 90
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "role": "ramp",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Ashiok, Dream Render",
+   "role": "win_condition",
+   "score": 105
+  },
+  {
+   "q": 1,
+   "name": "Ashling's Command",
+   "role": "board_wipe",
+   "score": 115
+  },
+  {
+   "q": 1,
+   "name": "Beast Within",
+   "role": "removal",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "role": "board_wipe",
+   "score": 118
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Boros Signet",
+   "role": "ramp",
+   "score": 161
+  },
+  {
+   "q": 1,
+   "name": "Bountiful Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Brokers Hideout",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Cabaretti Courtyard",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Chromanticore",
+   "role": "win_condition",
+   "score": 174
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Countersculpt",
+   "role": "draw",
+   "score": 38
+  },
+  {
+   "q": 1,
+   "name": "Cut Down",
+   "role": "removal",
+   "score": 44
+  },
+  {
+   "q": 1,
+   "name": "Deserted Beach",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Dovin, Hand of Control",
+   "role": "win_condition",
+   "score": 94
+  },
+  {
+   "q": 1,
+   "name": "Dovin's Veto",
+   "role": "protection",
+   "score": 206
+  },
+  {
+   "q": 1,
+   "name": "Dreamroot Cascade",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Eriette of the Charmed Apple",
+   "role": "win_condition",
+   "score": 127
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "role": "removal",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Fell the Profane // Fell Mire",
+   "role": "land",
+   "score": 181
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Go for the Throat",
+   "role": "removal",
+   "score": 135
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Golgari Charm",
+   "role": "board_wipe",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Heartless Act",
+   "role": "removal",
+   "score": 61
+  },
+  {
+   "q": 1,
+   "name": "Hedron Archive",
+   "role": "ramp",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Hero's Downfall",
+   "role": "removal",
+   "score": 81
+  },
+  {
+   "q": 1,
+   "name": "Hinterland Harbor",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Huatli, the Sun's Heart",
+   "role": "win_condition",
+   "score": 84
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "role": "land",
+   "score": 141
+  },
+  {
+   "q": 1,
+   "name": "Infinite Guideline Station",
+   "role": "draw",
+   "score": 180
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Jace, Multiverse Architect",
+   "role": "win_condition",
+   "score": 101
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Bane of Nightmares",
+   "role": "protection",
+   "score": 114
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Cunning Infiltrator",
+   "role": "win_condition",
+   "score": 131
+  },
+  {
+   "q": 1,
+   "name": "Kiora, Behemoth Beckoner",
+   "role": "win_condition",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Minsc & Boo, Timeless Heroes",
+   "role": "win_condition",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mortify",
+   "role": "removal",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "role": "ramp",
+   "score": 166
+  },
+  {
+   "q": 1,
+   "name": "Oath of Teferi",
+   "role": "utility",
+   "score": 108
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Path to Exile",
+   "role": "removal",
+   "score": 133
+  },
+  {
+   "q": 2,
+   "name": "Plains",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Plan for All Outcomes",
+   "role": "draw",
+   "score": 66
+  },
+  {
+   "q": 1,
+   "name": "Professor Dellian Fel",
+   "role": "removal",
+   "score": 129
+  },
+  {
+   "q": 1,
+   "name": "Quintorius Kand",
+   "role": "ramp",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Quintorius, History Chaser",
+   "role": "win_condition",
+   "score": 124
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "role": "board_wipe",
+   "score": 224
+  },
+  {
+   "q": 1,
+   "name": "Ral, Crackling Wit",
+   "role": "win_condition",
+   "score": 175
+  },
+  {
+   "q": 1,
+   "name": "Sacred Foundry",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Saheeli, Sublime Artificer",
+   "role": "win_condition",
+   "score": 152
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shattered Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sheltering Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "role": "land",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Solve for Disappointment",
+   "role": "draw",
+   "score": 23
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stomping Ground",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stormcarved Coast",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 4,
+   "name": "Swamp",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "role": "removal",
+   "score": 133
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Conviction",
+   "role": "ramp",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "role": "ramp",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Curiosity",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Impulse",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "role": "ramp",
+   "score": 177
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Resilience",
+   "role": "ramp",
+   "score": 156
+  },
+  {
+   "q": 1,
+   "name": "Tam's Resistance",
+   "role": "draw",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Tannuk, Memorial Ensign",
+   "role": "draw",
+   "score": 167
+  },
+  {
+   "q": 1,
+   "name": "Tatyova, Benthic Druid",
+   "role": "draw",
+   "score": 186
+  },
+  {
+   "q": 1,
+   "name": "Tekuthal, Inquiry Dominus",
+   "role": "win_condition",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Terminate",
+   "role": "removal",
+   "score": 209
+  },
+  {
+   "q": 1,
+   "name": "Tezzeret, Cruel Captain",
+   "role": "tutor",
+   "score": 132
+  },
+  {
+   "q": 1,
+   "name": "The Eternal Wanderer",
+   "role": "win_condition",
+   "score": 91
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "role": "draw",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "The Theorist, Jace Beleren",
+   "role": "win_condition",
+   "score": 102
+  },
+  {
+   "q": 1,
+   "name": "Twisted Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vineglimmer Snarl",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Way of the Mentor",
+   "role": "draw",
+   "score": 51
+  },
+  {
+   "q": 1,
+   "name": "Way of the Necromancer",
+   "role": "draw",
+   "score": 51
+  },
+  {
+   "q": 1,
+   "name": "Way of the Pyromancer",
+   "role": "ramp",
+   "score": 25
+  },
+  {
+   "q": 1,
+   "name": "Witch Enchanter // Witch-Blessed Meadow",
+   "role": "land",
+   "score": 210
+  },
+  {
+   "q": 1,
+   "name": "Yavimaya Coast",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Zurgo Stormrender",
+   "role": "draw",
+   "score": 170
+  }
+ ]
+}

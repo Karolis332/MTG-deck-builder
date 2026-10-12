@@ -1,0 +1,662 @@
+{
+ "metrics": {
+  "label": "tam-nocoll",
+  "strategy": "superfriends",
+  "tribal": null,
+  "size": 99,
+  "lands": 38,
+  "nonland": 61,
+  "roleCounts": {
+   "ramp": 14,
+   "removal": 16,
+   "draw": 9,
+   "tutor": 2,
+   "board_wipe": 5,
+   "protection": 2,
+   "win_condition": 9,
+   "utility": 4
+  },
+  "walkers": 18,
+  "ways": 7,
+  "slime": 0,
+  "arenaDupes": [],
+  "maxMargin": 162,
+  "ms": 1318
+ },
+ "margins": {
+  "ramp": {
+   "picked": "Way of the Paradox",
+   "pickedScore": 35,
+   "bench": "An Offer You Can't Refuse",
+   "benchScore": 191,
+   "margin": 156
+  },
+  "removal": {
+   "picked": "Garruk, Cursed Huntsman",
+   "pickedScore": 137,
+   "bench": "Fracture",
+   "benchScore": 189,
+   "margin": 52
+  },
+  "draw": {
+   "picked": "Way of the Healer",
+   "pickedScore": 35,
+   "bench": "Kutzil, Malamet Exemplar",
+   "benchScore": 197,
+   "margin": 162
+  },
+  "tutor": {
+   "picked": "Kaito Shizuki",
+   "pickedScore": 137,
+   "bench": "Eladamri's Call",
+   "benchScore": 162,
+   "margin": 25
+  },
+  "board_wipe": {
+   "picked": "Farewell",
+   "pickedScore": 140,
+   "bench": "Damnation",
+   "benchScore": 117,
+   "margin": -23
+  },
+  "protection": {
+   "picked": "Dovin's Veto",
+   "pickedScore": 198,
+   "bench": "Swan Song",
+   "benchScore": 173,
+   "margin": -26
+  },
+  "win_condition": {
+   "picked": "Huatli, Radiant Champion",
+   "pickedScore": 137,
+   "bench": "Torment of Hailfire",
+   "benchScore": 163,
+   "margin": 26
+  },
+  "utility": {
+   "picked": "The Chain Veil",
+   "pickedScore": 62,
+   "bench": "Villainous Wealth",
+   "benchScore": 184,
+   "margin": 122
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Anguished Unmaking",
+   "role": "removal",
+   "score": 199
+  },
+  {
+   "q": 1,
+   "name": "Arid Mesa",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "role": "removal",
+   "score": 202
+  },
+  {
+   "q": 1,
+   "name": "Austere Command",
+   "role": "board_wipe",
+   "score": 143
+  },
+  {
+   "q": 1,
+   "name": "Baleful Strix",
+   "role": "draw",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Bedevil",
+   "role": "removal",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Boros Charm",
+   "role": "removal",
+   "score": 184
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "role": "draw",
+   "score": 205
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Brokers Ascendancy",
+   "role": "utility",
+   "score": 150
+  },
+  {
+   "q": 1,
+   "name": "Deathrite Shaman",
+   "role": "removal",
+   "score": 193
+  },
+  {
+   "q": 1,
+   "name": "Despark",
+   "role": "removal",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Dovin, Grand Arbiter",
+   "role": "win_condition",
+   "score": 139
+  },
+  {
+   "q": 1,
+   "name": "Dovin's Veto",
+   "role": "protection",
+   "score": 198
+  },
+  {
+   "q": 1,
+   "name": "Farewell",
+   "role": "board_wipe",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Foreboding Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Forest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Garruk, Cursed Huntsman",
+   "role": "removal",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Golgari Charm",
+   "role": "board_wipe",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Grist, the Hunger Tide",
+   "role": "removal",
+   "score": 197
+  },
+  {
+   "q": 1,
+   "name": "Growth Spiral",
+   "role": "ramp",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Hearthhull, the Worldseed",
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Huatli, Radiant Champion",
+   "role": "win_condition",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Ichormoon Gauntlet",
+   "role": "utility",
+   "score": 92
+  },
+  {
+   "q": 1,
+   "name": "Inspired Tethermage",
+   "role": "draw",
+   "score": 50
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Kaito Shizuki",
+   "role": "tutor",
+   "score": 137
+  },
+  {
+   "q": 1,
+   "name": "Kaito, Dancing Shadow",
+   "role": "win_condition",
+   "score": 158
+  },
+  {
+   "q": 1,
+   "name": "Kasmina, Enigma Sage",
+   "role": "tutor",
+   "score": 147
+  },
+  {
+   "q": 1,
+   "name": "Kheru Goldkeeper",
+   "role": "ramp",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "Kiora, Behemoth Beckoner",
+   "role": "win_condition",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Kykar, Wind's Fury",
+   "role": "ramp",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Lolth, Spider Queen",
+   "role": "win_condition",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Loran of the Third Path",
+   "role": "removal",
+   "score": 190
+  },
+  {
+   "q": 1,
+   "name": "Lotho, Corrupt Shirriff",
+   "role": "ramp",
+   "score": 237
+  },
+  {
+   "q": 1,
+   "name": "Maestros Theater",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Minsc & Boo, Timeless Heroes",
+   "role": "win_condition",
+   "score": 144
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Mortify",
+   "role": "removal",
+   "score": 196
+  },
+  {
+   "q": 1,
+   "name": "Mountain",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Narset of the Ancient Way",
+   "role": "ramp",
+   "score": 145
+  },
+  {
+   "q": 1,
+   "name": "Oath of Teferi",
+   "role": "utility",
+   "score": 100
+  },
+  {
+   "q": 1,
+   "name": "Obscura Storefront",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 2,
+   "name": "Plains",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Prismari Command",
+   "role": "removal",
+   "score": 204
+  },
+  {
+   "q": 1,
+   "name": "Putrefy",
+   "role": "removal",
+   "score": 216
+  },
+  {
+   "q": 1,
+   "name": "Rakdos Charm",
+   "role": "board_wipe",
+   "score": 216
+  },
+  {
+   "q": 1,
+   "name": "Ral, Crackling Wit",
+   "role": "win_condition",
+   "score": 182
+  },
+  {
+   "q": 1,
+   "name": "Rhythm of the Wild",
+   "role": "protection",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "Riveteers Overlook",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sacred Foundry",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Saheeli, Sublime Artificer",
+   "role": "win_condition",
+   "score": 159
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Seething Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Shattered Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Sorcerer Class",
+   "role": "ramp",
+   "score": 170
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Stomping Ground",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Supreme Verdict",
+   "role": "board_wipe",
+   "score": 144
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "role": "ramp",
+   "score": 169
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo, Compleated Sage",
+   "role": "removal",
+   "score": 163
+  },
+  {
+   "q": 1,
+   "name": "Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar",
+   "role": "ramp",
+   "score": 136
+  },
+  {
+   "q": 1,
+   "name": "Teferi, Time Raveler",
+   "role": "win_condition",
+   "score": 162
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Terminate",
+   "role": "removal",
+   "score": 201
+  },
+  {
+   "q": 1,
+   "name": "The Chain Veil",
+   "role": "utility",
+   "score": 62
+  },
+  {
+   "q": 1,
+   "name": "The Gitrog Monster",
+   "role": "ramp",
+   "score": 172
+  },
+  {
+   "q": 1,
+   "name": "The Great Henge",
+   "role": "ramp",
+   "score": 200
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Tireless Tracker",
+   "role": "draw",
+   "score": 199
+  },
+  {
+   "q": 1,
+   "name": "Twisted Landscape",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Vraska, Betrayal's Sting",
+   "role": "ramp",
+   "score": 140
+  },
+  {
+   "q": 1,
+   "name": "Vraska, Golgari Queen",
+   "role": "removal",
+   "score": 155
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Way of the Cryomancer",
+   "role": "draw",
+   "score": 50
+  },
+  {
+   "q": 1,
+   "name": "Way of the Deathbringer",
+   "role": "draw",
+   "score": 50
+  },
+  {
+   "q": 1,
+   "name": "Way of the Healer",
+   "role": "draw",
+   "score": 35
+  },
+  {
+   "q": 1,
+   "name": "Way of the Mentor",
+   "role": "draw",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Way of the Necromancer",
+   "role": "draw",
+   "score": 78
+  },
+  {
+   "q": 1,
+   "name": "Way of the Paradox",
+   "role": "ramp",
+   "score": 35
+  },
+  {
+   "q": 1,
+   "name": "Way of the Pyromancer",
+   "role": "ramp",
+   "score": 52
+  },
+  {
+   "q": 1,
+   "name": "Wear // Tear",
+   "role": "removal",
+   "score": 189
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "role": "land",
+   "score": -9999
+  },
+  {
+   "q": 1,
+   "name": "Wooded Foothills",
+   "role": "land",
+   "score": -9999
+  }
+ ]
+}
