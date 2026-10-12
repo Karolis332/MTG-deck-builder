@@ -1,0 +1,1754 @@
+{
+ "metrics": {
+  "label": "meren-paper",
+  "strategy": "aristocrats",
+  "themes": [
+   "sacrifice",
+   "graveyard",
+   "control",
+   "draw",
+   "artifacts"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 35,
+  "basics": 22,
+  "honestRamp": 12,
+  "draw": 20,
+  "removal": 8,
+  "wipes": 3,
+  "protection": 4,
+  "wincons": 9,
+  "tutors": 2,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 27,
+  "primaryCounts": {
+   "draw": 16,
+   "utility": 5,
+   "synergy": 6,
+   "ramp": 12,
+   "removal": 8,
+   "win_condition": 5,
+   "tutor": 2,
+   "protection": 4,
+   "board_wipe": 3,
+   "land": 3
+  },
+  "ms": 3374,
+  "edhrec": {
+   "topCards": 60,
+   "themes": [
+    "Aristocrats",
+    "Reanimator"
+   ],
+   "themeCards": [
+    40,
+    40
+   ],
+   "unique": 60,
+   "fetchMs": 0
+  },
+  "sources": {
+   "W": 7,
+   "U": 6,
+   "B": 28,
+   "R": 8,
+   "G": 26
+  },
+  "price": {
+   "total": 0,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Carrion Feeder",
+   "cmc": 1,
+   "type": "Creature — Zombie",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 178,
+   "price": "4.88",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 75,
+    "edhrec": 49.36421763628016,
+    "theme": 15,
+    "profileSynergy": 20,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Haywire Mite",
+   "cmc": 1,
+   "type": "Artifact Creature — Insect",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 192,
+   "price": "0.54",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 75,
+    "edhrec": 44.30781159097779,
+    "globalRank": 3.984688409022212,
+    "theme": 30.000000000000014,
+    "profileSynergy": 20,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "type": "Creature — Elf Druid",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 133,
+   "price": "0.39",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 22.35725715454977,
+    "globalRank": 27.49774284545022,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Reanimate",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 141,
+   "price": "9.81",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 58,
+    "edhrec": 43.73727382564013,
+    "globalRank": 6.1277261743598785,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 188,
+   "price": "1.54",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "edhrec": 28.222047489736127,
+    "globalRank": 21.775452510263875,
+    "metaStats": 60,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Spore Frog",
+   "cmc": 1,
+   "type": "Creature — Frog",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 193,
+   "price": "0.39",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 64.6079828741363,
+    "profileSynergy": 20,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Village Rites",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 171,
+   "price": "0.85",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 43,
+    "edhrec": 26.708020940181044,
+    "globalRank": 22.786979059818947,
+    "theme": 30,
+    "profileSynergy": 20.000000000000014,
+    "strategyFit": 3,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Viscera Seer",
+   "cmc": 1,
+   "type": "Creature — Vampire Wizard",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 227,
+   "price": "0.48",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 56.34075080139553,
+    "theme": 30,
+    "profileSynergy": 20,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Wayfarer's Bauble",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 138,
+   "price": "5.44",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.69,
+    "theme": 15,
+    "profileSynergy": 20,
+    "metaStats": 45,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Accursed Marauder",
+   "cmc": 2,
+   "type": "Creature — Zombie Warrior",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 173,
+   "price": "0.38",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 75,
+    "edhrec": 53.66431780688896,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 173,
+   "price": "0.74",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 22.640070121090844,
+    "globalRank": 27.352429878909163,
+    "strategyFit": 5,
+    "metaStats": 60,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 156,
+   "price": "1.19",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 27.313339958215067,
+    "globalRank": 22.381660041784926,
+    "theme": 15,
+    "strategyFit": 8,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Blood Artist",
+   "cmc": 2,
+   "type": "Creature — Vampire",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "arsenal:community_top",
+   "score": 166,
+   "price": "3.92",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 49.08113849966007,
+    "globalRank": 0.5663615003399372,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "type": "Creature — Phyrexian Fungus",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 185,
+   "price": "0.59",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 48.6928851280976,
+    "theme": 30,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Chronomancer",
+   "cmc": 2,
+   "type": "Artifact Creature — Necron Wizard",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 160,
+   "price": "1.71",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 30.97,
+    "theme": 60,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "arsenal:collection_substitute",
+   "score": 176,
+   "price": "0.28",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "edhrec": 9.795429757220802,
+    "globalRank": 39.8770702427792,
+    "theme": 45,
+    "profileSynergy": 20.000000000000014,
+    "strategyFit": 8,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Eviscerator's Insight",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 141,
+   "price": "0.27",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 40.275,
+    "theme": 60.00000000000001,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 148,
+   "price": "0.61",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.9575,
+    "strategyFit": 5,
+    "metaStats": 85,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 118,
+   "price": "17.27",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "edhrec": 2.4368742845490345,
+    "globalRank": 47.48812571545096,
+    "strategyFit": 5,
+    "metaStats": 35,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 174,
+   "price": "2.76",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.5225,
+    "theme": 30.000000000000007,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 30,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "type": "Artifact — Equipment",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "arsenal:community_top",
+   "score": 143,
+   "price": "3.87",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 23.502227763309477,
+    "globalRank": 26.465272236690524,
+    "strategyFit": 5,
+    "metaStats": 45,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sakura-Tribe Elder",
+   "cmc": 2,
+   "type": "Creature — Snake Shaman",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 210,
+   "price": "0.68",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 56.83022246580316,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Umbral Collar Zealot",
+   "cmc": 2,
+   "type": "Creature — Human Cleric",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 180,
+   "price": "0.29",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 18.07213337659077,
+    "globalRank": 28.632866623409228,
+    "theme": 44.999999999999986,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Wight of the Reliquary",
+   "cmc": 2,
+   "type": "Creature — Zombie Knight",
+   "cats": [
+    "ramp",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 150,
+   "price": "0.40",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 33.93162742909129,
+    "globalRank": 12.903372570908715,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Wishclaw Talisman",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "",
+   "score": 94,
+   "price": "2.02",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.6925,
+    "theme": 15,
+    "strategyFit": 4.999999999999993,
+    "metaStats": 17,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Zulaport Cutthroat",
+   "cmc": 2,
+   "type": "Creature — Human Rogue Ally",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 165,
+   "price": "1.34",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 49.41753273782703,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ashnod's Altar",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 188,
+   "price": "15.35",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 46.76620094076999,
+    "globalRank": 2.898799059230001,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "cmc": 3,
+   "type": "Creature — Goblin // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 97,
+   "price": "1.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 48.4175,
+    "theme": 14.999999999999993,
+    "strategyFit": 5,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "type": "Legendary Creature — Nightmare",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 234,
+   "price": "4.86",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 49.3357352210037,
+    "theme": 44.999999999999986,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "type": "Sorcery // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 78,
+   "price": "1.31",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.325,
+    "strategyFit": 5,
+    "metaStats": 17,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Buried Alive",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "tutor",
+    "synergy"
+   ],
+   "primary": "tutor",
+   "role": "arsenal:community_top",
+   "score": 170,
+   "price": "3.44",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 75,
+    "edhrec": 55.52435053092262,
+    "theme": 15,
+    "strategyFit": 5,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Commander's Sphere",
+   "cmc": 3,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:staple_ramp",
+   "score": 181,
+   "price": "0.35",
+   "edhrec": false,
+   "comp": {
+    "edhrec": 9.5183644150831,
+    "globalRank": 40.3491355849169,
+    "theme": 30.000000000000007,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 65,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 143,
+   "price": "0.42",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 5.01738425320368,
+    "globalRank": 44.93261574679632,
+    "strategyFit": 5,
+    "metaStats": 44.999999999999986,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Dina, Essence Brewer",
+   "cmc": 3,
+   "type": "Legendary Creature — Dryad Druid",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 135,
+   "price": "2.26",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 35.5375,
+    "theme": 29.999999999999993,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "type": "Creature — Human Shaman",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 189,
+   "price": "2.23",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 55.722714390543985,
+    "strategyFit": 5,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 174,
+   "price": "0.52",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.7775,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 45,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Grim Haruspex",
+   "cmc": 3,
+   "type": "Creature — Human Wizard",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 213,
+   "price": "2.89",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 75,
+    "edhrec": 54.31418137501021,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Midnight Reaper",
+   "cmc": 3,
+   "type": "Creature — Zombie Knight",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 166,
+   "price": "0.23",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 21.2829489534449,
+    "globalRank": 26.0920510465551,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Morbid Opportunist",
+   "cmc": 3,
+   "type": "Creature — Human Rogue",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 189,
+   "price": "0.36",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 43,
+    "edhrec": 16.180553299805347,
+    "globalRank": 33.19694670019465,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Arena",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:staple_draw",
+   "score": 144,
+   "price": "4.87",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "edhrec": 11.647601182344154,
+    "globalRank": 38.094898817655846,
+    "theme": 15.000000000000007,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Plaguecrafter",
+   "cmc": 3,
+   "type": "Creature — Human Shaman",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 196,
+   "price": "0.40",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 57.2038609823218,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Putrefy",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 148,
+   "price": "0.33",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 17.124569224291598,
+    "globalRank": 32.027930775708406,
+    "theme": 30,
+    "strategyFit": 8,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "type": "Legendary Creature — Elf Scout",
+   "cats": [
+    "ramp",
+    "draw",
+    "synergy"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 145,
+   "price": "4.41",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.975,
+    "theme": 15,
+    "profileSynergy": 19.999999999999993,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 17,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Toxic Deluge",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 123,
+   "price": "5.06",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 24.086476714415596,
+    "globalRank": 25.748523285584398,
+    "strategyFit": 5,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Victimize",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:community_top",
+   "score": 221,
+   "price": "1.44",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 53.356032030073266,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 25,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Woe Strider",
+   "cmc": 3,
+   "type": "Creature — Horror",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "arsenal:archetype_payoff",
+   "score": 145,
+   "price": "0.27",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 28,
+    "edhrec": 16.16381343565108,
+    "globalRank": 29.631186564348923,
+    "theme": 30,
+    "profileSynergy": 20,
+    "strategyFit": 8.000000000000014,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Yahenni, Undying Partisan",
+   "cmc": 3,
+   "type": "Legendary Creature — Aetherborn Vampire",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "payoff",
+   "score": 118,
+   "price": "0.34",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 18,
+    "globalRank": 47.41749999999999,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Dread Return",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "synergy",
+   "score": 136,
+   "price": "0.68",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 28,
+    "edhrec": 16.461320178908693,
+    "globalRank": 32.19367982109131,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Gyome, Master Chef",
+   "cmc": 4,
+   "type": "Legendary Creature — Troll Warlock",
+   "cats": [
+    "protection",
+    "win_condition"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 94,
+   "price": "1.11",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 37.975,
+    "theme": 15,
+    "profileSynergy": 19.999999999999993,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Jarad, Golgari Lich Lord",
+   "cmc": 4,
+   "type": "Legendary Creature — Zombie Elf",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 148,
+   "price": "8.17",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 18.380804712336513,
+    "globalRank": 27.08169528766348,
+    "theme": 15,
+    "profileSynergy": 19.999999999999986,
+    "strategyFit": 5,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Scriptures",
+   "cmc": 4,
+   "type": "Enchantment — Saga",
+   "cats": [
+    "board_wipe",
+    "synergy"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 109,
+   "price": "0.95",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 38.36,
+    "theme": 30,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ravenous Chupacabra",
+   "cmc": 4,
+   "type": "Creature — Beast Horror",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:community_top",
+   "score": 143,
+   "price": "1.06",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 60,
+    "edhrec": 39.325579919777695,
+    "globalRank": 7.8444200802223065,
+    "theme": 15,
+    "strategyFit": 8.000000000000014,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Smothering Abomination",
+   "cmc": 4,
+   "type": "Creature — Eldrazi",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 149,
+   "price": "0.35",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 40.3575,
+    "theme": 30,
+    "profileSynergy": 20,
+    "drawEngine": 28.000000000000014,
+    "strategyFit": 8,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "arsenal:community_top",
+   "score": 179,
+   "price": "0.30",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 43,
+    "edhrec": 37.07132895255505,
+    "globalRank": 12.831171047444954,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 35,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Toski, Bearer of Secrets",
+   "cmc": 4,
+   "type": "Legendary Creature — Squirrel",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "upgrade",
+   "score": 145,
+   "price": "8.06",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.0325,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 17,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Gray Merchant of Asphodel",
+   "cmc": 5,
+   "type": "Creature — Zombie",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 142,
+   "price": "4.17",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 58,
+    "edhrec": 58.202441796523715,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "High-Society Hunter",
+   "cmc": 5,
+   "type": "Creature — Vampire Noble",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 133,
+   "price": "0.40",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 38.9925,
+    "theme": 30.000000000000007,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Moldervine Reclamation",
+   "cmc": 5,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "arsenal:community_top",
+   "score": 170,
+   "price": "0.33",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 43,
+    "edhrec": 21.754379895467366,
+    "globalRank": 25.76562010453263,
+    "theme": 15,
+    "profileSynergy": 20,
+    "drawEngine": 27.999999999999986,
+    "strategyFit": 3,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Syr Konrad, the Grim",
+   "cmc": 5,
+   "type": "Legendary Creature — Human Knight",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 175,
+   "price": "1.76",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 46.0711999077989,
+    "globalRank": 3.278800092201095,
+    "theme": 15,
+    "profileSynergy": 20,
+    "metaStats": 18,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "type": "Creature — Elf Druid // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 116,
+   "price": "3.78",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 48.8475,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 3,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Liliana, Dreadhorde General",
+   "cmc": 6,
+   "type": "Legendary Planeswalker — Liliana",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "arsenal:collection_substitute",
+   "score": 137,
+   "price": "8.38",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "edhrec": 15.37021509811344,
+    "globalRank": 32.64978490188656,
+    "theme": 15.000000000000007,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Massacre Wurm",
+   "cmc": 6,
+   "type": "Creature — Phyrexian Wurm",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "arsenal:community_top",
+   "score": 138,
+   "price": "1.91",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 39.02757940850299,
+    "globalRank": 9.692420591497012,
+    "profileSynergy": 20,
+    "metaStats": 11,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mikaeus, the Unhallowed",
+   "cmc": 6,
+   "type": "Legendary Creature — Zombie Cleric",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "arsenal:community_top",
+   "score": 148,
+   "price": "21.89",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 38.83179889616157,
+    "globalRank": 7.878201103838435,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 3,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Butcher of Malakir",
+   "cmc": 7,
+   "type": "Creature — Vampire Warrior",
+   "cats": [
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "payoff",
+   "score": 130,
+   "price": "0.40",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 34.35467660035421,
+    "globalRank": 12.21782339964578,
+    "profileSynergy": 20,
+    "metaStats": 5,
+    "collection": 8
+   }
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "18.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blooming Marsh",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 9,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Llanowar Wastes",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Necroblossom Snarl",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.47",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "cmc": 0,
+   "type": "Land — Swamp Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.20",
+   "edhrec": false
+  },
+  {
+   "q": 13,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Twilight Mire",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Viridescent Bog",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.35",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "12.79",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Wooded Foothills",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "17.97",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Woodland Cemetery",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.07",
+   "edhrec": false
+  }
+ ]
+}

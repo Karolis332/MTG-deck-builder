@@ -1,0 +1,1747 @@
+{
+ "metrics": {
+  "label": "kess",
+  "strategy": "reanimator",
+  "themes": [
+   "graveyard",
+   "ramp",
+   "draw",
+   "spellslinger",
+   "artifacts",
+   "aggro"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 37,
+  "basics": 14,
+  "honestRamp": 13,
+  "draw": 33,
+  "removal": 6,
+  "wipes": 3,
+  "protection": 2,
+  "wincons": 6,
+  "tutors": 3,
+  "walkers": 1,
+  "ways": 0,
+  "fromEdhrec": 0,
+  "primaryCounts": {
+   "ramp": 13,
+   "synergy": 3,
+   "win_condition": 1,
+   "utility": 3,
+   "tutor": 3,
+   "draw": 28,
+   "removal": 6,
+   "board_wipe": 3,
+   "protection": 1,
+   "land": 1
+  },
+  "ms": 1149,
+  "edhrec": {
+   "topCards": 0,
+   "themes": [],
+   "themeCards": [],
+   "unique": 0,
+   "fetchMs": 601
+  },
+  "sources": {
+   "W": 10,
+   "U": 31,
+   "B": 27,
+   "R": 27,
+   "G": 10
+  },
+  "price": {
+   "total": 1865.49,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "ramp",
+   "score": 163,
+   "price": "4.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.91499999999999,
+    "theme": 30,
+    "strategyFit": 3,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 146,
+   "price": "1.06",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.81999999999999,
+    "strategyFit": 3,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Consider",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 143,
+   "price": "0.29",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 43,
+    "globalRank": 49.07249999999999,
+    "theme": 30,
+    "strategyFit": 3,
+    "metaStats": 18
+   }
+  },
+  {
+   "q": 1,
+   "name": "Currency Converter",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "synergy",
+   "score": 145,
+   "price": "0.56",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 43.6175,
+    "theme": 45.00000000000001,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 180,
+   "price": "7.12",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "globalRank": 49.91749999999999,
+    "theme": 15,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Entomb",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor",
+    "synergy"
+   ],
+   "primary": "tutor",
+   "role": "payoff",
+   "score": 110,
+   "price": "19.51",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 28,
+    "globalRank": 49.192499999999995,
+    "theme": 15,
+    "metaStats": 18
+   }
+  },
+  {
+   "q": 1,
+   "name": "Faithless Looting",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 196,
+   "price": "0.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.754999999999995,
+    "theme": 30,
+    "profileSynergy": 20,
+    "strategyFit": 3,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mystic Remora",
+   "cmc": 1,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 166,
+   "price": "14.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.75,
+    "theme": 15,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 125,
+   "price": "19.31",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.5975,
+    "theme": 15,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ponder",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 158,
+   "price": "4.07",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 65,
+    "globalRank": 49.6375,
+    "theme": 14.999999999999986,
+    "strategyFit": 3,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Preordain",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "0.79",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.45750000000001,
+    "theme": 15,
+    "strategyFit": 3,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Reanimate",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 130,
+   "price": "9.81",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.86500000000001,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 195,
+   "price": "1.54",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "globalRank": 49.9975,
+    "theme": 15,
+    "metaStats": 60
+   }
+  },
+  {
+   "q": 1,
+   "name": "Stitcher's Supplier",
+   "cmc": 1,
+   "type": "Creature — Zombie",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 113,
+   "price": "0.37",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.455,
+    "theme": 15,
+    "profileSynergy": 20,
+    "metaStats": 30
+   }
+  },
+  {
+   "q": 1,
+   "name": "Vandalblast",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 138,
+   "price": "1.56",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.7475,
+    "theme": 15,
+    "strategyFit": 3,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Abrade",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 118,
+   "price": "0.30",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "globalRank": 49.64,
+    "theme": 15,
+    "strategyFit": 8,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Altar of Dementia",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "payoff",
+   "score": 118,
+   "price": "18.25",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.395,
+    "theme": 15,
+    "profileSynergy": 20.000000000000007,
+    "strategyFit": 5,
+    "metaStats": 30
+   }
+  },
+  {
+   "q": 1,
+   "name": "Arcane Denial",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "protection"
+   ],
+   "primary": "draw",
+   "role": "protection",
+   "score": 153,
+   "price": "1.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.870000000000005,
+    "theme": 15,
+    "strategyFit": 8,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 185,
+   "price": "0.74",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "globalRank": 49.99250000000001,
+    "strategyFit": 5,
+    "metaStats": 60
+   }
+  },
+  {
+   "q": 1,
+   "name": "Bloodghast",
+   "cmc": 2,
+   "type": "Creature — Vampire Spirit",
+   "cats": [
+    "synergy"
+   ],
+   "primary": "synergy",
+   "role": "payoff",
+   "score": 104,
+   "price": "0.89",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 47.4675,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 17
+   }
+  },
+  {
+   "q": 1,
+   "name": "Chronomancer",
+   "cmc": 2,
+   "type": "Artifact Creature — Necron Wizard",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 152,
+   "price": "1.71",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 30.97,
+    "theme": 60,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 150,
+   "price": "3.72",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.96000000000001,
+    "strategyFit": 5,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 135,
+   "price": "39.16",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.8625,
+    "strategyFit": 5,
+    "metaStats": 45.000000000000014
+   }
+  },
+  {
+   "q": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 168,
+   "price": "0.28",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.6725,
+    "theme": 45,
+    "strategyFit": 8,
+    "metaStats": 65.00000000000001
+   }
+  },
+  {
+   "q": 1,
+   "name": "Demonic Tutor",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 135,
+   "price": "67.78",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.8425,
+    "strategyFit": 5,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Dimir Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 145,
+   "price": "0.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.60249999999999,
+    "theme": 15,
+    "strategyFit": 5,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Feed the Swarm",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 128,
+   "price": "0.21",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.775000000000006,
+    "strategyFit": 8,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 150,
+   "price": "0.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.95750000000001,
+    "strategyFit": 5,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 161,
+   "price": "2.76",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.5225,
+    "theme": 30.000000000000007,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mesmeric Orb",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "payoff",
+   "score": 104,
+   "price": "17.87",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 47.2825,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 17
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 158,
+   "price": "0.24",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.92,
+    "theme": 45,
+    "strategyFit": 8,
+    "metaStats": 45.000000000000014
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Creativity",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 170,
+   "price": "1.25",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.685,
+    "theme": 30,
+    "strategyFit": 5,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 170,
+   "price": "0.72",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.7675,
+    "theme": 29.999999999999986,
+    "strategyFit": 5,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Indulgence",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 170,
+   "price": "1.12",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.67750000000001,
+    "theme": 30,
+    "strategyFit": 5,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Vohar, Vodalian Desecrator",
+   "cmc": 2,
+   "type": "Legendary Creature — Phyrexian Merfolk W",
+   "cats": [
+    "draw",
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 146,
+   "price": "0.31",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 40.265,
+    "theme": 45,
+    "profileSynergy": 20,
+    "drawEngine": 27.999999999999986,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 181,
+   "price": "9.88",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.675,
+    "theme": 30,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 65.00000000000001
+   }
+  },
+  {
+   "q": 1,
+   "name": "Chaos Warp",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 135,
+   "price": "0.31",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.92750000000001,
+    "strategyFit": 5,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Frantic Search",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 173,
+   "price": "2.31",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 65,
+    "globalRank": 49.7525,
+    "theme": 15,
+    "strategyFit": 8,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Palantír of Orthanc",
+   "cmc": 3,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "19.83",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 46.645,
+    "theme": 30.000000000000007,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 17
+   }
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Arena",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 166,
+   "price": "4.87",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.7425,
+    "theme": 15.000000000000007,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 65
+   }
+  },
+  {
+   "q": 1,
+   "name": "Rhystic Study",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 181,
+   "price": "70.36",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.88499999999999,
+    "theme": 15,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Secrets of the Dead",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 150,
+   "price": "0.45",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 18,
+    "globalRank": 40.675,
+    "theme": 30,
+    "profileSynergy": 20,
+    "drawEngine": 28.000000000000014,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 105,
+   "price": "8.38",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.585,
+    "theme": 15.000000000000007,
+    "strategyFit": 5,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Stinkweed Imp",
+   "cmc": 3,
+   "type": "Creature — Imp",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "payoff",
+   "score": 105,
+   "price": "1.50",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 42.175,
+    "theme": 30,
+    "profileSynergy": 20,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Toxic Deluge",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 125,
+   "price": "5.06",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.83500000000001,
+    "strategyFit": 5,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Windfall",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "utility",
+   "score": 148,
+   "price": "6.09",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 65,
+    "globalRank": 49.60499999999999,
+    "strategyFit": 8,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Archmage Emeritus",
+   "cmc": 4,
+   "type": "Creature — Human Wizard",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 198,
+   "price": "0.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.3625,
+    "theme": 30.000000000000014,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ashling, Flame Dancer",
+   "cmc": 4,
+   "type": "Legendary Creature — Elemental Shaman",
+   "cats": [
+    "ramp",
+    "draw",
+    "win_condition"
+   ],
+   "primary": "ramp",
+   "role": "win_condition",
+   "score": 132,
+   "price": "5.70",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 46.0975,
+    "theme": 45,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Big Score",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "ramp",
+   "score": 148,
+   "price": "0.36",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "globalRank": 49.655,
+    "theme": 45,
+    "strategyFit": 8,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Inventive Iteration // Living Breakthrough",
+   "cmc": 4,
+   "type": "Enchantment — Saga // Enchantment Creatu",
+   "cats": [
+    "draw",
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 132,
+   "price": "0.26",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 25.7275,
+    "theme": 44.99999999999999,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mizzix's Mastery",
+   "cmc": 4,
+   "type": "Sorcery",
+   "cats": [
+    "removal",
+    "synergy"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 119,
+   "price": "8.02",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "globalRank": 47.9725,
+    "theme": 15,
+    "profileSynergy": 20,
+    "strategyFit": 5,
+    "metaStats": 11
+   }
+  },
+  {
+   "q": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "type": "Artifact Creature — Golem",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 158,
+   "price": "0.30",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.9025,
+    "theme": 15,
+    "strategyFit": 8,
+    "metaStats": 85
+   }
+  },
+  {
+   "q": 1,
+   "name": "Storm-Kiln Artist",
+   "cmc": 4,
+   "type": "Creature — Dwarf Shaman",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "ramp",
+   "score": 178,
+   "price": "1.63",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.5025,
+    "theme": 45,
+    "strategyFit": 8,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "The Indomitable",
+   "cmc": 4,
+   "type": "Legendary Artifact — Vehicle",
+   "cats": [
+    "draw",
+    "synergy"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 135,
+   "price": "3.07",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 44.0525,
+    "theme": 30.000000000000007,
+    "profileSynergy": 20,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "protection",
+   "score": 146,
+   "price": "115.29",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.7625,
+    "theme": 15,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 34.999999999999986
+   }
+  },
+  {
+   "q": 1,
+   "name": "Thopter Spy Network",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 131,
+   "price": "0.45",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 47.6425,
+    "theme": 30,
+    "drawEngine": 28,
+    "strategyFit": 8,
+    "metaStats": 16.999999999999986
+   }
+  },
+  {
+   "q": 1,
+   "name": "Syr Konrad, the Grim",
+   "cmc": 5,
+   "type": "Legendary Creature — Human Knight",
+   "cats": [
+    "synergy",
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "payoff",
+   "score": 129,
+   "price": "1.76",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.35,
+    "theme": 14.999999999999993,
+    "profileSynergy": 20,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Vanquisher's Banner",
+   "cmc": 5,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 155,
+   "price": "5.20",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.04,
+    "theme": 44.99999999999999,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 30
+   }
+  },
+  {
+   "q": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "type": "Legendary Artifact",
+   "cats": [
+    "draw",
+    "win_condition"
+   ],
+   "primary": "draw",
+   "role": "win_condition",
+   "score": 139,
+   "price": "22.18",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 46.2,
+    "theme": 45,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 16.999999999999986
+   }
+  },
+  {
+   "q": 1,
+   "name": "Niv-Mizzet, Parun",
+   "cmc": 6,
+   "type": "Legendary Creature — Dragon Wizard",
+   "cats": [
+    "draw",
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 130,
+   "price": "5.30",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 48.035,
+    "theme": 30,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 11
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ugin, Eye of the Storms",
+   "cmc": 7,
+   "type": "Legendary Planeswalker — Ugin",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "tutor",
+   "score": 127,
+   "price": "41.31",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 45.625,
+    "theme": 45,
+    "drawEngine": 28,
+    "strategyFit": 3,
+    "metaStats": 5
+   }
+  },
+  {
+   "q": 1,
+   "name": "Blasphemous Act",
+   "cmc": 9,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 145,
+   "price": "0.93",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.94499999999999,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Badlands",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "235.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Blood Crypt",
+   "cmc": 0,
+   "type": "Land — Swamp Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.88",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Bloodstained Mire",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "18.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "12.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Dragonskull Summit",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.42",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Drowned Catacomb",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.70",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 6,
+   "name": "Island",
+   "cmc": 0,
+   "type": "Basic Land — Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Morphic Pool",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "27.92",
+   "edhrec": false
+  },
+  {
+   "q": 4,
+   "name": "Mountain",
+   "cmc": 0,
+   "type": "Basic Land — Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.09",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "19.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scalding Tarn",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Shivan Reef",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.73",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Starting Town",
+   "cmc": 0,
+   "type": "Land — Town",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "11.61",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Steam Vents",
+   "cmc": 0,
+   "type": "Land — Island Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "10.19",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Sulfur Falls",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.27",
+   "edhrec": false
+  },
+  {
+   "q": 4,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Temple of the Dragon Queen",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.33",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Three Tree City",
+   "cmc": 0,
+   "type": "Legendary Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "29.66",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Training Center",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "17.53",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Underground River",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "1.36",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "cmc": 0,
+   "type": "Land — Island Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "475.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Volcanic Island",
+   "cmc": 0,
+   "type": "Land — Island Mountain",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "327.81",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "cmc": 0,
+   "type": "Land — Island Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "9.15",
+   "edhrec": false
+  }
+ ]
+}

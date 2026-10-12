@@ -1,0 +1,1886 @@
+{
+ "metrics": {
+  "label": "tymna-thrasios",
+  "strategy": "combo",
+  "themes": [
+   "lifegain",
+   "aggro",
+   "draw",
+   "sacrifice",
+   "flying"
+  ],
+  "tribal": null,
+  "size": 99,
+  "lands": 37,
+  "basics": 5,
+  "honestRamp": 20,
+  "draw": 15,
+  "removal": 10,
+  "wipes": 2,
+  "protection": 6,
+  "wincons": 3,
+  "tutors": 7,
+  "walkers": 0,
+  "ways": 0,
+  "fromEdhrec": 16,
+  "primaryCounts": {
+   "ramp": 19,
+   "draw": 11,
+   "tutor": 7,
+   "utility": 4,
+   "protection": 5,
+   "removal": 10,
+   "board_wipe": 2,
+   "win_condition": 2,
+   "land": 2
+  },
+  "ms": 1219,
+  "edhrec": {
+   "topCards": 60,
+   "themes": [
+    "Lifegain",
+    "Aggro"
+   ],
+   "themeCards": [
+    40,
+    40
+   ],
+   "unique": 102,
+   "fetchMs": 0
+  },
+  "sources": {
+   "W": 32,
+   "U": 32,
+   "B": 34,
+   "R": 17,
+   "G": 30
+  },
+  "price": {
+   "total": 5114.9,
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4
+  }
+ },
+ "cards": [
+  {
+   "q": 1,
+   "name": "Chrome Mox",
+   "cmc": 0,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 220,
+   "price": "166.83",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 16.252343182460223,
+    "globalRank": 33.365156817539784,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Lotus Petal",
+   "cmc": 0,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 230,
+   "price": "34.34",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 13.151758587209315,
+    "globalRank": 36.548241412790674,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mox Amber",
+   "cmc": 0,
+   "type": "Legendary Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 199,
+   "price": "87.97",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 65,
+    "globalRank": 49.49250000000001,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mox Diamond",
+   "cmc": 0,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 219,
+   "price": "1126.69",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 37.16002027261331,
+    "globalRank": 12.224979727386682,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mox Opal",
+   "cmc": 0,
+   "type": "Legendary Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 184,
+   "price": "242.25",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 12.258639357817202,
+    "globalRank": 37.13636064218281,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Pact of Negation",
+   "cmc": 0,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 182,
+   "price": "17.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.08500000000001,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Walking Ballista",
+   "cmc": 0,
+   "type": "Artifact Creature — Construct",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 144,
+   "price": "10.71",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.9375,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "combo-staple",
+   "score": 195,
+   "price": "4.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.91499999999999,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Birds of Paradise",
+   "cmc": 1,
+   "type": "Creature — Bird",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "utility",
+   "score": 195,
+   "price": "10.55",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 49.912499999999994,
+    "theme": 15,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Brainstorm",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 185,
+   "price": "1.06",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.82,
+    "strategyFit": 10,
+    "powerTier": 39.99999999999999,
+    "metaStats": 85
+   }
+  },
+  {
+   "q": 1,
+   "name": "Chain of Vapor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 166,
+   "price": "15.95",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "globalRank": 47.56999999999999,
+    "theme": 15,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 18
+   }
+  },
+  {
+   "q": 1,
+   "name": "Culling the Weak",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 197,
+   "price": "7.82",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "edhrec": 12.238221995389182,
+    "globalRank": 36.45677800461081,
+    "theme": 15,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 215,
+   "price": "7.12",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 70,
+    "edhrec": 25.87409920945231,
+    "globalRank": 24.04340079054768,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Deathrite Shaman",
+   "cmc": 1,
+   "type": "Creature — Elf Shaman",
+   "cats": [
+    "ramp",
+    "removal",
+    "win_condition"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 143,
+   "price": "8.67",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "globalRank": 48.474999999999994,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Enlightened Tutor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 230,
+   "price": "37.19",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 30.869993379876277,
+    "globalRank": 18.82250662012372,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Esper Sentinel",
+   "cmc": 1,
+   "type": "Artifact Creature — Human Soldier",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "combo-staple",
+   "score": 273,
+   "price": "61.15",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 34.11672757342154,
+    "globalRank": 15.685772426578467,
+    "theme": 15,
+    "drawEngine": 28,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Flusterstorm",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 182,
+   "price": "8.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.2325,
+    "strategyFit": 10,
+    "powerTier": 40.000000000000014,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Imperial Seal",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 209,
+   "price": "171.88",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 13.930506538155555,
+    "globalRank": 34.74199346184443,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mana Vault",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 220,
+   "price": "119.62",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 11.99140368112262,
+    "globalRank": 37.63359631887738,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mental Misstep",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 182,
+   "price": "7.66",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 48.83500000000001,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mystic Remora",
+   "cmc": 1,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "combo-staple",
+   "score": 246,
+   "price": "14.43",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.75,
+    "theme": 15,
+    "drawEngine": 28,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "tutor",
+   "score": 185,
+   "price": "19.31",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "globalRank": 49.5975,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Nature's Claim",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 144,
+   "price": "1.44",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.05,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45.000000000000014
+   }
+  },
+  {
+   "q": 1,
+   "name": "Path to Exile",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 165,
+   "price": "0.75",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "edhrec": 30.890456848340577,
+    "globalRank": 19.07204315165943,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ponder",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 180,
+   "price": "4.07",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.6375,
+    "theme": 15,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 64.99999999999999
+   }
+  },
+  {
+   "q": 1,
+   "name": "Preordain",
+   "cmc": 1,
+   "type": "Sorcery",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 179,
+   "price": "0.79",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.4575,
+    "theme": 15.000000000000007,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 65
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sensei's Divining Top",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "combo-staple",
+   "score": 207,
+   "price": "41.20",
+   "edhrec": false,
+   "comp": {
+    "edhrec": 13.537245319089685,
+    "globalRank": 35.89025468091032,
+    "theme": 15.000000000000007,
+    "drawEngine": 28,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 65
+   }
+  },
+  {
+   "q": 1,
+   "name": "Silence",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "combo-staple",
+   "score": 219,
+   "price": "10.32",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 16.047306820137024,
+    "globalRank": 32.94769317986298,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 230,
+   "price": "1.54",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "edhrec": 21.357024044580328,
+    "globalRank": 28.640475955419674,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 60
+   }
+  },
+  {
+   "q": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "combo-staple",
+   "score": 218,
+   "price": "10.22",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.83250000000001,
+    "theme": 15,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Swords to Plowshares",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "combo-staple",
+   "score": 195,
+   "price": "1.02",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 27.88419735573055,
+    "globalRank": 22.088302644269447,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Vampiric Tutor",
+   "cmc": 1,
+   "type": "Instant",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 230,
+   "price": "55.33",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 33.058829377829625,
+    "globalRank": 16.65617062217038,
+    "strategyFit": 10,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Arcane Denial",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "draw",
+    "protection"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 190,
+   "price": "1.61",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.87,
+    "theme": 15.000000000000007,
+    "powerTier": 40,
+    "metaStats": 85
+   }
+  },
+  {
+   "q": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 220,
+   "price": "0.74",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 70,
+    "edhrec": 20.28806640409627,
+    "globalRank": 29.704433595903723,
+    "powerTier": 40.000000000000014,
+    "metaStats": 60
+   }
+  },
+  {
+   "q": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 145,
+   "price": "1.19",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.695,
+    "powerTier": 39.99999999999999,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Cyclonic Rift",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 155,
+   "price": "39.16",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 20,
+    "globalRank": 49.8625,
+    "powerTier": 40,
+    "metaStats": 45.000000000000014
+   }
+  },
+  {
+   "q": 1,
+   "name": "Demonic Tutor",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 220,
+   "price": "67.78",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 85,
+    "edhrec": 30.881257290017203,
+    "globalRank": 18.9612427099828,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Diabolic Intent",
+   "cmc": 2,
+   "type": "Sorcery",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 204,
+   "price": "17.10",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 12.625040813817662,
+    "globalRank": 36.69245918618233,
+    "theme": 15,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Faerie Mastermind",
+   "cmc": 2,
+   "type": "Creature — Faerie Rogue",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "combo-staple",
+   "score": 230,
+   "price": "12.07",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.28,
+    "theme": 30,
+    "drawEngine": 28,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 185,
+   "price": "0.61",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 50,
+    "edhrec": 8.308674201139333,
+    "globalRank": 41.64882579886068,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 150,
+   "price": "0.24",
+   "edhrec": false,
+   "comp": {
+    "edhrec": 8.211808212510693,
+    "globalRank": 41.70819178748931,
+    "theme": 15,
+    "metaStats": 85.00000000000001
+   }
+  },
+  {
+   "q": 1,
+   "name": "Orcish Bowmasters",
+   "cmc": 2,
+   "type": "Creature — Orc Archer",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 179,
+   "price": "45.38",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 65,
+    "edhrec": 17.353694705612668,
+    "globalRank": 32.00130529438732,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Tainted Pact",
+   "cmc": 2,
+   "type": "Instant",
+   "cats": [
+    "utility"
+   ],
+   "primary": "utility",
+   "role": "utility",
+   "score": 191,
+   "price": "41.73",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 85,
+    "globalRank": 47.83250000000001,
+    "powerTier": 40,
+    "metaStats": 18
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Curiosity",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 134,
+   "price": "0.52",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.7925,
+    "powerTier": 39.99999999999999,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Dominance",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 145,
+   "price": "0.72",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.7675,
+    "powerTier": 40,
+    "metaStats": 44.999999999999986
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Hierarchy",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 145,
+   "price": "0.48",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "edhrec": 15.60668848421334,
+    "globalRank": 34.05581151578666,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Progress",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 135,
+   "price": "0.98",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 10,
+    "globalRank": 49.6525,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Talisman of Resilience",
+   "cmc": 2,
+   "type": "Artifact",
+   "cats": [
+    "ramp"
+   ],
+   "primary": "ramp",
+   "role": "fixing-floor",
+   "score": 134,
+   "price": "0.52",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.75,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Thassa's Oracle",
+   "cmc": 2,
+   "type": "Creature — Merfolk Wizard",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 172,
+   "price": "22.10",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 48.875,
+    "powerTier": 40,
+    "metaStats": 25
+   }
+  },
+  {
+   "q": 1,
+   "name": "Black Market Connections",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 178,
+   "price": "9.88",
+   "edhrec": true,
+   "comp": {
+    "edhrec": 25.582585238648562,
+    "globalRank": 24.092414761351435,
+    "theme": 15,
+    "drawEngine": 28,
+    "metaStats": 85.00000000000001
+   }
+  },
+  {
+   "q": 1,
+   "name": "Fierce Guardianship",
+   "cmc": 3,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 193,
+   "price": "65.16",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.79249999999999,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "cmc": 3,
+   "type": "Creature — Weird // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 78,
+   "price": "1.39",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 48.4775,
+    "metaStats": 29.999999999999993
+   }
+  },
+  {
+   "q": 1,
+   "name": "Loran of the Third Path",
+   "cmc": 3,
+   "type": "Legendary Creature — Human Artificer",
+   "cats": [
+    "draw",
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 137,
+   "price": "7.33",
+   "edhrec": false,
+   "comp": {
+    "edhrec": 10.097702276147636,
+    "globalRank": 39.04479772385236,
+    "theme": 15,
+    "drawEngine": 28,
+    "metaStats": 44.999999999999986
+   }
+  },
+  {
+   "q": 1,
+   "name": "Phyrexian Arena",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "draw",
+   "score": 178,
+   "price": "4.87",
+   "edhrec": true,
+   "comp": {
+    "edhrec": 42.897698476401565,
+    "globalRank": 6.844801523598434,
+    "theme": 15.000000000000007,
+    "drawEngine": 28,
+    "metaStats": 85
+   }
+  },
+  {
+   "q": 1,
+   "name": "Ranger-Captain of Eos",
+   "cmc": 3,
+   "type": "Creature — Human Soldier Ranger",
+   "cats": [
+    "tutor"
+   ],
+   "primary": "tutor",
+   "role": "combo-staple",
+   "score": 201,
+   "price": "38.59",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 95,
+    "edhrec": 13.41796981169314,
+    "globalRank": 34.59453018830685,
+    "powerTier": 40,
+    "metaStats": 18
+   }
+  },
+  {
+   "q": 1,
+   "name": "Rhystic Study",
+   "cmc": 3,
+   "type": "Enchantment",
+   "cats": [
+    "draw"
+   ],
+   "primary": "draw",
+   "role": "combo-staple",
+   "score": 236,
+   "price": "70.36",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.88499999999999,
+    "theme": 15,
+    "drawEngine": 28,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "type": "Instant // Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": 85,
+   "price": "8.38",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.585,
+    "metaStats": 35.00000000000001
+   }
+  },
+  {
+   "q": 1,
+   "name": "Toxic Deluge",
+   "cmc": 3,
+   "type": "Sorcery",
+   "cats": [
+    "board_wipe"
+   ],
+   "primary": "board_wipe",
+   "role": "board_wipe",
+   "score": 145,
+   "price": "5.06",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 10,
+    "edhrec": 26.10842291516623,
+    "globalRank": 23.726577084833778,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Deadly Rollick",
+   "cmc": 4,
+   "type": "Instant",
+   "cats": [
+    "removal"
+   ],
+   "primary": "removal",
+   "role": "removal",
+   "score": 170,
+   "price": "28.38",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 35,
+    "edhrec": 13.518763364919913,
+    "globalRank": 36.21373663508009,
+    "powerTier": 40,
+    "metaStats": 45.000000000000014
+   }
+  },
+  {
+   "q": 1,
+   "name": "Smothering Tithe",
+   "cmc": 4,
+   "type": "Enchantment",
+   "cats": [
+    "ramp",
+    "draw"
+   ],
+   "primary": "ramp",
+   "role": "combo-staple",
+   "score": 213,
+   "price": "57.33",
+   "edhrec": true,
+   "comp": {
+    "cmdrStats": 78,
+    "edhrec": 46.51222540430041,
+    "globalRank": 3.3252745956995966,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Force of Will",
+   "cmc": 5,
+   "type": "Instant",
+   "cats": [
+    "protection"
+   ],
+   "primary": "protection",
+   "role": "protection",
+   "score": 183,
+   "price": "59.89",
+   "edhrec": false,
+   "comp": {
+    "cmdrStats": 58,
+    "globalRank": 49.50999999999999,
+    "powerTier": 40,
+    "metaStats": 35
+   }
+  },
+  {
+   "q": 1,
+   "name": "Craterhoof Behemoth",
+   "cmc": 8,
+   "type": "Creature — Beast",
+   "cats": [
+    "win_condition"
+   ],
+   "primary": "win_condition",
+   "role": "win_condition",
+   "score": 149,
+   "price": "24.36",
+   "edhrec": false,
+   "comp": {
+    "globalRank": 49.2525,
+    "theme": 15,
+    "powerTier": 40,
+    "metaStats": 45
+   }
+  },
+  {
+   "q": 1,
+   "name": "Bayou",
+   "cmc": 0,
+   "type": "Land — Swamp Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "247.80",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Breeding Pool",
+   "cmc": 0,
+   "type": "Land — Forest Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "9.27",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Caves of Koilos",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.58",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "City of Brass",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "12.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Flooded Strand",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "15.29",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Forbidden Orchard",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "9.56",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Forest",
+   "cmc": 0,
+   "type": "Basic Land — Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Glimmervoid",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "4.63",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Godless Shrine",
+   "cmc": 0,
+   "type": "Land — Plains Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.54",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Hallowed Fountain",
+   "cmc": 0,
+   "type": "Land — Plains Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.98",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Horizon of Progress",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "7.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Island",
+   "cmc": 0,
+   "type": "Basic Land — Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Isolated Chapel",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.26",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Marsh Flats",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "32.56",
+   "edhrec": true
+  },
+  {
+   "q": 1,
+   "name": "Meteor Crater",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "3.38",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Misty Rainforest",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "35.45",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Overgrown Tomb",
+   "cmc": 0,
+   "type": "Land — Swamp Forest",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "8.20",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Plains",
+   "cmc": 0,
+   "type": "Basic Land — Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.07",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Polluted Delta",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "19.14",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Prismatic Vista",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "30.69",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Reflecting Pool",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "10.77",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Savannah",
+   "cmc": 0,
+   "type": "Land — Forest Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "198.21",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Scrubland",
+   "cmc": 0,
+   "type": "Land — Plains Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "278.33",
+   "edhrec": true
+  },
+  {
+   "q": 2,
+   "name": "Swamp",
+   "cmc": 0,
+   "type": "Basic Land — Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "0.10",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Temple Garden",
+   "cmc": 0,
+   "type": "Land — Forest Plains",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "6.60",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Thran Quarry",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "4.76",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tropical Island",
+   "cmc": 0,
+   "type": "Land — Forest Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "320.05",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Tundra",
+   "cmc": 0,
+   "type": "Land — Plains Island",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "302.90",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Underground Sea",
+   "cmc": 0,
+   "type": "Land — Island Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "475.00",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Undiscovered Paradise",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "36.08",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Verdant Catacombs",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "29.72",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Watery Grave",
+   "cmc": 0,
+   "type": "Land — Island Swamp",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "9.15",
+   "edhrec": false
+  },
+  {
+   "q": 1,
+   "name": "Windswept Heath",
+   "cmc": 0,
+   "type": "Land",
+   "cats": [
+    "land"
+   ],
+   "primary": "land",
+   "role": "",
+   "score": -9999,
+   "price": "12.79",
+   "edhrec": false
+  }
+ ]
+}
