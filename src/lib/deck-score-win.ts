@@ -2023,22 +2023,35 @@ function controlRecipe(
   // Built BEFORE the line so `bestLine` can rank its candidates on this same
   // joint quantity (v1.4 stage 3h: selection = valuation).
   const engines: Member[] = pickMembers(nonLand, commanders, (f) => f.isDrawEngine && f.s >= 1);
+  const engineNames = new Set(engines.map((m) => m.name));
   const finisherNames = new Set(finishers.map((m) => m.name));
   const enginePool: RecipePool = { members: engines.filter((m) => !finisherNames.has(m.name)), r: 1 };
   // Same rule: the finisher demand comes from the output schedule, never from
   // the number of finishers that happen to be identified.
-  const controlPools = (names: ReadonlySet<string> | null, r: number): RecipePool[] => {
-    const finisherPool: RecipePool = {
-      members: names ? finishers.filter((m) => names.has(m.name)) : finishers, r,
-    };
-    return enginePool.members.length > 0 ? [enginePool, finisherPool] : [finisherPool];
+  //
+  // v1.4 stage 3x: the engine requirement is never DROPPED. The engine pool
+  // used to enter only while it had members, so deleting the last
+  // non-finisher engine (the rest being finishers or s<1) removed a factor
+  // < 1 and RAISED J (synthetic: J .163 -> .957). Two variants, each a fixed
+  // row set: a separate engine plus r finishers, or one of the line's own
+  // finishers IS the engine plus r-1 others. An empty pool reads 0, deletion
+  // only shrinks rows, so the max over the two cannot rise (3w's shape).
+  const controlLine = (names: ReadonlySet<string> | null, r: number): { pools: RecipePool[]; access: number } => {
+    const line = names ? finishers.filter((m) => names.has(m.name)) : finishers;
+    const separate: RecipePool[] = [enginePool, { members: line, r }];
+    const self: RecipePool[] = [
+      { members: line.filter((m) => engineNames.has(m.name)), r: 1 },
+      { members: line.filter((m) => !engineNames.has(m.name)), r: r - 1 },
+    ];
+    const a = poolsAccess(format, N, tStar, separate);
+    const b = poolsAccess(format, N, tStar, self);
+    return b > a ? { pools: self, access: b } : { pools: separate, access: a };
   };
   const finisherLine = bestLine(format, N, tStar, finisherSources, combatTarget, combatsBy(tStar),
-    norms.poolSizeCap, (names, r) => poolsAccess(format, N, tStar, controlPools(names, r)));
+    norms.poolSizeCap, (names, r) => controlLine(names, r).access);
   const rFinisher = finisherLine?.r ?? 1;
-  const pools = controlPools(finisherLine ? finisherLine.names : null, rFinisher);
+  const { pools, access: J } = controlLine(finisherLine ? finisherLine.names : null, rFinisher);
   const finisherPool = pools[pools.length - 1];
-  const J = poolsAccess(format, N, tStar, pools);
 
   // §9.4 `u_control = durable * J(t*) * 2^(-max(0, t* - Tfast)/h)`. The spec
   // writes the constant 6; it means Tfast, which the frozen norms put at 7 for
@@ -2048,7 +2061,7 @@ function controlRecipe(
   const decay = Math.pow(2, -Math.max(0, tStar - norms.fastClosingTurn) / norms.delayHalfLifeTurns);
   const u = durable * J * decay;
   return {
-    u, access: J, schedule, durable, tStar, engines: poolK(enginePool), rFinisher: poolR(finisherPool),
+    u, access: J, schedule, durable, tStar, engines: poolK(pools[0]), rFinisher: poolR(finisherPool),
     recipe: {
       id: 'control',
       schedule,
@@ -2061,7 +2074,7 @@ function controlRecipe(
         resource: `durable ${durable.toFixed(2)} from E ${totals.E.toFixed(1)}/${totals.Estar.toFixed(1)}`
           + ` and D ${totals.D.toFixed(1)}/${totals.Dstar.toFixed(1)}; ${engines.length} repeatable draw engines`,
         tutor: `joint access J=${J.toFixed(3)} over ${pools.length} pools`
-          + ` (engine r${poolR(enginePool)} of ${poolK(enginePool)}, finisher r${poolR(finisherPool)} of ${poolK(finisherPool)}) at T${tStar}`,
+          + ` (engine r${poolR(pools[0])} of ${poolK(pools[0])}, finisher r${poolR(finisherPool)} of ${poolK(finisherPool)}) at T${tStar}`,
         finish: `${combatTarget} damage by T${tStar}: ${schedule.detail.slice(0, 3).join('; ') || 'creature combat only'}`
           + ` [${typed.traces.slice(0, 3).join(' | ') || 'no typed non-creature output'}]`,
       },
