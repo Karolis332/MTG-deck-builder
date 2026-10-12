@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 5e9a99de-b2fa-445d-922f-131b02b695f6
-  modified: 2026-10-12T06:55:46.875Z
+  modified: 2026-10-12T07:37:21.561Z
 ---
 
 Paid tier deployed to prod 2026-10-12 (black-grimoire-web bf0b69e, 72fe8eb, ecc6e5f on branch `feat/claude-paid-tier`, not pushed): consults on `claude-opus-5` up to Free 5 / Pro 50 / Commander 150 per cycle (resets on the 4th, with the Max-plan $100 API credit), then OpenAI. VPS env has `ANTHROPIC_API_KEY`, `CLAUDE_MONTHLY_BUDGET_USD=90` and the **Stripe sandbox** keys (backup `.env.local.bak-2026-10-12-stripe-test`).
@@ -14,6 +14,7 @@ Paid tier deployed to prod 2026-10-12 (black-grimoire-web bf0b69e, 72fe8eb, ecc6
 
 **How to apply:**
 - Until the operator activates live Stripe (`acct_1UPcAvFhYSvKrIj4`) and sets the Terms/Privacy URLs, a 4242 test card grants Pro. After activation: live prices + webhook (checkout.session.completed, customer.subscription.created/updated/deleted) + portal, swap the 4 `STRIPE_*` vars, set `STRIPE_TOS_CONSENT=1`. Never handle `sk_live` in chat.
+- Resume point (2026-10-12): activation paused at "Verify identity" (operator waits for the ID document; business type + personal details saved). After submit: operator saves `STRIPE_SECRET_KEY=sk_live_...` to `~/.secrets/grimoire-stripe-live.env`; I set Settings → Public details (website, Terms `/terms`, Privacy `/privacy`) via Playwright, then run `~/.claude/harness/runs/paid-tier-2026-10-12/stripe-live-setup.cjs` (NODE_PATH=black-grimoire-web/node_modules; idempotent, sandbox dry run passed) and `stripe-live-push.sh` (VPS swap + restart + smoke check).
 - Prod E2E without the operator's password: on the VPS (env sourced, never printed), Clerk Backend API `POST /v1/users` (`skip_password_requirement`) + `POST /v1/sign_in_tokens` → open `/sign-in?__clerk_ticket=<token>` in Playwright. Delete the Clerk user + Neon `users` row (ai_usage cascades) + sandbox customer afterwards.
 - The Stripe CLI shows its default profile's account name ("Vitals sandbox") even with `--api-key`; destructive commands need `--confirm`; use `MSYS_NO_PATHCONV=1`.
 - Related: [[theblackgrimoire-com-launch]], [[reference-vps-ssh-and-neon-probe]].
