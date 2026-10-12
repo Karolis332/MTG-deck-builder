@@ -241,6 +241,8 @@ interface ScoreOptions {
   strategy?: string;
   tribalTypes?: string[];
   commanderName?: string;
+  /** Second commander of a partner pair — its EDHREC average deck counts too (B-D4). */
+  partnerName?: string;
   userId?: number;
   /** Restrict ownership to one collection source (e.g. 'arena', 'paper'). Undefined = every source. */
   collectionSource?: string;
@@ -334,10 +336,11 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
   // Get EDHREC land recommendations for this commander
   const edhrecLands = new Set<string>();
   if (commanderName) {
+    const names = [commanderName, options.partnerName].filter((n): n is string => !!n);
     const rows = db.prepare(`
       SELECT card_name FROM edhrec_avg_decks
-      WHERE commander_name = ? AND card_type = 'land'
-    `).all(commanderName) as Array<{ card_name: string }>;
+      WHERE commander_name IN (${names.map(() => '?').join(',')}) AND card_type = 'land'
+    `).all(...names) as Array<{ card_name: string }>;
     for (const r of rows) edhrecLands.add(r.card_name.toLowerCase());
   }
 
@@ -777,6 +780,8 @@ interface BuildOptions {
   targetLandCount: number;
   tribalTypes?: string[];
   commanderName?: string;
+  /** Second commander of a partner pair (B-D4). */
+  partnerName?: string;
   /** The picked spells; `type_line` (front face) feeds the permanent census for Glimmervoid / Thran Quarry (#2) */
   existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number; type_line?: string | null }>;
   userId?: number;
@@ -820,7 +825,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // Score all available lands
   const scored = scoreLandsForDeck({
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
-    collectionSource: options.collectionSource,
+    partnerName: options.partnerName, collectionSource: options.collectionSource,
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice, landPayoffs: options.landPayoffs,
     permanentCounts: existingNonLandCards ? countPermanents(existingNonLandCards) : undefined,
   });

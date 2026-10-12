@@ -10,7 +10,8 @@ import { getTemplate, getScaledCurve, mergeWithCommanderProfile, getRecommendedL
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin, MAX_MDFC_LANDS } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin, MAX_MDFC_LANDS, scoreLandsForDeck, analyzeManaDemands } from './land-intelligence';
+import type { LandScore } from './land-intelligence';
 import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -26,7 +27,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isHonestRamp } from './card-classifier';
+import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isHonestRamp, isSymmetricCreatureWipe } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
 import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
@@ -242,6 +243,14 @@ function buildSynergyQuery(themes: string[]): string {
   }
 
   return conditions.length > 0 ? `AND (${conditions.join(' OR ')})` : '';
+}
+
+// EDHREC keeps a combined page per partner pair — its slug is both names
+// joined (`tymna-the-weaver-thrasios-triton-hero`), so commanderToSlug of the
+// joined name reaches it; the order EDHREC chose is unknown, so both are
+// offered (B-D4).
+export function partnerPairNames(commanderName: string, partnerName: string): string[] {
+  return [`${commanderName} ${partnerName}`, `${partnerName} ${commanderName}`];
 }
 
 // ── Tribal detection ────────────────────────────────────────────────────────
@@ -757,81 +766,69 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // Check local commander_synergies table first (populated by Python scripts),
   // then fall back to live EDHREC fetch
 
-  let edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
+  const edhrecSynergyMap = new Map<string, { synergy: number; inclusion: number }>();
   let edhrecThemes: string[] = [];
-  let edhrecResolvedCards: DbCard[] = [];
+  const edhrecResolvedCards: DbCard[] = [];
+  // Union semantics for every commander-keyed signal (B-D4): a partner pair
+  // reads both halves, keeping the higher synergy per card, never overwriting.
+  const mergeSynergy = (rec: { name: string; synergy: number; inclusion: number }) => {
+    const prev = edhrecSynergyMap.get(rec.name);
+    if (!prev || rec.synergy > prev.synergy) edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+  };
+  const mergeResolved = (recs: EdhrecRecommendation[]) => {
+    for (const r of resolveEdhrecCards(db, recs, colorExcludeFilter, legalityFilter, commanderExclude)) {
+      if (!edhrecResolvedCards.some((c) => c.name === r.card.name)) edhrecResolvedCards.push(r.card);
+    }
+  };
+  // Partner blindness (B-D4): every commander-keyed lookup below iterates
+  // both halves of a pair. EDHREC is asked for the pair's own page first.
+  const commanderNames = [commanderName, partnerCard?.name].filter((n): n is string => !!n);
 
   if (isCommander && commanderName) {
     // Check if we have pre-enriched synergies from the Python pipeline
-    try {
-      const localSynergies = db.prepare(
-        `SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies
-         WHERE commander_name = ? COLLATE NOCASE
-         ORDER BY synergy_score DESC`
-      ).all(commanderName) as Array<{ card_name: string; synergy_score: number; inclusion_rate: number }>;
-
-      if (localSynergies.length > 0) {
-        for (const row of localSynergies) {
-          edhrecSynergyMap.set(row.card_name, {
-            synergy: row.synergy_score,
-            inclusion: row.inclusion_rate,
-          });
-        }
-        // Resolve local synergy card names to DB rows
-        const localRecs = localSynergies.map((r) => ({
-          name: r.card_name,
-          synergy: r.synergy_score,
-          inclusion: r.inclusion_rate,
-        }));
-        const resolved = resolveEdhrecCards(
-          db, localRecs, colorExcludeFilter, legalityFilter, commanderExclude
-        );
-        edhrecResolvedCards = resolved.map((r) => r.card);
+    for (const name of commanderNames) {
+      try {
+        const localSynergies = db.prepare(
+          `SELECT card_name, synergy_score, inclusion_rate FROM commander_synergies
+           WHERE commander_name = ? COLLATE NOCASE
+           ORDER BY synergy_score DESC`
+        ).all(name) as Array<{ card_name: string; synergy_score: number; inclusion_rate: number }>;
+        const localRecs = localSynergies.map((r) => ({ name: r.card_name, synergy: r.synergy_score, inclusion: r.inclusion_rate }));
+        for (const rec of localRecs) mergeSynergy(rec);
+        if (localRecs.length > 0) mergeResolved(localRecs);
+      } catch {
+        // Table may not exist yet — that's fine, the live EDHREC fetch handles it
       }
-    } catch {
-      // Table may not exist yet — that's fine, the live EDHREC fetch handles it
     }
 
-    // Always try the live EDHREC fetch for themes + any cards not in local DB
-    const edhrecData = await getEdhrecRecommendations(commanderName);
-
-    if (edhrecData) {
-      edhrecThemes = edhrecData.themes;
-
-      // Build synergy lookup from EDHREC's commander-specific data
-      for (const rec of edhrecData.topCards) {
-        edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
+    // Always try the live EDHREC fetch for themes + any cards not in local DB.
+    // Pair page (either order) first, then each half; themes and theme cards
+    // come from the first page that answers, top cards from every page.
+    const pageNames = partnerCard ? [...partnerPairNames(commanderName, partnerCard.name), ...commanderNames] : commanderNames;
+    let pairFound = false;
+    let themeSource: string | null = null;
+    for (const name of pageNames) {
+      const isPair = !commanderNames.includes(name);
+      if (isPair && pairFound) continue;
+      const edhrecData = await getEdhrecRecommendations(name);
+      if (!edhrecData) continue;
+      if (isPair) pairFound = true;
+      for (const rec of edhrecData.topCards) mergeSynergy(rec);
+      mergeResolved(edhrecData.topCards);
+      if (themeSource === null) {
+        themeSource = name;
+        edhrecThemes = edhrecData.themes;
       }
+    }
 
-      // Resolve EDHREC cards to DB rows
-      const resolved = resolveEdhrecCards(
-        db, edhrecData.topCards, colorExcludeFilter, legalityFilter, commanderExclude
-      );
-      edhrecResolvedCards = resolved.map((r) => r.card);
-
+    if (themeSource !== null) {
       // Fetch theme-specific cards for the top 2 EDHREC themes
-      const themePromises = edhrecData.themes.slice(0, 2).map((theme) =>
-        getEdhrecThemeCards(commanderName, theme)
-      );
-      const themeResults = await Promise.all(themePromises);
-
+      const themeResults = await Promise.all(edhrecThemes.slice(0, 2).map((theme) => getEdhrecThemeCards(themeSource!, theme)));
       for (const themeData of themeResults) {
         if (!themeData) continue;
-        for (const rec of themeData.cards) {
-          // Don't overwrite higher synergy scores from the main list
-          if (!edhrecSynergyMap.has(rec.name) || rec.synergy > (edhrecSynergyMap.get(rec.name)?.synergy || 0)) {
-            edhrecSynergyMap.set(rec.name, { synergy: rec.synergy, inclusion: rec.inclusion });
-          }
-        }
-        // Resolve theme cards too
-        const themeResolved = resolveEdhrecCards(
-          db, themeData.cards, colorExcludeFilter, legalityFilter, commanderExclude
-        );
-        for (const r of themeResolved) {
-          if (!edhrecResolvedCards.some((c) => c.name === r.card.name)) {
-            edhrecResolvedCards.push(r.card);
-          }
-        }
+        // Don't overwrite higher synergy scores from the main list
+        for (const rec of themeData.cards) mergeSynergy(rec);
+        mergeResolved(themeData.cards);
       }
     }
   }
@@ -844,7 +841,8 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   const tribalNames = new Set<string>();
 
   if (isCommander && commanderName) {
-    tribalType = detectTribalTheme(db, commanderName);
+    // Either half of a partner pair may be the tribal lord (B-D4).
+    tribalType = commanderNames.reduce<string | null>((t, n) => t ?? detectTribalTheme(db, n), null);
     if (tribalType) {
       const ownedNames = useCollection ? new Set(ownedQty.keys()) : new Set<string>();
       tribalCards = fetchTribalCards(db, tribalType, colorExcludeFilter, legalityFilter, commanderExclude, ownedNames);
@@ -1201,21 +1199,23 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   if (isCommander && commanderName) {
     try {
       const deckCardNames = poolPrefix(30).map(c => c.name);
-      const cfRecs = await getCFRecommendations(deckCardNames, commanderName, 50, { logImpressions: false });
-      for (const rec of cfRecs) {
-        cfScoreMap.set(rec.card_name, rec.cf_score);
-      }
-      // Inject CF-recommended cards into pool if not already present.
-      // Unowned recs stay in the pool (scored, craft-list candidates); the
-      // final deck still enforces ownership at pick time via getMaxQty().
-      if (cfRecs.length > 0) {
-        const existingIds = new Set(pool.map(c => c.id));
-        const cfCards = resolveCFToDbCards(cfRecs, existingIds);
-        for (const { card } of cfCards) {
-          if (!seenNames.has(card.name)) {
-            if (!validForPool(card)) continue;
-            seenNames.add(card.name);
-            pool.push(card);
+      for (const name of commanderNames) { // both halves of a pair (B-D4)
+        const cfRecs = await getCFRecommendations(deckCardNames, name, 50, { logImpressions: false });
+        for (const rec of cfRecs) {
+          if ((cfScoreMap.get(rec.card_name) ?? -Infinity) < rec.cf_score) cfScoreMap.set(rec.card_name, rec.cf_score);
+        }
+        // Inject CF-recommended cards into pool if not already present.
+        // Unowned recs stay in the pool (scored, craft-list candidates); the
+        // final deck still enforces ownership at pick time via getMaxQty().
+        if (cfRecs.length > 0) {
+          const existingIds = new Set(pool.map(c => c.id));
+          const cfCards = resolveCFToDbCards(cfRecs, existingIds);
+          for (const { card } of cfCards) {
+            if (!seenNames.has(card.name)) {
+              if (!validForPool(card)) continue;
+              seenNames.add(card.name);
+              pool.push(card);
+            }
           }
         }
       }
@@ -1227,9 +1227,11 @@ export async function buildScoredCandidatePool(options: BuildOptions): Promise<S
   // ── Per-commander card stats (from 506K+ community decks) ──────────────
   // Provides per-commander inclusion rates: "72% of Ur-Dragon decks run Sol Ring"
   const commanderStatsMap = new Map<string, { inclusionRate: number; synergyScore: number }>();
-  if (isCommander && commanderName) {
-    const cmdrStats = getCommanderCardStats(commanderName, 300);
+  for (const name of isCommander && commanderName ? commanderNames : []) { // both halves of a pair (B-D4)
+    const cmdrStats = getCommanderCardStats(name, 300);
     for (const s of cmdrStats) {
+      const prev = commanderStatsMap.get(s.cardName);
+      if (prev && prev.inclusionRate >= s.inclusionRate) continue;
       commanderStatsMap.set(s.cardName, {
         inclusionRate: s.inclusionRate,
         synergyScore: s.synergyScore,
@@ -1871,6 +1873,11 @@ export interface Step4bDisplaceableCtx {
    *  floor (above Step 4b) — they're never fair game for ANY synergy
    *  category's backfill, not just the 'planeswalker' category's own. */
   isSuperfriends?: boolean;
+  /** Creature-heavy deck (P2-G #6): a symmetric creature wipe is fair game for any backfill. */
+  creatureHeavy?: boolean;
+  /** Current main-board protection count / floor (P2-G #7) — protection stops being displaceable at the floor. */
+  protectionCount?: number;
+  protectionFloor?: number;
 }
 
 // Step 4b (synergy-minimum backfill) never displaces removal/wipes, and only
@@ -1901,11 +1908,18 @@ export function isStep4bDisplaceable(
   // first thing every later category's backfill cut.
   if (ctx.isSuperfriends && isWalkerEngineCard(p.card)) return false;
 
-  const primary = getPrimaryCategory(classifyCard(
+  const cats = classifyCard(
     p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0,
     ctx.commanderOracleText, ctx.classifyOpts
-  ));
-  if (primary === 'removal' || primary === 'board_wipe') return false;
+  );
+  const primary = getPrimaryCategory(cats);
+  if (primary === 'removal') return false;
+  // A symmetric creature wipe in a go-wide deck is the one wipe worth cutting
+  // (P2-G #6); one-sided wipes and everything else stay.
+  if (primary === 'board_wipe') return !!ctx.creatureHeavy && isSymmetricCreatureWipe(p.card.name, p.card.oracle_text || '');
+  // Protection keeps its floor the way ramp does (P2-G #7): Tam's walker-
+  // support fill cut Dovin's Veto and Mortify's counter mode down to 0.
+  if (ctx.protectionFloor !== undefined && cats.includes('protection')) return (ctx.protectionCount ?? 0) - p.quantity >= ctx.protectionFloor;
   if (primary === 'ramp') return ctx.rampCount - p.quantity >= ctx.rampFloor;
 
   // Pre-existing text heuristic (unrelated to a21f2ff): a mana rock/land
@@ -1919,6 +1933,83 @@ export function isStep4bDisplaceable(
 
   return true;
 }
+
+export interface WipeBackfillCtx {
+  classifyOpts?: ClassifyOpts;
+  /** Pool score of the candidate; undefined when the DB net found a card the pool never scored. */
+  score?: number;
+  /** The pool quality floor (A-D1) — a scored card below it is bench material, not a wipe slot. */
+  scoreFloor: number;
+  /** Go-wide build (see CREATURE_HEAVY_SHARE): a symmetric creature wipe hits us harder than the table. */
+  creatureHeavy?: boolean;
+}
+
+// The board-wipe backfill's acceptance test (P2-G #10): the SQL LIKE net is a
+// broad fetch, so a candidate must (a) be a wipe by the same strict classifier
+// the quota accountant uses and (b) clear the pool's own quality floor when
+// the pool scored it (Tatyova shipped Turtles in Time at 21 vs a ~60 floor).
+// (c) P2-G #6: a creature-heavy deck is never backfilled with a symmetric
+// creature wipe (Edgar + Sunfall) — one-sided wipes and spot removal only.
+export function isWipeBackfillCandidate(
+  card: Pick<DbCard, 'name' | 'oracle_text'>,
+  ctx: WipeBackfillCtx
+): boolean {
+  if (!isBoardWipe(card.name, card.oracle_text || '', ctx.classifyOpts)) return false;
+  if (ctx.score !== undefined && ctx.score < ctx.scoreFloor) return false;
+  if (ctx.creatureHeavy && isSymmetricCreatureWipe(card.name, card.oracle_text || '')) return false;
+  return true;
+}
+
+// A deck is "creature-heavy" (go-wide tribal, tokens, aristocrats) when its
+// own picks are at least this share creatures — the deck's real count, not
+// the template band, so collection builds that drift are read honestly.
+export const CREATURE_HEAVY_SHARE = 0.4;
+
+export interface PreferOneSidedWipesCtx {
+  /** Names seated FOR the board_wipe role (Pass A quota / backfill) — the only wipe slots this pass touches. */
+  wipeSlotNames: Set<string>;
+  /** Tribe members are plan picks whatever else they do (Amalia in Edgar). */
+  tribalNames: Set<string>;
+  classifyOpts?: ClassifyOpts;
+  scoreFloor: number;
+  getMaxQty: (card: DbCard) => number;
+}
+
+// P2-G #6, second half: a creature-heavy deck that Pass A seated symmetric
+// wipes into (Edgar: Sunfall, Genesis of the Daleks) trades each one, in
+// place, for the best benched one-sided wipe, else the best benched spot
+// removal, above the pool floor. Mutates `picked`; returns the swaps.
+export function preferOneSidedWipes(
+  picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
+  scored: Array<{ card: DbCard; score: number }>,
+  ctx: PreferOneSidedWipesCtx
+): Array<{ out: string; in: string }> {
+  const swaps: Array<{ out: string; in: string }> = [];
+  const taken = new Set(picked.map((p) => p.card.name));
+  const isSpellSlot = (c: DbCard) => !(c.type_line || '').split('//')[0].includes('Land');
+  const isOneSidedWipe = (c: DbCard) =>
+    isBoardWipe(c.name, c.oracle_text || '', ctx.classifyOpts) && !isSymmetricCreatureWipe(c.name, c.oracle_text || '');
+  const isSpotRemoval = (c: DbCard) =>
+    getPrimaryCategory(classifyCard(c.name, c.oracle_text || '', c.type_line || '', c.cmc || 0, undefined, ctx.classifyOpts)) === 'removal';
+  // `scored` is score-descending, so the first match is the best available.
+  const bench = scored.filter((s) => s.score >= ctx.scoreFloor && !taken.has(s.card.name) && isSpellSlot(s.card) && ctx.getMaxQty(s.card) > 0);
+  for (const p of [...picked]) {
+    if (p.board !== 'main' || !ctx.wipeSlotNames.has(p.card.name) || ctx.tribalNames.has(p.card.name)) continue;
+    if (!isSymmetricCreatureWipe(p.card.name, p.card.oracle_text || '')) continue;
+    const replacement = bench.find((s) => !taken.has(s.card.name) && isOneSidedWipe(s.card))
+      ?? bench.find((s) => !taken.has(s.card.name) && isSpotRemoval(s.card));
+    if (!replacement) break;
+    picked.splice(picked.indexOf(p), 1, { card: replacement.card, quantity: p.quantity, board: 'main' });
+    taken.delete(p.card.name);
+    taken.add(replacement.card.name);
+    swaps.push({ out: p.card.name, in: replacement.card.name });
+  }
+  return swaps;
+}
+
+// Every displacement pass keeps at least this much protection seated (the
+// template minimum — superfriends counterspells [2, 4]; P2-G #7).
+export const PROTECTION_FLOOR = 2;
 
 export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult> {
   const db = getDb();
@@ -2225,6 +2316,24 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // directly from the DB so every deck ships with at least 2 board wipes.
   const wipeFilled = pickResult.roleFills.board_wipe || 0;
   const wipeNeed = Math.max(0, (quotas.board_wipe || 2) - wipeFilled);
+  // Read once, after the role picker: the deck is full here (P2-G #6).
+  const creatureCount = picked.reduce((s, p) =>
+    s + (p.board === 'main' && /\bCreature\b/.test((p.card.type_line || '').split('//')[0]) ? p.quantity : 0), 0);
+  const creatureHeavy = creatureCount >= nonLandTarget * CREATURE_HEAVY_SHARE;
+  // Go-wide: the wipe quota's symmetric picks become one-sided wipes or spot
+  // removal (P2-G #6). Runs before the backfill so it sees the final slots.
+  if (creatureHeavy) {
+    const wipeSlotNames = new Set(reasoning.filter((r) => r.role === 'board_wipe').map((r) => r.cardName));
+    for (const s of preferOneSidedWipes(picked, scored, { wipeSlotNames, tribalNames, classifyOpts, scoreFloor: qualityFloor, getMaxQty })) {
+      pickedNames.delete(s.out);
+      pickedNames.add(s.in);
+      reasoning.push({ cardName: s.in, role: 'removal', reason: `go-wide: +${s.in} for symmetric wipe ${s.out}` });
+    }
+  }
+  // Live protection count for the displacement passes below (P2-G #7).
+  const isProtectionPick = (p: { card: DbCard }): boolean =>
+    classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts).includes('protection');
+  const countProtection = (): number => picked.reduce((s, p) => s + (p.board === 'main' && isProtectionPick(p) ? p.quantity : 0), 0);
   // The deck is normally FULL here (A-D1 fills every slot by score, and Pass A
   // no longer seats a sub-floor "wipe" just to meet the quota), so the
   // backfill makes its own room: the lowest-scored utility/synergy picks
@@ -2265,8 +2374,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (wipesAdded >= Math.min(wipeNeed, room)) break;
       if (pickedNames.has(wipe.name)) continue;
       // Validate against the same classifier the quota accountant uses (C2)
-      // — the SQL LIKE clauses above are a broad net, not the source of truth.
-      if (!isBoardWipe(wipe.name, wipe.oracle_text || '', classifyOpts)) continue;
+      // — the SQL LIKE clauses above are a broad net, not the source of truth
+      // — and against the pool's quality floor (P2-G #10).
+      if (!isWipeBackfillCandidate(wipe, { classifyOpts, score: poolByName.get(wipe.name)?.score, scoreFloor: qualityFloor, creatureHeavy })) continue;
       const qty = getMaxQty(wipe);
       if (qty <= 0) continue;
       picked.push({ card: wipe, quantity: 1, board: 'main' });
@@ -2428,6 +2538,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       for (const p of picked) {
         if (p.board === 'main' && primaryOf(p) === 'ramp') rampCount += p.quantity;
       }
+      let protectionCount = countProtection();
       const displaceable = [...picked]
         .filter((p) => {
           if (p.board !== 'main' || isWalker(p.card) || isSupport(p.card)) return false;
@@ -2438,10 +2549,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       let filled = 0;
       for (const candidate of candidates) {
         if (filled >= deficit) break;
-        const at = displaceable.findIndex((p) => primaryOf(p) !== 'ramp' || rampCount - p.quantity >= rampFloor);
+        // Ramp and protection each hold their floor (P2-G #7).
+        const at = displaceable.findIndex((p) =>
+          (primaryOf(p) !== 'ramp' || rampCount - p.quantity >= rampFloor)
+          && (!isProtectionPick(p) || protectionCount - p.quantity >= PROTECTION_FLOOR));
         if (at === -1) break;
         const [displaced] = displaceable.splice(at, 1);
         if (primaryOf(displaced) === 'ramp') rampCount -= displaced.quantity;
+        if (isProtectionPick(displaced)) protectionCount -= displaced.quantity;
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {
           picked.splice(idx, 1);
@@ -2584,12 +2699,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         const primary = getPrimaryCategory(classifyCard(p.card.name, p.card.oracle_text || '', p.card.type_line || '', p.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
         if (p.board === 'main' && primary === 'ramp') rampCount += p.quantity;
       }
+      // Protection mirrors ramp (P2-G #7): not pre-excluded here, live floor in the fill loop.
+      let protectionCount = countProtection();
 
       // Identify non-essential picks (lowest score, non-protected)
       const displaceable = [...picked]
         .filter((p) => isStep4bDisplaceable(p, {
           category, protectedNames: protectedSet, tribalNames,
-          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends, creatureHeavy,
           rampCount, rampFloor: -Infinity,
         }))
         .sort((a, b) => {
@@ -2606,13 +2723,14 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
         const at = displaceable.findIndex((p) => isStep4bDisplaceable(p, {
           category, protectedNames: protectedSet, tribalNames,
-          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends,
-          rampCount, rampFloor,
+          commanderOracleText: commanderCard?.oracle_text || undefined, classifyOpts, isSuperfriends, creatureHeavy,
+          rampCount, rampFloor, protectionCount, protectionFloor: PROTECTION_FLOOR,
         }));
         if (at === -1) break;
         const [displaced] = displaceable.splice(at, 1);
         const displacedPrimary = getPrimaryCategory(classifyCard(displaced.card.name, displaced.card.oracle_text || '', displaced.card.type_line || '', displaced.card.cmc || 0, commanderCard?.oracle_text || undefined, classifyOpts));
         if (displacedPrimary === 'ramp') rampCount -= displaced.quantity;
+        if (isProtectionPick(displaced)) protectionCount -= displaced.quantity;
         // Remove displaced card
         const idx = picked.indexOf(displaced);
         if (idx !== -1) {
@@ -2823,6 +2941,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       targetLandCount: targetLandsEffective,
       tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
       commanderName: commanderCard?.name,
+      partnerName: options.partnerName,
       existingNonLandCards: nonLandCards,
       collectionOnly: useCollection,
       rarityFilter: options.rarityFilter,
@@ -3205,8 +3324,18 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
 
   let replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
   if (options.maxDeckPrice != null && options.maxDeckPrice > 0) {
+    // Same land scoring as Step 5 (plus the per-card cap) so a cut land is
+    // replaced by a real land for the deficit colour, not a basic (P2-G #11).
+    const landPool = scoreLandsForDeck({
+      colors, format: options.format, strategy: resolvedStrategy,
+      tribalTypes: tribalTypesForLands.length > 0 ? tribalTypesForLands : undefined,
+      commanderName: commanderCard?.name, partnerName: options.partnerName, userId: options.userId, collectionSource: options.collectionSource,
+      manaDemand: analyzeManaDemands(nonLandCards), collectionOnly: useCollection,
+      rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice,
+    });
     const budget = applyDeckBudget(
-      finalCards, poolResult.pool, options.maxDeckPrice, ownedQty, useCollection, commanderCard?.oracle_text || undefined
+      finalCards, poolResult.pool, options.maxDeckPrice, ownedQty, useCollection, commanderCard?.oracle_text || undefined,
+      { classifyOpts, landPool },
     );
     finalCards = budget.cards;
     replacedForBudget = budget.replacedForBudget;
@@ -3309,6 +3438,17 @@ export function passesCardPriceCap(priceUsd: string | null, cap: number | null |
  * `pool`, which is nonland-only) fall back to an existing basic already in
  * the deck — basics are the floor.
  */
+export interface DeckBudgetOpts {
+  /** The builder's classify opts — same-role matching reads the builder's roles, not the default path. */
+  classifyOpts?: ClassifyOpts;
+  /** scoreLandsForDeck({ maxCardPrice }) output: a cut land is replaced by the best unpicked land that
+   *  produces the deficit colour and fits the budget, before falling back to a basic (P2-G #11). */
+  landPool?: Array<Pick<LandScore, 'card' | 'score' | 'producesColors' | 'clearsBar'>>;
+}
+
+/** A budget replacement is either popular (global EDHREC rank) or scored like the deck it joins (P2-G #11). */
+export const BUDGET_SWAP_MAX_RANK = 5000;
+
 export function applyDeckBudget(
   picked: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>,
   pool: Array<{ card: DbCard; score: number }>,
@@ -3316,6 +3456,7 @@ export function applyDeckBudget(
   ownedQty: Map<string, number>,
   useCollection: boolean,
   commanderOracle: string | undefined,
+  opts: DeckBudgetOpts = {},
 ): { cards: Array<{ card: DbCard; quantity: number; board: 'main' | 'sideboard' }>; replacedForBudget: Array<{ out: string; in: string; saved: number }> } {
   const cards = picked.map((p) => ({ ...p }));
   const replacedForBudget: Array<{ out: string; in: string; saved: number }> = [];
@@ -3323,10 +3464,23 @@ export function applyDeckBudget(
   const priceOf = (card: DbCard): number => (card.price_usd != null ? parseFloat(card.price_usd) || 0 : 0);
   const effPrice = (card: DbCard): number => (isOwned(card.name) ? 0 : priceOf(card));
   const primaryRole = (card: DbCard): string =>
-    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
+    getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle, opts.classifyOpts));
   const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
   const total = (): number =>
     cards.filter((c) => c.board === 'main').reduce((s, c) => s + effPrice(c.card) * c.quantity, 0);
+  // The deck's own bar for a nonland replacement: its 25th-percentile pool
+  // score (nearest rank). Niv's $150 build seated Brilliant Spectrum s6 and
+  // Rancorous Archaic s13 as "same-role" swaps; a cheaper card that is
+  // neither popular nor scored like the deck leaves the pricey card in place.
+  const scoreOf = new Map(pool.map((p) => [p.card.name, p.score]));
+  const deckScores = cards
+    .filter((c) => c.board === 'main' && !isLand(c.card))
+    .map((c) => scoreOf.get(c.card.name))
+    .filter((s): s is number => s !== undefined)
+    .sort((a, b) => a - b);
+  const deckP25 = deckScores.length > 0 ? deckScores[Math.max(0, Math.ceil(0.25 * deckScores.length) - 1)] : -Infinity;
+  const clearsSwapBar = (p: { card: DbCard; score: number }): boolean =>
+    (p.card.edhrec_rank != null && p.card.edhrec_rank <= BUDGET_SWAP_MAX_RANK) || p.score >= deckP25;
 
   // A card that already has no cheaper same-role candidate is skipped, not a
   // reason to stop entirely — other, less expensive cards further down the
@@ -3342,6 +3496,7 @@ export function applyDeckBudget(
     if (swappable.length === 0) break;
     const target = swappable.slice().sort((a, b) => effPrice(b.card) - effPrice(a.card))[0];
     const targetPrice = effPrice(target.card);
+    const budgetLeft = maxDeckPrice - (total() - targetPrice);
 
     if (isLand(target.card)) {
       const isBasic = (c: DbCard): boolean => /^Basic\b/.test(c.type_line || '');
@@ -3352,6 +3507,21 @@ export function applyDeckBudget(
       const deficitColor = Object.keys(pips)
         .filter((c) => pips[c] > 0)
         .sort((a, b) => (pips[b] - sources[b]) - (pips[a] - sources[a]))[0];
+      // Best unpicked real land (front face) for the deficit colour, priced
+      // within what is left OR the budget's per-slot average — the loop cuts
+      // the priciest card first, so `budgetLeft` is negative until the very
+      // end and every fetch/shock went to a basic (P2-G #11: 17 of Niv's).
+      const perSlot = maxDeckPrice / Math.max(1, cards.filter((c) => c.board === 'main').reduce((s, c) => s + c.quantity, 0));
+      const landIn = (opts.landPool ?? [])
+        .filter((l) => !inDeck.has(l.card.name) && l.clearsBar && /\bLand\b/.test((l.card.type_line || '').split('//')[0])
+          && l.producesColors.includes(deficitColor)
+          && effPrice(l.card) < targetPrice && effPrice(l.card) <= Math.max(budgetLeft, perSlot))
+        .sort((a, b) => b.score - a.score)[0];
+      if (landIn) {
+        cards[cards.indexOf(target)] = { card: landIn.card, quantity: target.quantity, board: 'main' };
+        replacedForBudget.push({ out: target.card.name, in: landIn.card.name, saved: Math.round((targetPrice - effPrice(landIn.card)) * 100) / 100 });
+        continue;
+      }
       const basic = mainLands.find((c) => isBasic(c.card) && BASIC_LAND_COLOR[c.card.name] === deficitColor)
         ?? mainLands.find((c) => isBasic(c.card));
       if (!basic) { stuck.add(target.card.name); continue; } // no basic to absorb the cut — try the next card
@@ -3363,12 +3533,11 @@ export function applyDeckBudget(
     }
 
     const role = primaryRole(target.card);
-    const budgetLeft = maxDeckPrice - (total() - targetPrice);
     // Unpriced is not free: an unowned candidate with no known price is only
     // eligible when the user owns it (isOwned already makes it effPrice 0
     // honestly — an unknown price otherwise can't be judged "savings").
     const candidates = pool.filter((p) =>
-      !inDeck.has(p.card.name) && !isLand(p.card) && primaryRole(p.card) === role
+      !inDeck.has(p.card.name) && !isLand(p.card) && clearsSwapBar(p) && primaryRole(p.card) === role
       && (isOwned(p.card.name) || p.card.price_usd != null)
     );
     const fitting = candidates.filter((p) => effPrice(p.card) <= budgetLeft).sort((a, b) => b.score - a.score)[0];
