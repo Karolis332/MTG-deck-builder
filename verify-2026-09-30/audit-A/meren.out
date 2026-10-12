@@ -1,0 +1,126 @@
+land tables: land_classifications
+land class table: land_classifications id,card_name,card_id,land_category,produces_colors,enters_untapped,enters_untapped_condition,tribal_types,synergy_tags,tier,updated_at
+
+=== meren: Meren of Clan Nel Toth (commander/paper) 3927ms ===
+strategy aristocrats themes ["draw","sacrifice","counters","tokens","aggro","flying","ramp","artifacts","enchantments"] tribal undefined
+size 99 lands 38 (basic 20) sources {"W":6,"U":5,"B":31,"R":8,"G":25} auditor {"W":6,"U":5,"B":31,"R":8,"G":25}
+pips {"G":23,"B":50} pipCards {"G":20,"B":39} curve {"1":10,"2":14,"3":20,"4":9,"5":5,"6":2,"7":1}
+roles {"arsenal:community_top":40,"arsenal:collection_substitute":2,"arsenal:archetype_payoff":3,"draw":7,"tutor":1,"board_wipe":1,"protection":1,"ramp":4,"win_condition":1,"utility":1,"(none)":38}
+health: {"grade":"A","realLands":35,"tappedLands":7,"tappedRatio":0.18,"pipsByColor":{"W":0,"U":0,"B":50,"R":0,"G":23},"drawCount":19,"drawEngineCount":15,"rampCount":13,"fakeLands":[],"warnings":[],"deficiencies":[]}
+dead: []
+bracket: {"target":null,"result":2,"reasons":[],"swapped":[]}
+--- LANDS
+1 Command Tower |  | 
+1 Exotic Orchard |  | 
+1 Bloodstained Mire |  | 
+1 Windswept Heath |  | 
+1 Wooded Foothills |  | 
+1 Overgrown Tomb | BG | 
+1 Woodland Cemetery | BG | 
+1 Mana Confluence |  | 
+1 Llanowar Wastes | BG | 
+1 Twilight Mire | BG | 
+1 Disciple of Freyalise // Garden of Freyalise | G | 
+1 Necroblossom Snarl | BG | 
+1 Boggart Trawler // Boggart Bog | B | 
+1 Bridgeworks Battle // Tanglespan Bridgeworks | G | 
+1 Riveteers Overlook |  | 
+1 Viridescent Bog | BG | 
+1 Blooming Marsh | BG | 
+1 Ifnir Deadlands | B | 
+14 Swamp | B | 
+6 Forest | G | 
+--- NONLANDS (by cmc)
+1 Sol Ring | {1} | Artifact | arsenal:community_top
+1 Spore Frog | {G} | Creature — Frog | arsenal:community_top
+1 Viscera Seer | {B} | Creature — Vampire Wizard | arsenal:community_top
+1 Reanimate | {B} | Sorcery | arsenal:community_top
+1 Haywire Mite | {1} | Artifact Creature — Insect | arsenal:community_top
+1 Carrion Feeder | {B} | Creature — Zombie | arsenal:community_top
+1 Llanowar Elves | {G} | Creature — Elf Druid | arsenal:community_top
+1 Elvish Mystic | {G} | Creature — Elf Druid | arsenal:community_top
+1 Village Rites | {B} | Instant | arsenal:community_top
+1 Dark Ritual | {B} | Instant | arsenal:community_top
+1 Sakura-Tribe Elder | {1}{G} | Creature — Snake Shaman | arsenal:community_top
+1 Blood Artist | {1}{B} | Creature — Vampire | arsenal:community_top
+1 Arcane Signet | {2} | Artifact | arsenal:community_top
+1 Assassin's Trophy | {B}{G} | Instant | arsenal:community_top
+1 Accursed Marauder | {1}{B} | Creature — Zombie Warrior | arsenal:community_top
+1 Zulaport Cutthroat | {1}{B} | Creature — Human Rogue Ally | arsenal:community_top
+1 Cankerbloom | {1}{G} | Creature — Phyrexian Fungus | arsenal:community_top
+1 Wight of the Reliquary | {B}{G} | Creature — Zombie Knight | arsenal:community_top
+1 Lightning Greaves | {2} | Artifact — Equipment | arsenal:community_top
+1 Priest of Forgotten Gods | {1}{B} | Creature — Human Cleric | arsenal:archetype_payoff
+1 Idol of Oblivion | {2} | Artifact | draw
+1 Chronomancer | {1}{B} | Artifact Creature — Necron W | draw
+1 Deadly Dispute | {1}{B} | Instant | ramp
+1 Fellwar Stone | {2} | Artifact | ramp
+1 Eternal Witness | {1}{G}{G} | Creature — Human Shaman | arsenal:community_top
+1 Victimize | {2}{B} | Sorcery | arsenal:community_top
+1 Plaguecrafter | {2}{B} | Creature — Human Shaman | arsenal:community_top
+1 Buried Alive | {2}{B} | Sorcery | arsenal:community_top
+1 Grim Haruspex | {2}{B} | Creature — Human Wizard | arsenal:community_top
+1 Braids, Arisen Nightmare | {1}{B}{B} | L.Creature — Nightmare | arsenal:community_top
+1 Ashnod's Altar | {3} | Artifact | arsenal:community_top
+1 Toxic Deluge | {2}{B} | Sorcery | arsenal:community_top
+1 Putrefy | {1}{B}{G} | Instant | arsenal:community_top
+1 Cultivate | {2}{G} | Sorcery | arsenal:community_top
+1 Cauldron of Essence | {1}{B}{G} | Artifact | arsenal:community_top
+1 Yahenni, Undying Partisan | {2}{B} | L.Creature — Aetherborn Vamp | arsenal:archetype_payoff
+1 Woe Strider | {2}{B} | Creature — Horror | arsenal:archetype_payoff
+1 Morbid Opportunist | {2}{B} | Creature — Human Rogue | arsenal:community_top
+1 Garruk's Uprising | {2}{G} | Enchantment | draw
+1 Tireless Provisioner | {2}{G} | Creature — Elf Scout | ramp
+1 Jerren, Corrupted Bishop // Ormendahl, the Corrupter | {2}{B} | L.Creature — Human Cleric // | draw
+1 Midnight Reaper | {2}{B} | Creature — Zombie Knight | draw
+1 Dina, Essence Brewer | {1}{B}{G} | L.Creature — Dryad Druid | utility
+1 Selvala, Heart of the Wilds | {1}{G}{G} | L.Creature — Elf Scout | ramp
+1 Dread Presence | {3}{B} | Creature — Nightmare | arsenal:collection_substitute
+1 Ravenous Chupacabra | {2}{B}{B} | Creature — Beast Horror | arsenal:community_top
+1 Force of Vigor | {2}{G}{G} | Instant | arsenal:collection_substitute
+1 Solemn Simulacrum | {4} | Artifact Creature — Golem | arsenal:community_top
+1 Culling Ritual | {2}{B}{G} | Sorcery | arsenal:community_top
+1 Night of the Sweets' Revenge | {3}{G} | Enchantment | board_wipe
+1 Toski, Bearer of Secrets | {3}{G} | L.Creature — Squirrel | protection
+1 Smothering Abomination | {2}{B}{B} | Creature — Eldrazi | draw
+1 Mirkwood Bats | {3}{B} | Creature — Bat | win_condition
+1 Gray Merchant of Asphodel | {3}{B}{B} | Creature — Zombie | arsenal:community_top
+1 Syr Konrad, the Grim | {3}{B}{B} | L.Creature — Human Knight | arsenal:community_top
+1 Moldervine Reclamation | {3}{B}{G} | Enchantment | arsenal:community_top
+1 Transmutation Font | {5} | Artifact | tutor
+1 High-Society Hunter | {3}{B}{B} | Creature — Vampire Noble | draw
+1 Massacre Wurm | {3}{B}{B}{B} | Creature — Phyrexian Wurm | arsenal:community_top
+1 Mikaeus, the Unhallowed | {3}{B}{B}{B} | L.Creature — Zombie Cleric | arsenal:community_top
+1 Butcher of Malakir | {5}{B}{B} | Creature — Vampire Warrior | arsenal:community_top
+--- BENCH LANDS (owned paper, CI-legal, nonbasic, not in deck): 31
+Path of Ancestry |  | rank 14 | {"id":735,"card_name":"Path of Ancestry","card_id":"b1aaa7b0-1cac-4a92-b880-7ef1ac00618f","land_category":"temple","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"scry\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Rogue's Passage |  | rank 18 | {"id":838,"card_name":"Rogue's Passage","card_id":"4493b62b-f354-47ff-9dcf-cc6e29de77c6","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Evolving Wilds |  | rank 19 | {"id":320,"card_name":"Evolving Wilds","card_id":"c0318a48-30e4-4ef7-be3d-5e561c5ce428","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Terramorphic Expanse |  | rank 28 | {"id":1080,"card_name":"Terramorphic Expanse","card_id":"a81f924b-0527-4311-8120-9bfff71524f6","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Myriad Landscape |  | rank 31 | {"id":678,"card_name":"Myriad Landscape","card_id":"a0e2098f-1d94-491a-a7e9-a45a9f69e3a8","land_category":"tapped","produces_colors":"[]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":4,"updated_at":"2026-09-30 11:53:15"}
+Fabled Passage |  | rank 44 | {"id":323,"card_name":"Fabled Passage","card_id":"62ef854d-ec9e-443d-a4ba-4b2875ed3fe7","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Temple of the False God |  | rank 82 | {"id":1075,"card_name":"Temple of the False God","card_id":"1024f555-e0d7-48ac-b86e-c87290eac832","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Ash Barrens |  | rank 210 | {"id":58,"card_name":"Ash Barrens","card_id":"e8510205-4baa-4f1c-bf64-5d931e2ddf48","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+High Market |  | rank 424 | {"id":489,"card_name":"High Market","card_id":"894aa6b6-0d08-4c43-8734-9cb7b31359c6","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Nesting Grounds |  | rank 560 | {"id":693,"card_name":"Nesting Grounds","card_id":"c25ad164-4076-496d-833c-d607391b1ac8","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Opal Palace |  | rank 680 | {"id":721,"card_name":"Opal Palace","card_id":"912553e7-1e67-4045-84fd-0a791754cf6c","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Escape Tunnel |  | rank 797 | {"id":313,"card_name":"Escape Tunnel","card_id":"5df90940-15ea-418c-8547-6c75d69ec6d3","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"sacrifice\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Cabaretti Courtyard |  | rank 969 | {"id":149,"card_name":"Cabaretti Courtyard","card_id":"c54ddd4e-f668-4ec8-b123-59afa977eba4","land_category":"fetch","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"shuffle\", \"sacrifice\"]","tier":1,"updated_at":"2026-09-30 11:53:15"}
+Witch's Clinic |  | rank 1068 | {"id":1269,"card_name":"Witch's Clinic","card_id":"d2422e3e-a923-4516-b87c-cac748354dca","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Maestros Theater |  | rank 1281 | {"id":606,"card_name":"Maestros Theater","card_id":"d4087ba6-8227-4ec3-a989-0833ad6c8788","land_category":"fetch","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"shuffle\", \"sacrifice\"]","tier":1,"updated_at":"2026-09-30 11:53:15"}
+Brokers Hideout |  | rank 1311 | {"id":141,"card_name":"Brokers Hideout","card_id":"989b299b-daa9-4bda-94e2-9a2f0e8f2bce","land_category":"fetch","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"shuffle\", \"sacrifice\"]","tier":1,"updated_at":"2026-09-30 11:53:15"}
+Muraganda Raceway |  | rank 1427 | {"id":673,"card_name":"Muraganda Raceway","card_id":"5041ae16-29ff-4ad5-8a37-4736e9409294","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Arid Archway |  | rank 1497 | {"id":53,"card_name":"Arid Archway","card_id":"3f8c8fa2-12ab-4f6a-9f7a-2bc69e9ba024","land_category":"bounce","produces_colors":"[]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":"[\"landfall\"]","tier":3,"updated_at":"2026-09-30 11:53:15"}
+Radiant Fountain |  | rank 1552 | {"id":779,"card_name":"Radiant Fountain","card_id":"7ee5e77f-ca43-480d-ac37-48336d3bf044","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Great Hall of the Citadel |  | rank 1820 | {"id":439,"card_name":"Great Hall of the Citadel","card_id":"219c7b57-b62b-42d1-85d9-4b57624a3f54","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Conduit Pylons |  | rank 2012 | {"id":205,"card_name":"Conduit Pylons","card_id":"5ffa48cc-b991-4d47-b7ec-cf678915c758","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Hidden Grotto |  | rank 2257 | {"id":483,"card_name":"Hidden Grotto","card_id":"4ba8f2e7-8357-4862-97dc-1942d066023a","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Rumble Arena |  | rank 3027 | {"id":845,"card_name":"Rumble Arena","card_id":"3f5d2c38-663c-4f64-8cfc-c102462e82ef","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Study Hall |  | rank 3566 | {"id":1007,"card_name":"Study Hall","card_id":"93f812bc-7663-4504-b566-79e2c0a0f845","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Interplanar Beacon |  | rank 4280 | {"id":518,"card_name":"Interplanar Beacon","card_id":"bc1bed72-2440-4364-a69f-a9d7c4fe3fea","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Mirage Mesa |  | rank 4325 | {"id":638,"card_name":"Mirage Mesa","card_id":"c3d2e816-c06d-4c5d-98fe-c350d8cfab27","land_category":"tapped","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":4,"updated_at":"2026-09-30 11:53:15"}
+Sandstorm Verge |  | rank 6410 | {"id":863,"card_name":"Sandstorm Verge","card_id":"3ab4e0a4-2faf-456b-99e3-ee06c008538c","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Plaza of Harmony |  | rank 7624 | {"id":756,"card_name":"Plaza of Harmony","card_id":"07f2ae00-206d-4984-84eb-d10ab75d3791","land_category":"utility","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Tarnation Vista |  | rank 9184 | {"id":1056,"card_name":"Tarnation Vista","card_id":"962552a1-ec34-49e2-a23d-85dfb405d5e0","land_category":"tapped","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":4,"updated_at":"2026-09-30 11:53:15"}
+Skycoach Waypoint |  | rank 10263 | {"id":951,"card_name":"Skycoach Waypoint","card_id":"6747657b-5ce4-4dbd-b924-ca1f7119faf7","land_category":"utility","produces_colors":"[]","enters_untapped":1,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":3,"updated_at":"2026-09-30 11:53:15"}
+Base Camp |  | rank 11109 | {"id":84,"card_name":"Base Camp","card_id":"dc85412e-333d-4e7d-8c85-40618cf1b6c2","land_category":"tapped","produces_colors":"[\"B\", \"G\", \"R\", \"U\", \"W\"]","enters_untapped":0,"enters_untapped_condition":null,"tribal_types":null,"synergy_tags":null,"tier":4,"updated_at":"2026-09-30 11:53:15"}

@@ -1,0 +1,97 @@
+# edgar — {"format":"commander","commanderName":"Edgar Markov"}  (934 ms)
+size 99  lands 38  avgCmc(nonland) 3.02  pips {"B":55,"R":4,"W":20}
+strategy tribal  themes ["tribal"]  tribal vampire
+realSources {"W":22,"U":8,"B":32,"R":18,"G":8}  health.sources {"W":22,"U":8,"B":32,"R":18,"G":8}
+roles {"fixing-floor":5,"payoff":8,"ramp":5,"draw":9,"tutor":2,"removal":6,"board_wipe":3,"protection":3,"win_condition":4,"utility":5,"synergy":3,"(none)":46}
+price total $1397.80 overBudget false replaced 0
+bracket target null -> 3 swapped 0 reasons ["1 game changer(s): Teferi's Protection"]
+
+
+1 Walking Ballista | {X}{X} | Artifact Creature — Construct | $10.71 | edh 425 | payoff | This creature enters with X +1/+1 counters on it. / {4}: Put a +1/+1 counter on this creature. / Remove a +1/+1 counter from this creature: 
+1 Indulgent Aristocrat | {B} | Creature — Vampire Noble | $0.31 | edh 2567 | synergy | Lifelink / {2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control.
+1 Master of Dark Rites | {B} | Creature — Vampire Cleric | $4.44 | edh 2729 | ramp | {T}, Sacrifice another creature: Add {B}{B}{B}. Spend this mana only to cast Vampire, Cleric, and/or Demon spells.
+1 Path to Exile | {W} | Instant | $0.75 | edh 15 | removal | Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffl
+1 Skullclamp | {1} | Artifact — Equipment | $4.85 | edh 41 | payoff | Equipped creature gets +1/-1. / Whenever equipped creature dies, draw two cards. / Equip {1}
+1 Sol Ring | {1} | Artifact | $1.54 | edh 1 | ramp | {T}: Add {C}{C}.
+1 Swords to Plowshares | {W} | Instant | $1.02 | edh 11 | removal | Exile target creature. Its controller gains life equal to its power.
+1 Viscera Seer | {B} | Creature — Vampire Wizard | $0.48 | edh 257 |  | Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+1 Amalia Benavides Aguirre | {W}{B} | Legendary Creature — Vampire Scout | $0.42 | edh 4157 | board_wipe | Ward—Pay 3 life. / Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all other creatures if its power is exactly 20. (
+1 Arcane Signet | {2} | Artifact | $0.74 | edh 3 | fixing-floor | {T}: Add one mana of any color in your commander's color identity.
+1 Bitterblossom | {1}{B} | Kindred Enchantment — Faerie | $32.55 | edh 616 | payoff | At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying.
+1 Blood Artist | {1}{B} | Creature — Vampire | $3.92 | edh 141 | utility | Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life.
+1 Charismatic Conqueror | {1}{W} | Creature — Vampire Soldier | $25.08 | edh 1045 |  | Vigilance / Whenever an artifact or creature an opponent controls enters untapped, they may tap that permanent. If they don't, you create a 
+1 Cordial Vampire | {B}{B} | Creature — Vampire | $2.45 | edh 1874 | synergy | Whenever this creature or another creature dies, put a +1/+1 counter on each Vampire you control.
+1 Cruel Celebrant | {W}{B} | Creature — Vampire | $2.66 | edh 964 | win_condition | Whenever this creature or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life.
+1 Legion Lieutenant | {W}{B} | Creature — Vampire Knight | $0.39 | edh 3069 | utility | Other Vampires you control get +1/+1.
+1 Mind Stone | {2} | Artifact | $0.24 | edh 32 | fixing-floor | {T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card.
+1 Orzhov Signet | {2} | Artifact | $0.37 | edh 188 | fixing-floor | {1}, {T}: Add {W}{B}.
+1 Talisman of Hierarchy | {2} | Artifact | $0.48 | edh 135 | fixing-floor | {T}: Add {C}. / {T}: Add {W} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Indulgence | {2} | Artifact | $1.12 | edh 129 | fixing-floor | {T}: Add {C}. / {T}: Add {B} or {R}. This artifact deals 1 damage to you.
+1 Thought Vessel | {2} | Artifact | $2.04 | edh 21 | ramp | You have no maximum hand size. / {T}: Add {C}.
+1 Vampire Socialite | {B}{R} | Creature — Vampire Noble | $0.32 | edh 5337 |  | Menace (This creature can't be blocked except by two or more creatures.) / When this creature enters, if an opponent lost life this turn, pu
+1 Adeline, Resplendent Cathar | {1}{W}{W} | Legendary Creature — Human Knight | $2.86 | edh 492 | payoff | Vigilance / Adeline's power is equal to the number of creatures you control. / Whenever you attack, for each opponent, create a 1/1 white Hu
+1 Black Market Connections | {2}{B} | Enchantment | $9.88 | edh 130 | draw | At the beginning of your first main phase, choose one or more — / • Sell Contraband — Create a Treasure token. You lose 1 life. / • Buy Info
+1 Captivating Vampire | {1}{B}{B} | Creature — Vampire | $3.52 | edh 2491 | utility | Other Vampire creatures you control get +1/+1. / Tap five untapped Vampires you control: Gain control of target creature. It becomes a Vampi
+1 Clavileño, First of the Blessed | {1}{W}{B} | Legendary Creature — Vampire Cleric | $0.71 | edh 3533 | draw | Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains "When this creatur
+1 Drana, Liberator of Malakir | {1}{B}{B} | Legendary Creature — Vampire Ally | $0.97 | edh 1533 |  | Flying, first strike / Whenever Drana deals combat damage to a player, put a +1/+1 counter on each attacking creature you control.
+1 Forerunner of the Legion | {2}{W} | Creature — Vampire Knight | $1.24 | edh 6103 | tutor | When this creature enters, you may search your library for a Vampire card, reveal it, then shuffle and put that card on top. / Whenever anot
+1 Loran of the Third Path | {2}{W} | Legendary Creature — Human Artificer | $7.33 | edh 343 | removal | Vigilance / When Loran enters, destroy up to one target artifact or enchantment. / {T}: You and target opponent each draw a card.
+1 Mari, the Killing Quill | {1}{B}{B} | Legendary Creature — Vampire Assassin | $6.07 | edh 2571 | draw | Whenever a creature an opponent controls dies, exile it with a hit counter on it. / Assassins, Mercenaries, and Rogues you control have deat
+1 Mavren Fein, Dusk Apostle | {2}{W} | Legendary Creature — Vampire Cleric | $0.35 | edh 3828 |  | Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.
+1 Pawn of Ulamog | {1}{B}{B} | Creature — Vampire Shaman | $0.51 | edh 1541 | ramp | Whenever this creature or another nontoken creature you control dies, you may create a 0/1 colorless Eldrazi Spawn creature token. It has "S
+1 Professional Face-Breaker | {2}{R} | Creature — Human Warrior | $7.20 | edh 207 |  | Menace / Whenever one or more creatures you control deal combat damage to a player, create a Treasure token. / Sacrifice a Treasure: Exile t
+1 Sorin, Imperious Bloodlord | {2}{B} | Legendary Planeswalker — Sorin | $6.47 | edh 4001 | removal | +1: Target creature you control gains deathtouch and lifelink until end of turn. If it's a Vampire, put a +1/+1 counter on it. / +1: You may
+1 Stromkirk Captain | {1}{B}{R} | Creature — Vampire Soldier | $1.45 | edh 3049 | utility | First strike / Other Vampire creatures you control get +1/+1 and have first strike.
+1 Teferi's Protection | {2}{W} | Instant | $48.68 | edh 109 | protection | Until your next turn, your life total can't change and you gain protection from everything. All permanents you control phase out. (While the
+1 Venat, Heart of Hydaelyn // Hydaelyn, the Mothercrystal | {1}{W}{W} | Legendary Creature — Elder Wizard // Legendary Creature — God | $1.79 | edh 2859 | protection | Whenever you cast a legendary spell, draw a card. This ability triggers only once each turn. / Hero's Sundering — {7}, {T}: Exile target non
+1 Vito, Thorn of the Dusk Rose | {2}{B} | Legendary Creature — Vampire Cleric | $10.78 | edh 491 | utility | Whenever you gain life, target opponent loses that much life. / {3}{B}{B}: Creatures you control gain lifelink until end of turn.
+1 Welcoming Vampire | {2}{W} | Creature — Vampire | $3.75 | edh 427 | draw | Flying / Whenever one or more other creatures you control with power 2 or less enter, draw a card. This ability triggers only once each turn
+1 Whispersilk Cloak | {3} | Artifact — Equipment | $2.07 | edh 331 | payoff | Equipped creature can't be blocked and has shroud. (It can't be the target of spells or abilities.) / Equip {2}
+1 Yahenni, Undying Partisan | {2}{B} | Legendary Creature — Aetherborn Vampire | $0.34 | edh 1033 | protection | Haste / Whenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni. / Sacrifice another creature: Yahenni gains indestruc
+1 Anger | {3}{R} | Creature — Incarnation | $0.53 | edh 347 | payoff | Haste / As long as this card is in your graveyard and you control a Mountain, creatures you control have haste.
+1 Anointed Procession | {3}{W} | Enchantment | $62.92 | edh 364 | payoff | If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
+1 Baron Bertram Graywater | {2}{W}{B} | Legendary Creature — Vampire Noble | $0.42 | edh 4398 | draw | Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only onc
+1 Bloodletter of Aclazotz | {1}{B}{B}{B} | Creature — Vampire Demon | $37.40 | edh 857 |  | Flying / If an opponent would lose life during your turn, they lose twice that much life instead. (Damage causes loss of life.)
+1 Bloodline Keeper // Lord of Lineage | {2}{B}{B} | Creature — Vampire // Creature — Vampire | $9.40 | edh 2537 | win_condition | Flying / {T}: Create a 2/2 black Vampire creature token with flying. / {B}: Transform this creature. Activate only if you control five or mo
+1 Damnation | {2}{B}{B} | Sorcery | $21.59 | edh 389 | board_wipe | Destroy all creatures. They can't be regenerated.
+1 Deadly Rollick | {3}{B} | Instant | $28.38 | edh 107 | removal | If you control a commander, you may cast this spell without paying its mana cost. / Exile target creature.
+1 Edgar, Charmed Groom // Edgar Markov's Coffin | {2}{W}{B} | Legendary Creature — Vampire Noble // Legendary Artifact | $3.58 | edh 3621 |  | Other Vampires you control get +1/+1. / When Edgar dies, return it to the battlefield transformed under its owner's control. / // / At the b
+1 Elenda, the Dusk Rose | {2}{W}{B} | Legendary Creature — Vampire Knight | $5.81 | edh 1268 | synergy | Lifelink / Whenever another creature dies, put a +1/+1 counter on Elenda. / When Elenda dies, create X 1/1 white Vampire creature tokens wit
+1 Emeritus of Woe // Demonic Tutor | {3}{B} // {1}{B} | Creature — Vampire Warlock // Sorcery | $11.55 | edh 3158 | tutor | This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.) / At the beginning of your e
+1 Sanctum Seeker | {2}{B}{B} | Creature — Vampire Knight | $0.39 | edh 2331 | win_condition | Whenever a Vampire you control attacks, each opponent loses 1 life and you gain 1 life.
+1 Solemn Simulacrum | {4} | Artifact Creature — Golem | $0.30 | edh 39 | ramp | When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / Whe
+1 Twilight Prophet | {2}{B}{B} | Creature — Vampire Cleric | $3.86 | edh 1135 | draw | Flying / Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.) / At the beginning of your up
+1 Champion of Dusk | {3}{B}{B} | Creature — Vampire Knight | $0.24 | edh 3585 | draw | When this creature enters, you draw X cards and you lose X life, where X is the number of Vampires you control.
+1 High-Society Hunter | {3}{B}{B} | Creature — Vampire Noble | $0.40 | edh 4403 | draw | Flying / Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature. / Whenever ano
+1 Malakir Bloodwitch | {3}{B}{B} | Creature — Vampire Shaman | $4.55 | edh 3565 | win_condition | Flying, protection from white / When this creature enters, each opponent loses life equal to the number of Vampires you control. You gain li
+1 Crossway Troublemakers | {5}{B} | Creature — Vampire | $0.33 | edh 3647 | draw | Attacking Vampires you control have deathtouch and lifelink. (Any amount of damage they deal to a creature is enough to destroy it. Damage d
+1 Invasion of Fiora // Marchesa, Resolute Monarch | {4}{B}{B} | Battle — Siege // Legendary Creature — Human Noble | $0.46 | edh 6601 | board_wipe | (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+1 Patron of the Vein | {4}{B}{B} | Creature — Vampire Shaman | $0.36 | edh 3553 | removal | Flying / When this creature enters, destroy target creature an opponent controls. / Whenever a creature an opponent controls dies, exile it 
+1 Butcher of Malakir | {5}{B}{B} | Creature — Vampire Warrior | $0.40 | edh 1371 | payoff | Flying / Whenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice.
+1 Arid Mesa |  | Land | $30.30 | edh 57 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Plains card, put it onto the battlefield, then shuffle.
+1 Badlands |  | Land — Swamp Mountain | $235.00 | edh 383 |  | ({T}: Add {B} or {R}.)
+1 Blood Crypt |  | Land — Swamp Mountain | $8.88 | edh 69 |  | ({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Bloodstained Mire |  | Land | $18.14 | edh 43 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle.
+1 Cavern of Souls |  | Land | $52.07 | edh 111 |  | As this land enters, choose a creature type. / {T}: Add {C}. / {T}: Add one mana of any color. Spend this mana only to cast a creature spell
+1 Caves of Koilos |  | Land | $0.58 | edh 125 |  | {T}: Add {C}. / {T}: Add {W} or {B}. This land deals 1 damage to you.
+1 City of Brass |  | Land | $12.10 | edh 96 |  | Whenever this land becomes tapped, it deals 1 damage to you. / {T}: Add one mana of any color.
+1 Command Tower |  | Land | $0.56 | edh 2 |  | {T}: Add one mana of any color in your commander's color identity.
+1 Dragonskull Summit |  | Land | $0.42 | edh 84 |  | This land enters tapped unless you control a Swamp or a Mountain. / {T}: Add {B} or {R}.
+1 Exotic Orchard |  | Land | $0.26 | edh 9 |  | {T}: Add one mana of any color that a land an opponent controls could produce.
+1 Godless Shrine |  | Land — Plains Swamp | $8.54 | edh 60 |  | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Grand Coliseum |  | Land | $0.37 | edh 4159 |  | This land enters tapped. / {T}: Add {C}. / {T}: Add one mana of any color. This land deals 1 damage to you.
+1 Isolated Chapel |  | Land | $0.60 | edh 92 |  | This land enters tapped unless you control a Plains or a Swamp. / {T}: Add {W} or {B}.
+1 Marsh Flats |  | Land | $32.56 | edh 51 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle.
+1 Mountain |  | Basic Land — Mountain | $0.09 | edh ? |  | ({T}: Add {R}.)
+3 Plains |  | Basic Land — Plains | $0.07 | edh ? |  | ({T}: Add {W}.)
+1 Plateau |  | Land — Mountain Plains | $225.00 | edh 442 |  | ({T}: Add {R} or {W}.)
+1 Sacred Foundry |  | Land — Mountain Plains | $10.08 | edh 73 |  | ({T}: Add {R} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Scrubland |  | Land — Plains Swamp | $278.33 | edh 386 |  | ({T}: Add {W} or {B}.)
+1 Shattered Landscape |  | Land | $0.29 | edh 1947 |  | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Mountain, Plains, or Swamp card, put it onto the battlefield tappe
+1 Starting Town |  | Land — Town | $11.61 | edh 714 |  | This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any co
+10 Swamp |  | Basic Land — Swamp | $0.10 | edh ? |  | ({T}: Add {B}.)
+1 Temple of the Dragon Queen |  | Land | $0.33 | edh 2547 |  | As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you 
+1 Three Tree City |  | Legendary Land | $29.66 | edh 177 |  | As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to 
+1 Agadeem's Awakening // Agadeem, the Undercrypt | {X}{B}{B}{B} | Sorcery // Land | $28.57 | edh 961 |  | Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less. / // / As
+1 Boggart Trawler // Boggart Bog | {2}{B} | Creature — Goblin // Land | $1.61 | edh 633 |  | When this creature enters, exile target player's graveyard. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. 
+1 Fell the Profane // Fell Mire | {2}{B}{B} | Instant // Land | $4.92 | edh 200 |  | Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}.

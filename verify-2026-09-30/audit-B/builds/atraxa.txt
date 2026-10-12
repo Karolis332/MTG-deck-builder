@@ -1,0 +1,104 @@
+# atraxa — {"format":"commander","commanderName":"Atraxa, Praetors' Voice"}  (1230 ms)
+size 99  lands 38  avgCmc(nonland) 3.30  pips {"U":15,"G":26,"B":14,"W":8}
+strategy superfriends  themes ["counters","draw","tokens","artifacts","ramp","enchantments"]  tribal undefined
+realSources {"W":29,"U":31,"B":30,"R":12,"G":35}  health.sources {"W":29,"U":31,"B":30,"R":12,"G":35}
+roles {"fixing-floor":8,"payoff":10,"ramp":4,"draw":5,"tutor":1,"removal":6,"board_wipe":5,"win_condition":4,"(none)":56}
+price total $2479.25 overBudget false replaced 0
+bracket target null -> 2 swapped 0 reasons []
+
+
+1 Everflowing Chalice | {0} | Artifact | $0.34 | edh 254 |  | Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.) / This artifact enters with a charge counter on 
+1 Lotus Petal | {0} | Artifact | $34.34 | edh 120 |  | {T}, Sacrifice this artifact: Add one mana of any color.
+1 Walking Ballista | {X}{X} | Artifact Creature — Construct | $10.71 | edh 425 | payoff | This creature enters with X +1/+1 counters on it. / {4}: Put a +1/+1 counter on this creature. / Remove a +1/+1 counter from this creature: 
+1 Dark Ritual | {B} | Instant | $7.12 | edh 33 |  | Add {B}{B}{B}.
+1 Elvish Mystic | {G} | Creature — Elf Druid | $5.21 | edh 102 |  | {T}: Add {G}.
+1 Llanowar Elves | {G} | Creature — Elf Druid | $0.39 | edh 58 |  | {T}: Add {G}.
+1 Sol Ring | {1} | Artifact | $1.54 | edh 1 | ramp | {T}: Add {C}{C}.
+1 Arcane Signet | {2} | Artifact | $0.74 | edh 3 | fixing-floor | {T}: Add one mana of any color in your commander's color identity.
+1 Azorius Signet | {2} | Artifact | $0.42 | edh 215 | fixing-floor | {1}, {T}: Add {W}{U}.
+1 Cankerbloom | {1}{G} | Creature — Phyrexian Fungus | $0.59 | edh 815 | removal | {1}, Sacrifice this creature: Choose one — / • Destroy target artifact. / • Destroy target enchantment. / • Proliferate. (Choose any number 
+1 Contagion Clasp | {2} | Artifact | $0.35 | edh 1421 | payoff | When this artifact enters, put a -1/-1 counter on target creature. / {4}, {T}: Proliferate. (Choose any number of permanents and/or players,
+1 Deadly Dispute | {1}{B} | Instant | $0.28 | edh 131 | ramp | As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact
+1 Dimir Signet | {2} | Artifact | $0.43 | edh 159 | fixing-floor | {1}, {T}: Add {U}{B}.
+1 Feed the Swarm | {1}{B} | Sorcery | $0.21 | edh 90 | removal | Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.
+1 Idol of Oblivion | {2} | Artifact | $2.76 | edh 191 | draw | {T}: Draw a card. Activate only if you created a token this turn. / {8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi crea
+1 Marionette Apprentice | {1}{B} | Creature — Human Artificer | $2.61 | edh 565 | win_condition | Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.) / Whenever anoth
+1 Mind Stone | {2} | Artifact | $0.24 | edh 32 | fixing-floor | {T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card.
+1 Origin of Metalbending | {1}{G} | Instant — Lesson | $0.18 | edh 1843 | removal | Choose one — / • Destroy target artifact or enchantment. / • Put a +1/+1 counter on target creature you control. It gains indestructible unt
+1 Talisman of Curiosity | {2} | Artifact | $0.52 | edh 483 | fixing-floor | {T}: Add {C}. / {T}: Add {G} or {U}. This artifact deals 1 damage to you.
+1 Talisman of Dominance | {2} | Artifact | $0.72 | edh 93 | fixing-floor | {T}: Add {C}. / {T}: Add {U} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Hierarchy | {2} | Artifact | $0.48 | edh 135 | fixing-floor | {T}: Add {C}. / {T}: Add {W} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Progress | {2} | Artifact | $0.98 | edh 139 | fixing-floor | {T}: Add {C}. / {T}: Add {W} or {U}. This artifact deals 1 damage to you.
+1 Thought Vessel | {2} | Artifact | $2.04 | edh 21 |  | You have no maximum hand size. / {T}: Add {C}.
+1 Thrummingbird | {1}{U} | Creature — Phyrexian Bird Horror | $0.32 | edh 839 | payoff | Flying / Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give eac
+1 Archdruid's Charm | {G}{G}{G} | Instant | $9.00 | edh 622 | removal | Choose one — / • Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Othe
+1 Ashnod's Altar | {3} | Artifact | $15.35 | edh 134 |  | Sacrifice a creature: Add {C}{C}.
+1 Black Market Connections | {2}{B} | Enchantment | $9.88 | edh 130 | draw | At the beginning of your first main phase, choose one or more — / • Sell Contraband — Create a Treasure token. You lose 1 life. / • Buy Info
+1 Evolution Sage | {2}{G} | Creature — Elf Druid | $3.21 | edh 403 | payoff | Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter 
+1 Flux Channeler | {2}{U} | Creature — Human Wizard | $3.17 | edh 1284 |  | Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each 
+1 Garruk's Uprising | {2}{G} | Enchantment | $0.52 | edh 89 | draw | When this enchantment enters, if you control a creature with power 4 or greater, draw a card. / Creatures you control have trample. (Each of
+1 Kaito, Cunning Infiltrator | {1}{U}{U} | Legendary Planeswalker — Kaito | $2.14 | edh 4176 |  | Whenever a creature you control deals combat damage to a player, put a loyalty counter on Kaito. / +1: Up to one target creature you control
+1 Stroke of Midnight | {2}{W} | Instant | $0.57 | edh 205 | removal | Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.
+1 Tezzeret, Cruel Captain | {3} | Legendary Planeswalker — Tezzeret | $22.00 | edh 1209 | tutor | Whenever an artifact you control enters, put a loyalty counter on Tezzeret. / 0: Untap target artifact or creature. If it's an artifact crea
+1 Tireless Provisioner | {2}{G} | Creature — Elf Scout | $3.98 | edh 185 |  | Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this 
+1 Tireless Tracker | {2}{G} | Creature — Human Scout | $0.31 | edh 663 | draw | Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a c
+1 Ajani, Strength of the Pride | {2}{W}{W} | Legendary Planeswalker — Ajani | $8.47 | edh 3138 |  | +1: You gain life equal to the number of creatures you control plus the number of planeswalkers you control. / −2: Create a 2/2 white Cat So
+1 Damnation | {2}{B}{B} | Sorcery | $21.59 | edh 389 | board_wipe | Destroy all creatures. They can't be regenerated.
+1 Ezuri, Stalker of Spheres | {2}{G}{U} | Legendary Creature — Phyrexian Elf Warrior | $1.13 | edh 3274 | draw | When Ezuri enters, you may pay {3}. If you do, proliferate twice. / Whenever you proliferate, draw a card.
+1 Felidar Retreat | {3}{W} | Enchantment | $1.05 | edh 516 |  | Landfall — Whenever a land you control enters, choose one — / • Create a 2/2 white Cat Beast creature token. / • Put a +1/+1 counter on each
+1 Kaito, Dancing Shadow | {2}{U}{B} | Legendary Planeswalker — Kaito | $0.36 | edh 7267 |  | Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you ma
+1 Night of the Sweets' Revenge | {3}{G} | Enchantment | $0.84 | edh 2058 | board_wipe | When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / Foods you co
+1 Pitiless Plunderer | {3}{B} | Creature — Human Pirate | $4.72 | edh 225 |  | Whenever another creature you control dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any 
+1 Tekuthal, Inquiry Dominus | {2}{U}{U} | Legendary Creature — Phyrexian Horror | $1.70 | edh 1215 | payoff | Flying / If you would proliferate, proliferate twice instead. / {1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, 
+1 Tezzeret's Gambit | {3}{U/P} | Sorcery | $0.24 | edh 950 | payoff | ({U/P} can be paid with either {U} or 2 life.) / Draw two cards, then proliferate. (Choose any number of permanents and/or players, then giv
+1 The Aetherspark | {4} | Legendary Artifact Planeswalker — Equipment | $19.99 | edh 1847 |  | As long as The Aetherspark is attached to a creature, The Aetherspark can't be attacked and has "Whenever equipped creature deals combat dam
+1 Tyvar Kell | {2}{G}{G} | Legendary Planeswalker — Tyvar | $5.32 | edh 4286 | win_condition | Elves you control have "{T}: Add {B}." / +1: Put a +1/+1 counter on up to one target Elf. Untap it. It gains deathtouch until end of turn. /
+1 Viral Drake | {3}{U} | Creature — Phyrexian Drake | $1.99 | edh 7103 | payoff | Flying / Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.) / {3}
+1 Zaxara, the Exemplary | {1}{B}{G}{U} | Legendary Creature — Nightmare Hydra | $1.99 | edh 5762 | payoff | Deathtouch / {T}: Add two mana of any one color. / Whenever you cast a spell with {X} in its mana cost, create a 0/0 green Hydra creature to
+1 Elspeth, Storm Slayer | {3}{W}{W} | Legendary Planeswalker — Elspeth | $42.42 | edh 693 |  | If one or more tokens would be created under your control, twice that many of those tokens are created instead. / +1: Create a 1/1 white Sol
+1 Freyalise, Llanowar's Fury | {3}{G}{G} | Legendary Planeswalker — Freyalise | $4.29 | edh 2680 | removal | +2: Create a 1/1 green Elf Druid creature token with "{T}: Add {G}." / −2: Destroy target artifact or enchantment. / −6: Draw a card for eac
+1 Inexorable Tide | {3}{U}{U} | Enchantment | $5.76 | edh 1020 | payoff | Whenever you cast a spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already
+1 Lolth, Spider Queen | {3}{B}{B} | Legendary Planeswalker — Lolth | $5.21 | edh 4261 |  | Whenever a creature you control dies, put a loyalty counter on Lolth. / 0: You draw a card and you lose 1 life. / −3: Create two 2/1 black S
+1 Teferi, Temporal Pilgrim | {3}{U}{U} | Legendary Planeswalker — Teferi | $5.33 | edh 3349 | win_condition | Whenever you draw a card, put a loyalty counter on Teferi. / 0: Draw a card. / −2: Create a 2/2 blue Spirit creature token with vigilance an
+1 Austere Command | {4}{W}{W} | Sorcery | $0.35 | edh 171 | board_wipe | Choose two — / • Destroy all artifacts. / • Destroy all enchantments. / • Destroy all creatures with mana value 3 or less. / • Destroy all c
+1 Bane of Progress | {4}{G}{G} | Creature — Elemental | $0.36 | edh 1237 | board_wipe | When this creature enters, destroy all artifacts and enchantments. Put a +1/+1 counter on this creature for each permanent destroyed this wa
+1 Contagion Engine | {6} | Artifact | $13.78 | edh 1848 | payoff | When this artifact enters, put a -1/-1 counter on each creature target player controls. / {4}, {T}: Proliferate twice. (Choose any number of
+1 Season of Gathering | {4}{G}{G} | Sorcery | $7.39 | edh 1754 | board_wipe | Choose up to five {P} worth of modes. You may choose the same mode more than once. / {P} — Put a +1/+1 counter on a creature you control. It
+1 Vraska, Betrayal's Sting | {4}{B}{B/P} | Legendary Planeswalker — Vraska | $1.35 | edh 1322 | ramp | Compleated ({B/P} can be paid with {B} or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.) / 0: You draw
+1 Avenger of Zendikar | {5}{G}{G} | Creature — Elemental | $0.43 | edh 295 | win_condition | When this creature enters, create a 0/1 green Plant creature token for each land you control. / Landfall — Whenever a land you control enter
+1 Ugin, Eye of the Storms | {7} | Legendary Planeswalker — Ugin | $41.31 | edh 1750 |  | When you cast this spell, exile up to one target permanent that's one or more colors. / Whenever you cast a colorless spell, exile up to one
+1 The Great Henge | {7}{G}{G} | Legendary Artifact | $64.54 | edh 227 | ramp | This spell costs {X} less to cast, where X is the greatest power among creatures you control. / {T}: Add {G}{G}. You gain 2 life. / Whenever
+1 Bayou |  | Land — Swamp Forest | $247.80 | edh 421 |  | ({T}: Add {B} or {G}.)
+1 Breeding Pool |  | Land — Forest Island | $9.27 | edh 59 |  | ({T}: Add {G} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Brokers Hideout |  | Land | $0.97 | edh 1311 |  | When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefiel
+1 City of Brass |  | Land | $12.10 | edh 96 |  | Whenever this land becomes tapped, it deals 1 damage to you. / {T}: Add one mana of any color.
+1 Command Tower |  | Land | $0.56 | edh 2 |  | {T}: Add one mana of any color in your commander's color identity.
+1 Deceptive Landscape |  | Land | $0.23 | edh 2254 |  | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Plains, Swamp, or Forest card, put it onto the battlefield tapped,
+1 Exotic Orchard |  | Land | $0.26 | edh 9 |  | {T}: Add one mana of any color that a land an opponent controls could produce.
+1 Flooded Strand |  | Land | $15.29 | edh 38 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle.
+1 Foreboding Landscape |  | Land | $0.24 | edh 1684 |  | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Swamp, Forest, or Island card, put it onto the battlefield tapped,
+3 Forest |  | Basic Land — Forest | $0.08 | edh ? |  | ({T}: Add {G}.)
+1 Godless Shrine |  | Land — Plains Swamp | $8.54 | edh 60 |  | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Grand Coliseum |  | Land | $0.37 | edh 4159 |  | This land enters tapped. / {T}: Add {C}. / {T}: Add one mana of any color. This land deals 1 damage to you.
+1 Hallowed Fountain |  | Land — Plains Island | $6.98 | edh 61 |  | ({T}: Add {W} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+2 Island |  | Basic Land — Island | $0.08 | edh ? |  | ({T}: Add {U}.)
+1 Marsh Flats |  | Land | $32.56 | edh 51 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle.
+1 Misty Rainforest |  | Land | $35.45 | edh 42 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.
+1 Murmuring Bosk |  | Land — Forest | $0.44 | edh 2705 |  | ({T}: Add {G}.) / As this land enters, you may reveal a Treefolk card from your hand. If you don't, this land enters tapped. / {T}: Add {W} 
+1 Overgrown Tomb |  | Land — Swamp Forest | $8.20 | edh 71 |  | ({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Plains |  | Basic Land — Plains | $0.07 | edh ? |  | ({T}: Add {W}.)
+1 Polluted Delta |  | Land | $19.14 | edh 36 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle.
+1 Savannah |  | Land — Forest Plains | $198.21 | edh 457 |  | ({T}: Add {G} or {W}.)
+1 Scrubland |  | Land — Plains Swamp | $278.33 | edh 386 |  | ({T}: Add {W} or {B}.)
+1 Starting Town |  | Land — Town | $11.61 | edh 714 |  | This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any co
+2 Swamp |  | Basic Land — Swamp | $0.10 | edh ? |  | ({T}: Add {B}.)
+1 Temple Garden |  | Land — Forest Plains | $6.60 | edh 81 |  | ({T}: Add {G} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Temple of the Dragon Queen |  | Land | $0.33 | edh 2547 |  | As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you 
+1 Three Tree City |  | Legendary Land | $29.66 | edh 177 |  | As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to 
+1 Tranquil Landscape |  | Land | $0.27 | edh 2112 |  | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped
+1 Tropical Island |  | Land — Forest Island | $320.05 | edh 351 |  | ({T}: Add {G} or {U}.)
+1 Tundra |  | Land — Plains Island | $302.90 | edh 352 |  | ({T}: Add {W} or {U}.)
+1 Underground Sea |  | Land — Island Swamp | $475.00 | edh 297 |  | ({T}: Add {U} or {B}.)
+1 Verdant Catacombs |  | Land | $29.72 | edh 48 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Forest card, put it onto the battlefield, then shuffle.
+1 Watery Grave |  | Land — Island Swamp | $9.15 | edh 50 |  | ({T}: Add {U} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Windswept Heath |  | Land | $12.79 | edh 45 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle.

@@ -1,0 +1,2243 @@
+{
+ "summary": {
+  "key": "meren",
+  "commander": "Meren of Clan Nel Toth",
+  "format": "commander",
+  "source": "paper",
+  "elapsedMs": 3927,
+  "ci": [
+   "B",
+   "G"
+  ],
+  "strategy": "aristocrats",
+  "themes": [
+   "draw",
+   "sacrifice",
+   "counters",
+   "tokens",
+   "aggro",
+   "flying",
+   "ramp",
+   "artifacts",
+   "enchantments"
+  ],
+  "size": 99,
+  "landCount": 38,
+  "basicCount": 20,
+  "nonbasicCount": 18,
+  "sourcesByColor": {
+   "W": 6,
+   "U": 5,
+   "B": 31,
+   "R": 8,
+   "G": 25
+  },
+  "auditorSources": {
+   "W": 6,
+   "U": 5,
+   "B": 31,
+   "R": 8,
+   "G": 25
+  },
+  "pips": {
+   "G": 23,
+   "B": 50
+  },
+  "pipCards": {
+   "G": 20,
+   "B": 39
+  },
+  "curve": {
+   "1": 10,
+   "2": 14,
+   "3": 20,
+   "4": 9,
+   "5": 5,
+   "6": 2,
+   "7": 1
+  },
+  "roleCounts": {
+   "arsenal:community_top": 40,
+   "arsenal:collection_substitute": 2,
+   "arsenal:archetype_payoff": 3,
+   "draw": 7,
+   "tutor": 1,
+   "board_wipe": 1,
+   "protection": 1,
+   "ramp": 4,
+   "win_condition": 1,
+   "utility": 1,
+   "(none)": 38
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 35,
+   "tappedLands": 7,
+   "tappedRatio": 0.18,
+   "sourcesByColor": {
+    "W": 6,
+    "U": 5,
+    "B": 31,
+    "R": 8,
+    "G": 25
+   },
+   "pipsByColor": {
+    "W": 0,
+    "U": 0,
+    "B": 50,
+    "R": 0,
+    "G": 23
+   },
+   "drawCount": 19,
+   "drawEngineCount": 15,
+   "rampCount": 13,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "price": {
+   "currency": "USD",
+   "total": 0,
+   "unpricedCount": 0,
+   "maxCardPrice": null,
+   "maxDeckPrice": null,
+   "excludedByCardCap": 0,
+   "replacedForBudget": [],
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 2,
+   "reasons": [],
+   "swapped": []
+  },
+  "deadCardsReplaced": [],
+  "buildReport": "Archetype: Aristocrats — targeting 61 nonland slots\nRole fills:\n  ramp       16/12 OK\n  draw       15/10 OK\n  tutor      2/2 OK\n  removal    10/7 OK\n  wipes      4/3 OK\n  protection 4/3 OK\n  payoffs    9/8 OK\n  wincons    28/5 OK",
+  "synergy": {
+   "detectedArchetype": "aristocrats",
+   "triggerCategories": [
+    "creature_dies"
+   ],
+   "payoffType": "general value",
+   "synergyMinimums": {
+    "creature_dies": 8
+   },
+   "cardPoolPatterns": [
+    "%whenever%creature%dies%",
+    "%sacrifice a creature%",
+    "%when this creature dies%",
+    "%whenever you sacrifice%"
+   ],
+   "scoreBonuses": {
+    "creature_dies": 20
+   },
+   "protectedPatterns": [
+    "blood artist",
+    "zulaport cutthroat",
+    "viscera seer",
+    "ashnod's altar",
+    "phyrexian altar"
+   ],
+   "strategyDescription": "**Detected Archetype**: aristocrats\n**Commander Payoff**: general value\n\n**Synergy Requirements** (these fill FLEX slots, not baseline ramp/draw/removal):\n- Death trigger payoffs and sacrifice outlets: **8+ cards**\n\n**CRITICAL**: Synergy cards fill FLEX slots. NEVER reduce ramp below 8, draw below 6, or removal below 6 to make room for synergy.",
+   "drawReduction": 0,
+   "removalReduction": 0
+  },
+  "commanderOracle": "Whenever another creature you control dies, you get an experience counter.\nAt the beginning of your end step, choose target creature card in your graveyard. If that card's mana value is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.",
+  "commanderCost": "{2}{B}{G}"
+ },
+ "cards": [
+  {
+   "qty": 1,
+   "name": "Sol Ring",
+   "cmc": 1,
+   "cost": "{1}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 1,
+   "price": "1.54",
+   "role": "arsenal:community_top",
+   "reason": "83% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "{T}: Add {C}{C}."
+  },
+  {
+   "qty": 1,
+   "name": "Sakura-Tribe Elder",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Creature — Snake Shaman",
+   "ci": [
+    "G"
+   ],
+   "rank": 113,
+   "price": "0.68",
+   "role": "arsenal:community_top",
+   "reason": "81% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Sacrifice this creature: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Spore Frog",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Creature — Frog",
+   "ci": [
+    "G"
+   ],
+   "rank": 1139,
+   "price": "0.39",
+   "role": "arsenal:community_top",
+   "reason": "74% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Sacrifice this creature: Prevent all combat damage that would be dealt this turn."
+  },
+  {
+   "qty": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "cost": "{1}{G}{G}",
+   "type": "Creature — Human Shaman",
+   "ci": [
+    "G"
+   ],
+   "rank": 119,
+   "price": "2.23",
+   "role": "arsenal:community_top",
+   "reason": "74% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "When this creature enters, you may return target card from your graveyard to your hand."
+  },
+  {
+   "qty": 1,
+   "name": "Victimize",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Sorcery",
+   "ci": [
+    "B"
+   ],
+   "rank": 128,
+   "price": "1.44",
+   "role": "arsenal:community_top",
+   "reason": "67% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped."
+  },
+  {
+   "qty": 1,
+   "name": "Viscera Seer",
+   "cmc": 1,
+   "cost": "{B}",
+   "type": "Creature — Vampire Wizard",
+   "ci": [
+    "B"
+   ],
+   "rank": 257,
+   "price": "0.48",
+   "role": "arsenal:community_top",
+   "reason": "66% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Sacrifice a creature: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+   "qty": 1,
+   "name": "Plaguecrafter",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Human Shaman",
+   "ci": [
+    "B"
+   ],
+   "rank": 639,
+   "price": "0.40",
+   "role": "arsenal:community_top",
+   "reason": "63% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "When this creature enters, each player sacrifices a creature or planeswalker of their choice. Each player who can't discards a card."
+  },
+  {
+   "qty": 1,
+   "name": "Buried Alive",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Sorcery",
+   "ci": [
+    "B"
+   ],
+   "rank": 354,
+   "price": "3.44",
+   "role": "arsenal:community_top",
+   "reason": "60% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Search your library for up to three creature cards, put them into your graveyard, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Gray Merchant of Asphodel",
+   "cmc": 5,
+   "cost": "{3}{B}{B}",
+   "type": "Creature — Zombie",
+   "ci": [
+    "B"
+   ],
+   "rank": 245,
+   "price": "4.17",
+   "role": "arsenal:community_top",
+   "reason": "58% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "When this creature enters, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)"
+  },
+  {
+   "qty": 1,
+   "name": "Blood Artist",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Creature — Vampire",
+   "ci": [
+    "B"
+   ],
+   "rank": 141,
+   "price": "3.92",
+   "role": "arsenal:community_top",
+   "reason": "55% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life."
+  },
+  {
+   "qty": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 3,
+   "price": "0.74",
+   "role": "arsenal:community_top",
+   "reason": "55% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "qty": 1,
+   "name": "Assassin's Trophy",
+   "cmc": 2,
+   "cost": "{B}{G}",
+   "type": "Instant",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 122,
+   "price": "1.19",
+   "role": "arsenal:community_top",
+   "reason": "54% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Destroy target permanent an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Accursed Marauder",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Creature — Zombie Warrior",
+   "ci": [
+    "B"
+   ],
+   "rank": 475,
+   "price": "0.38",
+   "role": "arsenal:community_top",
+   "reason": "53% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "When this creature enters, each player sacrifices a nontoken creature of their choice."
+  },
+  {
+   "qty": 1,
+   "name": "Reanimate",
+   "cmc": 1,
+   "cost": "{B}",
+   "type": "Sorcery",
+   "ci": [
+    "B"
+   ],
+   "rank": 54,
+   "price": "9.81",
+   "role": "arsenal:community_top",
+   "reason": "52% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value."
+  },
+  {
+   "qty": 1,
+   "name": "Zulaport Cutthroat",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Creature — Human Rogue Ally",
+   "ci": [
+    "B"
+   ],
+   "rank": 236,
+   "price": "1.34",
+   "role": "arsenal:community_top",
+   "reason": "52% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Whenever this creature or another creature you control dies, each opponent loses 1 life and you gain 1 life."
+  },
+  {
+   "qty": 1,
+   "name": "Haywire Mite",
+   "cmc": 1,
+   "cost": "{1}",
+   "type": "Artifact Creature — Insect",
+   "ci": [
+    "G"
+   ],
+   "rank": 683,
+   "price": "0.54",
+   "role": "arsenal:community_top",
+   "reason": "51% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "When this creature dies, you gain 2 life.\n{G}, Sacrifice this creature: Exile target noncreature artifact or noncreature enchantment."
+  },
+  {
+   "qty": 1,
+   "name": "Grim Haruspex",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Human Wizard",
+   "ci": [
+    "B"
+   ],
+   "rank": 1142,
+   "price": "2.89",
+   "role": "arsenal:community_top",
+   "reason": "48% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhenever another nontoken creature you control dies, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Braids, Arisen Nightmare",
+   "cmc": 3,
+   "cost": "{1}{B}{B}",
+   "type": "Legendary Creature — Nightmare",
+   "ci": [
+    "B"
+   ],
+   "rank": 296,
+   "price": "4.86",
+   "role": "arsenal:community_top",
+   "reason": "47% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. For each opponent who doesn't, that player loses 2 life and you draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Ashnod's Altar",
+   "cmc": 3,
+   "cost": "{3}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 134,
+   "price": "15.35",
+   "role": "arsenal:community_top",
+   "reason": "47% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Sacrifice a creature: Add {C}{C}."
+  },
+  {
+   "qty": 1,
+   "name": "Carrion Feeder",
+   "cmc": 1,
+   "cost": "{B}",
+   "type": "Creature — Zombie",
+   "ci": [
+    "B"
+   ],
+   "rank": 613,
+   "price": "4.88",
+   "role": "arsenal:community_top",
+   "reason": "46% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "This creature can't block.\nSacrifice a creature: Put a +1/+1 counter on this creature."
+  },
+  {
+   "qty": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 58,
+   "price": "0.39",
+   "role": "arsenal:community_top",
+   "reason": "46% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Creature — Phyrexian Fungus",
+   "ci": [
+    "G"
+   ],
+   "rank": 815,
+   "price": "0.59",
+   "role": "arsenal:community_top",
+   "reason": "43% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "{1}, Sacrifice this creature: Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "qty": 1,
+   "name": "Syr Konrad, the Grim",
+   "cmc": 5,
+   "cost": "{3}{B}{B}",
+   "type": "Legendary Creature — Human Knight",
+   "ci": [
+    "B"
+   ],
+   "rank": 260,
+   "price": "1.76",
+   "role": "arsenal:community_top",
+   "reason": "42% of 6898 Meren of Clan Nel Toth decks play this",
+   "oracle": "Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad deals 1 damage to each opponent.\n{1}{B}: Each player mills a card. (They each put the top card of their library into their graveyard.)"
+  },
+  {
+   "qty": 1,
+   "name": "Dread Presence",
+   "cmc": 4,
+   "cost": "{3}{B}",
+   "type": "Creature — Nightmare",
+   "ci": [
+    "B"
+   ],
+   "rank": 2582,
+   "price": "3.56",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned draw substitute for Skullclamp",
+   "oracle": "Whenever a Swamp you control enters, choose one —\n• You draw a card and you lose 1 life.\n• This creature deals 2 damage to any target and you gain 2 life."
+  },
+  {
+   "qty": 1,
+   "name": "Massacre Wurm",
+   "cmc": 6,
+   "cost": "{3}{B}{B}{B}",
+   "type": "Creature — Phyrexian Wurm",
+   "ci": [
+    "B"
+   ],
+   "rank": 512,
+   "price": "1.91",
+   "role": "arsenal:community_top",
+   "reason": "39% community inclusion",
+   "oracle": "When this creature enters, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life."
+  },
+  {
+   "qty": 1,
+   "name": "Wight of the Reliquary",
+   "cmc": 2,
+   "cost": "{B}{G}",
+   "type": "Creature — Zombie Knight",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 1266,
+   "price": "0.40",
+   "role": "arsenal:community_top",
+   "reason": "37% community inclusion",
+   "oracle": "Vigilance\nThis creature gets +1/+1 for each creature card in your graveyard.\n{T}, Sacrifice another creature: Search your library for a land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Ravenous Chupacabra",
+   "cmc": 4,
+   "cost": "{2}{B}{B}",
+   "type": "Creature — Beast Horror",
+   "ci": [
+    "B"
+   ],
+   "rank": 1132,
+   "price": "1.06",
+   "role": "arsenal:community_top",
+   "reason": "37% community inclusion",
+   "oracle": "When this creature enters, destroy target creature an opponent controls."
+  },
+  {
+   "qty": 1,
+   "name": "Force of Vigor",
+   "cmc": 4,
+   "cost": "{2}{G}{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 1017,
+   "price": "8.61",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned removal substitute for Fleshbag Marauder",
+   "oracle": "If it's not your turn, you may exile a green card from your hand rather than pay this spell's mana cost.\nDestroy up to two target artifacts and/or enchantments."
+  },
+  {
+   "qty": 1,
+   "name": "Elvish Mystic",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 102,
+   "price": "5.21",
+   "role": "arsenal:community_top",
+   "reason": "35% community inclusion",
+   "oracle": "{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Toxic Deluge",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Sorcery",
+   "ci": [
+    "B"
+   ],
+   "rank": 66,
+   "price": "5.06",
+   "role": "arsenal:community_top",
+   "reason": "34% community inclusion",
+   "oracle": "As an additional cost to cast this spell, pay X life.\nAll creatures get -X/-X until end of turn."
+  },
+  {
+   "qty": 1,
+   "name": "Mikaeus, the Unhallowed",
+   "cmc": 6,
+   "cost": "{3}{B}{B}{B}",
+   "type": "Legendary Creature — Zombie Cleric",
+   "ci": [
+    "B"
+   ],
+   "rank": 1316,
+   "price": "21.89",
+   "role": "arsenal:community_top",
+   "reason": "34% community inclusion",
+   "oracle": "Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever a Human deals damage to you, destroy it.\nOther non-Human creatures you control get +1/+1 and have undying. (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)"
+  },
+  {
+   "qty": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "cost": "{4}",
+   "type": "Artifact Creature — Golem",
+   "ci": [],
+   "rank": 39,
+   "price": "0.30",
+   "role": "arsenal:community_top",
+   "reason": "32% community inclusion",
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Lightning Greaves",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact — Equipment",
+   "ci": [],
+   "rank": 13,
+   "price": "3.87",
+   "role": "arsenal:community_top",
+   "reason": "31% community inclusion",
+   "oracle": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+  },
+  {
+   "qty": 1,
+   "name": "Village Rites",
+   "cmc": 1,
+   "cost": "{B}",
+   "type": "Instant",
+   "ci": [
+    "B"
+   ],
+   "rank": 202,
+   "price": "0.85",
+   "role": "arsenal:community_top",
+   "reason": "30% community inclusion",
+   "oracle": "As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards."
+  },
+  {
+   "qty": 1,
+   "name": "Moldervine Reclamation",
+   "cmc": 5,
+   "cost": "{3}{B}{G}",
+   "type": "Enchantment",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 992,
+   "price": "0.33",
+   "role": "arsenal:community_top",
+   "reason": "29% community inclusion",
+   "oracle": "Whenever a creature you control dies, you gain 1 life and draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Putrefy",
+   "cmc": 3,
+   "cost": "{1}{B}{G}",
+   "type": "Instant",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 339,
+   "price": "0.33",
+   "role": "arsenal:community_top",
+   "reason": "29% community inclusion",
+   "oracle": "Destroy target artifact or creature. It can't be regenerated."
+  },
+  {
+   "qty": 1,
+   "name": "Butcher of Malakir",
+   "cmc": 7,
+   "cost": "{5}{B}{B}",
+   "type": "Creature — Vampire Warrior",
+   "ci": [
+    "B"
+   ],
+   "rank": 1371,
+   "price": "0.40",
+   "role": "arsenal:community_top",
+   "reason": "28% community inclusion",
+   "oracle": "Flying\nWhenever this creature or another creature you control dies, each opponent sacrifices a creature of their choice."
+  },
+  {
+   "qty": 1,
+   "name": "Culling Ritual",
+   "cmc": 4,
+   "cost": "{2}{B}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 587,
+   "price": "0.51",
+   "role": "arsenal:community_top",
+   "reason": "28% community inclusion",
+   "oracle": "Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way."
+  },
+  {
+   "qty": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 20,
+   "price": "0.42",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Dark Ritual",
+   "cmc": 1,
+   "cost": "{B}",
+   "type": "Instant",
+   "ci": [
+    "B"
+   ],
+   "rank": 33,
+   "price": "7.12",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "Add {B}{B}{B}."
+  },
+  {
+   "qty": 1,
+   "name": "Cauldron of Essence",
+   "cmc": 3,
+   "cost": "{1}{B}{G}",
+   "type": "Artifact",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 2193,
+   "price": "2.53",
+   "role": "arsenal:community_top",
+   "reason": "22% community inclusion",
+   "oracle": "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life.\n{1}{B}{G}, {T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery."
+  },
+  {
+   "qty": 1,
+   "name": "Yahenni, Undying Partisan",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Legendary Creature — Aetherborn Vampire",
+   "ci": [
+    "B"
+   ],
+   "rank": 1033,
+   "price": "0.34",
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "oracle": "Haste\nWhenever a creature an opponent controls dies, put a +1/+1 counter on Yahenni.\nSacrifice another creature: Yahenni gains indestructible until end of turn."
+  },
+  {
+   "qty": 1,
+   "name": "Priest of Forgotten Gods",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Creature — Human Cleric",
+   "ci": [
+    "B"
+   ],
+   "rank": 1392,
+   "price": "0.57",
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "oracle": "{T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of their choice. You add {B}{B} and draw a card. (Activate only as an instant.)"
+  },
+  {
+   "qty": 1,
+   "name": "Woe Strider",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Horror",
+   "ci": [
+    "B"
+   ],
+   "rank": 1682,
+   "price": "0.27",
+   "role": "arsenal:archetype_payoff",
+   "reason": "creature dies payoff",
+   "oracle": "When this creature enters, create a 0/1 white Goat creature token.\nSacrifice another creature: Scry 1.\nEscape—{3}{B}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nThis creature escapes with two +1/+1 counters on it."
+  },
+  {
+   "qty": 1,
+   "name": "Morbid Opportunist",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Human Rogue",
+   "ci": [
+    "B"
+   ],
+   "rank": 249,
+   "price": "0.36",
+   "role": "arsenal:community_top",
+   "reason": "31% community inclusion",
+   "oracle": "Whenever one or more other creatures die, draw a card. This ability triggers only once each turn."
+  },
+  {
+   "qty": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Enchantment",
+   "ci": [
+    "G"
+   ],
+   "rank": 89,
+   "price": "0.52",
+   "role": "draw",
+   "reason": "card draw (role quota): Garruk's Uprising",
+   "oracle": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Idol of Oblivion",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 191,
+   "price": "2.76",
+   "role": "draw",
+   "reason": "card draw (role quota): Idol of Oblivion",
+   "oracle": "{T}: Draw a card. Activate only if you created a token this turn.\n{8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi creature token."
+  },
+  {
+   "qty": 1,
+   "name": "Transmutation Font",
+   "cmc": 5,
+   "cost": "{5}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 3420,
+   "price": "2.08",
+   "role": "tutor",
+   "reason": "tutor (role quota): Transmutation Font",
+   "oracle": "{T}: Create your choice of a Blood token, a Clue token, or a Food token.\n{3}, {T}, Sacrifice three artifact tokens with different names: Search your library for an artifact card, put it onto the battlefield, then shuffle. Activate only as a sorcery."
+  },
+  {
+   "qty": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "cost": "{3}{G}",
+   "type": "Enchantment",
+   "ci": [
+    "G"
+   ],
+   "rank": 2058,
+   "price": "0.84",
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Night of the Sweets' Revenge",
+   "oracle": "When this enchantment enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nFoods you control have \"{T}: Add {G}.\"\n{5}{G}{G}, Sacrifice this enchantment: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery."
+  },
+  {
+   "qty": 1,
+   "name": "Toski, Bearer of Secrets",
+   "cmc": 4,
+   "cost": "{3}{G}",
+   "type": "Legendary Creature — Squirrel",
+   "ci": [
+    "G"
+   ],
+   "rank": 387,
+   "price": "8.06",
+   "role": "protection",
+   "reason": "protection (role quota): Toski, Bearer of Secrets",
+   "oracle": "This spell can't be countered.\nIndestructible\nToski attacks each combat if able.\nWhenever a creature you control deals combat damage to a player, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "High-Society Hunter",
+   "cmc": 5,
+   "cost": "{3}{B}{B}",
+   "type": "Creature — Vampire Noble",
+   "ci": [
+    "B"
+   ],
+   "rank": 4403,
+   "price": "0.40",
+   "role": "draw",
+   "reason": "extra draw: High-Society Hunter",
+   "oracle": "Flying\nWhenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature.\nWhenever another nontoken creature dies, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Chronomancer",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Artifact Creature — Necron Wizard",
+   "ci": [
+    "B"
+   ],
+   "rank": 7612,
+   "price": "1.71",
+   "role": "draw",
+   "reason": "extra draw: Chronomancer",
+   "oracle": "Flying\nAtomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"
+  },
+  {
+   "qty": 1,
+   "name": "Deadly Dispute",
+   "cmc": 2,
+   "cost": "{1}{B}",
+   "type": "Instant",
+   "ci": [
+    "B"
+   ],
+   "rank": 131,
+   "price": "0.28",
+   "role": "ramp",
+   "reason": "extra ramp: Deadly Dispute",
+   "oracle": "As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards and create a Treasure token. (It's an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "qty": 1,
+   "name": "Smothering Abomination",
+   "cmc": 4,
+   "cost": "{2}{B}{B}",
+   "type": "Creature — Eldrazi",
+   "ci": [
+    "B"
+   ],
+   "rank": 3857,
+   "price": "0.35",
+   "role": "draw",
+   "reason": "extra draw: Smothering Abomination",
+   "oracle": "Devoid (This card has no color.)\nFlying\nAt the beginning of your upkeep, sacrifice a creature.\nWhenever you sacrifice a creature, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elf Scout",
+   "ci": [
+    "G"
+   ],
+   "rank": 185,
+   "price": "3.98",
+   "role": "ramp",
+   "reason": "extra ramp: Tireless Provisioner",
+   "oracle": "Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" Treasure is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "qty": 1,
+   "name": "Mirkwood Bats",
+   "cmc": 4,
+   "cost": "{3}{B}",
+   "type": "Creature — Bat",
+   "ci": [
+    "B"
+   ],
+   "rank": 228,
+   "price": "1.97",
+   "role": "win_condition",
+   "reason": "finisher: Mirkwood Bats",
+   "oracle": "Flying\nWhenever you create or sacrifice a token, each opponent loses 1 life."
+  },
+  {
+   "qty": 1,
+   "name": "Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Legendary Creature — Human Cleric // Legendary Creature — Demon",
+   "ci": [
+    "B"
+   ],
+   "rank": 13719,
+   "price": "0.50",
+   "role": "draw",
+   "reason": "extra draw: Jerren, Corrupted Bishop // Ormendahl, the Corrupter",
+   "oracle": "Whenever Jerren enters or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.\n//\nFlying, trample, lifelink\nSacrifice another creature: Draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Midnight Reaper",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Zombie Knight",
+   "ci": [
+    "B"
+   ],
+   "rank": 1050,
+   "price": "0.23",
+   "role": "draw",
+   "reason": "extra draw: Midnight Reaper",
+   "oracle": "Whenever a nontoken creature you control dies, this creature deals 1 damage to you and you draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Dina, Essence Brewer",
+   "cmc": 3,
+   "cost": "{1}{B}{G}",
+   "type": "Legendary Creature — Dryad Druid",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 5785,
+   "price": "2.26",
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Dina, Essence Brewer",
+   "oracle": "Whenever you sacrifice a creature, draw a card. This ability triggers only once each turn.\n{2}, {T}, Sacrifice another creature: You gain X life and put X +1/+1 counters on target creature you control, where X is the sacrificed creature's power."
+  },
+  {
+   "qty": 1,
+   "name": "Fellwar Stone",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 17,
+   "price": "0.61",
+   "role": "ramp",
+   "reason": "extra ramp: Fellwar Stone",
+   "oracle": "{T}: Add one mana of any color that a land an opponent controls could produce."
+  },
+  {
+   "qty": 1,
+   "name": "Selvala, Heart of the Wilds",
+   "cmc": 3,
+   "cost": "{1}{G}{G}",
+   "type": "Legendary Creature — Elf Scout",
+   "ci": [
+    "G"
+   ],
+   "rank": 410,
+   "price": "4.41",
+   "role": "ramp",
+   "reason": "extra ramp: Selvala, Heart of the Wilds",
+   "oracle": "Whenever another creature enters, its controller may draw a card if its power is greater than each other creature's power.\n{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control."
+  },
+  {
+   "qty": 1,
+   "name": "Overgrown Tomb",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land — Swamp Forest",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 71,
+   "price": "8.20",
+   "cls": {
+    "id": 731,
+    "card_name": "Overgrown Tomb",
+    "card_id": "ad7e18e2-c033-4b6c-86e8-d0e5cc824cfd",
+    "land_category": "shock",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay 2 life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {B} or {G}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "qty": 1,
+   "name": "Woodland Cemetery",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 110,
+   "price": "1.07",
+   "cls": {
+    "id": 1276,
+    "card_name": "Woodland Cemetery",
+    "card_id": "4d6f6c96-f813-4864-b4e1-b2a0aa8be1e8",
+    "land_category": "check",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "control basic type",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "This land enters tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Llanowar Wastes",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 137,
+   "price": "0.77",
+   "cls": {
+    "id": 588,
+    "card_name": "Llanowar Wastes",
+    "card_id": "266316d3-3bbc-4283-aab8-69629855909f",
+    "land_category": "pain",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {C}.\n{T}: Add {B} or {G}. This land deals 1 damage to you."
+  },
+  {
+   "qty": 1,
+   "name": "Necroblossom Snarl",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 532,
+   "price": "0.47",
+   "cls": {
+    "id": 687,
+    "card_name": "Necroblossom Snarl",
+    "card_id": "4355ba23-de6a-4f18-baf4-82ae47cc2965",
+    "land_category": "filter",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "reveal card of type",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped.\n{T}: Add {B} or {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Boggart Trawler // Boggart Bog",
+   "cmc": 3,
+   "cost": "{2}{B}",
+   "type": "Creature — Goblin // Land",
+   "ci": [
+    "B"
+   ],
+   "rank": 633,
+   "price": "1.61",
+   "cls": {
+    "id": 119,
+    "card_name": "Boggart Trawler // Boggart Bog",
+    "card_id": "d0d484a6-5610-4f1d-95ec-eda273c255e4",
+    "land_category": "shock",
+    "produces_colors": "[\"B\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\", \"removal\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "When this creature enters, exile target player's graveyard.\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {B}."
+  },
+  {
+   "qty": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 2,
+   "price": "0.56",
+   "cls": {
+    "id": 200,
+    "card_name": "Command Tower",
+    "card_id": "0548fb60-c843-4f8f-a029-6f10efc63a41",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "qty": 1,
+   "name": "Blooming Marsh",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 1531,
+   "price": "3.45",
+   "cls": {
+    "id": 115,
+    "card_name": "Blooming Marsh",
+    "card_id": "861caabb-0573-4e94-8b03-342f90465064",
+    "land_category": "fast",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "two or fewer other lands",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "This land enters tapped unless you control two or fewer other lands.\n{T}: Add {B} or {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "cost": "{3}{G}{G}{G}",
+   "type": "Creature — Elf Druid // Land",
+   "ci": [
+    "G"
+   ],
+   "rank": 461,
+   "price": "3.78",
+   "cls": {
+    "id": 268,
+    "card_name": "Disciple of Freyalise // Garden of Freyalise",
+    "card_id": "a8e9ea5a-5e10-4b77-baef-0352ff035483",
+    "land_category": "shock",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\", \"card_draw\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Sorcery // Land",
+   "ci": [
+    "G"
+   ],
+   "rank": 670,
+   "price": "1.31",
+   "cls": {
+    "id": 138,
+    "card_name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+    "card_id": "ebef3db0-2b58-4581-a79c-fbca9a059e63",
+    "land_category": "shock",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Riveteers Overlook",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 716,
+   "price": "0.37",
+   "cls": {
+    "id": 831,
+    "card_name": "Riveteers Overlook",
+    "card_id": "65ce9590-87c0-4057-bddb-fadc0de552f6",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "qty": 1,
+   "name": "Twilight Mire",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 355,
+   "price": "0.35",
+   "cls": {
+    "id": 1171,
+    "card_name": "Twilight Mire",
+    "card_id": "3cc8186b-b46f-46c0-8dfb-9e423e430048",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {C}.\n{B/G}, {T}: Add {B}{B}, {B}{G}, or {G}{G}."
+  },
+  {
+   "qty": 1,
+   "name": "Exotic Orchard",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 9,
+   "price": "0.26",
+   "cls": {
+    "id": 321,
+    "card_name": "Exotic Orchard",
+    "card_id": "d11c5fe0-1528-4c94-a8cc-42bcab9d7487",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add one mana of any color that a land an opponent controls could produce."
+  },
+  {
+   "qty": 1,
+   "name": "Bloodstained Mire",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 43,
+   "price": "18.14",
+   "cls": {
+    "id": 114,
+    "card_name": "Bloodstained Mire",
+    "card_id": "579743fe-f71e-4cb2-8629-d6b02ed1591d",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Mana Confluence",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 116,
+   "price": "35.26",
+   "cls": {
+    "id": 613,
+    "card_name": "Mana Confluence",
+    "card_id": "504a69eb-3c2d-4bb1-b117-252b15acf0c2",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "qty": 1,
+   "name": "Windswept Heath",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 45,
+   "price": "12.79",
+   "cls": {
+    "id": 1264,
+    "card_name": "Windswept Heath",
+    "card_id": "bd1d13f7-fd38-4f0b-a8e0-1eac78668117",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Wooded Foothills",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 47,
+   "price": "17.97",
+   "cls": {
+    "id": 1274,
+    "card_name": "Wooded Foothills",
+    "card_id": "4e11ea8a-f895-438d-a3b7-f070238e4161",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Viridescent Bog",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "B",
+    "G"
+   ],
+   "rank": 721,
+   "price": "0.35",
+   "cls": {
+    "id": 1230,
+    "card_name": "Viridescent Bog",
+    "card_id": "54d852fc-0f3a-4791-a147-b21ca6964763",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{1}, {T}: Add {B}{G}."
+  },
+  {
+   "qty": 1,
+   "name": "Ifnir Deadlands",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land — Desert",
+   "ci": [
+    "B"
+   ],
+   "rank": 4450,
+   "price": "0.24",
+   "cls": {
+    "id": 511,
+    "card_name": "Ifnir Deadlands",
+    "card_id": "902e260d-71ba-4342-9794-fefe2b531c00",
+    "land_category": "pain",
+    "produces_colors": "[\"B\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\", \"sacrifice\"]",
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {C}.\n{T}, Pay 1 life: Add {B}.\n{2}{B}{B}, {T}, Sacrifice a Desert: Put two -1/-1 counters on target creature an opponent controls. Activate only as a sorcery."
+  },
+  {
+   "qty": 14,
+   "name": "Swamp",
+   "cmc": 0,
+   "cost": null,
+   "type": "Basic Land — Swamp",
+   "ci": [
+    "B"
+   ],
+   "rank": null,
+   "price": "0.10",
+   "cls": {
+    "id": 1039,
+    "card_name": "Swamp",
+    "card_id": "b7387103-1df1-4fd0-9e91-1544509792c7",
+    "land_category": "basic",
+    "produces_colors": "[\"B\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 4,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {B}.)"
+  },
+  {
+   "qty": 6,
+   "name": "Forest",
+   "cmc": 0,
+   "cost": null,
+   "type": "Basic Land — Forest",
+   "ci": [
+    "G"
+   ],
+   "rank": null,
+   "price": "0.08",
+   "cls": {
+    "id": 357,
+    "card_name": "Forest",
+    "card_id": "dce15387-4114-4b3e-91aa-5b42b45c44ac",
+    "land_category": "basic",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 4,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {G}.)"
+  }
+ ],
+ "benchLands": [
+  {
+   "name": "Path of Ancestry",
+   "ci": "",
+   "rank": 14,
+   "qty": 3,
+   "cat": "temple",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\n{T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (L"
+  },
+  {
+   "name": "Rogue's Passage",
+   "ci": "",
+   "rank": 18,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+  },
+  {
+   "name": "Evolving Wilds",
+   "ci": "",
+   "rank": 19,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Bojuka Bog",
+   "ci": "B",
+   "rank": 24,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"B\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, exile target player's graveyard.\n{T}: Add {B}."
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "ci": "",
+   "rank": 28,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Myriad Landscape",
+   "ci": "",
+   "rank": 31,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Fabled Passage",
+   "ci": "",
+   "rank": 44,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+  },
+  {
+   "name": "Temple of the False God",
+   "ci": "",
+   "rank": 82,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}{C}. Activate only if you control five or more lands."
+  },
+  {
+   "name": "Mosswort Bridge",
+   "ci": "G",
+   "rank": 195,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nThis land enters tapped.\n{T}: Add {G}.\n{G}, {T}:"
+  },
+  {
+   "name": "Ash Barrens",
+   "ci": "",
+   "rank": 210,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+  },
+  {
+   "name": "Golgari Rot Farm",
+   "ci": "BG",
+   "rank": 335,
+   "qty": 2,
+   "cat": "bounce",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand.\n{T}: Add {B}{G}."
+  },
+  {
+   "name": "Temple of Malady",
+   "ci": "BG",
+   "rank": 368,
+   "qty": 1,
+   "cat": "temple",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {B} or {G}."
+  },
+  {
+   "name": "High Market",
+   "ci": "",
+   "rank": 424,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}, Sacrifice a creature: You gain 1 life."
+  },
+  {
+   "name": "Nesting Grounds",
+   "ci": "",
+   "rank": 560,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery."
+  },
+  {
+   "name": "Opal Palace",
+   "ci": "",
+   "rank": 680,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of additional +1/+1 counters on it equal to"
+  },
+  {
+   "name": "Vernal Fen",
+   "ci": "BG",
+   "rank": 687,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {B} or {G}.)\nThis land enters tapped unless you control two or more basic lands."
+  },
+  {
+   "name": "Mortuary Mire",
+   "ci": "B",
+   "rank": 699,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, you may put target creature card from your graveyard on top of your library.\n{T}: Add {B}."
+  },
+  {
+   "name": "Revitalizing Repast // Old-Growth Grove",
+   "ci": "BG",
+   "rank": 749,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "Put a +1/+1 counter on target creature. It gains indestructible until end of turn.\n//\nThis land enters tapped.\n{T}: Add {B} or {G}."
+  },
+  {
+   "name": "Jungle Hollow",
+   "ci": "BG",
+   "rank": 787,
+   "qty": 1,
+   "cat": "gainland",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {B} or {G}."
+  },
+  {
+   "name": "Escape Tunnel",
+   "ci": "",
+   "rank": 797,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked t"
+  },
+  {
+   "name": "Blighted Woodland",
+   "ci": "G",
+   "rank": 929,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}{G}, {T}, Sacrifice this land: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "ci": "",
+   "rank": 969,
+   "qty": 1,
+   "cat": "fetch",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 1,
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Witch's Clinic",
+   "ci": "",
+   "rank": 1068,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}: Target commander gains lifelink until end of turn."
+  },
+  {
+   "name": "Maestros Theater",
+   "ci": "",
+   "rank": 1281,
+   "qty": 1,
+   "cat": "fetch",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 1,
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Haunted Mire",
+   "ci": "BG",
+   "rank": 1299,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {B} or {G}.)\nThis land enters tapped."
+  },
+  {
+   "name": "Brokers Hideout",
+   "ci": "",
+   "rank": 1311,
+   "qty": 1,
+   "cat": "fetch",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 1,
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Muraganda Raceway",
+   "ci": "",
+   "rank": 1427,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add {C}.\nMax speed — {T}: Add {C}{C}."
+  },
+  {
+   "name": "Arid Archway",
+   "ci": "",
+   "rank": 1497,
+   "qty": 1,
+   "cat": "bounce",
+   "prod": "[]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it"
+  },
+  {
+   "name": "Radiant Fountain",
+   "ci": "",
+   "rank": 1552,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, you gain 2 life.\n{T}: Add {C}."
+  },
+  {
+   "name": "Ba Sing Se",
+   "ci": "G",
+   "rank": 1664,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a basic land.\n{T}: Add {G}.\n{2}{G}, {T}: Earthbend 2. Activate only as a sorcery. (Target land you control becomes a 0/0 creature with haste that's still a l"
+  },
+  {
+   "name": "Crypt of Agadeem",
+   "ci": "B",
+   "rank": 1713,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {B}.\n{2}, {T}: Add {B} for each black creature card in your graveyard."
+  },
+  {
+   "name": "Great Hall of the Citadel",
+   "ci": "",
+   "rank": 1820,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spells."
+  },
+  {
+   "name": "Festering Thicket",
+   "ci": "BG",
+   "rank": 1890,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {B} or {G}.)\nThis land enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Conduit Pylons",
+   "ci": "",
+   "rank": 2012,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Grim Backwoods",
+   "ci": "BG",
+   "rank": 2085,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card."
+  },
+  {
+   "name": "Hidden Grotto",
+   "ci": "",
+   "rank": 2257,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Manor Gate",
+   "ci": "G",
+   "rank": 2483,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nAs this land enters, choose a color other than green.\n{T}: Add {G} or one mana of the chosen color."
+  },
+  {
+   "name": "Gingerbread Cabin",
+   "ci": "G",
+   "rank": 2865,
+   "qty": 1,
+   "cat": "gainland",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G}.)\nThis land enters tapped unless you control three or more other Forests.\nWhen this land enters untapped, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You"
+  },
+  {
+   "name": "Mudflat Village",
+   "ci": "B",
+   "rank": 2948,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add {B}. Spend this mana only to cast a creature spell.\n{1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand."
+  },
+  {
+   "name": "Rumble Arena",
+   "ci": "",
+   "rank": 3027,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Vigilance\nWhen this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Tangled Florahedron // Tangled Vale",
+   "ci": "G",
+   "rank": 3235,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "{T}: Add {G}.\n//\nThis land enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "name": "Turbulent Fen",
+   "ci": "BG",
+   "rank": 3378,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {B} or {G}.)\nThis land enters tapped unless your opponents control eight or more lands."
+  },
+  {
+   "name": "Study Hall",
+   "ci": "",
+   "rank": 3566,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color. When you spend this mana to cast your commander, scry X, where X is the number of times it's been cast from the command zone this game."
+  },
+  {
+   "name": "Interplanar Beacon",
+   "ci": "",
+   "rank": 4280,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Whenever you cast a planeswalker spell, you gain 1 life.\n{T}: Add {C}.\n{1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells."
+  },
+  {
+   "name": "Mirage Mesa",
+   "ci": "",
+   "rank": 4325,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color."
+  },
+  {
+   "name": "Festering Gulch",
+   "ci": "BG",
+   "rank": 5382,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, it deals 1 damage to target opponent.\n{T}: Add {B} or {G}."
+  },
+  {
+   "name": "Realm of Koh",
+   "ci": "B",
+   "rank": 5837,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a basic land.\n{T}: Add {B}.\n{3}{B}, {T}: Create a 1/1 colorless Spirit creature token with \"This token can't block or be blocked by non-Spirit creatures.\""
+  },
+  {
+   "name": "Sandstorm Verge",
+   "ci": "",
+   "rank": 6410,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}, {T}: Target creature can't block this turn. Activate only as a sorcery."
+  },
+  {
+   "name": "Witherbloom Campus",
+   "ci": "BG",
+   "rank": 6501,
+   "qty": 1,
+   "cat": "temple",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\n{T}: Add {B} or {G}.\n{4}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+   "name": "Titan's Grave",
+   "ci": "BG",
+   "rank": 7208,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {B} or {G}.\n{2}{B}{G}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+  },
+  {
+   "name": "Sapseep Forest",
+   "ci": "G",
+   "rank": 7213,
+   "qty": 1,
+   "cat": "gainland",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G}.)\nThis land enters tapped.\n{G}, {T}: You gain 1 life. Activate only if you control two or more green permanents."
+  },
+  {
+   "name": "Plaza of Harmony",
+   "ci": "",
+   "rank": 7624,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type that a Gate you control could produce."
+  },
+  {
+   "name": "Tarnation Vista",
+   "ci": "",
+   "rank": 9184,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{1}, {T}: For each color among monocolored permanents you control, add one mana of that color."
+  },
+  {
+   "name": "Skycoach Waypoint",
+   "ci": "",
+   "rank": 10263,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)"
+  },
+  {
+   "name": "Base Camp",
+   "ci": "",
+   "rank": 11109,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Cleric, Rogue, Warrior, or Wizard spell or to activate an ability of a Cleric, Rogue, Warrior, or "
+  },
+  {
+   "name": "Formidable Commons",
+   "ci": "BG",
+   "rank": 26403,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a planeswalker.\n{T}: Add {B} or {G}."
+  }
+ ]
+}

@@ -1,0 +1,580 @@
+
+## atraxa (WUBG, commander) — 751 scored; heaviest G
+top 45:
+  1  245 t1 fetch                Misty Rainforest                           untapped enters untapped; produces UG; matches heavy color (G); EDHREC recommended; meta 11%
+  2  244 t1 fetch                Windswept Heath                            untapped enters untapped; produces WG; matches heavy color (G); EDHREC recommended; meta 11%
+  3  244 t1 fetch                Verdant Catacombs                          untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended; meta 11%
+  4  244 t1 shock                Breeding Pool                              untapped enters untapped; produces GU; matches heavy color (G); EDHREC recommended; meta 9%
+  5  244 t1 shock                Overgrown Tomb                             untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended; meta 10%
+  6  243 t1 shock                Temple Garden                              untapped enters untapped; produces GW; matches heavy color (G); EDHREC recommended; meta 8%
+  7  236 t1 fetch                Polluted Delta                             untapped enters untapped; produces UB; EDHREC recommended; meta 12%
+  8  235 t1 fetch                Flooded Strand                             untapped enters untapped; produces WU; EDHREC recommended; meta 11%
+  9  235 t1 shock                Watery Grave                               untapped enters untapped; produces BU; EDHREC recommended; meta 10%
+ 10  235 t1 fetch                Marsh Flats                                untapped enters untapped; produces WB; EDHREC recommended; meta 10%
+ 11  235 t1 shock                Godless Shrine                             untapped enters untapped; produces BW; EDHREC recommended; meta 9%
+ 12  234 t1 shock                Hallowed Fountain                          untapped enters untapped; produces UW; EDHREC recommended; meta 9%
+ 13  224 t3 utility              Command Tower                              untapped enters untapped; produces BGUW; matches heavy color (G); EDHREC recommended; meta 72%
+ 14  224 t3 utility              Exotic Orchard                             untapped enters untapped; produces BGUW; matches heavy color (G); EDHREC recommended; meta 36%
+ 15  223 t2 pain                 City of Brass                              untapped enters untapped; produces BGUW; matches heavy color (G); meta 8%
+ 16  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BGUW; matches heavy color (G)
+ 17  218 t1 dual_original        Tropical Island                            untapped enters untapped; produces GU; matches heavy color (G)
+ 18  218 t1 dual_original        Bayou                                      untapped enters untapped; produces BG; matches heavy color (G)
+ 19  218 t1 dual_original        Savannah                                   untapped enters untapped; produces GW; matches heavy color (G)
+ 20  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGUW; matches heavy color (G)
+ 21  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGUW; matches heavy color (G)
+ 22  214 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW; matches heavy color (G)
+ 23  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGUW; matches heavy color (G)
+ 24  209 t1 dual_original        Underground Sea                            untapped enters untapped; produces BU
+ 25  209 t1 dual_original        Tundra                                     untapped enters untapped; produces UW
+ 26  209 t1 dual_original        Scrubland                                  untapped enters untapped; produces BW
+ 27  206 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (G)
+ 28  206 t1 fetch                Foreboding Landscape                       TAPPED   produces UBG; matches heavy color (G)
+ 29  205 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (G)
+ 30  204 t1 fetch                Deceptive Landscape                        TAPPED   produces WBG; matches heavy color (G)
+ 31  199 t1 fetch                Bant Panorama                              TAPPED   produces WUG; matches heavy color (G)
+ 32  198 t1 shock                Disciple of Freyalise // Garden of Freyalise untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+ 33  198 t1 shock                Bridgeworks Battle // Tanglespan Bridgeworks untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+ 34  197 t1 fetch                Obscura Storefront                         TAPPED   produces WUB
+ 35  195 t1 fetch                Contaminated Landscape                     TAPPED   produces WUB
+ 36  194 t1 shock                Turntimber Symbiosis // Turntimber, Serpentine Wood untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+ 37  193 t1 shock                Sink into Stupor // Soporific Springs      untapped enters untapped; produces U; meta 5%; MDFC (spell+land)
+ 38  193 t2 check                Hinterland Harbor                          untapped enters untapped; produces GU; matches heavy color (G); meta 8%
+ 39  193 t2 check                Woodland Cemetery                          untapped enters untapped; produces BG; matches heavy color (G); meta 7%
+ 40  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BGUW; matches heavy color (G); meta 7%
+ 41  192 t2 check                Sunpetal Grove                             untapped enters untapped; produces GW; matches heavy color (G); meta 6%
+ 42  192 t2 pain                 Yavimaya Coast                             untapped enters untapped; produces GU; matches heavy color (G); meta 6%
+ 43  192 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); meta 6%
+ 44  192 t3 utility              Prismatic Vista                            untapped enters untapped; produces WUBG; matches heavy color (G); meta 5%
+ 45  190 t1 shock                Fell the Profane // Fell Mire              untapped enters untapped; produces B; MDFC (spell+land)
+watch list:
+  # 21  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGUW; matches heavy color (G)
+  # 16  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BGUW; matches heavy color (G)
+  # 23  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGUW; matches heavy color (G)
+  # 20  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGUW; matches heavy color (G)
+  # 22  214 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW; matches heavy color (G)
+  # 27  206 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (G)
+  # 29  205 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (G)
+  # 40  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BGUW; matches heavy color (G); meta 7%
+  #641   73 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana; meta 5%
+  # 82  183 t2 pain                 Underground River                          untapped enters untapped; produces BU; meta 6%
+  # 81  183 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; meta 7%
+  # 83  183 t2 pain                 Adarkar Wastes                             untapped enters untapped; produces UW; meta 5%
+  # 42  192 t2 pain                 Yavimaya Coast                             untapped enters untapped; produces GU; matches heavy color (G); meta 6%
+  # 52  189 t2 pain                 Brushland                                  untapped enters untapped; produces GW; matches heavy color (G)
+  # 43  192 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); meta 6%
+  #186  143 t4 tapped               Zagoth Triome                              TAPPED   produces BGU; matches heavy color (G); EDHREC recommended
+  #188  143 t4 tapped               Indatha Triome                             TAPPED   produces BGW; matches heavy color (G); EDHREC recommended
+  #482   88 t4 tapped               Morphic Pool                               TAPPED   produces BU; meta 5%
+  #591   85 t4 tapped               Vault of Champions                         TAPPED   produces BW
+  #593   84 t4 tapped               Undercity Sewers                           TAPPED   produces BU
+  #109  178 t2 pathway              Clearwater Pathway // Murkwater Pathway    untapped enters untapped; produces BU
+  #111  178 t2 pathway              Hengegate Pathway // Mistgate Pathway      untapped enters untapped; produces UW
+  # 86  180 t3 temple               Path of Ancestry                           TAPPED   produces BGUW; matches heavy color (G); EDHREC recommended; meta 21%
+  #315  115 t3 utility              Karn's Bastion                             untapped enters untapped; EDHREC recommended
+  #230  124 t3 utility              Otawara, Soaring City                      untapped enters untapped; produces U; meta 8%
+  #255  120 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B
+  # 75  184 t2 check                Glacial Fortress                           untapped enters untapped; produces UW; meta 7%
+  # 80  183 t2 check                Drowned Catacomb                           untapped enters untapped; produces BU; meta 7%
+  #164  148 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BGUW; matches heavy color (G); meta 7%
+  #367  100 t3 utility              Ancient Tomb                               untapped enters untapped; meta 10%
+  #117  177 t2 pain                 Silent Clearing                            untapped enters untapped; produces BW
+  #113  178 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW
+  #246  122 t4 tapped               Thriving Isle                              TAPPED   produces BGUW; matches heavy color (G)
+  #742   21 t4 tapped               Vivid Creek                                TAPPED   conditional colored mana
+  #377   97 t4 tapped               Undergrowth Stadium                        TAPPED   produces BG; matches heavy color (G); meta 6%
+  #418   93 t4 tapped               Underground Mortuary                       TAPPED   produces BG; matches heavy color (G)
+  #213  133 t3 utility              Boseiju, Who Endures                       untapped enters untapped; produces G; matches heavy color (G); meta 9%
+  #495   87 t4 tapped               Restless Cottage                           TAPPED   produces BG; matches heavy color (G)
+  # 44  192 t3 utility              Prismatic Vista                            untapped enters untapped; produces WUBG; matches heavy color (G); meta 5%
+  #146  155 t3 utility              Fabled Passage                             TAPPED   produces WUBG; matches heavy color (G); meta 11%
+  #135  159 t3 utility              Evolving Wilds                             TAPPED   produces WUBG; matches heavy color (G); meta 20%
+  # 72  185 t1 shock                Multiversal Passage                        untapped enters untapped; produces G; matches heavy color (G)
+  # 67  186 t2 fast                 Blooming Marsh                             untapped enters untapped; produces BG; matches heavy color (G)
+  # 56  188 t2 slow                 Deathcap Glade                             untapped enters untapped; produces BG; matches heavy color (G)
+
+## edgar (WBR, commander) — 582 scored; heaviest B
+top 45:
+  1  254 t2 tribal               Three Tree City                            untapped enters untapped; produces BRW; matches heavy color (B); tribal land
+  2  250 t1 fetch                Bloodstained Mire                          untapped enters untapped; produces BR; matches heavy color (B); EDHREC recommended; meta 11%
+  3  249 t1 fetch                Marsh Flats                                untapped enters untapped; produces WB; matches heavy color (B); EDHREC recommended; meta 10%
+  4  249 t1 shock                Godless Shrine                             untapped enters untapped; produces BW; matches heavy color (B); EDHREC recommended; meta 9%
+  5  249 t1 shock                Blood Crypt                                untapped enters untapped; produces BR; matches heavy color (B); EDHREC recommended; meta 9%
+  6  234 t1 shock                Sacred Foundry                             untapped enters untapped; produces RW; EDHREC recommended; meta 8%
+  7  229 t3 utility              Command Tower                              untapped enters untapped; produces BRW; matches heavy color (B); EDHREC recommended; meta 72%
+  8  229 t3 utility              Exotic Orchard                             untapped enters untapped; produces BRW; matches heavy color (B); EDHREC recommended; meta 36%
+  9  228 t2 pain                 City of Brass                              untapped enters untapped; produces BRW; matches heavy color (B); meta 8%
+ 10  223 t1 dual_original        Badlands                                   untapped enters untapped; produces BR; matches heavy color (B)
+ 11  223 t1 dual_original        Scrubland                                  untapped enters untapped; produces BW; matches heavy color (B)
+ 12  223 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BRW; matches heavy color (B)
+ 13  219 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BRW; matches heavy color (B)
+ 14  218 t2 check                Dragonskull Summit                         untapped enters untapped; produces BR; matches heavy color (B); EDHREC recommended; meta 8%
+ 15  218 t2 check                Isolated Chapel                            untapped enters untapped; produces BW; matches heavy color (B); EDHREC recommended; meta 8%
+ 16  217 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; matches heavy color (B); EDHREC recommended; meta 7%
+ 17  216 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BRW; matches heavy color (B)
+ 18  215 t1 fetch                Arid Mesa                                  untapped enters untapped; produces WR; meta 10%
+ 19  210 t1 fetch                Shattered Landscape                        TAPPED   produces WBR; matches heavy color (B)
+ 20  209 t1 dual_original        Plateau                                    untapped enters untapped; produces RW
+ 21  204 t1 shock                Fell the Profane // Fell Mire              untapped enters untapped; produces B; matches heavy color (B); MDFC (spell+land)
+ 22  203 t1 shock                Boggart Trawler // Boggart Bog             untapped enters untapped; produces B; matches heavy color (B); MDFC (spell+land)
+ 23  202 t1 shock                Agadeem's Awakening // Agadeem, the Undercrypt untapped enters untapped; produces B; matches heavy color (B); MDFC (spell+land)
+ 24  199 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BRW; matches heavy color (B); tribal land; EDHREC recommended; meta 7%
+ 25  198 t3 utility              Mana Confluence                            untapped enters untapped; produces BRW; matches heavy color (B); meta 7%
+ 26  197 t2 pain                 Sulfurous Springs                          untapped enters untapped; produces BR; matches heavy color (B); meta 6%
+ 27  197 t3 utility              Prismatic Vista                            untapped enters untapped; produces WBR; matches heavy color (B); meta 5%
+ 28  196 t2 tribal               Secluded Courtyard                         untapped enters untapped; restricted producer; produces BRW; matches heavy color (B); tribal land; EDHREC recommended
+ 29  196 t2 tribal               Unclaimed Territory                        untapped enters untapped; restricted producer; produces BRW; matches heavy color (B); tribal land; EDHREC recommended
+ 30  193 t2 slow                 Shattered Sanctum                          untapped enters untapped; produces BW; matches heavy color (B)
+ 31  193 t2 slow                 Haunted Ridge                              untapped enters untapped; produces BR; matches heavy color (B)
+ 32  193 t2 filter               Foreboding Ruins                           untapped enters untapped; produces BR; matches heavy color (B)
+ 33  193 t2 filter               Shineshadow Snarl                          untapped enters untapped; produces BW; matches heavy color (B)
+ 34  193 t3 utility              Demolition Field                           untapped enters untapped; produces WBR; matches heavy color (B)
+ 35  193 t3 utility              Forbidden Orchard                          untapped enters untapped; produces BRW; matches heavy color (B)
+ 36  192 t1 shock                The Black Gate                             untapped enters untapped; produces B; matches heavy color (B)
+ 37  192 t2 pathway              Brightclimb Pathway // Grimclimb Pathway   untapped enters untapped; produces BW; matches heavy color (B)
+ 38  192 t2 pathway              Blightstep Pathway // Searstep Pathway     untapped enters untapped; produces BR; matches heavy color (B)
+ 39  192 t2 fast                 Blackcleave Cliffs                         untapped enters untapped; produces BR; matches heavy color (B)
+ 40  192 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW; matches heavy color (B)
+ 41  192 t2 pain                 Mount Doom                                 untapped enters untapped; produces BR; matches heavy color (B)
+ 42  191 t2 pain                 Silent Clearing                            untapped enters untapped; produces BW; matches heavy color (B)
+ 43  191 t3 utility              The Grey Havens                            untapped enters untapped; produces BRW; matches heavy color (B)
+ 44  190 t1 shock                Multiversal Passage                        untapped enters untapped; produces B; matches heavy color (B)
+ 45  190 t3 utility              Lazotep Quarry                             untapped enters untapped; produces BRW; matches heavy color (B)
+watch list:
+  # 13  219 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BRW; matches heavy color (B)
+  #  1  254 t2 tribal               Three Tree City                            untapped enters untapped; produces BRW; matches heavy color (B); tribal land
+  # 17  216 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BRW; matches heavy color (B)
+  # 12  223 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BRW; matches heavy color (B)
+  #212  119 t1 fetch                Brokers Hideout                            TAPPED   off-color fetch (thinning only); produces W
+  # 25  198 t3 utility              Mana Confluence                            untapped enters untapped; produces BRW; matches heavy color (B); meta 7%
+  #503   73 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana; meta 5%
+  # 26  197 t2 pain                 Sulfurous Springs                          untapped enters untapped; produces BR; matches heavy color (B); meta 6%
+  # 16  217 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; matches heavy color (B); EDHREC recommended; meta 7%
+  #219  119 t4 tapped               Vault of Champions                         TAPPED   produces BW; matches heavy color (B); EDHREC recommended
+  #288   98 t4 tapped               Raucous Theater                            TAPPED   produces BR; matches heavy color (B)
+  # 55  185 t3 temple               Path of Ancestry                           TAPPED   produces BRW; matches heavy color (B); EDHREC recommended; meta 21%
+  #295   95 t3 utility              Karn's Bastion                             untapped enters untapped
+  #147  134 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B; matches heavy color (B)
+  # 24  199 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BRW; matches heavy color (B); tribal land; EDHREC recommended; meta 7%
+  #281  100 t3 utility              Ancient Tomb                               untapped enters untapped; meta 10%
+  #127  148 t4 tapped               Nomad Outpost                              TAPPED   produces BRW; matches heavy color (B); EDHREC recommended
+  #128  148 t4 tapped               Savai Triome                               TAPPED   produces BRW; matches heavy color (B); EDHREC recommended
+  # 42  191 t2 pain                 Silent Clearing                            untapped enters untapped; produces BW; matches heavy color (B)
+  # 40  192 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW; matches heavy color (B)
+  #486   85 t4 tapped               Spectator Seating                          TAPPED   produces RW
+  #218  119 t4 tapped               Luxury Suite                               TAPPED   produces BR; matches heavy color (B); EDHREC recommended
+  #123  148 t2 check                Castle Embereth                            untapped enters untapped; produces R
+  #551   49 t4 tapped               Den of the Bugbear                         TAPPED   produces R
+  #223  118 t3 utility              Sokenzan, Crucible of Defiance             untapped enters untapped; produces R
+  # 27  197 t3 utility              Prismatic Vista                            untapped enters untapped; produces WBR; matches heavy color (B); meta 5%
+  #106  160 t3 utility              Fabled Passage                             TAPPED   produces WBR; matches heavy color (B); meta 11%
+  # 93  164 t3 utility              Evolving Wilds                             TAPPED   produces WBR; matches heavy color (B); meta 20%
+  # 44  190 t1 shock                Multiversal Passage                        untapped enters untapped; produces B; matches heavy color (B)
+
+## niv (WUBRG, commander) — 968 scored; heaviest G
+top 45:
+  1  241 t1 fetch                Misty Rainforest                           untapped enters untapped; produces UG; matches heavy color (G); EDHREC recommended; meta 11%
+  2  240 t1 fetch                Windswept Heath                            untapped enters untapped; produces WG; matches heavy color (G); EDHREC recommended; meta 11%
+  3  240 t1 fetch                Wooded Foothills                           untapped enters untapped; produces RG; matches heavy color (G); EDHREC recommended; meta 11%
+  4  240 t1 fetch                Verdant Catacombs                          untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended; meta 11%
+  5  240 t1 shock                Breeding Pool                              untapped enters untapped; produces GU; matches heavy color (G); EDHREC recommended; meta 9%
+  6  240 t1 shock                Stomping Ground                            untapped enters untapped; produces GR; matches heavy color (G); EDHREC recommended; meta 9%
+  7  240 t1 shock                Overgrown Tomb                             untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended; meta 10%
+  8  239 t1 shock                Temple Garden                              untapped enters untapped; produces GW; matches heavy color (G); EDHREC recommended; meta 8%
+  9  236 t1 fetch                Polluted Delta                             untapped enters untapped; produces UB; EDHREC recommended; meta 12%
+ 10  236 t1 fetch                Bloodstained Mire                          untapped enters untapped; produces BR; EDHREC recommended; meta 11%
+ 11  235 t1 fetch                Flooded Strand                             untapped enters untapped; produces WU; EDHREC recommended; meta 11%
+ 12  235 t1 fetch                Scalding Tarn                              untapped enters untapped; produces UR; EDHREC recommended; meta 10%
+ 13  235 t1 shock                Watery Grave                               untapped enters untapped; produces BU; EDHREC recommended; meta 10%
+ 14  235 t1 fetch                Marsh Flats                                untapped enters untapped; produces WB; EDHREC recommended; meta 10%
+ 15  235 t1 fetch                Arid Mesa                                  untapped enters untapped; produces WR; EDHREC recommended; meta 10%
+ 16  235 t1 shock                Godless Shrine                             untapped enters untapped; produces BW; EDHREC recommended; meta 9%
+ 17  235 t1 shock                Steam Vents                                untapped enters untapped; produces RU; EDHREC recommended; meta 9%
+ 18  235 t1 shock                Blood Crypt                                untapped enters untapped; produces BR; EDHREC recommended; meta 9%
+ 19  234 t1 shock                Hallowed Fountain                          untapped enters untapped; produces UW; EDHREC recommended; meta 9%
+ 20  234 t1 shock                Sacred Foundry                             untapped enters untapped; produces RW; EDHREC recommended; meta 8%
+ 21  220 t3 utility              Command Tower                              untapped enters untapped; produces BGRUW; matches heavy color (G); EDHREC recommended; meta 72%
+ 22  220 t3 utility              Exotic Orchard                             untapped enters untapped; produces BGRUW; matches heavy color (G); EDHREC recommended; meta 36%
+ 23  219 t2 pain                 City of Brass                              untapped enters untapped; produces BGRUW; matches heavy color (G); meta 8%
+ 24  215 t2 tribal               Three Tree City                            untapped enters untapped; produces BGRUW; matches heavy color (G)
+ 25  214 t1 dual_original        Tropical Island                            untapped enters untapped; produces GU; matches heavy color (G)
+ 26  214 t1 dual_original        Bayou                                      untapped enters untapped; produces BG; matches heavy color (G)
+ 27  214 t1 dual_original        Taiga                                      untapped enters untapped; produces GR; matches heavy color (G)
+ 28  214 t1 dual_original        Savannah                                   untapped enters untapped; produces GW; matches heavy color (G)
+ 29  214 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGRUW; matches heavy color (G)
+ 30  210 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGRUW; matches heavy color (G)
+ 31  210 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW; matches heavy color (G)
+ 32  209 t1 dual_original        Underground Sea                            untapped enters untapped; produces BU
+ 33  209 t1 dual_original        Volcanic Island                            untapped enters untapped; produces RU
+ 34  209 t1 dual_original        Tundra                                     untapped enters untapped; produces UW
+ 35  209 t1 dual_original        Badlands                                   untapped enters untapped; produces BR
+ 36  209 t1 dual_original        Scrubland                                  untapped enters untapped; produces BW
+ 37  209 t1 dual_original        Plateau                                    untapped enters untapped; produces RW
+ 38  207 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGRUW; matches heavy color (G)
+ 39  204 t1 fetch                Riveteers Overlook                         TAPPED   produces BRG; matches heavy color (G)
+ 40  203 t1 fetch                Cabaretti Courtyard                        TAPPED   produces WRG; matches heavy color (G)
+ 41  202 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (G)
+ 42  202 t1 fetch                Foreboding Landscape                       TAPPED   produces UBG; matches heavy color (G)
+ 43  202 t1 fetch                Bountiful Landscape                        TAPPED   produces URG; matches heavy color (G)
+ 44  201 t1 fetch                Twisted Landscape                          TAPPED   produces BRG; matches heavy color (G)
+ 45  201 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (G)
+watch list:
+  # 30  210 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGRUW; matches heavy color (G)
+  # 24  215 t2 tribal               Three Tree City                            untapped enters untapped; produces BGRUW; matches heavy color (G)
+  # 38  207 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGRUW; matches heavy color (G)
+  # 29  214 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGRUW; matches heavy color (G)
+  # 31  210 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW; matches heavy color (G)
+  # 41  202 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (G)
+  # 45  201 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (G)
+  # 72  189 t3 utility              Mana Confluence                            untapped enters untapped; produces BGRUW; matches heavy color (G); meta 7%
+  #837   73 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana; meta 5%
+  #105  183 t2 pain                 Sulfurous Springs                          untapped enters untapped; produces BR; meta 6%
+  #103  183 t2 pain                 Underground River                          untapped enters untapped; produces BU; meta 6%
+  #102  183 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; meta 7%
+  #104  183 t2 pain                 Adarkar Wastes                             untapped enters untapped; produces UW; meta 5%
+  # 76  188 t2 pain                 Yavimaya Coast                             untapped enters untapped; produces GU; matches heavy color (G); meta 6%
+  # 84  185 t2 pain                 Brushland                                  untapped enters untapped; produces GW; matches heavy color (G)
+  # 77  188 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); meta 6%
+  #412  114 t4 tapped               Xander's Lounge                            TAPPED   produces BRU
+  #346  119 t4 tapped               Zagoth Triome                              TAPPED   produces BGU; matches heavy color (G)
+  #348  119 t4 tapped               Indatha Triome                             TAPPED   produces BGW; matches heavy color (G)
+  #604   88 t4 tapped               Morphic Pool                               TAPPED   produces BU; meta 5%
+  #730   85 t4 tapped               Vault of Champions                         TAPPED   produces BW
+  #733   84 t4 tapped               Undercity Sewers                           TAPPED   produces BU
+  #734   84 t4 tapped               Raucous Theater                            TAPPED   produces BR
+  #141  178 t2 pathway              Riverglide Pathway // Lavaglide Pathway    untapped enters untapped; produces RU
+  #137  178 t2 pathway              Clearwater Pathway // Murkwater Pathway    untapped enters untapped; produces BU
+  #144  178 t2 pathway              Hengegate Pathway // Mistgate Pathway      untapped enters untapped; produces UW
+  #153  176 t3 temple               Path of Ancestry                           TAPPED   produces BGRUW; matches heavy color (G); EDHREC recommended; meta 21%
+  #494   95 t3 utility              Karn's Bastion                             untapped enters untapped
+  #305  124 t3 utility              Otawara, Soaring City                      untapped enters untapped; produces U; meta 8%
+  #331  120 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B
+  #140  178 t2 pain                 Fiery Islet                                untapped enters untapped; produces RU
+  # 89  184 t2 check                Glacial Fortress                           untapped enters untapped; produces UW; meta 7%
+  #100  183 t2 check                Drowned Catacomb                           untapped enters untapped; produces BU; meta 7%
+  # 86  184 t2 check                Sulfur Falls                               untapped enters untapped; produces RU; meta 8%
+  #239  147 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BGRUW; matches heavy color (G); meta 7%
+  #481  100 t3 utility              Ancient Tomb                               untapped enters untapped; meta 10%
+  #410  114 t4 tapped               Nomad Outpost                              TAPPED   produces BRW
+  #414  114 t4 tapped               Savai Triome                               TAPPED   produces BRW
+  #152  177 t2 pain                 Silent Clearing                            untapped enters untapped; produces BW
+  #146  178 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW
+  #729   85 t4 tapped               Spectator Seating                          TAPPED   produces RW
+  #727   85 t4 tapped               Luxury Suite                               TAPPED   produces BR
+  #605   88 t4 tapped               Training Center                            TAPPED   produces RU; meta 5%
+  #368  118 t4 tapped               Thriving Isle                              TAPPED   produces BGRUW; matches heavy color (G)
+  #958   21 t4 tapped               Vivid Creek                                TAPPED   conditional colored mana
+  # 91  184 t2 pain                 Shivan Reef                                untapped enters untapped; produces RU; meta 7%
+  #228  148 t2 check                Castle Embereth                            untapped enters untapped; produces R
+  #918   49 t4 tapped               Den of the Bugbear                         TAPPED   produces R
+  #353  118 t3 utility              Sokenzan, Crucible of Defiance             untapped enters untapped; produces R
+  #536   93 t4 tapped               Undergrowth Stadium                        TAPPED   produces BG; matches heavy color (G); meta 6%
+  #585   89 t4 tapped               Underground Mortuary                       TAPPED   produces BG; matches heavy color (G)
+  #295  129 t3 utility              Boseiju, Who Endures                       untapped enters untapped; produces G; matches heavy color (G); meta 9%
+  #760   83 t4 tapped               Restless Cottage                           TAPPED   produces BG; matches heavy color (G)
+  # 78  188 t3 utility              Prismatic Vista                            untapped enters untapped; produces WUBRG; matches heavy color (G); meta 5%
+  #207  151 t3 utility              Fabled Passage                             TAPPED   produces WUBRG; matches heavy color (G); meta 11%
+  #193  155 t3 utility              Evolving Wilds                             TAPPED   produces WUBRG; matches heavy color (G); meta 20%
+  #118  181 t1 shock                Multiversal Passage                        untapped enters untapped; produces G; matches heavy color (G)
+  #113  182 t2 fast                 Blooming Marsh                             untapped enters untapped; produces BG; matches heavy color (G)
+  # 94  184 t2 slow                 Deathcap Glade                             untapped enters untapped; produces BG; matches heavy color (G)
+
+## krenko (R, brawl) — 55 scored; heaviest R
+top 45:
+  1  209 t1 shock                Pinnacle Monk // Mystic Peak               untapped enters untapped; produces R; matches heavy color (R); MDFC (spell+land)
+  2  209 t1 shock                Sundering Eruption // Volcanic Fissure     untapped enters untapped; produces R; matches heavy color (R); MDFC (spell+land)
+  3  207 t1 shock                Shatterskull Smashing // Shatterskull, the Hammer Pass untapped enters untapped; produces R; matches heavy color (R); MDFC (spell+land)
+  4  200 t1 fetch                Bloodstained Mire                          untapped enters untapped; produces R; matches heavy color (R)
+  5  200 t1 fetch                Wooded Foothills                           untapped enters untapped; produces R; matches heavy color (R)
+  6  200 t1 fetch                Scalding Tarn                              untapped enters untapped; produces R; matches heavy color (R)
+  7  200 t1 fetch                Arid Mesa                                  untapped enters untapped; produces R; matches heavy color (R)
+  8  189 t2 check                Arena of Glory                             untapped enters untapped; produces R; matches heavy color (R); EDHREC recommended
+  9  188 t2 check                Castle Embereth                            untapped enters untapped; produces R; matches heavy color (R); EDHREC recommended
+ 10  175 t2 tribal               Three Tree City                            untapped enters untapped; tribal land; EDHREC recommended
+ 11  160 t2 pain                 Fogwell's Gym                              untapped enters untapped; produces R; matches heavy color (R)
+ 12  155 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; tribal land
+ 13  140 t3 utility              Prismatic Vista                            untapped enters untapped; produces R; matches heavy color (R)
+ 14  140 t3 utility              Scalding Tarn                              untapped enters untapped; produces R; matches heavy color (R)
+ 15  139 t3 utility              Great Furnace                              untapped enters untapped; produces R; matches heavy color (R)
+ 16  139 t3 utility              Demolition Field                           untapped enters untapped; produces R; matches heavy color (R)
+ 17  138 t3 utility              Sokenzan, Crucible of Defiance             untapped enters untapped; produces R; matches heavy color (R)
+ 18  130 t2 pain                 Barbarian Ring                             untapped enters untapped; conditional colored mana; produces R; matches heavy color (R)
+ 19  130 t3 utility              Meteor Crater                              untapped enters untapped; produces R; matches heavy color (R)
+ 20  121 t2 creature_land        Mutavault                                  untapped enters untapped
+ 21  121 t2 creature_land        Inkmoth Nexus                              untapped enters untapped
+ 22  119 t2 creature_land        Blinkmoth Nexus                            untapped enters untapped
+ 23  115 t2 creature_land        Soulstone Sanctuary                        untapped enters untapped
+ 24  115 t2 creature_land        Mishra's Foundry                           untapped enters untapped
+ 25  115 t2 creature_land        Faceless Haven                             untapped enters untapped
+ 26  115 t2 creature_land        Mobilized District                         untapped enters untapped
+ 27  115 t2 creature_land        Cavernous Maw                              untapped enters untapped
+ 28  115 t2 creature_land        Hall of Echoes                             untapped enters untapped
+ 29   95 t3 utility              Rogue's Passage                            untapped enters untapped
+ 30   95 t3 utility              Nykthos, Shrine to Nyx                     untapped enters untapped; conditional colored mana
+ 31   95 t3 utility              Rogue's Passage                            untapped enters untapped
+ 32   94 t3 utility              Access Tunnel                              untapped enters untapped
+ 33   93 t3 utility              Ghost Quarter                              untapped enters untapped
+ 34   93 t3 utility              Field of Ruin                              untapped enters untapped
+ 35   92 t3 utility              Secret Tunnel                              untapped enters untapped
+ 36   90 t3 utility              Volatile Fault                             untapped enters untapped
+ 37   89 t4 tapped               Den of the Bugbear                         TAPPED   produces R; matches heavy color (R); EDHREC recommended
+ 38   85 t3 utility              Dust Bowl                                  untapped enters untapped
+ 39   85 t3 utility              Endless Sands                              untapped enters untapped
+ 40   85 t3 utility              Mystifying Maze                            untapped enters untapped
+ 41   85 t3 utility              Encroaching Wastes                         untapped enters untapped
+ 42   85 t3 utility              Northampton Farm                           untapped enters untapped
+ 43   84 t4 tapped               Valakut Awakening // Valakut Stoneforge    TAPPED   produces R; matches heavy color (R); MDFC (spell+land)
+ 44   82 t4 tapped               Kazuul's Fury // Kazuul's Cliffs           TAPPED   produces R; matches heavy color (R); MDFC (spell+land)
+ 45   79 t4 tapped               Spikefield Hazard // Spikefield Cave       TAPPED   produces R; matches heavy color (R); MDFC (spell+land)
+watch list:
+  # 10  175 t2 tribal               Three Tree City                            untapped enters untapped; tribal land; EDHREC recommended
+  # 12  155 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; tribal land
+  #  9  188 t2 check                Castle Embereth                            untapped enters untapped; produces R; matches heavy color (R); EDHREC recommended
+  # 37   89 t4 tapped               Den of the Bugbear                         TAPPED   produces R; matches heavy color (R); EDHREC recommended
+  # 17  138 t3 utility              Sokenzan, Crucible of Defiance             untapped enters untapped; produces R; matches heavy color (R)
+  # 13  140 t3 utility              Prismatic Vista                            untapped enters untapped; produces R; matches heavy color (R)
+
+## kess (UBR, commander) — 586 scored; heaviest U
+top 45:
+  1  245 t1 fetch                Polluted Delta                             untapped enters untapped; produces UB; matches heavy color (U); EDHREC recommended; meta 12%
+  2  244 t1 fetch                Scalding Tarn                              untapped enters untapped; produces UR; matches heavy color (U); EDHREC recommended; meta 10%
+  3  244 t1 shock                Watery Grave                               untapped enters untapped; produces BU; matches heavy color (U); EDHREC recommended; meta 10%
+  4  244 t1 shock                Steam Vents                                untapped enters untapped; produces RU; matches heavy color (U); EDHREC recommended; meta 9%
+  5  236 t1 fetch                Bloodstained Mire                          untapped enters untapped; produces BR; EDHREC recommended; meta 11%
+  6  235 t1 shock                Blood Crypt                                untapped enters untapped; produces BR; EDHREC recommended; meta 9%
+  7  224 t3 utility              Command Tower                              untapped enters untapped; produces BRU; matches heavy color (U); EDHREC recommended; meta 72%
+  8  224 t3 utility              Exotic Orchard                             untapped enters untapped; produces BRU; matches heavy color (U); EDHREC recommended; meta 36%
+  9  223 t2 pain                 City of Brass                              untapped enters untapped; produces BRU; matches heavy color (U); meta 8%
+ 10  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BRU; matches heavy color (U)
+ 11  218 t1 dual_original        Underground Sea                            untapped enters untapped; produces BU; matches heavy color (U)
+ 12  218 t1 dual_original        Volcanic Island                            untapped enters untapped; produces RU; matches heavy color (U)
+ 13  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BRU; matches heavy color (U)
+ 14  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BRU; matches heavy color (U)
+ 15  213 t2 check                Sulfur Falls                               untapped enters untapped; produces RU; matches heavy color (U); EDHREC recommended; meta 8%
+ 16  213 t2 pain                 Shivan Reef                                untapped enters untapped; produces RU; matches heavy color (U); EDHREC recommended; meta 7%
+ 17  212 t2 check                Drowned Catacomb                           untapped enters untapped; produces BU; matches heavy color (U); EDHREC recommended; meta 7%
+ 18  212 t2 pain                 Underground River                          untapped enters untapped; produces BU; matches heavy color (U); EDHREC recommended; meta 6%
+ 19  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BRU; matches heavy color (U)
+ 20  209 t1 dual_original        Badlands                                   untapped enters untapped; produces BR
+ 21  206 t1 fetch                Maestros Theater                           TAPPED   produces UBR; matches heavy color (U)
+ 22  205 t1 fetch                Seething Landscape                         TAPPED   produces UBR; matches heavy color (U)
+ 23  204 t2 check                Dragonskull Summit                         untapped enters untapped; produces BR; EDHREC recommended; meta 8%
+ 24  202 t1 shock                Sink into Stupor // Soporific Springs      untapped enters untapped; produces U; matches heavy color (U); meta 5%; MDFC (spell+land)
+ 25  199 t1 fetch                Grixis Panorama                            TAPPED   produces UBR; matches heavy color (U)
+ 26  198 t1 shock                Hydroelectric Specimen // Hydroelectric Laboratory untapped enters untapped; produces U; matches heavy color (U); MDFC (spell+land)
+ 27  198 t1 shock                Sea Gate Restoration // Sea Gate, Reborn   untapped enters untapped; produces U; matches heavy color (U); MDFC (spell+land)
+ 28  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BRU; matches heavy color (U); meta 7%
+ 29  192 t3 utility              Prismatic Vista                            untapped enters untapped; produces UBR; matches heavy color (U); meta 5%
+ 30  190 t1 shock                Fell the Profane // Fell Mire              untapped enters untapped; produces B; MDFC (spell+land)
+ 31  189 t1 shock                Pinnacle Monk // Mystic Peak               untapped enters untapped; produces R; MDFC (spell+land)
+ 32  189 t1 shock                Boggart Trawler // Boggart Bog             untapped enters untapped; produces B; MDFC (spell+land)
+ 33  189 t1 shock                Sundering Eruption // Volcanic Fissure     untapped enters untapped; produces R; MDFC (spell+land)
+ 34  189 t2 slow                 Stormcarved Coast                          untapped enters untapped; produces RU; matches heavy color (U)
+ 35  189 t2 slow                 Shipwreck Marsh                            untapped enters untapped; produces BU; matches heavy color (U)
+ 36  188 t1 shock                Agadeem's Awakening // Agadeem, the Undercrypt untapped enters untapped; produces B; MDFC (spell+land)
+ 37  188 t2 filter               Choked Estuary                             untapped enters untapped; produces BU; matches heavy color (U)
+ 38  188 t2 filter               Frostboil Snarl                            untapped enters untapped; produces RU; matches heavy color (U)
+ 39  188 t3 utility              Demolition Field                           untapped enters untapped; produces UBR; matches heavy color (U)
+ 40  188 t3 utility              Forbidden Orchard                          untapped enters untapped; produces BRU; matches heavy color (U)
+ 41  187 t1 shock                Shatterskull Smashing // Shatterskull, the Hammer Pass untapped enters untapped; produces R; MDFC (spell+land)
+ 42  187 t2 pathway              Clearwater Pathway // Murkwater Pathway    untapped enters untapped; produces BU; matches heavy color (U)
+ 43  187 t2 pain                 Fiery Islet                                untapped enters untapped; produces RU; matches heavy color (U)
+ 44  187 t2 pathway              Riverglide Pathway // Lavaglide Pathway    untapped enters untapped; produces RU; matches heavy color (U)
+ 45  186 t2 fast                 Darkslick Shores                           untapped enters untapped; produces BU; matches heavy color (U)
+watch list:
+  # 14  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BRU; matches heavy color (U)
+  # 10  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BRU; matches heavy color (U)
+  # 19  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BRU; matches heavy color (U)
+  # 13  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BRU; matches heavy color (U)
+  #167  123 t1 fetch                Brokers Hideout                            TAPPED   off-color fetch (thinning only); produces U; matches heavy color (U)
+  # 28  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BRU; matches heavy color (U); meta 7%
+  #501   73 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana; meta 5%
+  # 53  183 t2 pain                 Sulfurous Springs                          untapped enters untapped; produces BR; meta 6%
+  # 18  212 t2 pain                 Underground River                          untapped enters untapped; produces BU; matches heavy color (U); EDHREC recommended; meta 6%
+  #128  143 t4 tapped               Xander's Lounge                            TAPPED   produces BRU; matches heavy color (U); EDHREC recommended
+  #221  117 t4 tapped               Morphic Pool                               TAPPED   produces BU; matches heavy color (U); EDHREC recommended; meta 5%
+  #325   93 t4 tapped               Undercity Sewers                           TAPPED   produces BU; matches heavy color (U)
+  #484   84 t4 tapped               Raucous Theater                            TAPPED   produces BR
+  # 44  187 t2 pathway              Riverglide Pathway // Lavaglide Pathway    untapped enters untapped; produces RU; matches heavy color (U)
+  # 42  187 t2 pathway              Clearwater Pathway // Murkwater Pathway    untapped enters untapped; produces BU; matches heavy color (U)
+  # 89  160 t3 temple               Path of Ancestry                           TAPPED   produces BRU; matches heavy color (U); meta 21%
+  #293   95 t3 utility              Karn's Bastion                             untapped enters untapped
+  #147  133 t3 utility              Otawara, Soaring City                      untapped enters untapped; produces U; matches heavy color (U); meta 8%
+  #185  120 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B
+  # 43  187 t2 pain                 Fiery Islet                                untapped enters untapped; produces RU; matches heavy color (U)
+  # 17  212 t2 check                Drowned Catacomb                           untapped enters untapped; produces BU; matches heavy color (U); EDHREC recommended; meta 7%
+  # 15  213 t2 check                Sulfur Falls                               untapped enters untapped; produces RU; matches heavy color (U); EDHREC recommended; meta 8%
+  #114  148 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BRU; matches heavy color (U); meta 7%
+  #285  100 t3 utility              Ancient Tomb                               untapped enters untapped; meta 10%
+  #281  105 t4 tapped               Luxury Suite                               TAPPED   produces BR; EDHREC recommended
+  #222  117 t4 tapped               Training Center                            TAPPED   produces RU; matches heavy color (U); EDHREC recommended; meta 5%
+  #176  122 t4 tapped               Thriving Isle                              TAPPED   produces BRU; matches heavy color (U)
+  #579   21 t4 tapped               Vivid Creek                                TAPPED   conditional colored mana
+  # 16  213 t2 pain                 Shivan Reef                                untapped enters untapped; produces RU; matches heavy color (U); EDHREC recommended; meta 7%
+  #116  148 t2 check                Castle Embereth                            untapped enters untapped; produces R
+  #558   49 t4 tapped               Den of the Bugbear                         TAPPED   produces R
+  #216  118 t3 utility              Sokenzan, Crucible of Defiance             untapped enters untapped; produces R
+  # 29  192 t3 utility              Prismatic Vista                            untapped enters untapped; produces UBR; matches heavy color (U); meta 5%
+  #102  155 t3 utility              Fabled Passage                             TAPPED   produces UBR; matches heavy color (U); meta 11%
+  # 90  159 t3 utility              Evolving Wilds                             TAPPED   produces UBR; matches heavy color (U); meta 20%
+  # 48  185 t1 shock                Multiversal Passage                        untapped enters untapped; produces U; matches heavy color (U)
+
+## ygra (BG, brawl) — 348 scored; heaviest G
+top 45:
+  1  241 t1 shock                Overgrown Tomb                             untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  2  221 t1 fetch                Verdant Catacombs                          untapped enters untapped; produces BG; matches heavy color (G)
+  3  211 t2 check                Woodland Cemetery                          untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  4  211 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  5  210 t2 slow                 Deathcap Glade                             untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  6  210 t2 filter               Necroblossom Snarl                         untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  7  200 t1 shock                Disciple of Freyalise // Garden of Freyalise untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+  8  200 t1 shock                Bridgeworks Battle // Tanglespan Bridgeworks untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+  9  196 t1 shock                Turntimber Symbiosis // Turntimber, Serpentine Wood untapped enters untapped; produces G; matches heavy color (G); MDFC (spell+land)
+ 10  191 t2 tribal               Three Tree City                            untapped enters untapped; produces BG; matches heavy color (G)
+ 11  190 t1 shock                Fell the Profane // Fell Mire              untapped enters untapped; produces B; MDFC (spell+land)
+ 12  190 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BG; matches heavy color (G)
+ 13  189 t1 shock                Boggart Trawler // Boggart Bog             untapped enters untapped; produces B; MDFC (spell+land)
+ 14  189 t2 pathway              Darkbore Pathway // Slitherbore Pathway    untapped enters untapped; produces BG; matches heavy color (G)
+ 15  188 t1 shock                Agadeem's Awakening // Agadeem, the Undercrypt untapped enters untapped; produces B; MDFC (spell+land)
+ 16  188 t2 fast                 Blooming Marsh                             untapped enters untapped; produces BG; matches heavy color (G)
+ 17  188 t2 pain                 Nurturing Peatland                         untapped enters untapped; produces BG; matches heavy color (G)
+ 18  187 t1 shock                Multiversal Passage                        untapped enters untapped; produces G; matches heavy color (G)
+ 19  186 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BG; matches heavy color (G)
+ 20  181 t3 utility              Command Tower                              untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+ 21  181 t3 utility              Command Tower                              untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+ 22  181 t3 utility              Command Tower                              untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+ 23  181 t3 utility              Command Tower                              untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+ 24  181 t3 utility              Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+ 25  180 t1 fetch                Riveteers Overlook                         TAPPED   produces BG; matches heavy color (G)
+ 26  178 t1 shock                The Black Gate                             untapped enters untapped; produces B
+ 27  166 t1 fetch                Misty Rainforest                           untapped enters untapped; off-color fetch (thinning only); produces G; matches heavy color (G)
+ 28  166 t1 fetch                Windswept Heath                            untapped enters untapped; off-color fetch (thinning only); produces G; matches heavy color (G)
+ 29  166 t1 fetch                Wooded Foothills                           untapped enters untapped; off-color fetch (thinning only); produces G; matches heavy color (G)
+ 30  162 t1 fetch                Polluted Delta                             untapped enters untapped; off-color fetch (thinning only); produces B
+ 31  162 t1 fetch                Bloodstained Mire                          untapped enters untapped; off-color fetch (thinning only); produces B
+ 32  162 t1 fetch                Marsh Flats                                untapped enters untapped; off-color fetch (thinning only); produces B
+ 33  161 t3 utility              Mana Confluence                            untapped enters untapped; produces BG; matches heavy color (G)
+ 34  161 t3 utility              Prismatic Vista                            untapped enters untapped; produces BG; matches heavy color (G)
+ 35  160 t3 utility              Demolition Field                           untapped enters untapped; produces BG; matches heavy color (G)
+ 36  159 t3 utility              Wastewood Verge                            untapped enters untapped; produces BG; matches heavy color (G)
+ 37  158 t3 utility              The Grey Havens                            untapped enters untapped; produces BG; matches heavy color (G)
+ 38  156 t3 utility              Tarnished Citadel                          untapped enters untapped; produces BG; matches heavy color (G)
+ 39  152 t2 pain                 Hashep Oasis                               untapped enters untapped; produces G; matches heavy color (G)
+ 40  152 t2 fast                 Thran Portal                               untapped enters untapped; produces G; matches heavy color (G)
+ 41  151 t2 check                Kishla Village                             untapped enters untapped; produces G; matches heavy color (G)
+ 42  151 t2 tribal               A-Thran Portal                             untapped enters untapped; produces G; matches heavy color (G)
+ 43  151 t3 utility              Meteor Crater                              untapped enters untapped; produces BG; matches heavy color (G)
+ 44  148 t2 check                Castle Locthwain                           untapped enters untapped; produces B
+ 45  148 t2 check                Spymaster's Vault                          untapped enters untapped; produces B
+watch list:
+  # 19  186 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BG; matches heavy color (G)
+  # 10  191 t2 tribal               Three Tree City                            untapped enters untapped; produces BG; matches heavy color (G)
+  # 12  190 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BG; matches heavy color (G)
+  # 66  123 t1 fetch                Brokers Hideout                            TAPPED   off-color fetch (thinning only); produces G; matches heavy color (G)
+  # 33  161 t3 utility              Mana Confluence                            untapped enters untapped; produces BG; matches heavy color (G)
+  #293   70 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana
+  #  4  211 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+  #169   95 t3 utility              Karn's Bastion                             untapped enters untapped
+  # 81  120 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B
+  # 54  138 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BG; matches heavy color (G)
+  #172   95 t4 tapped               Underground Mortuary                       TAPPED   produces BG; matches heavy color (G)
+  # 59  131 t3 utility              Boseiju, Who Endures                       untapped enters untapped; produces G; matches heavy color (G)
+  #128  109 t4 tapped               Restless Cottage                           TAPPED   produces BG; matches heavy color (G); EDHREC recommended
+  # 34  161 t3 utility              Prismatic Vista                            untapped enters untapped; produces BG; matches heavy color (G)
+  # 73  121 t3 utility              Fabled Passage                             TAPPED   produces BG; matches heavy color (G)
+  # 71  121 t3 utility              Evolving Wilds                             TAPPED   produces BG; matches heavy color (G)
+  # 18  187 t1 shock                Multiversal Passage                        untapped enters untapped; produces G; matches heavy color (G)
+  # 16  188 t2 fast                 Blooming Marsh                             untapped enters untapped; produces BG; matches heavy color (G)
+  #  5  210 t2 slow                 Deathcap Glade                             untapped enters untapped; produces BG; matches heavy color (G); EDHREC recommended
+
+## tymna-thrasios (WUBG, commander) — 751 scored; heaviest U
+top 45:
+  1  235 t1 fetch                Marsh Flats                                untapped enters untapped; produces WB; EDHREC recommended; meta 10%
+  2  235 t1 shock                Godless Shrine                             untapped enters untapped; produces BW; EDHREC recommended; meta 9%
+  3  225 t1 fetch                Polluted Delta                             untapped enters untapped; produces UB; matches heavy color (U); meta 12%
+  4  225 t1 fetch                Misty Rainforest                           untapped enters untapped; produces UG; matches heavy color (U); meta 11%
+  5  224 t1 fetch                Flooded Strand                             untapped enters untapped; produces WU; matches heavy color (U); meta 11%
+  6  224 t1 shock                Watery Grave                               untapped enters untapped; produces BU; matches heavy color (U); meta 10%
+  7  224 t1 shock                Breeding Pool                              untapped enters untapped; produces GU; matches heavy color (U); meta 9%
+  8  224 t3 utility              Command Tower                              untapped enters untapped; produces BGUW; matches heavy color (U); EDHREC recommended; meta 72%
+  9  223 t1 shock                Hallowed Fountain                          untapped enters untapped; produces UW; matches heavy color (U); meta 9%
+ 10  223 t2 pain                 City of Brass                              untapped enters untapped; produces BGUW; matches heavy color (U); meta 8%
+ 11  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BGUW; matches heavy color (U)
+ 12  218 t1 dual_original        Underground Sea                            untapped enters untapped; produces BU; matches heavy color (U)
+ 13  218 t1 dual_original        Tropical Island                            untapped enters untapped; produces GU; matches heavy color (U)
+ 14  218 t1 dual_original        Tundra                                     untapped enters untapped; produces UW; matches heavy color (U)
+ 15  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGUW; matches heavy color (U)
+ 16  215 t1 fetch                Windswept Heath                            untapped enters untapped; produces WG; meta 11%
+ 17  215 t1 fetch                Verdant Catacombs                          untapped enters untapped; produces BG; meta 11%
+ 18  215 t1 shock                Overgrown Tomb                             untapped enters untapped; produces BG; meta 10%
+ 19  214 t1 shock                Temple Garden                              untapped enters untapped; produces GW; meta 8%
+ 20  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGUW; matches heavy color (U)
+ 21  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGUW; matches heavy color (U)
+ 22  209 t1 dual_original        Scrubland                                  untapped enters untapped; produces BW
+ 23  209 t1 dual_original        Bayou                                      untapped enters untapped; produces BG
+ 24  209 t1 dual_original        Savannah                                   untapped enters untapped; produces GW
+ 25  206 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (U)
+ 26  206 t1 fetch                Obscura Storefront                         TAPPED   produces WUB; matches heavy color (U)
+ 27  206 t1 fetch                Foreboding Landscape                       TAPPED   produces UBG; matches heavy color (U)
+ 28  205 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (U)
+ 29  205 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW
+ 30  204 t1 fetch                Contaminated Landscape                     TAPPED   produces WUB; matches heavy color (U)
+ 31  204 t2 check                Isolated Chapel                            untapped enters untapped; produces BW; EDHREC recommended; meta 8%
+ 32  204 t3 utility              Exotic Orchard                             untapped enters untapped; produces BGUW; matches heavy color (U); meta 36%
+ 33  203 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; EDHREC recommended; meta 7%
+ 34  202 t1 shock                Sink into Stupor // Soporific Springs      untapped enters untapped; produces U; matches heavy color (U); meta 5%; MDFC (spell+land)
+ 35  199 t1 fetch                Bant Panorama                              TAPPED   produces WUG; matches heavy color (U)
+ 36  199 t1 fetch                Esper Panorama                             TAPPED   produces WUB; matches heavy color (U)
+ 37  199 t2 slow                 Shattered Sanctum                          untapped enters untapped; produces BW; EDHREC recommended
+ 38  199 t2 filter               Shineshadow Snarl                          untapped enters untapped; produces BW; EDHREC recommended
+ 39  198 t1 shock                Hydroelectric Specimen // Hydroelectric Laboratory untapped enters untapped; produces U; matches heavy color (U); MDFC (spell+land)
+ 40  198 t1 shock                Sea Gate Restoration // Sea Gate, Reborn   untapped enters untapped; produces U; matches heavy color (U); MDFC (spell+land)
+ 41  198 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW; EDHREC recommended
+ 42  195 t1 fetch                Deceptive Landscape                        TAPPED   produces WBG
+ 43  193 t2 check                Glacial Fortress                           untapped enters untapped; produces UW; matches heavy color (U); meta 7%
+ 44  193 t2 check                Hinterland Harbor                          untapped enters untapped; produces GU; matches heavy color (U); meta 8%
+ 45  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BGUW; matches heavy color (U); meta 7%
+watch list:
+  # 20  214 t2 filter               Temple of the Dragon Queen                 untapped enters untapped; produces BGUW; matches heavy color (U)
+  # 11  219 t2 tribal               Three Tree City                            untapped enters untapped; produces BGUW; matches heavy color (U)
+  # 21  211 t2 pain                 Grand Coliseum                             untapped enters untapped; produces BGUW; matches heavy color (U)
+  # 15  218 t2 conditional_untapped Starting Town                              untapped enters untapped; produces BGUW; matches heavy color (U)
+  # 29  205 t2 pain                 Murmuring Bosk                             untapped enters untapped; produces BGW
+  # 25  206 t1 fetch                Brokers Hideout                            TAPPED   produces WUG; matches heavy color (U)
+  # 28  205 t1 fetch                Tranquil Landscape                         TAPPED   produces WUG; matches heavy color (U)
+  # 45  193 t3 utility              Mana Confluence                            untapped enters untapped; produces BGUW; matches heavy color (U); meta 7%
+  #642   73 t4 utility              Reflecting Pool                            untapped enters untapped; conditional colored mana; meta 5%
+  # 48  192 t2 pain                 Underground River                          untapped enters untapped; produces BU; matches heavy color (U); meta 6%
+  # 33  203 t2 pain                 Caves of Koilos                            untapped enters untapped; produces BW; EDHREC recommended; meta 7%
+  # 49  192 t2 pain                 Adarkar Wastes                             untapped enters untapped; produces UW; matches heavy color (U); meta 5%
+  # 47  192 t2 pain                 Yavimaya Coast                             untapped enters untapped; produces GU; matches heavy color (U); meta 6%
+  # 85  180 t2 pain                 Brushland                                  untapped enters untapped; produces GW
+  # 83  183 t2 pain                 Llanowar Wastes                            untapped enters untapped; produces BG; meta 6%
+  #238  123 t4 tapped               Zagoth Triome                              TAPPED   produces BGU; matches heavy color (U)
+  #320  114 t4 tapped               Indatha Triome                             TAPPED   produces BGW
+  #379   97 t4 tapped               Morphic Pool                               TAPPED   produces BU; matches heavy color (U); meta 5%
+  #363  105 t4 tapped               Vault of Champions                         TAPPED   produces BW; EDHREC recommended
+  #419   93 t4 tapped               Undercity Sewers                           TAPPED   produces BU; matches heavy color (U)
+  # 65  187 t2 pathway              Clearwater Pathway // Murkwater Pathway    untapped enters untapped; produces BU; matches heavy color (U)
+  # 68  187 t2 pathway              Hengegate Pathway // Mistgate Pathway      untapped enters untapped; produces UW; matches heavy color (U)
+  #136  160 t3 temple               Path of Ancestry                           TAPPED   produces BGUW; matches heavy color (U); meta 21%
+  #381   95 t3 utility              Karn's Bastion                             untapped enters untapped
+  #207  133 t3 utility              Otawara, Soaring City                      untapped enters untapped; produces U; matches heavy color (U); meta 8%
+  #255  120 t3 utility              Takenuma, Abandoned Mire                   untapped enters untapped; produces B
+  # 43  193 t2 check                Glacial Fortress                           untapped enters untapped; produces UW; matches heavy color (U); meta 7%
+  # 46  192 t2 check                Drowned Catacomb                           untapped enters untapped; produces BU; matches heavy color (U); meta 7%
+  #169  148 t2 tribal               Cavern of Souls                            untapped enters untapped; restricted producer; produces BGUW; matches heavy color (U); meta 7%
+  #367  100 t3 utility              Ancient Tomb                               untapped enters untapped; meta 10%
+  #115  177 t2 pain                 Silent Clearing                            untapped enters untapped; produces BW
+  # 41  198 t2 fast                 Concealed Courtyard                        untapped enters untapped; produces BW; EDHREC recommended
+  #246  122 t4 tapped               Thriving Isle                              TAPPED   produces BGUW; matches heavy color (U)
+  #742   21 t4 tapped               Vivid Creek                                TAPPED   conditional colored mana
+  #483   88 t4 tapped               Undergrowth Stadium                        TAPPED   produces BG; meta 6%
+  #593   84 t4 tapped               Underground Mortuary                       TAPPED   produces BG
+  #226  124 t3 utility              Boseiju, Who Endures                       untapped enters untapped; produces G; meta 9%
+  #625   78 t4 tapped               Restless Cottage                           TAPPED   produces BG
+  # 50  192 t3 utility              Prismatic Vista                            untapped enters untapped; produces WUBG; matches heavy color (U); meta 5%
+  #152  155 t3 utility              Fabled Passage                             TAPPED   produces WUBG; matches heavy color (U); meta 11%
+  #137  159 t3 utility              Evolving Wilds                             TAPPED   produces WUBG; matches heavy color (U); meta 20%
+  # 74  185 t1 shock                Multiversal Passage                        untapped enters untapped; produces U; matches heavy color (U)
+  #113  177 t2 fast                 Blooming Marsh                             untapped enters untapped; produces BG
+  # 89  179 t2 slow                 Deathcap Glade                             untapped enters untapped; produces BG

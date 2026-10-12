@@ -1,0 +1,90 @@
+# ygra — {"format":"brawl","commanderName":"Ygra, Eater of All"}  (2003 ms)
+size 99  lands 40  avgCmc(nonland) 2.37  pips {"B":26,"G":30}
+strategy aggro  themes ["ramp","draw","tokens","artifacts","control","aggro","sacrifice","tribal"]  tribal undefined
+realSources {"W":14,"U":14,"B":36,"R":14,"G":35}  health.sources {"W":14,"U":14,"B":36,"R":14,"G":35}
+roles {"ramp":13,"draw":13,"tutor":1,"removal":5,"(none)":39,"board_wipe":2,"protection":3,"win_condition":3,"synergy":16,"utility":4}
+price total $324.75 overBudget false replaced 0
+bracket target null -> 2 swapped 0 reasons []
+deadCardsReplaced [{"out":"Kozilek's Command","in":"Nature's Claim","reason":"{C} cost, only 6 colourless sources"}]
+
+1 Cauldron Familiar | {B} | Creature — Cat | $3.20 | edh 2999 | win_condition | When this creature enters, each opponent loses 1 life and you gain 1 life. / Sacrifice a Food: Return this card from your graveyard to the b
+1 Currency Converter | {1} | Artifact | $0.56 | edh 2553 | draw | Whenever you discard a card, you may exile that card from your graveyard. / {2}, {T}: Draw a card, then discard a card. / {T}: Put a card ex
+1 Dark Ritual | {B} | Instant | $7.12 | edh 33 | ramp | Add {B}{B}{B}.
+1 Gilded Goose | {G} | Creature — Bird | $0.43 | edh 803 | ramp | Flying / When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / {1}{G}
+1 Goldvein Hydra | {X}{G} | Creature — Hydra | $3.14 | edh 1441 | synergy | Vigilance, trample, haste / This creature enters with X +1/+1 counters on it. / When this creature dies, create a number of tapped Treasure 
+1 Greedy Freebooter | {B} | Creature — Human Pirate | $1.08 | edh 2337 | ramp | When this creature dies, scry 1 and create a Treasure token. (To scry 1, look at the top card of your library. You may put that card on the 
+1 Many Partings | {G} | Sorcery | $0.24 | edh 1970 | draw | Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Create a Food token. (It's an artifact with "{2},
+1 Nature's Claim | {G} | Instant | $1.44 | edh 380 |  | Destroy target artifact or enchantment. Its controller gains 4 life.
+1 Party Dude | {G} | Enchantment — Class | $0.40 | edh 10648 | synergy | (Gain the next level as a sorcery to add its ability.) / When this Class enters, each player creates a Food token. / {1}{G}: Level 2 / Whene
+1 Pest Infestation | {X}{X}{G} | Sorcery | $0.59 | edh 1071 | removal | Destroy up to X target artifacts and/or enchantments. Create twice X 1/1 black and green Pest creature tokens with "When this token dies, yo
+1 Ravenous Squirrel | {B/G} | Creature — Squirrel | $0.28 | edh 3083 | draw | Whenever you sacrifice an artifact or creature, put a +1/+1 counter on this creature. / {1}{B}{G}, Sacrifice an artifact or creature: You ga
+1 Scavenger's Talent | {B} | Enchantment — Class | $1.07 | edh 3970 | synergy | (Gain the next level as a sorcery to add its ability.) / Whenever one or more creatures you control die, create a Food token. This ability t
+1 Witch's Oven | {1} | Artifact | $0.76 | edh 3136 | synergy | {T}, Sacrifice a creature: Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead. (Th
+1 Arcane Signet | {2} | Artifact | $0.74 | edh 3 | ramp | {T}: Add one mana of any color in your commander's color identity.
+1 Assassin's Trophy | {B}{G} | Instant | $1.19 | edh 122 | removal | Destroy target permanent an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield, t
+1 Blood Artist | {1}{B} | Creature — Vampire | $3.92 | edh 141 | utility | Whenever this creature or another creature dies, target player loses 1 life and you gain 1 life.
+1 Collective Resistance | {1}{G} | Instant | $2.41 | edh 769 | protection | Escalate {G} (Pay this cost for each mode chosen beyond the first.) / Choose one or more — / • Destroy target artifact. / • Destroy target e
+1 Collector's Vault | {2} | Artifact | $0.70 | edh 1810 | ramp | {2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any 
+1 Deadly Dispute | {1}{B} | Instant | $0.28 | edh 131 | ramp | As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact
+1 Fanatic of Rhonas | {1}{G} | Creature — Snake Druid | $14.09 | edh 407 | synergy | {T}: Add {G}. / Ferocious — {T}: Add {G}{G}{G}{G}. Activate only if you control a creature with power 4 or greater. / Eternalize {2}{G}{G} (
+1 Fanatical Offering | {1}{B} | Instant | $1.61 | edh 4566 | synergy | As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Map token. (It's an artifact with
+1 Gorbag of Minas Morgul | {1}{B} | Legendary Creature — Orc Soldier | $0.25 | edh 9027 | draw | Whenever a Goblin or Orc you control deals combat damage to a player, you may sacrifice it. When you do, choose one — / • Draw a card. / • C
+1 Lightning Greaves | {2} | Artifact — Equipment | $3.87 | edh 13 | protection | Equipped creature has haste and shroud. (It can't be the target of spells or abilities.) / Equip {0}
+1 Marionette Apprentice | {1}{B} | Creature — Human Artificer | $2.61 | edh 565 | win_condition | Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.) / Whenever anoth
+1 Mind Stone | {2} | Artifact | $0.24 | edh 32 | draw | {T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card.
+1 Priest of Forgotten Gods | {1}{B} | Creature — Human Cleric | $0.57 | edh 1392 | synergy | {T}, Sacrifice two other creatures: Any number of target players each lose 2 life and sacrifice a creature of their choice. You add {B}{B} a
+1 Prosperous Innkeeper | {1}{G} | Creature — Halfling Citizen | $0.23 | edh 1478 | synergy | When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") / Whenev
+1 Swiftfoot Boots | {2} | Artifact — Equipment | $2.00 | edh 12 | protection | Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no ma
+1 Syr Ginger, the Meal Ender | {2} | Legendary Artifact Creature — Food Knight | $1.71 | edh 3019 | synergy | Syr Ginger has trample, hexproof, and haste as long as an opponent controls a planeswalker. / Whenever another artifact you control is put i
+1 The Sackville-Bagginses | {1}{B} | Legendary Creature — Halfling Citizen | $0.75 | edh 9086 | draw | When The Sackville-Bagginses enter, you may sacrifice another creature or artifact. If you do, draw a card and create a Treasure token. / Wh
+1 Thornvault Forager | {1}{G} | Creature — Squirrel Ranger | $2.57 | edh 3263 | ramp | {T}: Add {G}. / {T}, Forage: Add two mana in any combination of colors. (To forage, exile three cards from your graveyard or sacrifice a Foo
+1 Trail of Crumbs | {1}{G} | Enchantment | $0.45 | edh 4737 | draw | When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / Whenever you
+1 Tribute to Horobi // Echo of Death's Wail | {1}{B} | Enchantment — Saga // Enchantment Creature — Spirit | $0.23 | edh 9041 | synergy | (As this Saga enters and after your draw step, add a lore counter.) / I, II — Each opponent creates a 1/1 black Rat Rogue creature token. / 
+1 Voldaren Bloodcaster // Bloodbat Summoner | {1}{B} | Creature — Vampire Wizard // Creature — Vampire Wizard | $0.35 | edh 6870 | draw | Flying / Whenever this creature or another nontoken creature you control dies, create a Blood token. (It's an artifact with "{1}, {T}, Disca
+1 Academy Manufactor | {3} | Artifact Creature — Assembly-Worker | $9.52 | edh 262 | synergy | If you would create a Clue, Food, or Treasure token, instead create one of each.
+1 Ashnod's Altar | {3} | Artifact | $15.35 | edh 134 | ramp | Sacrifice a creature: Add {C}{C}.
+1 Beast Within | {2}{G} | Instant | $0.62 | edh 25 | removal | Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
+1 Braids, Arisen Nightmare | {1}{B}{B} | Legendary Creature — Nightmare | $4.86 | edh 296 | draw | At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may
+1 Camellia, the Seedmiser | {1}{B}{G} | Legendary Creature — Squirrel Warlock | $2.77 | edh 2704 | synergy | Menace / Other Squirrels you control have menace. / Whenever you sacrifice one or more Foods, create a 1/1 green Squirrel creature token. / 
+1 Chatterfang, Squirrel General | {2}{G} | Legendary Creature — Squirrel Warrior | $11.42 | edh 1049 | removal | Forestwalk (This creature can't be blocked as long as defending player controls a Forest.) / If one or more tokens would be created under yo
+1 Cultivate | {2}{G} | Sorcery | $0.42 | edh 20 | utility | Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, th
+1 Experimental Confectioner | {2}{B} | Creature — Human Peasant | $8.22 | edh 3843 | synergy | When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / Whenever you sa
+1 Greta, Sweettooth Scourge | {1}{B}{G} | Legendary Creature — Human Warrior | $0.34 | edh 5664 | draw | When Greta enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / {G}, Sacrifice a Food: 
+1 Manglehorn | {2}{G} | Creature — Beast | $1.04 | edh 2289 | removal | When this creature enters, you may destroy target artifact. / Artifacts your opponents control enter tapped.
+1 Peregrin Took | {2}{G} | Legendary Creature — Halfling Citizen | $0.96 | edh 789 | draw | If one or more tokens would be created under your control, those tokens plus an additional Food token are created instead. (It's an artifact
+1 Ruthless Knave | {2}{B} | Creature — Orc Pirate | $0.20 | edh 9246 | synergy | {2}{B}, Sacrifice a creature: Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.") /
+1 Savvy Hunter | {1}{B}{G} | Creature — Human Warrior | $0.18 | edh 3269 | draw | Whenever this creature attacks or blocks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / 
+1 Skullport Merchant | {2}{B} | Creature — Dwarf Citizen | $0.15 | edh 6913 | synergy | When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") / {1}{B}
+1 The Cabbage Merchant | {2}{G} | Legendary Creature — Human Citizen | $27.95 | edh 2283 | ramp | Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life
+1 Tireless Provisioner | {2}{G} | Creature — Elf Scout | $3.98 | edh 185 | ramp | Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this 
+1 Tireless Tracker | {2}{G} | Creature — Human Scout | $0.31 | edh 663 | draw | Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a c
+1 Warren Soultrader | {2}{B} | Creature — Zombie Goblin Wizard | $18.71 | edh 415 | ramp | Pay 1 life, Sacrifice another creature: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any colo
+1 Fade from History | {2}{G}{G} | Sorcery | $4.76 | edh 4794 | board_wipe | Each player who controls an artifact or enchantment creates a 2/2 green Bear creature token. Then destroy all artifacts and enchantments.
+1 Mirkwood Bats | {3}{B} | Creature — Bat | $1.97 | edh 228 | win_condition | Flying / Whenever you create or sacrifice a token, each opponent loses 1 life.
+1 Night of the Sweets' Revenge | {3}{G} | Enchantment | $0.84 | edh 2058 | ramp | When this enchantment enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.") / Foods you co
+1 Pitiless Plunderer | {3}{B} | Creature — Human Pirate | $4.72 | edh 225 | ramp | Whenever another creature you control dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any 
+1 Tyvar Kell | {2}{G}{G} | Legendary Planeswalker — Tyvar | $5.32 | edh 4286 | synergy | Elves you control have "{T}: Add {B}." / +1: Put a +1/+1 counter on up to one target Elf. Untap it. It gains deathtouch until end of turn. /
+1 Tamiyo's Journal | {5} | Legendary Artifact — Book | $3.66 | edh 2559 | tutor | At the beginning of your upkeep, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.") / {T}, 
+1 Season of Gathering | {4}{G}{G} | Sorcery | $7.39 | edh 1754 | board_wipe | Choose up to five {P} worth of modes. You may choose the same mode more than once. / {P} — Put a +1/+1 counter on a creature you control. It
+1 Blooming Marsh |  | Land | $3.45 | edh 1531 |  | This land enters tapped unless you control two or fewer other lands. / {T}: Add {B} or {G}.
+1 Command Tower |  | Land | $0.56 | edh 2 |  | {T}: Add one mana of any color in your commander's color identity.
+1 Darkbore Pathway // Slitherbore Pathway |  | Land // Land | $7.06 | edh 1174 |  | {T}: Add {B}. / // / {T}: Add {G}.
+1 Deathcap Glade |  | Land | $2.90 | edh 345 |  | This land enters tapped unless you control two or more other lands. / {T}: Add {B} or {G}.
+10 Forest |  | Basic Land — Forest | $0.08 | edh ? |  | ({T}: Add {G}.)
+1 Llanowar Wastes |  | Land | $0.77 | edh 137 |  | {T}: Add {C}. / {T}: Add {B} or {G}. This land deals 1 damage to you.
+1 Midgar, City of Mako // Reactor Raid | {2}{B} | Land — Town // Sorcery — Adventure | $2.12 | edh 1216 | utility | This land enters tapped. / {T}: Add {B}. / // / You may sacrifice an artifact or creature. If you do, draw two cards. (Then exile this card.
+1 Multiversal Passage |  | Land | $6.53 | edh 2127 |  | As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped. / This land is the chosen type.
+1 Necroblossom Snarl |  | Land | $0.47 | edh 532 |  | As this land enters, you may reveal a Swamp or Forest card from your hand. If you don't, this land enters tapped. / {T}: Add {B} or {G}.
+1 Nurturing Peatland |  | Land | $6.01 | edh 1609 |  | {T}, Pay 1 life: Add {B} or {G}. / {1}, {T}, Sacrifice this land: Draw a card.
+1 Overgrown Tomb |  | Land — Swamp Forest | $8.20 | edh 71 |  | ({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Starting Town |  | Land — Town | $11.61 | edh 714 |  | This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any co
+10 Swamp |  | Basic Land — Swamp | $0.10 | edh ? |  | ({T}: Add {B}.)
+1 Temple of the Dragon Queen |  | Land | $0.33 | edh 2547 |  | As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you 
+1 Three Tree City |  | Legendary Land | $29.66 | edh 177 |  | As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to 
+1 Verdant Catacombs |  | Land | $29.72 | edh 48 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Forest card, put it onto the battlefield, then shuffle.
+1 Woodland Cemetery |  | Land | $1.07 | edh 110 |  | This land enters tapped unless you control a Swamp or a Forest. / {T}: Add {B} or {G}.
+1 Revitalizing Repast // Old-Growth Grove | {B/G} | Instant // Land | $1.81 | edh 749 | utility | Put a +1/+1 counter on target creature. It gains indestructible until end of turn. / // / This land enters tapped. / {T}: Add {B} or {G}.
+1 Bridgeworks Battle // Tanglespan Bridgeworks | {2}{G} | Sorcery // Land | $1.31 | edh 670 |  | Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't control. (Each deals damage equal to
+1 Fell the Profane // Fell Mire | {2}{B}{B} | Instant // Land | $4.92 | edh 200 |  | Destroy target creature or planeswalker. / // / As this land enters, you may pay 3 life. If you don't, it enters tapped. / {T}: Add {B}.
+1 Disciple of Freyalise // Garden of Freyalise | {3}{G}{G}{G} | Creature — Elf Druid // Land | $3.78 | edh 461 |  | When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power
+1 Turntimber Symbiosis // Turntimber, Serpentine Wood | {4}{G}{G}{G} | Sorcery // Land | $3.93 | edh 2316 |  | Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. If that card has mana value 3

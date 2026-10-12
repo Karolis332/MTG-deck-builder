@@ -1,0 +1,2954 @@
+{
+ "summary": {
+  "key": "tatyova",
+  "commander": "Tatyova, Benthic Druid",
+  "format": "brawl",
+  "source": "arena",
+  "elapsedMs": 5147,
+  "ci": [
+   "G",
+   "U"
+  ],
+  "strategy": "midrange",
+  "themes": [
+   "counters",
+   "artifacts",
+   "sacrifice",
+   "aggro",
+   "tokens",
+   "draw"
+  ],
+  "size": 99,
+  "landCount": 38,
+  "basicCount": 20,
+  "nonbasicCount": 18,
+  "sourcesByColor": {
+   "W": 7,
+   "U": 23,
+   "B": 5,
+   "R": 6,
+   "G": 32
+  },
+  "auditorSources": {
+   "W": 7,
+   "U": 23,
+   "B": 5,
+   "R": 6,
+   "G": 33
+  },
+  "pips": {
+   "G": 39,
+   "U": 22
+  },
+  "pipCards": {
+   "G": 32,
+   "U": 19
+  },
+  "curve": {
+   "1": 18,
+   "2": 12,
+   "3": 13,
+   "4": 9,
+   "5": 2,
+   "6": 5,
+   "7": 2
+  },
+  "roleCounts": {
+   "arsenal:community_top": 21,
+   "arsenal:collection_substitute": 4,
+   "arsenal:archetype_payoff": 1,
+   "arsenal:community_synergy": 1,
+   "arsenal:staple_ramp": 5,
+   "arsenal:staple_draw": 7,
+   "arsenal:staple_removal": 5,
+   "tutor": 2,
+   "removal": 2,
+   "board_wipe": 4,
+   "win_condition": 5,
+   "utility": 4,
+   "(none)": 38
+  },
+  "health": {
+   "grade": "A",
+   "realLands": 34,
+   "tappedLands": 10,
+   "tappedRatio": 0.26,
+   "sourcesByColor": {
+    "W": 7,
+    "U": 23,
+    "B": 5,
+    "R": 6,
+    "G": 33
+   },
+   "pipsByColor": {
+    "W": 0,
+    "U": 22,
+    "B": 0,
+    "R": 0,
+    "G": 39
+   },
+   "drawCount": 19,
+   "drawEngineCount": 7,
+   "rampCount": 17,
+   "fakeLands": [],
+   "warnings": [],
+   "deficiencies": []
+  },
+  "price": {
+   "currency": "USD",
+   "total": 0,
+   "unpricedCount": 0,
+   "maxCardPrice": null,
+   "maxDeckPrice": null,
+   "excludedByCardCap": 0,
+   "replacedForBudget": [],
+   "overBudget": false
+  },
+  "bracket": {
+   "target": null,
+   "result": 4,
+   "reasons": [
+    "4 game changer(s): Crop Rotation, Mystical Tutor, Worldly Tutor, The One Ring"
+   ],
+   "swapped": []
+  },
+  "deadCardsReplaced": [],
+  "buildReport": "Archetype: Midrange — targeting 61 nonland slots\nRole fills:\n  ramp       20/12 OK\n  draw       12/7 OK\n  tutor      4/2 OK\n  removal    9/9 OK\n  wipes      4/4 OK\n  protection 5/3 OK\n  payoffs    4/6 SHORT\n  wincons    21/6 OK\nWarnings:\n  - role shortfall: synergy_payoff needs 6, filled 4 — pool exhausted or collection blocked",
+  "synergy": {
+   "detectedArchetype": "midrange",
+   "triggerCategories": [
+    "land_matters"
+   ],
+   "payoffType": "draws cards, gains life",
+   "synergyMinimums": {
+    "land_matters": 6
+   },
+   "cardPoolPatterns": [
+    "%landfall%",
+    "%whenever a land enters%",
+    "%whenever you play a land%",
+    "%sacrifice%land%",
+    "%search your library for a%land%"
+   ],
+   "scoreBonuses": {
+    "land_matters": 20
+   },
+   "protectedPatterns": [
+    "exploration",
+    "oracle of mul daya",
+    "azusa, lost but seeking",
+    "dryad of the ilysian grove",
+    "crucible of worlds",
+    "ramunap excavator"
+   ],
+   "strategyDescription": "**Detected Archetype**: midrange\n**Commander Payoff**: draws cards, gains life\n\n**Synergy Requirements** (these fill FLEX slots, not baseline ramp/draw/removal):\n- Landfall triggers, extra land drops, land sacrifice/recursion: **6+ cards**\n\n**Commander generates card advantage** → reduce external draw requirement by 3\n\n**CRITICAL**: Synergy cards fill FLEX slots. NEVER reduce ramp below 8, draw below 6, or removal below 6 to make room for synergy.",
+   "drawReduction": 3,
+   "removalReduction": 0
+  },
+  "commanderOracle": "Landfall — Whenever a land you control enters, you gain 1 life and draw a card.",
+  "commanderCost": "{3}{G}{U}"
+ },
+ "cards": [
+  {
+   "qty": 1,
+   "name": "Cultivate",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 20,
+   "price": "0.42",
+   "role": "arsenal:community_top",
+   "reason": "63% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Rampaging Baloths",
+   "cmc": 6,
+   "cost": "{4}{G}{G}",
+   "type": "Creature — Beast",
+   "ci": [
+    "G"
+   ],
+   "rank": 382,
+   "price": "0.35",
+   "role": "arsenal:community_top",
+   "reason": "55% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Trample\nLandfall — Whenever a land you control enters, create a 4/4 green Beast creature token."
+  },
+  {
+   "qty": 1,
+   "name": "Rampant Growth",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 27,
+   "price": "0.81",
+   "role": "arsenal:community_top",
+   "reason": "53% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Counterspell",
+   "cmc": 2,
+   "cost": "{U}{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 16,
+   "price": "3.72",
+   "role": "arsenal:community_top",
+   "reason": "53% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Counter target spell."
+  },
+  {
+   "qty": 1,
+   "name": "Tireless Provisioner",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elf Scout",
+   "ci": [
+    "G"
+   ],
+   "rank": 185,
+   "price": "3.98",
+   "role": "arsenal:community_top",
+   "reason": "49% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\" Treasure is an artifact with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "qty": 1,
+   "name": "Explore",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 235,
+   "price": "0.22",
+   "role": "arsenal:community_top",
+   "reason": "48% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "You may play an additional land this turn.\nDraw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Beast Within",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 25,
+   "price": "0.62",
+   "role": "arsenal:community_top",
+   "reason": "42% of 3162 Tatyova, Benthic Druid decks play this",
+   "oracle": "Destroy target permanent. Its controller creates a 3/3 green Beast creature token."
+  },
+  {
+   "qty": 1,
+   "name": "Elvish Archdruid",
+   "cmc": 3,
+   "cost": "{1}{G}{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 879,
+   "price": "7.17",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned ramp substitute for Growth Spiral",
+   "oracle": "Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control."
+  },
+  {
+   "qty": 1,
+   "name": "Dungeon Map",
+   "cmc": 3,
+   "cost": "{3}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 8812,
+   "price": "0.27",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned ramp substitute for Lotus Cobra",
+   "oracle": "{T}: Add {C}.\n{3}, {T}: Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)"
+  },
+  {
+   "qty": 1,
+   "name": "Bushwhack",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 1258,
+   "price": "0.23",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned ramp substitute for Harrow",
+   "oracle": "Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)"
+  },
+  {
+   "qty": 1,
+   "name": "Negate",
+   "cmc": 2,
+   "cost": "{1}{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 56,
+   "price": "0.34",
+   "role": "arsenal:community_top",
+   "reason": "38% community inclusion",
+   "oracle": "Counter target noncreature spell."
+  },
+  {
+   "qty": 1,
+   "name": "Crop Rotation",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 214,
+   "price": "3.74",
+   "role": "arsenal:community_top",
+   "reason": "38% community inclusion",
+   "oracle": "As an additional cost to cast this spell, sacrifice a land.\nSearch your library for a land card, put that card onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Arcane Signet",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 3,
+   "price": "0.74",
+   "role": "arsenal:community_top",
+   "reason": "38% community inclusion",
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "qty": 1,
+   "name": "Farseek",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 23,
+   "price": "0.48",
+   "role": "arsenal:community_top",
+   "reason": "35% community inclusion",
+   "oracle": "Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Starting Column",
+   "cmc": 3,
+   "cost": "{3}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 8225,
+   "price": "0.22",
+   "role": "arsenal:collection_substitute",
+   "reason": "owned ramp substitute for Exploration",
+   "oracle": "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add one mana of any color.\nMax speed — {T}, Sacrifice this artifact: Draw two cards, then discard a card."
+  },
+  {
+   "qty": 1,
+   "name": "Eternal Witness",
+   "cmc": 3,
+   "cost": "{1}{G}{G}",
+   "type": "Creature — Human Shaman",
+   "ci": [
+    "G"
+   ],
+   "rank": 119,
+   "price": "2.23",
+   "role": "arsenal:community_top",
+   "reason": "30% community inclusion",
+   "oracle": "When this creature enters, you may return target card from your graveyard to your hand."
+  },
+  {
+   "qty": 1,
+   "name": "Burgeoning",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Enchantment",
+   "ci": [
+    "G"
+   ],
+   "rank": 901,
+   "price": "33.56",
+   "role": "arsenal:community_top",
+   "reason": "29% community inclusion",
+   "oracle": "Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield."
+  },
+  {
+   "qty": 1,
+   "name": "Mossborn Hydra",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elemental Hydra",
+   "ci": [
+    "G"
+   ],
+   "rank": 762,
+   "price": "14.48",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nThis creature enters with a +1/+1 counter on it.\nLandfall — Whenever a land you control enters, double the number of +1/+1 counters on this creature."
+  },
+  {
+   "qty": 1,
+   "name": "Llanowar Elves",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 58,
+   "price": "0.39",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Loot, Exuberant Explorer",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Legendary Creature — Beast Noble",
+   "ci": [
+    "G"
+   ],
+   "rank": 885,
+   "price": "3.60",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "You may play an additional land on each of your turns.\n{4}{G}{G}, {T}: Look at the top six cards of your library. You may reveal a creature card with mana value less than or equal to the number of lands you control from among them and put it onto the battlefield. Put the rest on the bottom in a random order."
+  },
+  {
+   "qty": 1,
+   "name": "Springbloom Druid",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 778,
+   "price": "0.59",
+   "role": "arsenal:community_top",
+   "reason": "27% community inclusion",
+   "oracle": "When this creature enters, you may sacrifice a land. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Pongify",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 155,
+   "price": "3.59",
+   "role": "arsenal:community_top",
+   "reason": "25% community inclusion",
+   "oracle": "Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token."
+  },
+  {
+   "qty": 1,
+   "name": "Broken Bond",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 2256,
+   "price": "0.32",
+   "role": "arsenal:community_top",
+   "reason": "23% community inclusion",
+   "oracle": "Destroy target artifact or enchantment. You may put a land card from your hand onto the battlefield."
+  },
+  {
+   "qty": 1,
+   "name": "Heroic Intervention",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 30,
+   "price": "17.27",
+   "role": "arsenal:community_top",
+   "reason": "21% community inclusion",
+   "oracle": "Permanents you control gain hexproof and indestructible until end of turn."
+  },
+  {
+   "qty": 1,
+   "name": "World Shaper",
+   "cmc": 4,
+   "cost": "{3}{G}",
+   "type": "Creature — Merfolk Shaman",
+   "ci": [
+    "G"
+   ],
+   "rank": 1505,
+   "price": "6.71",
+   "role": "arsenal:archetype_payoff",
+   "reason": "land matters payoff",
+   "oracle": "Whenever this creature attacks, you may mill three cards.\nWhen this creature dies, return all land cards from your graveyard to the battlefield tapped."
+  },
+  {
+   "qty": 1,
+   "name": "Swan Song",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 67,
+   "price": "10.22",
+   "role": "arsenal:community_top",
+   "reason": "21% community inclusion",
+   "oracle": "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying."
+  },
+  {
+   "qty": 1,
+   "name": "Planar Engineering",
+   "cmc": 4,
+   "cost": "{3}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 3295,
+   "price": "1.38",
+   "role": "arsenal:community_synergy",
+   "reason": "EDHREC average decklist recommendation",
+   "oracle": "Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Mind Stone",
+   "cmc": 2,
+   "cost": "{2}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 32,
+   "price": "0.24",
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "oracle": "{T}: Add {C}.\n{1}, {T}, Sacrifice this artifact: Draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Hedron Archive",
+   "cmc": 4,
+   "cost": "{4}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 544,
+   "price": "0.26",
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "oracle": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice this artifact: Draw two cards."
+  },
+  {
+   "qty": 1,
+   "name": "Paradise Druid",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Creature — Elf Druid",
+   "ci": [
+    "G"
+   ],
+   "rank": 2090,
+   "price": "0.23",
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "oracle": "This creature has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)\n{T}: Add one mana of any color."
+  },
+  {
+   "qty": 1,
+   "name": "Wood Elves",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elf Scout",
+   "ci": [
+    "G"
+   ],
+   "rank": 672,
+   "price": "0.27",
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "oracle": "When this creature enters, search your library for a Forest card, put that card onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Solemn Simulacrum",
+   "cmc": 4,
+   "cost": "{4}",
+   "type": "Artifact Creature — Golem",
+   "ci": [],
+   "rank": 39,
+   "price": "0.30",
+   "role": "arsenal:staple_ramp",
+   "reason": "universal ramp staple",
+   "oracle": "When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nWhen this creature dies, you may draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Brainstorm",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 72,
+   "price": "1.06",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Draw three cards, then put two cards from your hand on top of your library in any order."
+  },
+  {
+   "qty": 1,
+   "name": "Ponder",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Sorcery",
+   "ci": [
+    "U"
+   ],
+   "rank": 145,
+   "price": "4.07",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Preordain",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Sorcery",
+   "ci": [
+    "U"
+   ],
+   "rank": 217,
+   "price": "0.79",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"
+  },
+  {
+   "qty": 1,
+   "name": "Opt",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 218,
+   "price": "0.27",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\nDraw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Consider",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 371,
+   "price": "0.29",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nDraw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Sleight of Hand",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Sorcery",
+   "ci": [
+    "U"
+   ],
+   "rank": 2963,
+   "price": "0.34",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library."
+  },
+  {
+   "qty": 1,
+   "name": "Harmonize",
+   "cmc": 4,
+   "cost": "{2}{G}{G}",
+   "type": "Sorcery",
+   "ci": [
+    "G"
+   ],
+   "rank": 325,
+   "price": "0.25",
+   "role": "arsenal:staple_draw",
+   "reason": "universal card draw staple",
+   "oracle": "Draw three cards."
+  },
+  {
+   "qty": 1,
+   "name": "Return to Nature",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 770,
+   "price": "0.33",
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "oracle": "Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile target card from a graveyard."
+  },
+  {
+   "qty": 1,
+   "name": "Reclamation Sage",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Creature — Elf Shaman",
+   "ci": [
+    "G"
+   ],
+   "rank": 330,
+   "price": "0.30",
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "oracle": "When this creature enters, you may destroy target artifact or enchantment."
+  },
+  {
+   "qty": 1,
+   "name": "Rapid Hybridization",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 208,
+   "price": "0.72",
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "oracle": "Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token."
+  },
+  {
+   "qty": 1,
+   "name": "Dispel",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 938,
+   "price": "0.35",
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "oracle": "Counter target instant spell."
+  },
+  {
+   "qty": 1,
+   "name": "Spell Pierce",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 904,
+   "price": "0.32",
+   "role": "arsenal:staple_removal",
+   "reason": "universal removal staple",
+   "oracle": "Counter target noncreature spell unless its controller pays {2}."
+  },
+  {
+   "qty": 1,
+   "name": "Mystical Tutor",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 161,
+   "price": "19.31",
+   "role": "tutor",
+   "reason": "tutor (role quota): Mystical Tutor",
+   "oracle": "Search your library for an instant or sorcery card, reveal it, then shuffle and put that card on top."
+  },
+  {
+   "qty": 1,
+   "name": "Worldly Tutor",
+   "cmc": 1,
+   "cost": "{G}",
+   "type": "Instant",
+   "ci": [
+    "G"
+   ],
+   "rank": 167,
+   "price": "32.59",
+   "role": "tutor",
+   "reason": "tutor (role quota): Worldly Tutor",
+   "oracle": "Search your library for a creature card, reveal it, then shuffle and put the card on top."
+  },
+  {
+   "qty": 1,
+   "name": "Zuko's Exile",
+   "cmc": 5,
+   "cost": "{5}",
+   "type": "Instant — Lesson",
+   "ci": [],
+   "rank": 4402,
+   "price": "0.23",
+   "role": "removal",
+   "reason": "spot removal (role quota): Zuko's Exile",
+   "oracle": "Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")"
+  },
+  {
+   "qty": 1,
+   "name": "Cankerbloom",
+   "cmc": 2,
+   "cost": "{1}{G}",
+   "type": "Creature — Phyrexian Fungus",
+   "ci": [
+    "G"
+   ],
+   "rank": 815,
+   "price": "0.59",
+   "role": "removal",
+   "reason": "spot removal (role quota): Cankerbloom",
+   "oracle": "{1}, Sacrifice this creature: Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "qty": 1,
+   "name": "Night of the Sweets' Revenge",
+   "cmc": 4,
+   "cost": "{3}{G}",
+   "type": "Enchantment",
+   "ci": [
+    "G"
+   ],
+   "rank": 2058,
+   "price": "0.84",
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Night of the Sweets' Revenge",
+   "oracle": "When this enchantment enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")\nFoods you control have \"{T}: Add {G}.\"\n{5}{G}{G}, Sacrifice this enchantment: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery."
+  },
+  {
+   "qty": 1,
+   "name": "Aetherize",
+   "cmc": 4,
+   "cost": "{3}{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 287,
+   "price": "0.65",
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Aetherize",
+   "oracle": "Return all attacking creatures to their owner's hand."
+  },
+  {
+   "qty": 1,
+   "name": "Perilous Vault",
+   "cmc": 4,
+   "cost": "{4}",
+   "type": "Artifact",
+   "ci": [],
+   "rank": 10127,
+   "price": "0.34",
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): Perilous Vault",
+   "oracle": "{5}, {T}, Exile this artifact: Exile all nonland permanents."
+  },
+  {
+   "qty": 1,
+   "name": "River's Rebuke",
+   "cmc": 6,
+   "cost": "{4}{U}{U}",
+   "type": "Sorcery",
+   "ci": [
+    "U"
+   ],
+   "rank": 3161,
+   "price": "0.30",
+   "role": "board_wipe",
+   "reason": "board wipe (role quota): River's Rebuke",
+   "oracle": "Return all nonland permanents target player controls to their owner's hand."
+  },
+  {
+   "qty": 1,
+   "name": "Glacier Godmaw",
+   "cmc": 7,
+   "cost": "{5}{G}{G}",
+   "type": "Creature — Leviathan",
+   "ci": [
+    "G"
+   ],
+   "rank": 4967,
+   "price": "0.35",
+   "role": "win_condition",
+   "reason": "win condition (role quota): Glacier Godmaw",
+   "oracle": "Trample\nWhen this creature enters, create a Lander token. (It's an artifact with \"{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\")\nLandfall — Whenever a land you control enters, creatures you control get +1/+1 and gain vigilance and haste until end of turn."
+  },
+  {
+   "qty": 1,
+   "name": "Shark Typhoon",
+   "cmc": 6,
+   "cost": "{5}{U}",
+   "type": "Enchantment",
+   "ci": [
+    "U"
+   ],
+   "rank": 1247,
+   "price": "1.55",
+   "role": "win_condition",
+   "reason": "win condition (role quota): Shark Typhoon",
+   "oracle": "Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.\nCycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, create an X/X blue Shark creature token with flying."
+  },
+  {
+   "qty": 1,
+   "name": "Chronicle of Victory",
+   "cmc": 6,
+   "cost": "{6}",
+   "type": "Legendary Artifact",
+   "ci": [],
+   "rank": 1520,
+   "price": "22.18",
+   "role": "win_condition",
+   "reason": "win condition (role quota): Chronicle of Victory",
+   "oracle": "As Chronicle of Victory enters, choose a creature type.\nCreatures you control of the chosen type get +2/+2 and have first strike and trample.\nWhenever you cast a spell of the chosen type, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Earthshaker Dreadmaw",
+   "cmc": 6,
+   "cost": "{4}{G}{G}",
+   "type": "Creature — Dinosaur",
+   "ci": [
+    "G"
+   ],
+   "rank": 2390,
+   "price": "0.29",
+   "role": "win_condition",
+   "reason": "win condition (role quota): Earthshaker Dreadmaw",
+   "oracle": "Trample\nWhen this creature enters, draw a card for each other Dinosaur you control."
+  },
+  {
+   "qty": 1,
+   "name": "The Unagi of Kyoshi Island",
+   "cmc": 5,
+   "cost": "{3}{U}{U}",
+   "type": "Legendary Creature — Serpent",
+   "ci": [
+    "U"
+   ],
+   "rank": 2946,
+   "price": "1.38",
+   "role": "win_condition",
+   "reason": "win condition (role quota): The Unagi of Kyoshi Island",
+   "oracle": "Flash\nWard—Waterbend {4}. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}. They can tap their artifacts and creatures to help. Each one pays for {1}.)\nWhenever an opponent draws their second card each turn, you draw two cards."
+  },
+  {
+   "qty": 1,
+   "name": "The One Ring",
+   "cmc": 4,
+   "cost": "{4}",
+   "type": "Legendary Artifact",
+   "ci": [],
+   "rank": 95,
+   "price": "115.29",
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): The One Ring",
+   "oracle": "Indestructible\nWhen The One Ring enters, if you cast it, you gain protection from everything until your next turn.\nAt the beginning of your upkeep, you lose 1 life for each burden counter on The One Ring.\n{T}: Put a burden counter on The One Ring, then draw a card for each burden counter on The One Ring."
+  },
+  {
+   "qty": 1,
+   "name": "The Great Henge",
+   "cmc": 9,
+   "cost": "{7}{G}{G}",
+   "type": "Legendary Artifact",
+   "ci": [
+    "G"
+   ],
+   "rank": 227,
+   "price": "64.54",
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): The Great Henge",
+   "oracle": "This spell costs {X} less to cast, where X is the greatest power among creatures you control.\n{T}: Add {G}{G}. You gain 2 life.\nWhenever a nontoken creature you control enters, put a +1/+1 counter on it and draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "Garruk's Uprising",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Enchantment",
+   "ci": [
+    "G"
+   ],
+   "rank": 89,
+   "price": "0.52",
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): Garruk's Uprising",
+   "oracle": "When this enchantment enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (Each of those creatures can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card."
+  },
+  {
+   "qty": 1,
+   "name": "An Offer You Can't Refuse",
+   "cmc": 1,
+   "cost": "{U}",
+   "type": "Instant",
+   "ci": [
+    "U"
+   ],
+   "rank": 34,
+   "price": "4.43",
+   "role": "utility",
+   "reason": "allowlisted (arsenal/commander stats): An Offer You Can't Refuse",
+   "oracle": "Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with \"{T}, Sacrifice this token: Add one mana of any color.\")"
+  },
+  {
+   "qty": 1,
+   "name": "Misty Rainforest",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 42,
+   "price": "35.45",
+   "cls": {
+    "id": 651,
+    "card_name": "Misty Rainforest",
+    "card_id": "88231c0d-0cc8-44ec-bf95-81d1710ac141",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Breeding Pool",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land — Forest Island",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 59,
+   "price": "9.27",
+   "cls": {
+    "id": 136,
+    "card_name": "Breeding Pool",
+    "card_id": "63e4dc07-c742-41bd-8301-861637908fd1",
+    "land_category": "shock",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay 2 life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {G} or {U}.)\nAs this land enters, you may pay 2 life. If you don't, it enters tapped."
+  },
+  {
+   "qty": 1,
+   "name": "Hinterland Harbor",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 97,
+   "price": "0.31",
+   "cls": {
+    "id": 493,
+    "card_name": "Hinterland Harbor",
+    "card_id": "892451a1-5527-4857-84f8-62028d147489",
+    "land_category": "check",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "control basic type",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "This land enters tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U}."
+  },
+  {
+   "qty": 1,
+   "name": "Yavimaya Coast",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 136,
+   "price": "0.33",
+   "cls": {
+    "id": 1281,
+    "card_name": "Yavimaya Coast",
+    "card_id": "f4c1500b-1f4c-4d33-810c-25e3bb0a4666",
+    "land_category": "pain",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {C}.\n{T}: Add {G} or {U}. This land deals 1 damage to you."
+  },
+  {
+   "qty": 1,
+   "name": "Dreamroot Cascade",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 173,
+   "price": "1.12",
+   "cls": {
+    "id": 278,
+    "card_name": "Dreamroot Cascade",
+    "card_id": "ef662b92-5a7f-48c9-bcc1-14b55e091aef",
+    "land_category": "slow",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "two or more other lands",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "This land enters tapped unless you control two or more other lands.\n{T}: Add {G} or {U}."
+  },
+  {
+   "qty": 1,
+   "name": "Disciple of Freyalise // Garden of Freyalise",
+   "cmc": 6,
+   "cost": "{3}{G}{G}{G}",
+   "type": "Creature — Elf Druid // Land",
+   "ci": [
+    "G"
+   ],
+   "rank": 461,
+   "price": "3.78",
+   "cls": {
+    "id": 268,
+    "card_name": "Disciple of Freyalise // Garden of Freyalise",
+    "card_id": "a8e9ea5a-5e10-4b77-baef-0352ff035483",
+    "land_category": "shock",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\", \"card_draw\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+   "cmc": 3,
+   "cost": "{2}{G}",
+   "type": "Sorcery // Land",
+   "ci": [
+    "G"
+   ],
+   "rank": 670,
+   "price": "1.31",
+   "cls": {
+    "id": 138,
+    "card_name": "Bridgeworks Battle // Tanglespan Bridgeworks",
+    "card_id": "ebef3db0-2b58-4581-a79c-fbca9a059e63",
+    "land_category": "shock",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "qty": 1,
+   "name": "Brokers Hideout",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 1311,
+   "price": "0.97",
+   "cls": {
+    "id": 141,
+    "card_name": "Brokers Hideout",
+    "card_id": "989b299b-daa9-4bda-94e2-9a2f0e8f2bce",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "qty": 1,
+   "name": "Vineglimmer Snarl",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 541,
+   "price": "0.19",
+   "cls": {
+    "id": 1229,
+    "card_name": "Vineglimmer Snarl",
+    "card_id": "445bd162-b523-45f4-83d0-ffc702fc1fac",
+    "land_category": "filter",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "reveal card of type",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.\n{T}: Add {G} or {U}."
+  },
+  {
+   "qty": 1,
+   "name": "Starting Town",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land — Town",
+   "ci": [],
+   "rank": 714,
+   "price": "11.61",
+   "cls": {
+    "id": 993,
+    "card_name": "Starting Town",
+    "card_id": "fc7d1912-7e27-49ef-bd98-375d975a42b0",
+    "land_category": "conditional_untapped",
+    "produces_colors": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "first three turns",
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "This land enters tapped unless it's your first, second, or third turn of the game.\n{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color."
+  },
+  {
+   "qty": 1,
+   "name": "Sink into Stupor // Soporific Springs",
+   "cmc": 3,
+   "cost": "{1}{U}{U}",
+   "type": "Instant // Land",
+   "ci": [
+    "U"
+   ],
+   "rank": 166,
+   "price": "8.38",
+   "cls": {
+    "id": 945,
+    "card_name": "Sink into Stupor // Soporific Springs",
+    "card_id": "5358b87a-1a29-426d-b165-40c97da2c14d",
+    "land_category": "shock",
+    "produces_colors": "[\"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "Return target spell or nonland permanent an opponent controls to its owner's hand.\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {U}."
+  },
+  {
+   "qty": 1,
+   "name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+   "cmc": 3,
+   "cost": "{2}{U}",
+   "type": "Creature — Weird // Land",
+   "ci": [
+    "U"
+   ],
+   "rank": 609,
+   "price": "1.39",
+   "cls": {
+    "id": 505,
+    "card_name": "Hydroelectric Specimen // Hydroelectric Laboratory",
+    "card_id": "8689ecd7-e9a6-458b-99d2-6dbaca527f00",
+    "land_category": "shock",
+    "produces_colors": "[\"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "Flash\nWhen this creature enters, you may change the target of target instant or sorcery spell with a single target to this creature.\n//\nAs this land enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {U}."
+  },
+  {
+   "qty": 1,
+   "name": "Multiversal Passage",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 2127,
+   "price": "6.53",
+   "cls": {
+    "id": 671,
+    "card_name": "Multiversal Passage",
+    "card_id": "f5fb426a-5618-4dd4-9c51-0cc847be8c1d",
+    "land_category": "shock",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": "pay life",
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped.\nThis land is the chosen type."
+  },
+  {
+   "qty": 1,
+   "name": "Command Tower",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 2,
+   "price": "0.56",
+   "cls": {
+    "id": 200,
+    "card_name": "Command Tower",
+    "card_id": "0548fb60-c843-4f8f-a029-6f10efc63a41",
+    "land_category": "utility",
+    "produces_colors": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add one mana of any color in your commander's color identity."
+  },
+  {
+   "qty": 1,
+   "name": "Flooded Strand",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 38,
+   "price": "15.29",
+   "cls": {
+    "id": 347,
+    "card_name": "Flooded Strand",
+    "card_id": "8f85e12c-196b-4459-b81f-0c9c854e9f57",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Scalding Tarn",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [],
+   "rank": 49,
+   "price": "35.58",
+   "cls": {
+    "id": 872,
+    "card_name": "Scalding Tarn",
+    "card_id": "71e491c5-8c07-449b-b2f1-ffa052e6d311",
+    "land_category": "fetch",
+    "produces_colors": "[]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"shuffle\", \"sacrifice\"]",
+    "tier": 1,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle."
+  },
+  {
+   "qty": 1,
+   "name": "Willowrush Verge",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land",
+   "ci": [
+    "G",
+    "U"
+   ],
+   "rank": 1043,
+   "price": "5.77",
+   "cls": {
+    "id": 1260,
+    "card_name": "Willowrush Verge",
+    "card_id": "758d93d5-3f66-4395-a928-000485396c87",
+    "land_category": "utility",
+    "produces_colors": "[\"G\", \"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 3,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {U}.\n{T}: Add {G}. Activate only if you control a Forest or an Island."
+  },
+  {
+   "qty": 1,
+   "name": "Hashep Oasis",
+   "cmc": 0,
+   "cost": null,
+   "type": "Land — Desert",
+   "ci": [
+    "G"
+   ],
+   "rank": 4409,
+   "price": "0.25",
+   "cls": {
+    "id": 465,
+    "card_name": "Hashep Oasis",
+    "card_id": "d18d5af2-ca2c-4a3a-9b67-e953b24b0718",
+    "land_category": "pain",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": "[\"lifepay\", \"sacrifice\"]",
+    "tier": 2,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "{T}: Add {C}.\n{T}, Pay 1 life: Add {G}.\n{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate only as a sorcery."
+  },
+  {
+   "qty": 13,
+   "name": "Forest",
+   "cmc": 0,
+   "cost": null,
+   "type": "Basic Land — Forest",
+   "ci": [
+    "G"
+   ],
+   "rank": null,
+   "price": "0.08",
+   "cls": {
+    "id": 357,
+    "card_name": "Forest",
+    "card_id": "dce15387-4114-4b3e-91aa-5b42b45c44ac",
+    "land_category": "basic",
+    "produces_colors": "[\"G\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 4,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {G}.)"
+  },
+  {
+   "qty": 7,
+   "name": "Island",
+   "cmc": 0,
+   "cost": null,
+   "type": "Basic Land — Island",
+   "ci": [
+    "U"
+   ],
+   "rank": null,
+   "price": "0.08",
+   "cls": {
+    "id": 524,
+    "card_name": "Island",
+    "card_id": "eeecf096-87dd-4dcb-953f-700445bf3f3a",
+    "land_category": "basic",
+    "produces_colors": "[\"U\"]",
+    "enters_untapped": 1,
+    "enters_untapped_condition": null,
+    "tribal_types": null,
+    "synergy_tags": null,
+    "tier": 4,
+    "updated_at": "2026-09-30 11:53:15"
+   },
+   "oracle": "({T}: Add {U}.)"
+  }
+ ],
+ "benchLands": [
+  {
+   "name": "Reliquary Tower",
+   "ci": "",
+   "rank": 10,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "You have no maximum hand size.\n{T}: Add {C}."
+  },
+  {
+   "name": "Rogue's Passage",
+   "ci": "",
+   "rank": 18,
+   "qty": 3,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{4}, {T}: Target creature can't be blocked this turn."
+  },
+  {
+   "name": "Evolving Wilds",
+   "ci": "",
+   "rank": 19,
+   "qty": 72,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Terramorphic Expanse",
+   "ci": "",
+   "rank": 28,
+   "qty": 24,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Fabled Passage",
+   "ci": "",
+   "rank": 44,
+   "qty": 12,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if you control four or more lands, untap that land."
+  },
+  {
+   "name": "Urborg, Tomb of Yawgmoth",
+   "ci": "",
+   "rank": 75,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Each land is a Swamp in addition to its other land types."
+  },
+  {
+   "name": "Otawara, Soaring City",
+   "ci": "U",
+   "rank": 88,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {U}.\nChannel — {3}{U}, Discard this card: Return target artifact, creature, enchantment, or planeswalker to its owner's hand. This ability costs {1} less to activate for each legendary creatu"
+  },
+  {
+   "name": "Cavern of Souls",
+   "ci": "",
+   "rank": 111,
+   "qty": 4,
+   "cat": "tribal",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered."
+  },
+  {
+   "name": "Mystic Sanctuary",
+   "ci": "U",
+   "rank": 174,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {U}.)\nThis land enters tapped unless you control three or more other Islands.\nWhen this land enters untapped, you may put target instant or sorcery card from your graveyard on top of your li"
+  },
+  {
+   "name": "Gemstone Caverns",
+   "ci": "",
+   "rank": 180,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "If this card is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your ha"
+  },
+  {
+   "name": "Buried Ruin",
+   "ci": "",
+   "rank": 193,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."
+  },
+  {
+   "name": "Karn's Bastion",
+   "ci": "",
+   "rank": 206,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+  },
+  {
+   "name": "Ash Barrens",
+   "ci": "",
+   "rank": 210,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\nBasic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"
+  },
+  {
+   "name": "Secluded Courtyard",
+   "ci": "",
+   "rank": 219,
+   "qty": 12,
+   "cat": "tribal",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature source "
+  },
+  {
+   "name": "Unclaimed Territory",
+   "ci": "",
+   "rank": 247,
+   "qty": 1,
+   "cat": "tribal",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "As this land enters, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type."
+  },
+  {
+   "name": "Inventors' Fair",
+   "ci": "",
+   "rank": 267,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.\n{T}: Add {C}.\n{4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it"
+  },
+  {
+   "name": "Darksteel Citadel",
+   "ci": "",
+   "rank": 284,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Indestructible\n{T}: Add {C}."
+  },
+  {
+   "name": "Seat of the Synod",
+   "ci": "U",
+   "rank": 314,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {U}."
+  },
+  {
+   "name": "Temple of Mystery",
+   "ci": "GU",
+   "rank": 333,
+   "qty": 4,
+   "cat": "temple",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\nWhen this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Mistrise Village",
+   "ci": "U",
+   "rank": 385,
+   "qty": 1,
+   "cat": "check",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": "control basic type",
+   "tier": 2,
+   "oracle": "This land enters tapped unless you control a Mountain or a Forest.\n{T}: Add {U}.\n{U}, {T}: The next spell you cast this turn can't be countered."
+  },
+  {
+   "name": "Emergence Zone",
+   "ci": "",
+   "rank": 539,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}, Sacrifice this land: You may cast spells this turn as though they had flash."
+  },
+  {
+   "name": "Bonders' Enclave",
+   "ci": "",
+   "rank": 548,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}, {T}: Draw a card. Activate only if you control a creature with power 4 or greater."
+  },
+  {
+   "name": "Hedge Maze",
+   "ci": "GU",
+   "rank": 552,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G} or {U}.)\nThis land enters tapped.\nWhen this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+  },
+  {
+   "name": "Nesting Grounds",
+   "ci": "",
+   "rank": 560,
+   "qty": 3,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery."
+  },
+  {
+   "name": "Growing Rites of Itlimoc // Itlimoc, Cradle of the Sun",
+   "ci": "G",
+   "rank": 572,
+   "qty": 4,
+   "cat": "pathway",
+   "prod": "[\"G\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "When Growing Rites of Itlimoc enters, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library i"
+  },
+  {
+   "name": "Thespian's Stage",
+   "ci": "",
+   "rank": 579,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}: This land becomes a copy of target land, except it has this ability."
+  },
+  {
+   "name": "Escape Tunnel",
+   "ci": "",
+   "rank": 797,
+   "qty": 8,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{T}, Sacrifice this land: Target creature with power 2 or less can't be blocked t"
+  },
+  {
+   "name": "Archway of Innovation",
+   "ci": "U",
+   "rank": 922,
+   "qty": 1,
+   "cat": "check",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": "control basic type",
+   "tier": 2,
+   "oracle": "This land enters tapped unless you control an Island.\n{T}: Add {U}.\n{U}, {T}: The next spell you cast this turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you"
+  },
+  {
+   "name": "Evendo, Waking Haven",
+   "ci": "G",
+   "rank": 926,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\n12+ | {G}, {T}: Add {G} for each cr"
+  },
+  {
+   "name": "Cabaretti Courtyard",
+   "ci": "",
+   "rank": 969,
+   "qty": 1,
+   "cat": "fetch",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 1,
+   "oracle": "When this land enters, sacrifice it. When you do, search your library for a basic Mountain, Forest, or Plains card, put it onto the battlefield tapped, then shuffle and you gain 1 life."
+  },
+  {
+   "name": "Thriving Isle",
+   "ci": "U",
+   "rank": 1008,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color other than blue.\n{T}: Add {U} or one mana of the chosen color."
+  },
+  {
+   "name": "Thornwood Falls",
+   "ci": "GU",
+   "rank": 1096,
+   "qty": 40,
+   "cat": "gainland",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Lonely Sandbar",
+   "ci": "U",
+   "rank": 1141,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {U}.\nCycling {U} ({U}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Thriving Grove",
+   "ci": "G",
+   "rank": 1177,
+   "qty": 16,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color other than green.\n{T}: Add {G} or one mana of the chosen color."
+  },
+  {
+   "name": "Uthros, Titanic Godcore",
+   "ci": "U",
+   "rank": 1310,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {U}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\n12+ | {U}, {T}: Add {U} for each ar"
+  },
+  {
+   "name": "Secret Tunnel",
+   "ci": "",
+   "rank": 1328,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land can't be blocked.\n{T}: Add {C}.\n{4}, {T}: Two target creatures you control that share a creature type can't be blocked this turn."
+  },
+  {
+   "name": "Tangled Islet",
+   "ci": "GU",
+   "rank": 1383,
+   "qty": 2,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G} or {U}.)\nThis land enters tapped."
+  },
+  {
+   "name": "Vibrant Cityscape",
+   "ci": "",
+   "rank": 1405,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."
+  },
+  {
+   "name": "Dark Depths",
+   "ci": "",
+   "rank": 1471,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Dark Depths enters with ten ice counters on it.\n{3}: Remove an ice counter from Dark Depths.\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, create Marit Lage, a legendary 20/20 b"
+  },
+  {
+   "name": "Arid Archway",
+   "ci": "",
+   "rank": 1497,
+   "qty": 4,
+   "cat": "bounce",
+   "prod": "[]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\nWhen this land enters, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it"
+  },
+  {
+   "name": "Adventurer's Inn",
+   "ci": "",
+   "rank": 1512,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, you gain 2 life.\n{T}: Add {C}."
+  },
+  {
+   "name": "Simic Guildgate",
+   "ci": "GU",
+   "rank": 1558,
+   "qty": 20,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Deserted Temple",
+   "ci": "",
+   "rank": 1584,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Untap target land."
+  },
+  {
+   "name": "Fomori Vault",
+   "ci": "",
+   "rank": 1606,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of you"
+  },
+  {
+   "name": "Ba Sing Se",
+   "ci": "G",
+   "rank": 1664,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a basic land.\n{T}: Add {G}.\n{2}{G}, {T}: Earthbend 2. Activate only as a sorcery. (Target land you control becomes a 0/0 creature with haste that's still a l"
+  },
+  {
+   "name": "Valgavoth's Lair",
+   "ci": "",
+   "rank": 1695,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "Hexproof\nThis land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color."
+  },
+  {
+   "name": "Eldrazi Temple",
+   "ci": "",
+   "rank": 1705,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi."
+  },
+  {
+   "name": "Great Hall of the Citadel",
+   "ci": "",
+   "rank": 1820,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add two mana in any combination of colors. Spend this mana only to cast legendary spells."
+  },
+  {
+   "name": "Terrain Generator",
+   "ci": "",
+   "rank": 1880,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}: You may put a basic land card from your hand onto the battlefield tapped."
+  },
+  {
+   "name": "Conduit Pylons",
+   "ci": "",
+   "rank": 2012,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Amonkhet Raceway",
+   "ci": "",
+   "rank": 2346,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add {C}.\nMax speed — {T}: Target creature gains ha"
+  },
+  {
+   "name": "Agna Qel'a",
+   "ci": "U",
+   "rank": 2482,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a basic land.\n{T}: Add {U}.\n{2}{U}, {T}: Draw a card, then discard a card."
+  },
+  {
+   "name": "Baldur's Gate",
+   "ci": "",
+   "rank": 2565,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}: Add X mana of any one color, where X is the number of other Gates you control."
+  },
+  {
+   "name": "Gateway Plaza",
+   "ci": "",
+   "rank": 2621,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color."
+  },
+  {
+   "name": "Maze's End",
+   "ci": "",
+   "rank": 2951,
+   "qty": 3,
+   "cat": "tapped",
+   "prod": "[]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {C}.\n{3}, {T}, Return this land to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle. If you control ten or more Gates "
+  },
+  {
+   "name": "Oakhollow Village",
+   "ci": "G",
+   "rank": 2957,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"G\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add {G}. Spend this mana only to cast a creature spell.\n{G}, {T}: Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn."
+  },
+  {
+   "name": "Rumble Arena",
+   "ci": "",
+   "rank": 3027,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Vigilance\nWhen this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Eclipsed Realms",
+   "ci": "",
+   "rank": 3167,
+   "qty": 4,
+   "cat": "tribal",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "As this land enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a spell of the chosen type "
+  },
+  {
+   "name": "Tangled Florahedron // Tangled Vale",
+   "ci": "G",
+   "rank": 3235,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "{T}: Add {G}.\n//\nThis land enters tapped.\n{T}: Add {G}."
+  },
+  {
+   "name": "Ojer Pakpatiq, Deepest Epoch // Temple of Cyclical Time",
+   "ci": "U",
+   "rank": 3292,
+   "qty": 1,
+   "cat": "pathway",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "Flying\nWhenever you cast an instant spell from your hand, it gains rebound. (Exile it as it resolves. At the beginning of your next upkeep, you may cast it from exile without paying its mana cost.)\nWh"
+  },
+  {
+   "name": "Daily Bugle Building",
+   "ci": "",
+   "rank": 3343,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\nSmear Campaign — {1}, {T}: Target legendary creature gains menace until end of turn. Activate only as a sorcery."
+  },
+  {
+   "name": "Command Bridge",
+   "ci": "",
+   "rank": 3466,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, sacrifice it unless you tap an untapped permanent you control.\n{T}: Add one mana of any color."
+  },
+  {
+   "name": "Eden, Seat of the Sanctum",
+   "ci": "",
+   "rank": 3665,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{5}, {T}: Mill two cards. Then you may sacrifice this land. When you do, return another target permanent card from your graveyard to your hand."
+  },
+  {
+   "name": "Capital City",
+   "ci": "",
+   "rank": 3723,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\nCycling {2} ({2}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Secluded Starforge",
+   "ci": "",
+   "rank": 3790,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Activate only as a sorcery.\n{5}, {T}: Create a 2/2 colorless Robot artifact creature token."
+  },
+  {
+   "name": "Avishkar Raceway",
+   "ci": "",
+   "rank": 3816,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add {C}.\nMax speed — {3}, {T}, Discard a card: Dra"
+  },
+  {
+   "name": "Roadside Reliquary",
+   "ci": "",
+   "rank": 3901,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}, Sacrifice this land: Draw a card if you control an artifact. Draw a card if you control an enchantment."
+  },
+  {
+   "name": "Interplanar Beacon",
+   "ci": "",
+   "rank": 4280,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "Whenever you cast a planeswalker spell, you gain 1 life.\n{T}: Add {C}.\n{1}, {T}: Add two mana of different colors. Spend this mana only to cast planeswalker spells."
+  },
+  {
+   "name": "Mirage Mesa",
+   "ci": "",
+   "rank": 4325,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color."
+  },
+  {
+   "name": "Jasmine Dragon Tea Shop",
+   "ci": "",
+   "rank": 4347,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an Ally spell or activate an ability of an Ally source.\n{5}, {T}: Create a 1/1 white Ally creature token."
+  },
+  {
+   "name": "Thran Portal",
+   "ci": "",
+   "rank": 4593,
+   "qty": 1,
+   "cat": "fast",
+   "prod": "[]",
+   "untap": 1,
+   "cond": "two or fewer other lands",
+   "tier": 2,
+   "oracle": "This land enters tapped unless you control two or fewer other lands.\nAs this land enters, choose a basic land type.\nThis land is the chosen type in addition to its other types.\nMana abilities of this "
+  },
+  {
+   "name": "Quandrix Campus",
+   "ci": "GU",
+   "rank": 4763,
+   "qty": 1,
+   "cat": "temple",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 3,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"
+  },
+  {
+   "name": "Kishla Village",
+   "ci": "G",
+   "rank": 4883,
+   "qty": 1,
+   "cat": "check",
+   "prod": "[\"G\"]",
+   "untap": 1,
+   "cond": "control basic type",
+   "tier": 2,
+   "oracle": "This land enters tapped unless you control an Island or a Swamp.\n{T}: Add {G}.\n{3}{G}, {T}: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and t"
+  },
+  {
+   "name": "Guadosalam, Farplane Gateway",
+   "ci": "GU",
+   "rank": 5095,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Hidden Cataract",
+   "ci": "U",
+   "rank": 5273,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {U}.\n{4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana valu"
+  },
+  {
+   "name": "White Lotus Hideout",
+   "ci": "",
+   "rank": 5333,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Drannith Ruins",
+   "ci": "",
+   "rank": 5477,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{2}, {T}: Put two +1/+1 counters on target non-Human creature that entered this turn."
+  },
+  {
+   "name": "Soulstone Sanctuary",
+   "ci": "",
+   "rank": 5705,
+   "qty": 2,
+   "cat": "creature_land",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "{T}: Add {C}.\n{4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land."
+  },
+  {
+   "name": "Turtle Lair",
+   "ci": "",
+   "rank": 5709,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell.\n{3}, {T}: Target Ninja or Turtle can't be blocked this turn."
+  },
+  {
+   "name": "Captivating Cave",
+   "ci": "",
+   "rank": 6196,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery."
+  },
+  {
+   "name": "Balamb Garden, SeeD Academy // Balamb Garden, Airborne",
+   "ci": "GU",
+   "rank": 6318,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}.\n{5}{G}{U}, {T}: Transform this land. This ability costs {1} less to activate for each other Town you control.\n//\nFlying\nWhenever Balamb Garden attacks, dr"
+  },
+  {
+   "name": "Night Market",
+   "ci": "",
+   "rank": 6631,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\nCycling {3} ({3}, Discard this card: Draw a card.)"
+  },
+  {
+   "name": "Avengers Tower",
+   "ci": "",
+   "rank": 7360,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Hero spell or to activate an ability of a Hero source.\n{4}, {T}: Look at the top three cards of your library. You may revea"
+  },
+  {
+   "name": "Meditation Pools",
+   "ci": "GU",
+   "rank": 7510,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}.\n{4}, {T}, Sacrifice this land: Draw a card."
+  },
+  {
+   "name": "Branch of Vitu-Ghazi",
+   "ci": "",
+   "rank": 7530,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\nDisguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen this land is turned face up, add two mana of"
+  },
+  {
+   "name": "Plaza of Harmony",
+   "ci": "",
+   "rank": 7624,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, if you control two or more Gates, you gain 3 life.\n{T}: Add {C}.\n{T}: Add one mana of any type that a Gate you control could produce."
+  },
+  {
+   "name": "Villainous Hideout",
+   "ci": "",
+   "rank": 7988,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Villain spell or to activate an ability of a Villain source.\n{3}, {T}: Target Villain you control connives. Activate only a"
+  },
+  {
+   "name": "Hobbit Hole",
+   "ci": "",
+   "rank": 7997,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nHalflingcycling {4} ({4}, Discard this card: Search your library for a Halfling c"
+  },
+  {
+   "name": "Elven Passage",
+   "ci": "",
+   "rank": 8656,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}, Pay 1 life, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. You may behold an Elf. If you do, untap that land. (To behold an Elf,"
+  },
+  {
+   "name": "Castle Doom",
+   "ci": "",
+   "rank": 8696,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an artifact spell.\n{3}, {T}, Sacrifice an artifact: Create a 3/3 colorless Robot Villain artifact creature token named Doombo"
+  },
+  {
+   "name": "Great Hall of the Biblioplex",
+   "ci": "",
+   "rank": 8818,
+   "qty": 4,
+   "cat": "creature_land",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.\n{5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with \"Whenever "
+  },
+  {
+   "name": "Paradox Gardens",
+   "ci": "GU",
+   "rank": 8946,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}.\n{2}{G}{U}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"
+  },
+  {
+   "name": "Tarnation Vista",
+   "ci": "",
+   "rank": 9184,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{1}, {T}: For each color among monocolored permanents you control, add one mana of that color."
+  },
+  {
+   "name": "The Surgical Bay",
+   "ci": "U",
+   "rank": 9239,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {U}.\n{1}{U}, {T}, Sacrifice this land: Draw a card."
+  },
+  {
+   "name": "Petrified Hamlet",
+   "ci": "",
+   "rank": 9381,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, choose a land card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.\nLands with the chosen name have \"{T}: Add {C}.\"\n{T"
+  },
+  {
+   "name": "Surveillance Room",
+   "ci": "",
+   "rank": 9487,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "When this land enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color."
+  },
+  {
+   "name": "Edgewall Inn",
+   "ci": "",
+   "rank": 9884,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nAs this land enters, choose a color.\n{T}: Add one mana of the chosen color.\n{3}, {T}, Sacrifice this land: Return target card that has an Adventure from your graveyard to your"
+  },
+  {
+   "name": "Lakeside Shack",
+   "ci": "GU",
+   "rank": 9921,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless a player has 13 or less life.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Skycoach Waypoint",
+   "ci": "",
+   "rank": 10263,
+   "qty": 4,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{3}, {T}: Target creature becomes prepared. (Only creatures with prepare spells can become prepared.)"
+  },
+  {
+   "name": "Mirrodin's Core",
+   "ci": "",
+   "rank": 11326,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Put a charge counter on this land.\n{T}, Remove a charge counter from this land: Add one mana of any color."
+  },
+  {
+   "name": "Twists and Turns // Mycoid Maze",
+   "ci": "G",
+   "rank": 11959,
+   "qty": 2,
+   "cat": "pathway",
+   "prod": "[\"G\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "If a creature you control would explore, instead you scry 1, then that creature explores.\nWhen this enchantment enters, target creature you control explores.\nWhen a land you control enters, if you con"
+  },
+  {
+   "name": "Northampton Farm",
+   "ci": "",
+   "rank": 12150,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{1}, {T}: Exile target creature you own.\n{2}, {T}, Sacrifice this land: Return a creature card exiled with this land to the battlefield under your control. Return each other card exiled "
+  },
+  {
+   "name": "Mutant Town",
+   "ci": "GU",
+   "rank": 13324,
+   "qty": 4,
+   "cat": "gainland",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Forgotten Monument",
+   "ci": "",
+   "rank": 14143,
+   "qty": 2,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\nOther Caves you control have \"{T}, Pay 1 life: Add one mana of any color.\""
+  },
+  {
+   "name": "Bucolic Ranch",
+   "ci": "",
+   "rank": 14175,
+   "qty": 1,
+   "cat": "utility",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 3,
+   "oracle": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Mount spell.\n{3}, {T}: Look at the top card of your library. If it's a Mount card, you may reveal it and put it into your h"
+  },
+  {
+   "name": "Pym Technologies",
+   "ci": "GU",
+   "rank": 15623,
+   "qty": 2,
+   "cat": "gainland",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Elvenking's Halls",
+   "ci": "GU",
+   "rank": 16216,
+   "qty": 4,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\n{T}: Add {G} or {U}.\n{2}{G}{U}, {T}, Sacrifice this land: Put two +1/+1 counters on target Elf you control. Activate only as a sorcery."
+  },
+  {
+   "name": "Hall of Echoes",
+   "ci": "",
+   "rank": 19515,
+   "qty": 1,
+   "cat": "creature_land",
+   "prod": "[]",
+   "untap": 1,
+   "cond": null,
+   "tier": 2,
+   "oracle": "{T}: Add {C}.\n{5}: This land becomes a copy of target creature you control until end of turn. The \"legend rule\" doesn't apply to permanents you control this turn."
+  },
+  {
+   "name": "Theorist's Sanctum",
+   "ci": "U",
+   "rank": 19784,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {U}.)\nAs this land enters, you may behold a Jace. If you don't, this land enters tapped. (To behold a Jace, choose a Jace you control or reveal a Jace card from your hand.)\n{2}{U}, {T}: Empo"
+  },
+  {
+   "name": "Roiling Canopy",
+   "ci": "G",
+   "rank": 22377,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped.\nWhenever a Forest you control enters, if you control at least five other Forests, target creature you control gets +3/+3 until end of turn.\n{T}: Add {G}."
+  },
+  {
+   "name": "Transformative Commons",
+   "ci": "GU",
+   "rank": 26114,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\", \"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped unless you control a planeswalker.\n{T}: Add {G} or {U}."
+  },
+  {
+   "name": "Room of Refuge",
+   "ci": "",
+   "rank": 30585,
+   "qty": 3,
+   "cat": "tapped",
+   "prod": "[\"B\", \"G\", \"R\", \"U\", \"W\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "This land enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{5}, {T}, Sacrifice this land: Put two +1/+1 counters on target creature. Activate only as a sorcery."
+  },
+  {
+   "name": "Gate to Manorborn",
+   "ci": "G",
+   "rank": null,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"G\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G}.)\nGate to Manorborn enters the battlefield tapped.\n{3}{G}, {T}: Seek a nonland card. Activate only once."
+  },
+  {
+   "name": "Gate to Seatower",
+   "ci": "U",
+   "rank": null,
+   "qty": 1,
+   "cat": "tapped",
+   "prod": "[\"U\"]",
+   "untap": 0,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {U}.)\nGate to Seatower enters the battlefield tapped.\n{3}{U}, {T}: Seek a nonland card. Activate only once."
+  },
+  {
+   "name": "Snow-Covered Forest",
+   "ci": "G",
+   "rank": null,
+   "qty": 12,
+   "cat": "basic",
+   "prod": "[\"G\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {G}.)"
+  },
+  {
+   "name": "Snow-Covered Island",
+   "ci": "U",
+   "rank": null,
+   "qty": 12,
+   "cat": "basic",
+   "prod": "[\"U\"]",
+   "untap": 1,
+   "cond": null,
+   "tier": 4,
+   "oracle": "({T}: Add {U}.)"
+  }
+ ]
+}

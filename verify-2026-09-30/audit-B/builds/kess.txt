@@ -1,0 +1,97 @@
+# kess — {"format":"commander","commanderName":"Kess, Dissident Mage"}  (1845 ms)
+size 99  lands 38  avgCmc(nonland) 2.67  pips {"B":18,"R":13,"U":26}
+strategy reanimator  themes ["graveyard","ramp","draw","spellslinger","artifacts","aggro"]  tribal undefined
+realSources {"W":10,"U":31,"B":28,"R":28,"G":10}  health.sources {"W":10,"U":31,"B":28,"R":28,"G":10}
+roles {"fixing-floor":6,"payoff":8,"ramp":8,"draw":14,"tutor":3,"removal":6,"board_wipe":3,"protection":3,"win_condition":6,"utility":2,"synergy":2,"(none)":38}
+price total $1785.66 overBudget false replaced 0
+bracket target null -> 4 swapped 0 reasons ["5 game changer(s): Rhystic Study, Demonic Tutor, Mystical Tutor, Cyclonic Rift, The One Ring"]
+
+
+1 An Offer You Can't Refuse | {U} | Instant | $4.43 | edh 34 | ramp | Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with "{T}, Sacrifice this token: Add one ma
+1 Brainstorm | {U} | Instant | $1.06 | edh 72 | utility | Draw three cards, then put two cards from your hand on top of your library in any order.
+1 Consider | {U} | Instant | $0.29 | edh 371 | synergy | Surveil 1. (Look at the top card of your library. You may put it into your graveyard.) / Draw a card.
+1 Currency Converter | {1} | Artifact | $0.56 | edh 2553 | synergy | Whenever you discard a card, you may exile that card from your graveyard. / {2}, {T}: Draw a card, then discard a card. / {T}: Put a card ex
+1 Dark Ritual | {B} | Instant | $7.12 | edh 33 | ramp | Add {B}{B}{B}.
+1 Entomb | {B} | Instant | $19.51 | edh 323 | payoff | Search your library for a card, put that card into your graveyard, then shuffle.
+1 Faithless Looting | {R} | Sorcery | $0.43 | edh 98 | draw | Draw two cards, then discard two cards. / Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it
+1 Mystic Remora | {U} | Enchantment | $14.43 | edh 100 | draw | Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep co
+1 Mystical Tutor | {U} | Instant | $19.31 | edh 161 | tutor | Search your library for an instant or sorcery card, reveal it, then shuffle and put that card on top.
+1 Ponder | {U} | Sorcery | $4.07 | edh 145 | draw | Look at the top three cards of your library, then put them back in any order. You may shuffle. / Draw a card.
+1 Preordain | {U} | Sorcery | $0.79 | edh 217 | draw | Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on t
+1 Reanimate | {B} | Sorcery | $9.81 | edh 54 | payoff | Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to that card's mana value.
+1 Sol Ring | {1} | Artifact | $1.54 | edh 1 | ramp | {T}: Add {C}{C}.
+1 Stitcher's Supplier | {B} | Creature — Zombie | $0.37 | edh 618 | payoff | When this creature enters or dies, mill three cards. (Put the top three cards of your library into your graveyard.)
+1 Vandalblast | {R} | Sorcery | $1.56 | edh 101 | removal | Destroy target artifact you don't control. / Overload {4}{R} (You may cast this spell for its overload cost. If you do, change "target" in i
+1 Abrade | {1}{R} | Instant | $0.30 | edh 144 | removal | Choose one — / • Abrade deals 3 damage to target creature. / • Destroy target artifact.
+1 Altar of Dementia | {2} | Artifact | $18.25 | edh 642 | payoff | Sacrifice a creature: Target player mills cards equal to the sacrificed creature's power.
+1 Arcane Denial | {1}{U} | Instant | $1.61 | edh 52 | protection | Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep. / You draw a card at the beginning
+1 Arcane Signet | {2} | Artifact | $0.74 | edh 3 | fixing-floor | {T}: Add one mana of any color in your commander's color identity.
+1 Bloodghast | {B}{B} | Creature — Vampire Spirit | $0.89 | edh 1013 | payoff | This creature can't block. / This creature has haste as long as an opponent has 10 or less life. / Landfall — Whenever a land you control en
+1 Chronomancer | {1}{B} | Artifact Creature — Necron Wizard | $1.71 | edh 7612 | draw | Flying / Atomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card. / Unearth {2}{B} ({2}{B}: Return this card from your grav
+1 Counterspell | {U}{U} | Instant | $3.72 | edh 16 | protection | Counter target spell.
+1 Cyclonic Rift | {1}{U} | Instant | $39.16 | edh 55 | board_wipe | Return target nonland permanent you don't control to its owner's hand. / Overload {6}{U} (You may cast this spell for its overload cost. If 
+1 Deadly Dispute | {1}{B} | Instant | $0.28 | edh 131 | ramp | As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact
+1 Demonic Tutor | {1}{B} | Sorcery | $67.78 | edh 63 | tutor | Search your library for a card, put that card into your hand, then shuffle.
+1 Dimir Signet | {2} | Artifact | $0.43 | edh 159 | ramp | {1}, {T}: Add {U}{B}.
+1 Feed the Swarm | {1}{B} | Sorcery | $0.21 | edh 90 | removal | Destroy target creature or enchantment an opponent controls. You lose life equal to that permanent's mana value.
+1 Fellwar Stone | {2} | Artifact | $0.61 | edh 17 | fixing-floor | {T}: Add one mana of any color that a land an opponent controls could produce.
+1 Idol of Oblivion | {2} | Artifact | $2.76 | edh 191 | draw | {T}: Draw a card. Activate only if you created a token this turn. / {8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi crea
+1 Mesmeric Orb | {2} | Artifact | $17.87 | edh 1087 | payoff | Whenever a permanent becomes untapped, that permanent's controller mills a card.
+1 Mind Stone | {2} | Artifact | $0.24 | edh 32 | fixing-floor | {T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card.
+1 Talisman of Creativity | {2} | Artifact | $1.25 | edh 126 | fixing-floor | {T}: Add {C}. / {T}: Add {U} or {R}. This artifact deals 1 damage to you.
+1 Talisman of Dominance | {2} | Artifact | $0.72 | edh 93 | fixing-floor | {T}: Add {C}. / {T}: Add {U} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Indulgence | {2} | Artifact | $1.12 | edh 129 | fixing-floor | {T}: Add {C}. / {T}: Add {B} or {R}. This artifact deals 1 damage to you.
+1 Vohar, Vodalian Desecrator | {U}{B} | Legendary Creature — Phyrexian Merfolk Wizard | $0.31 | edh 3894 | win_condition | {T}: Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.
+1 Black Market Connections | {2}{B} | Enchantment | $9.88 | edh 130 | draw | At the beginning of your first main phase, choose one or more — / • Sell Contraband — Create a Treasure token. You lose 1 life. / • Buy Info
+1 Chaos Warp | {2}{R} | Instant | $0.31 | edh 29 | removal | The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put
+1 Frantic Search | {2}{U} | Instant | $2.31 | edh 99 | draw | Draw two cards, then discard two cards. Untap up to three lands.
+1 Palantír of Orthanc | {3} | Legendary Artifact | $19.83 | edh 1342 | draw | At the beginning of your end step, put an influence counter on Palantír of Orthanc and scry 2. Then target opponent may have you draw a card
+1 Phyrexian Arena | {1}{B}{B} | Enchantment | $4.87 | edh 103 | draw | At the beginning of your upkeep, you draw a card and lose 1 life.
+1 Rhystic Study | {2}{U} | Enchantment | $70.36 | edh 46 | draw | Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
+1 Secrets of the Dead | {2}{U} | Enchantment | $0.45 | edh 3730 | draw | Whenever you cast a spell from your graveyard, draw a card.
+1 Stinkweed Imp | {2}{B} | Creature — Imp | $1.50 | edh 3130 | payoff | Flying / Whenever this creature deals combat damage to a creature, destroy that creature. / Dredge 5 (If you would draw a card, you may mill
+1 Toxic Deluge | {2}{B} | Sorcery | $5.06 | edh 66 | board_wipe | As an additional cost to cast this spell, pay X life. / All creatures get -X/-X until end of turn.
+1 Windfall | {2}{U} | Sorcery | $6.09 | edh 158 | utility | Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
+1 Archmage Emeritus | {2}{U}{U} | Creature — Human Wizard | $0.61 | edh 255 | draw | Magecraft — Whenever you cast or copy an instant or sorcery spell, draw a card.
+1 Ashling, Flame Dancer | {2}{R}{R} | Legendary Creature — Elemental Shaman | $5.70 | edh 1561 | win_condition | You don't lose unspent red mana as steps and phases end. / Magecraft — Whenever you cast or copy an instant or sorcery spell, discard a card
+1 Big Score | {3}{R} | Instant | $0.36 | edh 138 | ramp | As an additional cost to cast this spell, discard a card. / Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sac
+1 Inventive Iteration // Living Breakthrough | {3}{U} | Enchantment — Saga // Enchantment Creature — Moonfolk | $0.26 | edh 9709 | win_condition | (As this Saga enters and after your draw step, add a lore counter.) / I — Return up to one target creature or planeswalker to its owner's ha
+1 Mizzix's Mastery | {3}{R} | Sorcery | $8.02 | edh 811 | removal | Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy withou
+1 Solemn Simulacrum | {4} | Artifact Creature — Golem | $0.30 | edh 39 | ramp | When this creature enters, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. / Whe
+1 Storm-Kiln Artist | {3}{R} | Creature — Dwarf Shaman | $1.63 | edh 199 | ramp | This creature gets +1/+0 for each artifact you control. / Magecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasu
+1 The Indomitable | {2}{U}{U} | Legendary Artifact — Vehicle | $3.07 | edh 2379 | win_condition | Trample / Whenever a creature you control deals combat damage to a player, draw a card. / Crew 3 / You may cast this card from your graveyar
+1 The One Ring | {4} | Legendary Artifact | $115.29 | edh 95 | protection | Indestructible / When The One Ring enters, if you cast it, you gain protection from everything until your next turn. / At the beginning of y
+1 Thopter Spy Network | {2}{U}{U} | Enchantment | $0.45 | edh 943 | win_condition | At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying. / Whenever 
+1 Syr Konrad, the Grim | {3}{B}{B} | Legendary Creature — Human Knight | $1.76 | edh 260 | payoff | Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leav
+1 Vanquisher's Banner | {5} | Artifact | $5.20 | edh 384 | draw | As this artifact enters, choose a creature type. / Creatures you control of the chosen type get +1/+1. / Whenever you cast a creature spell 
+1 Chronicle of Victory | {6} | Legendary Artifact | $22.18 | edh 1520 | win_condition | As Chronicle of Victory enters, choose a creature type. / Creatures you control of the chosen type get +2/+2 and have first strike and tramp
+1 Niv-Mizzet, Parun | {U}{U}{U}{R}{R}{R} | Legendary Creature — Dragon Wizard | $5.30 | edh 786 | removal | This spell can't be countered. / Flying / Whenever you draw a card, Niv-Mizzet deals 1 damage to any target. / Whenever a player casts an in
+1 Ugin, Eye of the Storms | {7} | Legendary Planeswalker — Ugin | $41.31 | edh 1750 | tutor | When you cast this spell, exile up to one target permanent that's one or more colors. / Whenever you cast a colorless spell, exile up to one
+1 Blasphemous Act | {8}{R} | Sorcery | $0.93 | edh 22 | board_wipe | This spell costs {1} less to cast for each creature on the battlefield. / Blasphemous Act deals 13 damage to each creature.
+1 Badlands |  | Land — Swamp Mountain | $235.00 | edh 383 |  | ({T}: Add {B} or {R}.)
+1 Blood Crypt |  | Land — Swamp Mountain | $8.88 | edh 69 |  | ({T}: Add {B} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Bloodstained Mire |  | Land | $18.14 | edh 43 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle.
+1 City of Brass |  | Land | $12.10 | edh 96 |  | Whenever this land becomes tapped, it deals 1 damage to you. / {T}: Add one mana of any color.
+1 Command Tower |  | Land | $0.56 | edh 2 |  | {T}: Add one mana of any color in your commander's color identity.
+1 Dragonskull Summit |  | Land | $0.42 | edh 84 |  | This land enters tapped unless you control a Swamp or a Mountain. / {T}: Add {B} or {R}.
+1 Drowned Catacomb |  | Land | $0.70 | edh 108 |  | This land enters tapped unless you control an Island or a Swamp. / {T}: Add {U} or {B}.
+1 Exotic Orchard |  | Land | $0.26 | edh 9 |  | {T}: Add one mana of any color that a land an opponent controls could produce.
+1 Grand Coliseum |  | Land | $0.37 | edh 4159 |  | This land enters tapped. / {T}: Add {C}. / {T}: Add one mana of any color. This land deals 1 damage to you.
+6 Island |  | Basic Land — Island | $0.08 | edh ? |  | ({T}: Add {U}.)
+1 Maestros Theater |  | Land | $0.24 | edh 1281 |  | When this land enters, sacrifice it. When you do, search your library for a basic Island, Swamp, or Mountain card, put it onto the battlefie
+4 Mountain |  | Basic Land — Mountain | $0.09 | edh ? |  | ({T}: Add {R}.)
+1 Polluted Delta |  | Land | $19.14 | edh 36 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle.
+1 Scalding Tarn |  | Land | $35.58 | edh 49 |  | {T}, Pay 1 life, Sacrifice this land: Search your library for an Island or Mountain card, put it onto the battlefield, then shuffle.
+1 Seething Landscape |  | Land | $0.27 | edh 1961 |  | {T}: Add {C}. / {T}, Sacrifice this land: Search your library for a basic Island, Swamp, or Mountain card, put it onto the battlefield tappe
+1 Shivan Reef |  | Land | $0.73 | edh 115 |  | {T}: Add {C}. / {T}: Add {U} or {R}. This land deals 1 damage to you.
+1 Starting Town |  | Land — Town | $11.61 | edh 714 |  | This land enters tapped unless it's your first, second, or third turn of the game. / {T}: Add {C}. / {T}, Pay 1 life: Add one mana of any co
+1 Steam Vents |  | Land — Island Mountain | $10.19 | edh 64 |  | ({T}: Add {U} or {R}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Sulfur Falls |  | Land | $0.27 | edh 77 |  | This land enters tapped unless you control an Island or a Mountain. / {T}: Add {U} or {R}.
+4 Swamp |  | Basic Land — Swamp | $0.10 | edh ? |  | ({T}: Add {B}.)
+1 Temple of the Dragon Queen |  | Land | $0.33 | edh 2547 |  | As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you 
+1 Three Tree City |  | Legendary Land | $29.66 | edh 177 |  | As Three Tree City enters, choose a creature type. / {T}: Add {C}. / {2}, {T}: Choose a color. Add an amount of mana of that color equal to 
+1 Underground River |  | Land | $1.36 | edh 146 |  | {T}: Add {C}. / {T}: Add {U} or {B}. This land deals 1 damage to you.
+1 Underground Sea |  | Land — Island Swamp | $475.00 | edh 297 |  | ({T}: Add {U} or {B}.)
+1 Volcanic Island |  | Land — Island Mountain | $327.81 | edh 337 |  | ({T}: Add {U} or {R}.)
+1 Watery Grave |  | Land — Island Swamp | $9.15 | edh 50 |  | ({T}: Add {U} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Sink into Stupor // Soporific Springs | {1}{U}{U} | Instant // Land | $8.38 | edh 166 |  | Return target spell or nonland permanent an opponent controls to its owner's hand. / // / As this land enters, you may pay 3 life. If you do

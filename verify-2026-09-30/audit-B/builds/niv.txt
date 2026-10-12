@@ -1,0 +1,83 @@
+# niv — {"format":"commander","commanderName":"Niv-Mizzet Reborn","maxDeckPrice":150,"bracket":2}  (1975 ms)
+size 99  lands 38  avgCmc(nonland) 2.97  pips {"G":22,"W":18,"U":17,"B":18,"R":18}
+strategy midrange  themes ["artifacts","tokens","ramp","draw","sacrifice","flying","spellslinger"]  tribal undefined
+realSources {"W":26,"U":22,"B":23,"R":23,"G":24}  health.sources {"W":26,"U":22,"B":23,"R":23,"G":24}
+roles {"fixing-floor":8,"payoff":4,"(none)":44,"ramp":6,"draw":12,"tutor":1,"removal":9,"board_wipe":4,"protection":3,"win_condition":6,"utility":2}
+price total $144.73 overBudget false replaced 28
+bracket target 2 -> 2 swapped 0 reasons []
+
+
+1 Deathrite Shaman | {B/G} | Creature — Elf Shaman | $8.67 | edh 610 | removal | {T}: Exile target land card from a graveyard. Add one mana of any color. (Activate only as an instant.) / {B}, {T}: Exile target instant or 
+1 Arcane Signet | {2} | Artifact | $0.74 | edh 3 | fixing-floor | {T}: Add one mana of any color in your commander's color identity.
+1 Assassin's Trophy | {B}{G} | Instant | $1.19 | edh 122 | removal | Destroy target permanent an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield, t
+1 Baleful Strix | {U}{B} | Artifact Creature — Bird | $7.19 | edh 362 | draw | Flying, deathtouch / When this creature enters, draw a card.
+1 Boros Charm | {R}{W} | Instant | $4.35 | edh 181 | removal | Choose one — / • Boros Charm deals 4 damage to target player or planeswalker. / • Permanents you control gain indestructible until end of tu
+1 Collector's Vault | {2} | Artifact | $0.70 | edh 1810 | ramp | {2}, {T}: Draw a card, then discard a card. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any 
+1 Deadly Dispute | {1}{B} | Instant | $0.28 | edh 131 | ramp | As an additional cost to cast this spell, sacrifice an artifact or creature. / Draw two cards and create a Treasure token. (It's an artifact
+1 Despark | {W}{B} | Instant | $0.35 | edh 413 | removal | Exile target permanent with mana value 4 or greater.
+1 Dovin's Veto | {W}{U} | Instant | $3.43 | edh 232 | protection | This spell can't be countered. / Counter target noncreature spell.
+1 Golgari Charm | {B}{G} | Instant | $1.49 | edh 1616 | board_wipe | Choose one — / • All creatures get -1/-1 until end of turn. / • Destroy target enchantment. / • Regenerate each creature you control.
+1 Growth Spiral | {G}{U} | Instant | $0.32 | edh 237 | ramp | Draw a card. You may put a land card from your hand onto the battlefield.
+1 Idol of Oblivion | {2} | Artifact | $2.76 | edh 191 | draw | {T}: Draw a card. Activate only if you created a token this turn. / {8}, {T}, Sacrifice this artifact: Create a 10/10 colorless Eldrazi crea
+1 Lunar Convocation | {W}{B} | Enchantment | $1.26 | edh 3172 | win_condition | At the beginning of your end step, if you gained life this turn, each opponent loses 1 life. / At the beginning of your end step, if you gai
+1 Mind Stone | {2} | Artifact | $0.24 | edh 32 | fixing-floor | {T}: Add {C}. / {1}, {T}, Sacrifice this artifact: Draw a card.
+1 Rakdos Charm | {B}{R} | Instant | $0.39 | edh 324 | board_wipe | Choose one — / • Exile target player's graveyard. / • Destroy target artifact. / • Each creature deals 1 damage to its controller.
+1 Sorcerer Class | {U}{R} | Enchantment — Class | $2.09 | edh 3829 | win_condition | (Gain the next level as a sorcery to add its ability.) / When this Class enters, draw two cards, then discard two cards. / {U}{R}: Level 2 /
+1 Sythis, Harvest's Hand | {G}{W} | Legendary Enchantment Creature — Nymph | $4.31 | edh 1000 | draw | Whenever you cast an enchantment spell, you gain 1 life and draw a card.
+1 Talisman of Conviction | {2} | Artifact | $0.41 | edh 151 | fixing-floor | {T}: Add {C}. / {T}: Add {R} or {W}. This artifact deals 1 damage to you.
+1 Talisman of Creativity | {2} | Artifact | $1.25 | edh 126 | fixing-floor | {T}: Add {C}. / {T}: Add {U} or {R}. This artifact deals 1 damage to you.
+1 Talisman of Dominance | {2} | Artifact | $0.72 | edh 93 | fixing-floor | {T}: Add {C}. / {T}: Add {U} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Hierarchy | {2} | Artifact | $0.48 | edh 135 | fixing-floor | {T}: Add {C}. / {T}: Add {W} or {B}. This artifact deals 1 damage to you.
+1 Talisman of Indulgence | {2} | Artifact | $1.12 | edh 129 | fixing-floor | {T}: Add {C}. / {T}: Add {B} or {R}. This artifact deals 1 damage to you.
+1 Talisman of Progress | {2} | Artifact | $0.98 | edh 139 | fixing-floor | {T}: Add {C}. / {T}: Add {W} or {U}. This artifact deals 1 damage to you.
+1 Terminate | {B}{R} | Instant | $0.34 | edh 224 | removal | Destroy target creature. It can't be regenerated.
+1 Anguished Unmaking | {1}{W}{B} | Instant | $1.63 | edh 156 | removal | Exile target nonland permanent. You lose 3 life.
+1 Braids, Arisen Nightmare | {1}{B}{B} | Legendary Creature — Nightmare | $4.86 | edh 296 | draw | At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker. If you do, each opponent may
+1 Chromatic Lantern | {3} | Artifact | $0.64 | edh 85 | payoff | Lands you control have "{T}: Add one mana of any color." / {T}: Add one mana of any color.
+1 Faeburrow Elder | {1}{G}{W} | Creature — Treefolk Druid | $0.47 | edh 497 | payoff | Vigilance / This creature gets +1/+1 for each color among permanents you control. / {T}: For each color among permanents you control, add on
+1 Fierce Empath | {2}{G} | Creature — Elf | $0.15 | edh 2137 |  | When this creature enters, you may search your library for a creature card with mana value 6 or greater, reveal it, put it into your hand, t
+1 General Ferrous Rokiric | {1}{R}{W} | Legendary Creature — Human Soldier | $1.10 | edh 3957 | utility | Hexproof from monocolored / Whenever you cast a multicolored spell, create a 4/4 red and white Golem artifact creature token.
+1 Gluntch, the Bestower | {1}{G}{W} | Legendary Creature — Jellyfish | $0.51 | edh 3096 | draw | Flying / At the beginning of your end step, choose a player. They put two +1/+1 counters on a creature they control. Choose a second player 
+1 Lifespring Druid | {2}{G} | Creature — Elf Druid | $0.06 | edh 16455 |  | {T}: Add one mana of any color.
+1 Loran of the Third Path | {2}{W} | Legendary Creature — Human Artificer | $7.33 | edh 343 | removal | Vigilance / When Loran enters, destroy up to one target artifact or enchantment. / {T}: You and target opponent each draw a card.
+1 Prismari Command | {1}{U}{R} | Instant | $0.29 | edh 1108 | draw | Choose two — / • Prismari Command deals 2 damage to any target. / • Target player draws two cards, then discards two cards. / • Target playe
+1 Putrefy | {1}{B}{G} | Instant | $0.33 | edh 339 | removal | Destroy target artifact or creature. It can't be regenerated.
+1 Rhythm of the Wild | {1}{R}{G} | Enchantment | $5.04 | edh 222 | protection | Creature spells you control can't be countered. / Nontoken creatures you control have riot. (They enter with your choice of a +1/+1 counter 
+1 Sai, Master Thopterist | {2}{U} | Legendary Creature — Human Artificer | $0.68 | edh 823 | draw | Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying. / {1}{U}, Sacrifice two artifacts: 
+1 Soulherder | {1}{W}{U} | Creature — Spirit | $1.88 | edh 1690 | utility | Whenever a creature is exiled from the battlefield, put a +1/+1 counter on this creature. / At the beginning of your end step, you may exile
+1 Temur Ascendancy | {G}{U}{R} | Enchantment | $4.12 | edh 891 | draw | Creatures you control have haste. / Whenever a creature you control with power 4 or greater enters, you may draw a card.
+1 Ticket Turbotubes | {3} | Artifact | $0.08 | edh 20279 |  | {T}: Add one mana of any color. / {3}, {T}: You get {TK} (a ticket counter).
+1 Tireless Provisioner | {2}{G} | Creature — Elf Scout | $3.98 | edh 185 | ramp | Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this 
+1 Tireless Tracker | {2}{G} | Creature — Human Scout | $0.31 | edh 663 | draw | Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a c
+1 Uro, Titan of Nature's Wrath | {1}{G}{U} | Legendary Creature — Elder Giant | $3.15 | edh 1556 | ramp | When Uro enters, sacrifice it unless it escaped. / Whenever Uro enters or attacks, you gain 3 life and draw a card, then you may put a land 
+1 Void Rend | {W}{U}{B} | Instant | $0.92 | edh 761 | removal | This spell can't be countered. / Destroy target nonland permanent.
+1 Big Score | {3}{R} | Instant | $0.36 | edh 138 | draw | As an additional cost to cast this spell, discard a card. / Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sac
+1 Centaur Nurturer | {3}{G} | Creature — Centaur Druid | $0.04 | edh 22258 |  | When this creature enters, you gain 3 life. / {T}: Add one mana of any color.
+1 Hearthhull, the Worldseed | {1}{B}{R}{G} | Legendary Artifact — Spacecraft | $1.07 | edh 3404 | win_condition | Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an art
+1 Jhoira, Weatherlight Captain | {2}{U}{R} | Legendary Creature — Human Artificer | $0.41 | edh 1072 | draw | Whenever you cast a historic spell, draw a card. (Artifacts, legendaries, and Sagas are historic.)
+1 Kykar, Wind's Fury | {1}{U}{R}{W} | Legendary Creature — Bird Wizard | $0.45 | edh 2982 | win_condition | Flying / Whenever you cast a noncreature spell, create a 1/1 white Spirit creature token with flying. / Sacrifice a Spirit: Add {R}.
+1 Professional Wrestler | {3}{G} | Creature — Human Warrior Performer | $0.09 | edh 20693 |  | When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.") / This c
+1 Roilmage's Trick | {3}{U} | Instant | $0.04 | edh 29439 |  | Converge — Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast this spell. /
+1 Storm-Kiln Artist | {3}{R} | Creature — Dwarf Shaman | $1.63 | edh 199 | ramp | This creature gets +1/+0 for each artifact you control. / Magecraft — Whenever you cast or copy an instant or sorcery spell, create a Treasu
+1 Supreme Verdict | {1}{W}{W}{U} | Sorcery | $2.32 | edh 472 | board_wipe | This spell can't be countered. / Destroy all creatures.
+1 Toski, Bearer of Secrets | {3}{G} | Legendary Creature — Squirrel | $8.06 | edh 387 | protection | This spell can't be countered. / Indestructible / Toski attacks each combat if able. / Whenever a creature you control deals combat damage t
+1 Unexpected Windfall | {2}{R}{R} | Instant | $3.48 | edh 272 | draw | As an additional cost to cast this spell, discard a card. / Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sac
+1 Bring to Light | {3}{G}{U} | Sorcery | $0.38 | edh 5650 | tutor | Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana s
+1 Jegantha, the Wellspring | {4}{R/G} | Legendary Creature — Elemental Elk | $0.24 | edh 3869 | payoff | Companion — No card in your starting deck has more than one of the same mana symbol in its mana cost. (If this card is your chosen companion
+1 Korvold, Fae-Cursed King | {2}{B}{R}{G} | Legendary Creature — Dragon Noble | $0.44 | edh 1836 | win_condition | Flying / Whenever Korvold enters or attacks, sacrifice another permanent. / Whenever you sacrifice a permanent, put a +1/+1 counter on Korvo
+1 Maelstrom Nexus | {W}{U}{B}{R}{G} | Enchantment | $2.12 | edh 4877 | payoff | The first spell you cast each turn has cascade. (When you cast your first spell, exile cards from the top of your library until you exile a 
+1 The Gitrog Monster | {3}{B}{G} | Legendary Creature — Frog Horror | $0.43 | edh 907 | win_condition | Deathtouch / At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land. / You may play an additional land on
+1 Time Wipe | {2}{W}{W}{U} | Sorcery | $0.20 | edh 1432 | board_wipe | Return a creature you control to its owner's hand, then destroy all creatures.
+1 Command Tower |  | Land | $0.56 | edh 2 |  | {T}: Add one mana of any color in your commander's color identity.
+1 Exotic Orchard |  | Land | $0.26 | edh 9 |  | {T}: Add one mana of any color that a land an opponent controls could produce.
+8 Forest |  | Basic Land — Forest | $0.08 | edh ? |  | ({T}: Add {G}.)
+1 Godless Shrine |  | Land — Plains Swamp | $8.54 | edh 60 |  | ({T}: Add {W} or {B}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Hallowed Fountain |  | Land — Plains Island | $6.98 | edh 61 |  | ({T}: Add {W} or {U}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+5 Island |  | Basic Land — Island | $0.08 | edh ? |  | ({T}: Add {U}.)
+5 Mountain |  | Basic Land — Mountain | $0.09 | edh ? |  | ({T}: Add {R}.)
+1 Overgrown Tomb |  | Land — Swamp Forest | $8.20 | edh 71 |  | ({T}: Add {B} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+7 Plains |  | Basic Land — Plains | $0.07 | edh ? |  | ({T}: Add {W}.)
+1 Stomping Ground |  | Land — Mountain Forest | $6.43 | edh 70 |  | ({T}: Add {R} or {G}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+5 Swamp |  | Basic Land — Swamp | $0.10 | edh ? |  | ({T}: Add {B}.)
+1 Temple Garden |  | Land — Forest Plains | $6.60 | edh 81 |  | ({T}: Add {G} or {W}.) / As this land enters, you may pay 2 life. If you don't, it enters tapped.
+1 Temple of the Dragon Queen |  | Land | $0.33 | edh 2547 |  | As this land enters, you may reveal a Dragon card from your hand. This land enters tapped unless you revealed a Dragon card this way or you 
