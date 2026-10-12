@@ -6,11 +6,11 @@ import { DEFAULT_LAND_COUNT, DEFAULT_DECK_SIZE, getLegalityKey, COMMANDER_FORMAT
 import { getCardGlobalScore, getMetaAdjustedScore } from './global-learner';
 import { getEdhrecRecommendations, getEdhrecThemeCards } from './edhrec';
 import type { EdhrecRecommendation } from './edhrec';
-import { getTemplate, getScaledCurve, mergeWithCommanderProfile } from './deck-templates';
+import { getTemplate, getScaledCurve, mergeWithCommanderProfile, getRecommendedLands, ARCHETYPE_TEMPLATES } from './deck-templates';
 import type { Archetype, ArchetypeTemplate } from './deck-templates';
 import { analyzeCommander, mergeProfiles, detectTribalPayoff } from './commander-synergy';
 import type { CommanderSynergyProfile } from './commander-synergy';
-import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin } from './land-intelligence';
+import { buildOptimalLandBase, isFetchLandRelevant, ownedNameJoin, MAX_MDFC_LANDS } from './land-intelligence';
 import { buildOwnedQtyMap, ownedNamesSubqueryInline, normalizedNameExpr, stripArenaPrefix } from './collection-ownership';
 import type { OwnershipFilter } from './collection-ownership';
 import { getCFRecommendations, resolveCFToDbCards } from './cf-api-client';
@@ -26,7 +26,7 @@ import {
 } from './deck-builder-constraints';
 import { analyzeCommanderForBuild } from './commander-analysis';
 import type { ArsenalCard } from './commander-analysis';
-import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe } from './card-classifier';
+import { classifyCard, getPrimaryCategory, isDrawEngine, isBoardWipe, isHonestRamp } from './card-classifier';
 import type { ClassifyOpts } from './card-classifier';
 import { isTribeCreature, narrowTutorTarget, countTargets, colorlessPipCount, isColorlessSource, isMonoColourDeadFixer } from './card-relevance';
 import type { RelevanceCard } from './card-relevance';
@@ -69,12 +69,22 @@ export function getScoringWeights(): Record<string, number> | null {
   return cachedScoringWeights;
 }
 
-// MDFC spell//land budget — shared intuition with land-intelligence's
-// MAX_MDFC_LANDS: a deck wants at most ~4 modal land-back cards total.
-const MAX_MDFC_IN_SPELLS = 4;
 /** A-D1: quality floor = this share of the score of the pool's nonLandTarget-th best pickable nonland. */
 const QUALITY_FLOOR_RATIO = 0.6;
-function isLandBackDfc(card: DbCard): boolean {
+/** B-D8: with one of these in the deck every basic name is capped at one copy (snow basics are other names). */
+const SINGLETON_NAME_COMBO = new Set(['Tainted Pact', 'Demonic Consultation']);
+/** L-open: landfall / "whenever a land enters" payoffs make a typed fetch worth a mono-colour slot (B-D9). */
+const LAND_PAYOFF_RE = /landfall|whenever a land (?:you control )?enters/i;
+export function hasLandPayoffs(commanderOracle: string | null | undefined, spells: Array<Pick<DbCard, 'oracle_text'>>): boolean {
+  if (LAND_PAYOFF_RE.test(commanderOracle || '')) return true;
+  return spells.filter((c) => LAND_PAYOFF_RE.test(c.oracle_text || '')).length >= 3;
+}
+export function isLandBackDfc(card: DbCard): boolean {
+  // Only a modal DFC can be PLAYED as its land face. A transforming artifact
+  // or creature with a land back (Dowsing Dagger, Treasure Map, Tarrian's
+  // Journal) is a spell that stays a spell — counting it here shrank Ygra's
+  // real land count to 29 of 35.
+  if (card.layout !== 'modal_dfc') return false;
   const tl = card.type_line || '';
   return tl.includes('//') && !tl.split('//')[0].includes('Land') && tl.includes('Land');
 }
@@ -1751,6 +1761,22 @@ export function resolveConsistentManaLandTarget(
   return baseLandTarget;
 }
 
+/**
+ * B-D1: the land count follows the deck that was actually picked, not a flat
+ * format default (Tymna + Thrasios shipped 39 lands at MV 1.9 with 16 mana
+ * pieces). Archetype + colour recommendation, minus one land per three honest
+ * ramp pieces over eight, minus one under MV 3 and two under MV 2.5; never
+ * under 30 or over 38. Commander-scale only (the caller guards 60-card formats).
+ * A landfall deck (hasLandPayoffs) keeps the recommendation: its ramp is
+ * land drops, and cutting lands starves the plan (Tatyova 34 → 27).
+ */
+export function resolveLandTarget(strategy: string, colorCount: number, honestRamp: number, avgMv: number, landPayoffs = false): number {
+  const archetype = (strategy.toLowerCase() in ARCHETYPE_TEMPLATES ? strategy.toLowerCase() : 'midrange') as Archetype;
+  const curve = landPayoffs ? 0 : avgMv < 2.5 ? 2 : avgMv < 3 ? 1 : 0;
+  const ramp = landPayoffs ? 0 : Math.floor(Math.max(0, honestRamp - 8) / 3);
+  return Math.min(38, Math.max(30, getRecommendedLands(archetype, colorCount) - ramp - curve));
+}
+
 const SUPERFRIENDS_DRAW_CAP_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?|whenever you draw/i;
 
 // A cycling land's reminder text ("{2}, {T}, Discard this card: Draw a card")
@@ -2532,7 +2558,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
         if (getMaxQty(card) <= 0) return false;
         // Plain lands never belong in spell slots; modal land-backs are budgeted.
         if ((card.type_line || '').split('//')[0].includes('Land')) return false;
-        if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_IN_SPELLS) return false;
+        if (isLandBackDfc(card) && mdfcLandBacksPicked >= MAX_MDFC_LANDS) return false;
         const cardType = (card.type_line || '').toLowerCase();
         const isSpellType = category === 'spell_cast' && (cardType.includes('instant') || cardType.includes('sorcery'));
         return matchesCat(card) || isSpellType;
@@ -2664,13 +2690,53 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   }
 
   // ── Step 5: Add lands (via land intelligence) ───────────────────────────
+  const isSpellFront = (card: DbCard) => !(card.type_line || '').split('//')[0].includes('Land');
+  const mainSpells = () => picked.filter((p) => p.board === 'main' && isSpellFront(p.card));
+  let freedSlots = 0;
   // MDFC spell//land cards already in the nonland picks are tapped-land
   // equivalents — every one of them reduces how many dedicated land slots
   // the deck needs, otherwise total land-capable cards balloon to 45-52.
-  const mdfcLandBackCount = picked.filter((p) => isLandBackDfc(p.card)).length;
-  // Floor at 30 for 100-card formats, but never above the format's own target
-  // (standardbrawl runs 24 lands in a 60-card deck — the flat 30 floor shipped 65-card decks).
-  const targetLandsEffective = Math.max(Math.min(30, targetLands), targetLands - Math.min(6, mdfcLandBackCount));
+  // A-D12: one MDFC budget for the whole deck. Step 4 has no cap of its
+  // own, so the excess land backs (lowest pool score first) leave here and
+  // their slots refill below; the land base gets what is left of the budget.
+  const mdfcPicks = mainSpells().filter((p) => isLandBackDfc(p.card))
+    .sort((a, b) => (poolByName.get(a.card.name)?.score ?? 0) - (poolByName.get(b.card.name)?.score ?? 0));
+  for (const p of mdfcPicks.slice(0, Math.max(0, mdfcPicks.length - MAX_MDFC_LANDS))) {
+    picked.splice(picked.indexOf(p), 1);
+    pickedNames.delete(p.card.name);
+    reasoning.push({ cardName: p.card.name, role: 'mdfc-cap', reason: `over the ${MAX_MDFC_LANDS} MDFC land-back budget` });
+    freedSlots += p.quantity;
+  }
+  const mdfcLandBackCount = Math.min(MAX_MDFC_LANDS, mdfcPicks.length);
+  // B-D1: the land count follows the picked deck (ramp and curve), Commander-
+  // scale formats only; a "consistent mana" hint still only moves it up.
+  let landTarget = targetLands;
+  const landPayoffs = hasLandPayoffs(commanderCard?.oracle_text, mainSpells().map((p) => p.card));
+  if (isCommander && targetLands >= 30) {
+    const spells = mainSpells();
+    const spellQty = spells.reduce((s, p) => s + p.quantity, 0);
+    const honestRamp = spells.reduce((s, p) => s + (isHonestRamp(p.card.name, p.card.oracle_text || '', p.card.type_line || '') ? p.quantity : 0), 0);
+    const avgMv = spellQty ? spells.reduce((s, p) => s + (p.card.cmc || 0) * p.quantity, 0) / spellQty : 0;
+    const formula = resolveLandTarget(resolvedStrategy, colors.length, honestRamp, avgMv, landPayoffs);
+    landTarget = hints.consistentMana ? Math.max(targetLands, formula) : formula;
+    freedSlots += Math.max(0, targetLands - landTarget);
+  }
+  // Refill the freed nonland slots from the pool, best score first.
+  for (const s of scored) {
+    if (freedSlots <= 0) break;
+    const key = stripArenaPrefix(s.card.name);
+    if (pickedNames.has(s.card.name) || pickedNames.has(key) || pickedNames.has(`A-${key}`)) continue;
+    if (getMaxQty(s.card) <= 0 || !isSpellFront(s.card) || isLandBackDfc(s.card)) continue;
+    picked.push({ card: s.card, quantity: 1, board: 'main' });
+    pickedNames.add(s.card.name);
+    reasoning.push({ cardName: s.card.name, role: 'refill', reason: `land count ${targetLands} → ${landTarget}: next-best pool card` });
+    freedSlots -= 1;
+  }
+  // Real land slots = the land target minus the MDFC land backs Step 4 kept
+  // (they sit inside the nonland quota). MAX_MDFC_LANDS bounds it, so no
+  // separate 30 floor — that floor over-filled the deck once the B-D1 target
+  // itself reached 30, and the overflow was cut from the lands.
+  const targetLandsEffective = Math.max(0, landTarget - mdfcLandBackCount);
 
   const basicLandMap: Record<string, string> = {
     W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest',
@@ -2720,9 +2786,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // casting cost and activated-ability costs feed the land builder too —
   // Tam's {W}{U}{B}{R}{G} proliferate activation is real demand for a card
   // that's on the battlefield every game, not just what got "picked".
-  const commanderPipDemand: Array<{ mana_cost: string | null; quantity: number }> = [];
+  const commanderPipDemand: Array<{ mana_cost: string | null; quantity: number; type_line?: string | null }> = [];
   if (commanderCard) {
-    if (commanderCard.mana_cost) commanderPipDemand.push({ mana_cost: commanderCard.mana_cost, quantity: 1 });
+    if (commanderCard.mana_cost) commanderPipDemand.push({ mana_cost: commanderCard.mana_cost, quantity: 1, type_line: commanderCard.type_line });
     for (const line of (commanderCard.oracle_text || '').split('\n')) {
       const colonIdx = line.indexOf(':');
       if (colonIdx === -1) continue;
@@ -2730,10 +2796,13 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (/\{[WUBRG]\}/.test(costPart)) commanderPipDemand.push({ mana_cost: costPart, quantity: 1 });
     }
   }
+  // type_line = the permanent census for "sacrifice unless you control an
+  // artifact / a creature" rainbows (Glimmervoid, Thran Quarry — #2).
   const nonLandCards = [
     ...picked.map(p => ({
       mana_cost: p.card.mana_cost,
       quantity: p.quantity,
+      type_line: p.card.type_line,
     })),
     ...commanderPipDemand,
   ];
@@ -2762,6 +2831,9 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       userId: options.userId,
       collectionSource: options.collectionSource,
       excludeNames,
+      mdfcPicked: mdfcLandBackCount,
+      singletonBasics: isCommander && picked.some((p) => p.board === 'main' && SINGLETON_NAME_COMBO.has(stripArenaPrefix(p.card.name))),
+      landPayoffs,
     });
 
     // Add non-basic lands. A--stripped: a land already picked (e.g. as an
@@ -2821,10 +2893,10 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
       if (pickedNames.has(land.name)) continue;
 
       // Front face must be a playable Land — transform/meld backs don't count.
-      // Modal DFC spell//land cards are allowed but capped at 4.
+      // Modal DFC spell//land cards share the deck-wide MAX_MDFC_LANDS budget.
       const frontIsLand = (land.type_line || '').split('//')[0].includes('Land');
       if (!frontIsLand) {
-        if (land.layout !== 'modal_dfc' || fallbackMdfcCount >= 4) continue;
+        if (land.layout !== 'modal_dfc' || mdfcLandBackCount + fallbackMdfcCount >= MAX_MDFC_LANDS) continue;
         fallbackMdfcCount++;
       }
 
@@ -3004,7 +3076,7 @@ export async function autoBuildDeck(options: BuildOptions): Promise<BuildResult>
   // can't reach the user. Repairs are size-preserving swaps; bounded to avoid
   // thrash. This is the safety net that replaces hand-patching the builder.
   const DRAW_RE = /draw (?:a|two|three|four|x|that many|cards|\d) cards?|draws? (?:a|two|three|\d|x) cards?/i;
-  const auditOpts = { colors, format: options.format, targetLands, isCommander, strategy: resolvedStrategy };
+  const auditOpts = { colors, format: options.format, targetLands: landTarget, isCommander, strategy: resolvedStrategy };
   let health = auditDeck(picked, auditOpts);
 
   if (health.deficiencies.length > 0) {
@@ -3407,7 +3479,8 @@ export function applyDeadCardPass(
   const replacedAsDead: Array<{ out: string; in: string; reason: string }> = [];
   const primaryRole = (card: DbCard): string =>
     getPrimaryCategory(classifyCard(card.name, card.oracle_text || '', card.type_line || '', card.cmc || 0, commanderOracle));
-  const isLand = (card: DbCard): boolean => (card.type_line || '').includes('Land');
+  // Front face only: a dead land must not be replaced by a DFC spell with a land back (#1).
+  const isLand = (card: DbCard): boolean => (card.type_line || '').split('//')[0].includes('Land');
 
   const mainCards = (): RelevanceCard[] =>
     cards.filter((c) => c.board === 'main')
@@ -3417,6 +3490,10 @@ export function applyDeadCardPass(
     cards.filter((c) => c.board === 'main' && isColorlessSource(c.card)).reduce((s, c) => s + c.quantity, 0);
 
   const deadReason = (card: DbCard): string | null => {
+    // Lands are the land base's call: a typed fetch with a Forest and an
+    // Overgrown Tomb to find is live, and the nonland pool has no real land
+    // to replace one with (it swapped fetches for Westvale Abbey / Dowsing Dagger).
+    if (isLand(card)) return null;
     const target = narrowTutorTarget(card);
     if (target) {
       const count = countTargets(target, mainCards());

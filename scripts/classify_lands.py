@@ -70,6 +70,15 @@ def detect_land_types(type_line: str) -> list[str]:
     return found
 
 
+def is_mana_base_land(type_line: str, layout: str | None) -> bool:
+    """A card belongs in the mana base only if it can be PLAYED as a land: its
+    front face is a Land, or it is a modal DFC with a land face. A transforming
+    artifact/creature with a land back (Dowsing Dagger, Treasure Map) is a spell
+    — classifying it read its back as a tier-2 WUBRG "pathway"."""
+    front = type_line.split("//")[0]
+    return "Land" in front or (layout == "modal_dfc" and "Land" in type_line)
+
+
 def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: str | None) -> dict:
     """Classify a single land card. Returns classification dict.
 
@@ -303,9 +312,23 @@ def classify_land(name: str, type_line: str, oracle: str, produced_mana_json: st
 
     # A rainbow that costs 3 life per activation (Tarnished Citadel) or two
     # lands to enter (Lotus Vale, Scorched Ruins) or is donated at end of turn
-    # (Rainbow Vale) is worse than a basic.
-    if re.search(r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of", ot):
+    # (Rainbow Vale), that any player may switch off (Rhystic Cave), that
+    # bounces itself every untap step (Undiscovered Paradise) or costs a card
+    # per untap (Forsaken City) is worse than a basic.
+    if re.search(
+        r"deals 3 damage to you|sacrifice two untapped lands|opponent gains control of"
+        r"|unless any player pays|as you untap your permanents, return this land to its owner's hand"
+        r"|doesn't untap during your untap step",
+        ot,
+    ):
         tier = 4
+
+    # Colour that only comes from sacrificing the land itself (Archaeological
+    # Dig) is one-shot, not a source. The Odyssey cycle (Abandoned Outpost)
+    # keeps its plain {T}: Add {W} line and its colour.
+    colour_lines = [line for line in ot.split("\n") if re.search(r"add .*(?:any (?:one )?color|\{[wubrg]\})", line.split(":")[-1])]
+    if colour_lines and all("sacrifice this land" in line.split(":")[0] for line in colour_lines):
+        produces = []
 
     # If tier not yet set and enters tapped, bump down
     if not enters_untapped and tier < 3:
@@ -344,13 +367,19 @@ def main():
 
     # Fetch all lands
     lands = conn.execute("""
-        SELECT id, name, type_line, oracle_text, produced_mana
+        SELECT id, name, type_line, oracle_text, produced_mana, layout
         FROM cards
         WHERE type_line LIKE '%Land%'
         ORDER BY name
     """).fetchall()
+    lands = [land for land in lands if is_mana_base_land(land["type_line"], land["layout"])]
 
     print(f"Found {len(lands)} lands to classify...")
+
+    # Rows for cards that no longer qualify (transform land backs) would
+    # otherwise survive the upsert below.
+    names = [land["name"] for land in lands]
+    conn.execute("DELETE FROM land_classifications WHERE card_name NOT IN (%s)" % ",".join("?" * len(names)), names)
 
     classified = 0
     for land in lands:

@@ -33,6 +33,11 @@ const BASIC_TYPE_TO_COLOR: Record<string, string> = {
   plains: 'W', island: 'U', swamp: 'B', mountain: 'R', forest: 'G',
 };
 
+/** A land that charges life for one colour — "Pay 1 life: Add {R}" (Hashep Oasis) or "{T}: Add {R}. This land deals 1 damage to you" (Barbarian Ring, Karplusan Forest) — is a worse basic for that colour. */
+export function paysLifeForColor(oracleText: string, color: string): boolean {
+  return new RegExp(`pay \\d+ life:\\s*add \\{${color}\\}|add (?:\\{[WUBRG]\\} or )*\\{${color}\\}(?: or \\{[WUBRG]\\})*\\.[^\\n]*deals \\d+ damage to you`, 'i').test(oracleText);
+}
+
 export function isFetchLandRelevant(oracleText: string, deckColors: string[]): boolean {
   const lower = oracleText.toLowerCase();
   if (!lower.includes('search your library for a')) return true;
@@ -44,6 +49,13 @@ export function isFetchLandRelevant(oracleText: string, deckColors: string[]): b
 }
 
 // ── Types ────────────────────────────────────────────────────────────────────
+
+/**
+ * One MDFC spell//land budget for the whole deck (A-D12) — the builder's
+ * nonland picks and the land base share it. EDHREC consensus decks run 2–3;
+ * two independent caps of 4 shipped up to eight tapped-land equivalents.
+ */
+export const MAX_MDFC_LANDS = 3;
 
 export interface LandScore {
   card: DbCard;
@@ -239,6 +251,22 @@ interface ScoreOptions {
   maxCardPrice?: number;
   /** Deck runs landfall / graveyard-land payoffs — a typed fetch earns a mono-colour slot (B-D9) */
   landPayoffs?: boolean;
+  /** Front-face permanent census of the picked spells — decides "sacrifice unless you control an artifact / a creature" rainbows (#2) */
+  permanentCounts?: PermanentCounts;
+}
+
+export interface PermanentCounts { artifact: number; creature: number; total: number }
+
+/** Count artifacts and creatures (front face) among the deck's spells. */
+export function countPermanents(cards: Array<{ type_line?: string | null; quantity: number }>): PermanentCounts {
+  const out: PermanentCounts = { artifact: 0, creature: 0, total: 0 };
+  for (const c of cards) {
+    const front = (c.type_line || '').split('//')[0];
+    out.total += c.quantity;
+    if (front.includes('Artifact')) out.artifact += c.quantity;
+    if (front.includes('Creature')) out.creature += c.quantity;
+  }
+  return out;
 }
 
 /**
@@ -280,6 +308,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     LEFT JOIN land_classifications lc ON lc.card_id = c.id
     WHERE c.type_line LIKE '%Land%'
     AND c.type_line NOT LIKE '%Basic%'
+    AND (c.layout = 'modal_dfc' OR instr(c.type_line, '//') = 0 OR substr(c.type_line, 1, instr(c.type_line, '//') - 1) LIKE '%Land%')
     ${legalityFilter}
     ORDER BY lc.tier ASC NULLS LAST, c.edhrec_rank ASC NULLS LAST
     LIMIT 1000
@@ -350,6 +379,11 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const frontIsLand = frontType.includes('Land');
     const isModalDfc = land.layout === 'modal_dfc';
     if (!frontIsLand && !isModalDfc) continue;
+    // Modal DFC spell-lands (Valakut Awakening, Khalni Ambush, Bala Ged
+    // Recovery, Talrand's cycle) are a free spell stapled to a tapped land —
+    // priced as tapped-land equivalents at best (A-D12); only a land face
+    // that pays life to enter untapped (Agadeem's Awakening) is untapped.
+    const isMdfcSpellLand = isModalDfc && !frontIsLand;
 
     // ── Mono-colour "beats a basic" filter ─────────────────────────
     // A basic taps for the deck's one colour, untapped, no downside. A
@@ -409,7 +443,7 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
       if (typedFetch !== null && typedFetch.length < 5 && !(options.landPayoffs || /landfall|lands/.test(strategy ?? ''))) continue;
 
       // Pain lands that charge life for the SAME colour a basic gives free.
-      if (deckColor && new RegExp(`pay \\d+ life:\\s*add \\{${deckColor}\\}`, 'i').test(lower)) continue;
+      if (deckColor && paysLifeForColor(lower, deckColor)) continue;
 
       // Conditional duals whose untap condition names basic types this deck
       // doesn't run (Kishla Village: "unless you control an Island or a
@@ -423,6 +457,16 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
         const satisfiable = namedTypes.some((t) => BASIC_TYPE_TO_COLOR[t] === deckColor);
         if (namesBasicType && !satisfiable) continue;
       }
+    }
+
+    // "Sacrifice unless you control an artifact / a creature" rainbows
+    // (Glimmervoid, Thran Quarry) are real fixing only when the deck can
+    // keep the condition from turn one — a third of its spells being that
+    // permanent type. No census = no credit.
+    const sacUnless = (land.oracle_text || '').toLowerCase().match(/if you control no (artifact|creature)s, sacrifice/);
+    if (sacUnless) {
+      const counts = options.permanentCounts;
+      if (!counts || counts[sacUnless[1] as 'artifact' | 'creature'] < Math.ceil(counts.total / 3)) continue;
     }
 
     let producesColors: string[] = [];
@@ -488,6 +532,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     let tier = land.tier || 3;
     if (isNeverColoredProducer(land, manaCtx) && tier < 4) tier = 4;
     const tapText = (land.oracle_text || '').toLowerCase();
+    // Bounces itself every untap step (Undiscovered Paradise) or costs a card per untap (Forsaken City): worse than a basic.
+    if (/as you untap your permanents, return this land to its owner's hand|doesn't untap during your untap step/.test(tapText)) tier = 4;
     // Untapped only when true. Fetches are judged on their own ETB plus what
     // they deposit (Thawing Glaciers / Krosan Verge enter tapped, Evolving
     // Wilds fetches tapped); every other land on its ETB clause read against
@@ -498,7 +544,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const depositsTapped = /onto the battlefield tapped/.test(tapText);
     const untappedCredit = isFetch
       ? (!ownEntersTapped && !depositsTapped ? 1 : 0)
-      : untappedCreditFor(parseTappedCondition(land.oracle_text), colors, tribalTypes, format, land.enters_untapped);
+      : isMdfcSpellLand
+        ? (parseTappedCondition(land.oracle_text).kind === 'payLife' ? 1 : 0)
+        : untappedCreditFor(parseTappedCondition(land.oracle_text), colors, tribalTypes, format, land.enters_untapped);
     const entersUntapped = untappedCredit >= 1;
     // No land that isn't reliably untapped is tier 1-2 (the classifier's own
     // rule, re-applied to the deck-specific verdict — Starting Town is a
@@ -628,11 +676,8 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     // other permanent it targets (Mech Hangar: "Target Vehicle becomes an
     // artifact creature", Ba Sing Se: "Target land you control becomes...").
     const isManland = /\bthis land becomes an? [\s\S]*?\bcreature\b/i.test(tapText);
-    // Modal DFC spell-lands (Valakut Awakening, Khalni Ambush, Bala Ged
-    // Recovery, Talrand's cycle) are a free spell stapled to a tapped land —
-    // already priced as "tapped-land equivalent at best" by the MDFC bonus
-    // below, not held to the always-tapped colourless bar again here.
-    const isMdfcSpellLand = isModalDfc && !frontIsLand;
+    // MDFC spell-lands are already priced as tapped-land equivalents (above),
+    // not held to the always-tapped colourless bar again here.
     // Nykthos: devotion scales with the deck, not a fixed weak rate.
     const nykthosDevotion = /devotion/.test(tapText);
     // Ancient Tomb: unconditional double colorless is real fast mana.
@@ -701,9 +746,9 @@ export function scoreLandsForDeck(options: ScoreOptions): LandScore[] {
     const payoff = tribalMatch || genericTribalLand || exemptColorless;
     // A one-colour land that charges life for that colour (Hashep Oasis) is
     // a worse basic in any deck; the mono gate above already drops it there.
-    const paysLifeForColor = fixes === 1 && new RegExp(`pay \\d+ life:\\s*add \\{${matchingColors[0]}\\}`, 'i').test(tapText);
+    const painForColor = fixes === 1 && paysLifeForColor(tapText, matchingColors[0]);
     const clearsBar = colors.length <= 1
-      || (entersUntapped && sourceCredit >= 1 && tier <= 3 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !paysLifeForColor)))
+      || (entersUntapped && sourceCredit >= 1 && tier <= 3 && (fixes >= 2 || (fixes >= 1 && tier <= 2 && !painForColor)))
       || (isFetch && entersUntapped && fixes >= 1)
       || (fixes >= 3 && colors.length >= 3 && sourceCredit >= 1 && tier <= 3)
       || payoff;
@@ -732,7 +777,8 @@ interface BuildOptions {
   targetLandCount: number;
   tribalTypes?: string[];
   commanderName?: string;
-  existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number }>;
+  /** The picked spells; `type_line` (front face) feeds the permanent census for Glimmervoid / Thran Quarry (#2) */
+  existingNonLandCards?: Array<{ mana_cost: string | null; quantity: number; type_line?: string | null }>;
   userId?: number;
   /** Restrict ownership to one collection source (e.g. 'arena', 'paper'). Undefined = every source. */
   collectionSource?: string;
@@ -749,6 +795,10 @@ interface BuildOptions {
    * next-best land instead of being silently lost to Step 7 basics.
    */
   excludeNames?: Set<string>;
+  /** MDFC spell//land cards already picked as spells — they spend the shared MAX_MDFC_LANDS budget (A-D12) */
+  mdfcPicked?: number;
+  /** Tainted Pact / Demonic Consultation in the deck: one copy per basic name, snow basics are other names, then nonbasics (B-D8) */
+  singletonBasics?: boolean;
 }
 
 /**
@@ -772,6 +822,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     colors, format, strategy, tribalTypes, commanderName, userId, manaDemand, collectionOnly,
     collectionSource: options.collectionSource,
     rarityFilter: options.rarityFilter, maxCardPrice: options.maxCardPrice, landPayoffs: options.landPayoffs,
+    permanentCounts: existingNonLandCards ? countPermanents(existingNonLandCards) : undefined,
   });
 
   // Candidates: lands that clear the quality bar (scoreLandsForDeck) and the
@@ -780,6 +831,10 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // (a flat 30 in 4-5 colours used to guarantee Temple of the Dragon Queen,
   // Starting Town and the tapped Landscapes a slot).
   const candidates = scored.filter((s) => s.clearsBar && s.score >= SELECT_MIN_SCORE);
+  // Singleton basics (B-D8): once the one regular and one snow copy per
+  // colour are in and the real candidates are gone, any scored land beats a
+  // basic the deck cannot run.
+  const fallback = options.singletonBasics ? scored.filter((s) => !s.clearsBar && s.score >= SELECT_MIN_SCORE) : [];
   const basicColors = colors.filter((c) => BASIC_LAND_MAP[c]);
   const MAX_MONO_COLORLESS = 2;
 
@@ -806,24 +861,29 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   const intensity = (c: string) => manaDemand?.colorIntensity[c] ?? 1 / colors.length;
   const need = (c: string) => Math.max(0, (targets[c] ?? 0) - (sources[c] ?? 0)) / Math.max(1, targets[c] ?? 1)
     * (0.5 + 0.5 * intensity(c) * colors.length);
-  const neediestBasic = () => [...basicColors].sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
+  // The basic name a colour's next basic would take: the regular basic, then
+  // (singleton basics) its snow-covered twin, then nothing — the colour is
+  // served by nonbasics from there.
+  const basicNameFor = (c: string): string | null => {
+    const name = BASIC_LAND_MAP[c];
+    if (!options.singletonBasics || !basicDistribution[name]) return name;
+    return basicDistribution[`Snow-Covered ${name}`] ? null : `Snow-Covered ${name}`;
+  };
+  const neediestBasic = () => basicColors.filter((c) => basicNameFor(c) !== null).sort((a, b) => need(b) - need(a) || intensity(b) - intensity(a))[0];
 
-  // MDFC spell//land cards are capped — EDHREC consensus decks run 2-4 of
-  // them, not 15+, because they are functionally tapped lands stapled to
-  // mediocre spells.
-  const MAX_MDFC_LANDS = 4;
   const selectedLands: Array<{ card: DbCard; quantity: number }> = [];
   const selectedNames = new Set<string>();
   const basicDistribution: Record<string, number> = {};
   let nonBasicCount = 0;
   let basicCount = 0;
-  let mdfcCount = 0;
+  let mdfcCount = options.mdfcPicked ?? 0; // shared deck-wide budget (A-D12)
   const isMdfcSpell = (s: LandScore) => !(s.card.type_line || '').split('//')[0].includes('Land');
-  // Mono-colour colourless cap (A-D8): a triple-pip card ({2}{G}{G}{G})
-  // needs every land to make the colour — at most two colourless lands
-  // then, manlands and Cavern included (they stay eligible, they just count).
+  // Mono-colour colourless cap (A-D8, #9): a basic makes the colour for free,
+  // so at most two lands that don't — manlands and Cavern included (they
+  // stay eligible, they just count). Gating this on a triple-pip card let
+  // Krenko seat five colourless manlands (R 43 → 38).
   const monoColor = colors.length === 1 ? colors[0] : undefined;
-  const capColorless = !!monoColor && (manaDemand?.maxPips[monoColor] ?? 0) >= 3;
+  const capColorless = !!monoColor;
   let colorlessCount = 0;
   const eligible = (s: LandScore): boolean => {
     // A--stripped: an Arena-rebalanced "A-X" and its paper name "X" are one card.
@@ -835,7 +895,8 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     return true;
   };
   const giveBasic = (c: string) => {
-    basicDistribution[BASIC_LAND_MAP[c]] = (basicDistribution[BASIC_LAND_MAP[c]] || 0) + 1;
+    const name = basicNameFor(c)!;
+    basicDistribution[name] = (basicDistribution[name] || 0) + 1;
     sources[c] += 1;
     basicCount += 1;
   };
@@ -845,7 +906,7 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
   // or a tier-3 pain rainbow (Tarnished Citadel) never jumps an untapped
   // tier-1 dual on breadth alone.
   const DEFICIT_WEIGHT = 60;
-  const BASIC_SCORE = 110; // under any untapped land with an upside (~150), over a colourless manland (115) until the colour is nearly served
+  const BASIC_SCORE = 110; // under any untapped land with an upside (~150); a colourless manland (115) beats it only inside MAX_MONO_COLORLESS
   const gainOf = (s: LandScore): number => {
     let covered = 0;
     for (const c of s.producesColors) if (c in sources) covered += need(c);
@@ -866,7 +927,11 @@ export function buildOptimalLandBase(options: BuildOptions): LandBaseResult {
     });
     const basicColor = neediestBasic();
     const basicKey = basicColor ? BASIC_SCORE + DEFICIT_WEIGHT * need(basicColor) : -Infinity;
-    if (idx === -1 && !basicColor) break;
+    if (idx === -1 && !basicColor) {
+      if (!fallback.length) break;
+      remaining.push(...fallback.splice(0));
+      continue;
+    }
     if (idx === -1 || basicKey >= bestKey) { giveBasic(basicColor); continue; }
     const [pick] = remaining.splice(idx, 1);
     const qty = isCommander ? 1 : Math.min(4, targetLandCount - nonBasicCount - basicCount);
