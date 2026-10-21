@@ -24,7 +24,8 @@ const fs = require('fs');
 const BASE_URL = 'http://localhost:3000';
 const OUTPUT_DIR = path.resolve(__dirname, '..', 'marketing', 'screenshots');
 const VIEWPORT = { width: 1920, height: 1080 };
-const LOGIN_CREDENTIALS = { username: 'QuLeR', password: 'grimoire123' };
+const LOGIN_CREDENTIALS = { username: process.env.GRIMOIRE_USER || 'QuLeR', password: process.env.GRIMOIRE_PASSWORD };
+if (!LOGIN_CREDENTIALS.password) throw new Error('Set GRIMOIRE_PASSWORD (the app login) before running this script');
 const WITH_FRAMES = process.argv.includes('--with-frames');
 
 /* ── Page definitions ────────────────────────────────────────────────── */
