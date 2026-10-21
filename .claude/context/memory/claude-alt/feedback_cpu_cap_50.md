@@ -8,7 +8,7 @@ metadata:
   modified: 2026-10-08T21:41:31.403Z
 ---
 
-Keep CPU usage at the 50% cap: run `powershell -NoProfile -ExecutionPolicy Bypass -File "C:/Users/QuLeR/.claude/skills/cpu-cap/cpu-cap.ps1" -Percent 50` at session start and again before launching any batch (best-deck climbs, goldfish sims, Workflow fan-outs). Children inherit the affinity, processes started before the cap do not.
+Keep CPU usage at the 50% cap: run `powershell -NoProfile -ExecutionPolicy Bypass -File "C:/Users/kpaul/.claude/skills/cpu-cap/cpu-cap.ps1" -Percent 50` at session start and again before launching any batch (best-deck climbs, goldfish sims, Workflow fan-outs). Children inherit the affinity, processes started before the cap do not.
 
 **Why:** the operator said "keep cpu usage at 50% cap" (2026-10-09) after the model-lab server had been killed for low memory; the machine has 16 logical CPUs, so the cap = 8. Heavy node processes (collection-best-deck climbs ≈ 1–3 min per pass per commander at 100 games, swap-lab ≈ 20 s per swap) must also be bounded in count: ≤ 2 climb shards + ≤ 3 concurrent reviewer agents worked without thrashing.
 

@@ -8,7 +8,7 @@ metadata:
   modified: 2026-09-08T11:10:00.000Z
 ---
 
-`https://theblackgrimoire.com` is the public, free, accounts-off deployment of `C:/Users/QuLeR/black-grimoire-web`
+`https://theblackgrimoire.com` is the public, free, accounts-off deployment of `C:/Users/kpaul/black-grimoire-web`
 (live 2026-09-06). Same pm2 process as the friends deploy (`black-grimoire-web`, `next start -p 3100`, `/opt/black-grimoire-web`).
 Hostinger DNS (A @ → 187.77.110.100, CNAME www, TXT google-site-verification), nginx vhost `/etc/nginx/sites-available/theblackgrimoire.com`
 (TLS via certbot, canonical redirects, HSTS, `/umami/` proxy), Let's Encrypt auto-renew. Deploy = `git archive HEAD | ssh tar -x` +

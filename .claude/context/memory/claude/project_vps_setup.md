@@ -16,7 +16,7 @@ SSH: `ssh -i ~/.ssh/id_ed25519_geo_vps root@187.77.110.100`
 **Secondary: Grimoire CF API**
 - Docker Compose at `/opt/grimoire-cf-api/` (docker-compose.prod.yml)
 - Services: api (port 8000), postgres, redis — all bind 127.0.0.1 only
-- Postgres password: `grimoire` (was `Gr1m0ir3_CF_2026!xK9`, changed 2026-03-21)
+- Postgres password: lives only in the VPS env (/opt/grimoire-cf-api); never copy it into memory or the repo
 - Docker memory limits: API 2GB, Postgres 1GB, Redis 256MB, Worker 3GB
 - 2GB swap configured (swappiness=10)
 - Nginx: `/etc/nginx/sites-enabled/grimoire-cf-api` at path `/cf-api/`

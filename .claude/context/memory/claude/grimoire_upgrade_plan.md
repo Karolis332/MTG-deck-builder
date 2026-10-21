@@ -71,5 +71,5 @@
 - User wants voice control via Telegram (working)
 - n8n available for workflow automation but not yet configured
 - SERP API and Temporal are installed locally but not integrated
-- Password: QuLeR / grimoire123 (all 3 DB locations)
+- Login: user QuLeR, password not stored here (all 3 DB locations)
 - Claude bridge must run detached to avoid nested session errors

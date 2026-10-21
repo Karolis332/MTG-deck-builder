@@ -24,6 +24,6 @@ Resource scheduler at `/opt/cf-resource-scheduler.sh` runs hourly:
 - Off hours: API gets 3GB RAM / 1.5 CPU for retraining
 - n8n + gotenberg stopped during work hours to save ~165MB
 
-Live API auth: `x-api-key` header, key in `C:\Users\QuLeR\grimoire-cf-api\.env` `API_KEY=...`. Endpoint POST `http://187.77.110.100/cf-api/recommend` body `{cards:[], commander:str, limit:int}`.
+Live API auth: `x-api-key` header, key in `C:\Users\kpaul\grimoire-cf-api\.env` `API_KEY=...`. Endpoint POST `http://187.77.110.100/cf-api/recommend` body `{cards:[], commander:str, limit:int}`.
 
 **Railway environment (`nurturing-radiance` project)** is a dev/staging deployment that's been mostly dormant. Original Postgres has 10.5K test decks (vs prod 1.18M), grimoire-cf-api service offline since Feb 26 (healthcheck failure that's already fixed in current repo code — just needs redeploy). Not load-bearing for production.

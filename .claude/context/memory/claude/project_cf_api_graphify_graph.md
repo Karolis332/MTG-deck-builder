@@ -7,7 +7,7 @@ metadata:
   originSessionId: bf746aee-4d72-4c7a-8588-0e9658a5123b
 ---
 
-The `grimoire-cf-api` repo now has a **graphify knowledge graph** at `C:/Users/QuLeR/grimoire-cf-api/graphify-out/` (`graph.json`, `graph.html`, `GRAPH_REPORT.md`). Built 2026-06-17 from 52 files → 602 nodes / 1001 edges / 46 communities (6.7x token reduction per query).
+The `grimoire-cf-api` repo now has a **graphify knowledge graph** at `C:/Users/kpaul/grimoire-cf-api/graphify-out/` (`graph.json`, `graph.html`, `GRAPH_REPORT.md`). Built 2026-06-17 from 52 files → 602 nodes / 1001 edges / 46 communities (6.7x token reduction per query).
 
 **Why:** User explicitly adopted graphify (the `/graphify` skill) to give Claude a persistent map of the recommendation engine instead of cold-grepping every session — prompted while benchmarking the CF model.
 

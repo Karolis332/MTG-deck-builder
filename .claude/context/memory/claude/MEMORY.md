@@ -8,7 +8,7 @@
   - Scripts MUST use this path too — never hardcode `data/mtg-deck-builder.db` for production changes
   - Legacy copies at `./data/` and `%APPDATA%/mtg-deck-builder/data/` — DO NOT USE
 - Auth: scrypt hex salt:hash via Node's scryptSync
-- Login: QuLeR / grimoire123
+- Login: user QuLeR; password is not stored in memory (ask the operator)
 
 ## Architecture
 - Next.js 14 (App Router, standalone) + Electron 33 + Python 3.13 ML pipeline
@@ -76,7 +76,7 @@
 - Commit: `cd3ba1c` on MTG-deck-builder main
 
 ## Web App — Black Grimoire Web (2026-04-10)
-- **Repo**: `C:\Users\QuLeR\black-grimoire-web\` (separate from Electron app)
+- **Repo**: `C:\Users\kpaul\black-grimoire-web\` (separate from Electron app)
 - **Stack**: Next.js 16.2.3 + Clerk + Neon Postgres + Drizzle ORM + Stripe + shadcn/ui v2 + Geist
 - **Domain target**: blackgrimoire.gg (Vercel deployment)
 - **Pricing**: Free (3 decks) / Pro $4.99 (unlimited, AI chat 50/day, overlay, analytics) / Commander $14.99 (everything + commander ML + unlimited AI)
@@ -138,3 +138,4 @@
 - [project_recommender_methods_audit.md](project_recommender_methods_audit.md) — **recommender.cards video audit → docs/RECOMMENDER_METHODS_AUDIT.md. Bandit outcome wiring FIXED 2026-08-23 (card events + game events both POST /events/track; watch rec_outcomes grow). Lift scoring tried+reverted (897→885 vs consensus refs).**
 - [project_ccs_refresh_2026-07-02.md](project_ccs_refresh_2026-07-02.md) — **VPS commander_card_stats has NO cron, goes stale silently (found 80d stale). populate_ccs.py loop = days at 3M decks; use /opt/grimoire-cf-api/refresh_ccs.sql (set-based one pass) instead.**
 - [project_collection_builds_2026-07-02.md](project_collection_builds_2026-07-02.md) — Harness `--collection` mode (roster + Meren/Tazri, results-collection.json); Ramos picks counters cards over 479 owned gold spells in collection mode → hand-fixed `--collection-optimal` variant
+- [project_moxfield_coverage_depth.md](project_moxfield_coverage_depth.md) — **≥768k Moxfield decks missing for top-300 commanders (scrapers read top 5 pages only); deep-backfill cron 01:10/17:10 UTC; scrape_all depth fix awaits OK.**

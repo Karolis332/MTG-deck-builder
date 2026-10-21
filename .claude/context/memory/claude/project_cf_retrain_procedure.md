@@ -48,3 +48,5 @@ docker logs grimoire-cf-api-api-run-XXXXX --tail 5
 ```
 
 Do NOT kill the long-running `api-run-*` container on sight.
+
+**Serving (2026-10-20):** api-1 loads SVD models only at startup — a retrain is invisible to `/recommend` until api-1 restarts. `ops/reload-api-after-retrain.sh` (cron */20 off-hours) now restarts it after each saved retrain; before that, retrains went live only at the Sunday 03:00 docker restart. The pipeline also retrains nightly (≥ 20 h since last success, off-hours), not only at +50K decks. See [[project-moxfield-coverage-depth]].

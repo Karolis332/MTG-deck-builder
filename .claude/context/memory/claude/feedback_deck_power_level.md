@@ -11,7 +11,7 @@ User wants paper Commander decks **strong enough to win, never the strongest at 
 **How to apply:**
 - Skip these in upgrade lists: Demonic Tutor, Vampiric Tutor, Imperial Seal, Mystical Tutor, Phyrexian Altar, Bolas's Citadel, Necropotence, Survival of the Fittest, 2-card combos that win on resolution, mass land destruction.
 - These are still fair game: Ashnod's Altar, Pernicious Deed, Volrath's Stronghold, Birthing Pod, Eternal Witness, Sol Ring, Skullclamp, free 1-mana sac outlets (Viscera Seer, Carrion Feeder).
-- Default storage for paper decklists: `C:\Users\QuLeR\Desktop\MTG decks\` (not the MTG-deck-builder repo).
+- Default storage for paper decklists: `C:\Users\kpaul\Desktop\MTG decks\` (not the MTG-deck-builder repo).
 
 **Exceptions where user pushes past mid-power for specific cards:** On 2026-05-04 user explicitly added Braids, Cabal Minion to Meren despite my mid-power objection. Accept similar overrides — when user names a specific high-power card they want, apply it and warn about pod-meta implications, don't re-litigate the mid-power principle.
 
